@@ -1,0 +1,85 @@
+<html>
+<head>
+<style type="Text/css">
+<!--
+BODY{margin:20px;border:0px;background-color:#ffffff}
+
+//-->
+</style>
+</head>
+<body>
+<pre><font  style='font: 12px Tahoma,verdana'>
+    <h1>TaskMenu 3.0</h1>
+
+    新特点:
+       (1) 重新设计的数据结构，使用了更合理的双向链表，代替了旧版本的父子包含结构，更容易以后扩展。
+       (2) 重新设计了控制函数接口，更方便使用者。
+       (3) 通过重写css样式文件，就可以换菜单肤表，不需要刷新，并可自定义样式。
+       (4) 兼容最新的firefox 浏览器。
+
+   使用特点:
+
+       菜单有一些比较特殊的地方，跟前两个版本不同的是，在构建TaskMenu类之后，必须调用init方法，才可以让
+   菜单显示。在调用init方法之前add的条目，会立即显示，而在init后添加的或使用中动态添加的，都会以动态效果
+   添加到菜单。
+       菜单的动作基本分为open(伸出）,close (缩回),extend (变长),shorten(变短);
+       四种操作可同时加载在同一个菜单，而且同一个操作可加载在多个菜单上。 也可算上是异步操作。 
+       但open和close 其中响应一种操作只会停止之前操作，毕竟菜单要么打开，要么关闭。
+       extend 和 shorten 同上。
+       同一个菜单条目添加到不同的菜单，之后添加的是该条目的科隆版本。 如果你要返回该菜单变量建议您直角调用cloneNode函数。
+            var item = new TaskMenuItem("条目");
+            var menu1 = new TaskMenu("菜单");
+            var menu2 = new TaskMenu("菜单");
+
+            menu1.add(item);
+            menu2.add(item); 同item被两次添加，这里实际隐式的调用的是 menu2.add(item.cloneNode ());
+           这样如果您要调用 menu2.remove(item);是不会成功的。因为被添加的是科隆条目，并不是item变量，引用不一致。
+       解决办法就是  调用 menu2.remove(menu2.items(0)); menu2.item(0)方法返回的就是那个被科隆的版本，
+       因为它是第一条目。或者直接调用科隆方法。 
+            var item1 = new TaskMenuItem("条目"); 
+            var item2 = item.cloneNode();
+
+      
+
+    配制:
+       默认情况下，菜单已经能很好的使用了，不过，根据大家的需要，可能还是需要更改，先说下TaskMenu.js中头部
+   中一些全局变量的用途: 默认配制如下 [注:文件头部中以INF打头的变量不要更改]
+   var CFG_FRAME_COUNT                 = 6;
+   var CFG_DOCUMENT_MARGIN             = 12;
+   var CFG_MENU_SPACING                = 15;
+   var CFG_MENU_WIDTH                  = 185;
+   var CFG_SCROLLBAR_WIDTH             = 17;
+   var CFG_TITLEBAR_HEIGHT             = 25;
+   var CFG_TITLEBAR_LEFT_WIDTH         = 13;
+   var CFG_TITLEBAR_RIGHT_WIDTH        = 25;
+   var CFG_MENUBODY_PADDING            = 9;
+   var CFG_TITLEBAR_BORDER_WIDTH       = 0;
+   var CFG_MENUBODY_BORDER_WIDTH       = 1;
+   var CFG_SLEEP_TIME_BEGIN            = 20;
+   var CFG_SLEEP_TIME_END              = 60;
+   var CFG_ALPHA_STEP = Math.ceil( 100 / (CFG_FRAME_COUNT) );
+   var CFG_IS_SCROLLBAR_ENABLED        = true;
+   var CFG_TITLEBAR_MIDDLE_WIDTH = CFG_MENU_WIDTH - CFG_TITLEBAR_LEFT_WIDTH - CFG_TITLEBAR_RIGHT_WIDTH;
+   CFG_IS_SPECIAL_HEAD_NODE            = false
+
+    CFG_FRAME_COUNT 变量设定菜单变动效果需要的贞数。越小越快。最小为1 (不要设定为0 哦)，就没有变动的效果了。
+    CFG_DOCUMENT_MARGIN 变量设定菜单的上方向和左方向离 文档边缘的空隙。
+    CFG_MENU_WIDTH 用来设定菜单的宽度
+    CFG_TITLEBAR_HEIGHT 用来设定菜单标题栏的高度。
+    CFG_TITLEBAR_LEFT_WIDTH 标题栏实际被分为三个部分，此变量决定左边的宽度，也就是装载titlebarLeft.gif部分除非您设计了自己的样式，否则不要更改
+    CFG_TITLEBAR_RIGHT_WIDTH 同上，是右边的宽度，也就是菜单状态箭头的部分。
+    CFG_TITLEBAR_MIDDLE_WIDTH  标题栏中间部分宽度，这里是总长度减去两边的部分，也就是titlebarMiddle.gif部分。
+    CFG_TITLEBAR_BORDER_WIDTH 标题栏的边框大小，这里被设定为0
+    CFG_MENUBODY_PADDING 菜单身体的内部空隙大小
+    CFG_MENUBODY_BORDER_WIDTH 菜单实体的边框大小
+    CFG_SLEEP_TIME_BEGIN  起始时间间隔 不要更改
+    CFG_SLEEP_TIME_END    结束时间间隔 不要更改
+    CFG_ALPHA_STEP        菜单变化中，每贞透明度发生变化的值。
+    CFG_IS_SPECIAL_HEAD_NODE  默认情况下，是否特殊化头菜单，建议不要更改此变量，而使用TaskMenu.setHeadMenuSpecial设定。
+    CFG_IS_SCROLLBAR_ENABLED  默认情况下滚动条是否可用，建议不要更改此变量，而使用TaskMenu.setScrollbarEnabled(value)来更改。
+
+   
+ </font>   
+</pre>
+</body>
+</html>

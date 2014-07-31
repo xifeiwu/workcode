@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="../jquery/jquery-1.7.2.js"></script>
+<link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="../bootstrap-3.1.1/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+<!--
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+            <li><a tabindex="-1" href="#">动作</a></li>
+            <li><a tabindex="-1" href="#">剧情</a></li>
+            <li><a tabindex="-1" href="#">恐怖</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#">更多类型</a></li>
+        </ul>
+-->
+</body>
+<script>
+function gen_right_menu(contents){
+    var menu = document.createElement("ul");
+    $(menu).attr({
+    'class':'dropdown-menu',
+    'role':'menu',
+    'aria-labelledby': 'dropdownMenu'
+    });
+    var items = [];
+    for(var i=0; i<contents.length; i++){
+        items.push('<li><a tabindex="-1" href="#">' + contents[i] + '</a></li>');
+    }
+    $(menu).html(items.join('\n'));
+    return menu;
+}
+	$(document).on('mousedown', function(event) {
+	    console.log('-----------------*********************----------------');
+		console.log('event.pageX', event.pageX);
+		console.log('event.pageY', event.pageY);
+		console.log('event.target', event.target);
+		console.log('event.timeStamp', event.timeStamp);
+		console.log('event.type', event.type);
+		console.log('event.which', event.which);
+		switch(event.which){
+		case 3:
+            $('.dropdown-menu').css({'display':'block', 'left': event.pageX+'px', 'top': event.pageY+'px'});
+            break;
+        case 1:
+            $('.dropdown-menu').css({'display':'none'});
+            break;
+        }
+		event.stopPropagation();
+	});
+	$(document).bind('contextmenu', function(e) {
+            // 你弹出右键的函数
+            //下面这句必须
+            return false;
+        });
+    $(document).ready(function() {
+        var contents = ['动作', '剧情', '恐怖', '更多类型'];
+        $('body').append(gen_right_menu(contents));
+        $('.dropdown-menu').css({'display':'block', 'left': '10px', 'top': '10px'});
+    });
+</script>
+</html>

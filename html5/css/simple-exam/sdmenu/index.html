@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Slashdot's Menu</title>
+	<link rel="stylesheet" type="text/css" href="sdmenu/sdmenu.css" />
+	<script type="text/javascript" src="sdmenu/sdmenu.js">
+		/***********************************************
+		* Slashdot Menu script- By DimX
+		* Submitted to Dynamic Drive DHTML code library: http://www.dynamicdrive.com
+		* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+		***********************************************/
+	</script>
+	<script type="text/javascript">
+	// <![CDATA[
+	var myMenu;
+	window.onload = function() {
+		myMenu = new SDMenu("my_menu");
+		myMenu.init();
+	};
+	// ]]>
+	</script>
+  </head>
+  <body>
+    <form action="#" style="font-family: sans-serif; font-size: .8em" onsubmit="return false">
+      <fieldset><legend>Menu actions</legend>
+        <label for="speed">Speed (1-5):</label>
+        <input type="text" id="speed" value="3" size="1" onchange="myMenu.speed = parseInt(this.value)" />
+        &nbsp;&nbsp;&nbsp;
+        <label for="oneSmOnly">One submenu at a time:</label>
+        <select id="oneSmOnly" onchange="myMenu.oneSmOnly = this.selectedIndex"><option>false</option><option>true</option></select>
+        &nbsp;&nbsp;&nbsp;
+        <select name="smNr"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        <input type="button" value="Expand" onclick="myMenu.expandMenu(myMenu.submenus[smNr.selectedIndex])" />
+        <input type="button" value="Collapse" onclick="myMenu.collapseMenu(myMenu.submenus[smNr.selectedIndex])" />
+        <input type="button" value="Toggle" onclick="myMenu.toggleMenu(myMenu.submenus[smNr.selectedIndex])" />
+        &nbsp;&nbsp;&nbsp;
+        <input type="button" value="Expand all" onclick="myMenu.expandAll()" />
+        <input type="button" value="Collapse all" onclick="myMenu.collapseAll()" />
+      </fieldset>
+    </form>
+
+    <div style="float: left" id="my_menu" class="sdmenu">
+      <div>
+        <span>Online Tools</span>
+        <a href="http://tools.dynamicdrive.com/imageoptimizer/">Image Optimizer</a>
+        <a href="http://tools.dynamicdrive.com/favicon/">FavIcon Generator</a>
+        <a href="http://www.dynamicdrive.com/emailriddler/">Email Riddler</a>
+        <a href="http://tools.dynamicdrive.com/password/">htaccess Password</a>
+        <a href="http://tools.dynamicdrive.com/gradient/">Gradient Image</a>
+        <a href="http://tools.dynamicdrive.com/button/">Button Maker</a>
+      </div>
+      <div>
+        <span>Support Us</span>
+        <a href="http://www.dynamicdrive.com/recommendit/">Recommend Us</a>
+        <a href="http://www.dynamicdrive.com/link.htm">Link to Us</a>
+        <a href="http://www.dynamicdrive.com/resources/">Web Resources</a>
+      </div>
+      <div class="collapsed">
+        <span>Partners</span>
+        <a href="http://www.javascriptkit.com">JavaScript Kit</a>
+        <a href="http://www.cssdrive.com">CSS Drive</a>
+        <a href="http://www.codingforums.com">CodingForums</a>
+        <a href="http://www.dynamicdrive.com/style/">CSS Examples</a>
+      </div>
+      <div>
+        <span>Test Current</span>
+        <a href="?foo=bar">Current or not</a>
+        <a href="./">Current or not</a>
+        <a href="index.html">Current or not</a>
+        <a href="index.html?query">Current or not</a>
+      </div>
+    </div>
+
+    <div style="padding-left: 200px">
+      <pre>
+var myMenu = new SDMenu("main_menu"); // ID of the menu element
+// Default values...
+myMenu.speed = 3;                     // Menu sliding speed (1 - 5 recomended)
+myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+myMenu.oneSmOnly = false;             // One expanded submenu at a time
+myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+myMenu.init();
+
+// Additional methods...
+var firstSubmenu = myMenu.submenus[0];
+myMenu.expandMenu(firstSubmenu);      // Expand a submenu
+myMenu.collapseMenu(firstSubmenu);    // Collapse a menu
+myMenu.toggleMenu(firstSubmenu);      // Expand if collapsed and collapse if expanded
+
+myMenu.expandAll();                   // Expand all submenus
+myMenu.collapseAll();                 // Collapse all submenus
+      </pre>
+      <p>Download: <a href="sdmenu.zip">sdmenu.zip</a></p>
+    </div>
+  </body>
+</html>

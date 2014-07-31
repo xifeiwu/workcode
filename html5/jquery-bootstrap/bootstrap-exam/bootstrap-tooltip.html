@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="./jquery-1.7.2.js"></script>
+<script src="./Bootstrap_files/bootstrap-tooltip.js"></script>
+<script src="./Bootstrap_files/bootstrap-popover.js"></script>
+<link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="../bootstrap-3.1.1/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
+</head>
+<body>
+
+        <!-- Tooltips
+        ================================================== -->
+        <section id="tooltips">
+          <div class="page-header">
+            <h1>工具提示 (Tooltip) <small>bootstrap-tooltip.js</small></h1>
+          </div>
+
+
+          <h2>示例</h2>
+          <p>受到 Jason Frame 写的著名 jQuery.tipsy 插件的启发。工具提示插件不见依赖图像，并使用 CSS3 动画，并且使用 data-attributes 存储本地标题。</p>
+          <p>考虑到性能的原因，你需要手工启用工具提示和 Popover。</p>
+          <p>鼠标悬停在下面的链接上，查看工具提示：</p>
+          <div class="bs-docs-example tooltip-demo">
+            <p class="muted" style="margin-bottom: 0;">
+            1965年4月4日生于美国纽约。父亲是电影导演Robert Downey Sr.，母亲为一名演员。五岁时他参加过多次业余表演。由于决意发展演艺事业，他便辍学加入剧团，并参加《周末夜现场》等热门电视节目的演出。自1992年在<a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" title="查看电影详细内容">《卓别林与他的情人》</a>中将喜剧泰斗卓别林一角演绎得绘声绘色，并荣获英国电影学院奖最佳男主角奖及奥斯卡最佳男主角提名，将其演艺事业推向高峰。1997年传出吸毒被捕的丑闻，演艺事业遭受重挫。2000年更经历了几个月的铁窗生涯，同年9月出狱，重新投身好莱坞，但不久再因吸毒二进宫，事业再遭重创。之后开始在一些电影中出演配角，并未引起多大反响。2005年开始出演的《晚安，好运》、《亲亲，撞撞》等片获得了不少好评，2007年主演大卫·芬奇《十二宫》，在其中精彩的演出备受关注。2008年更是摇身一变，成为超级英雄《钢铁侠》，同时还在本·斯蒂勒主演的《热带惊雷》中尝试搞笑角色，并凭借该片获得奥斯卡男配角提名，打了一场极为漂亮的翻身仗。接下来唐尼与杰米·福克斯合作了《独奏者》，出演盖·里奇的《大侦探福尔摩斯》，并继续主演<a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" title="这是一种很好看的电影">《钢铁侠2》</a>、《复仇者联盟》、《钢铁侠3》等超级漫画英雄大片。
+              </p>
+          </div>
+
+          <h3>四个方向</h3>
+          <div class="bs-docs-example tooltip-demo">
+            <ul class="bs-docs-tooltip-examples">
+              <li><a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">工具提示在上面</a></li>
+              <li><a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" data-placement="right" title="Tooltip on right">工具提示在右边</a></li>
+              <li><a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">工具提示在下面</a></li>
+              <li><a href="http://bootstrap.ninghao.net/javascript.html#" data-toggle="tooltip" data-placement="left" title="Tooltip on left">工具提示在左边</a></li>
+            </ul>
+          </div>
+
+
+          <h3>在 input 组中的工具提示</h3>
+          <p>在 input 组中使用工具提示和 popovers 的时候，你需要设置 <code>container</code> 选项来去掉一些副作用。</p>
+
+          <hr class="bs-docs-separator">
+
+
+          <h2>用法</h2>
+          <p>Trigger the tooltip via JavaScript:</p>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#example'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="pln">options</span><span class="pun">)</span></li></ol></pre>
+
+          <h3>选项</h3>
+          <p>可以通过数据属性和 JavaScript 来传递选项。使用数据属性， 在 <code>data-</code> 后面加上选项的名称， 比如 <code>data-animation=""</code>。</p>
+          <table class="table table-bordered table-striped">
+            <thead>
+             <tr>
+               <th style="width: 100px;">名称</th>
+               <th style="width: 100px;">类型</th>
+               <th style="width: 50px;">默认</th>
+               <th>描述</th>
+             </tr>
+            </thead>
+            <tbody>
+             <tr>
+               <td>animation</td>
+               <td>布尔值</td>
+               <td>true</td>
+               <td>添加一个 css 渐变效果</td>
+             </tr>
+             <tr>
+               <td>html</td>
+               <td>布尔值</td>
+               <td>false</td>
+               <td>在工具提示里插入 html 。如果设置为 false （假），会使用 jQuery 的 <code>text</code> 方式插入内容。如果你担心 XSS 攻击，请使用 text。</td>
+             </tr>
+             <tr>
+               <td>placement</td>
+               <td>string | function</td>
+               <td>'top'</td>
+               <td>工具提示的位置 - top | bottom | left | right</td>
+             </tr>
+             <tr>
+               <td>selector</td>
+               <td>string</td>
+               <td>false</td>
+               <td>如果提供了选项器，工具提示对象会委派到指定的目标。</td>
+             </tr>
+             <tr>
+               <td>title</td>
+               <td>string | function</td>
+               <td>''</td>
+               <td>默认的标题的值</td>
+             </tr>
+             <tr>
+               <td>trigger</td>
+               <td>string</td>
+               <td>'hover focus'</td>
+               <td>触发工具提示的方法 - click | hover | focus | manual。你可以传递多种方法，使用空格分隔不同的方法。</td>
+             </tr>
+             <tr>
+               <td>delay</td>
+               <td>number | object</td>
+               <td>0</td>
+               <td>
+                <p>显示和隐藏工具提示时的延时（毫秒），不要使用手工触发类型</p>
+                <p>如果提供了数字，延时会同时用在 显示/隐藏上</p>
+                <p>对象结构是：<code>delay: { show: 500, hide: 100 }</code></p>
+               </td>
+             </tr>
+             <tr>
+               <td>container</td>
+               <td>string | false</td>
+               <td>false</td>
+               <td>
+                <p>附加工具提示到指定元素 <code>container: 'body'</code></p>
+               </td>
+             </tr>
+            </tbody>
+          </table>
+          <div class="alert alert-info">
+            <strong>提示！</strong>
+            使用数据属性你可以单独为每个工具提示设置选项。
+          </div>
+
+          <h3>代码</h3>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="tag">&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"#"</span><span class="pln"> </span><span class="atn">data-toggle</span><span class="pun">=</span><span class="atv">"tooltip"</span><span class="pln"> </span><span class="atn">title</span><span class="pun">=</span><span class="atv">"first tooltip"</span><span class="tag">&gt;</span><span class="pln">hover over me</span><span class="tag">&lt;/a&gt;</span></li></ol></pre>
+
+          <h3>方法</h3>
+          <h4>$().tooltip(options)</h4>
+          <p>附加选项处理元素的工具提示</p>
+          <h4>.tooltip('show')</h4>
+          <p>显示元素的工具提示。</p>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#element'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="str">'show'</span><span class="pun">)</span></li></ol></pre>
+          <h4>.tooltip('hide')</h4>
+          <p>隐藏元素的工具提示。</p>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#element'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="str">'hide'</span><span class="pun">)</span></li></ol></pre>
+          <h4>.tooltip('toggle')</h4>
+          <p>切换元素的工具提示。</p>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#element'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="str">'toggle'</span><span class="pun">)</span></li></ol></pre>
+          <h4>.tooltip('destroy')</h4>
+          <p>隐藏和破坏元素的工具提示</p>
+          <pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">$</span><span class="pun">(</span><span class="str">'#element'</span><span class="pun">).</span><span class="pln">tooltip</span><span class="pun">(</span><span class="str">'destroy'</span><span class="pun">)</span></li></ol></pre>
+        </section>
+
+
+
+</body>
+</html>

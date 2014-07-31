@@ -1,0 +1,207 @@
+<html>
+<head>
+<title>drag file</title>
+<style type="text/css">
+#progress_bar {
+	margin: 10px 0;
+	padding: 3px;
+	border: 1px solid #000;
+	font-size: 14px;
+	clear: both;
+	opacity: 0;
+	-moz-transition: opacity 1s linear;
+	-o-transition: opacity 1s linear;
+	-webkit-transition: opacity 1s linear;
+}
+
+#progress_bar.loading {
+	opacity: 1.0;
+}
+
+#progress_bar .percent {
+	background-color: #99ccff;
+	height: auto;
+	width: 0;
+}
+
+#drop_zone {
+	border: 10px dashed #ccc;
+	width: 300px;
+	height: 300px;
+	margin: 20px auto;
+}
+
+#drop_zone.hover {
+	border: 10px dashed #333;
+}
+
+.thumb {
+	height: 75px;
+	border: 1px solid #000;
+	margin: 10px 5px 0 0;
+}
+</style>
+</head>
+<body>
+
+	<input type="file" id="files" name="files[]" multiple />
+	<button onclick="abortRead();">Cancel read</button>
+    <div id="progress_bar"><div class="percent">0%</div></div>
+	<div id="drop_zone">Drop files here</div>
+	<output id="list"></output>
+
+	<script>
+    var reader;
+    var progress = document.querySelector('.percent');
+		function handleFileSelect(evt) {
+		    progress.style.width = '0%';
+		    progress.textContent = '0%';
+
+		    reader = new FileReader();
+		    reader.onerror = errorHandler;
+		    reader.onprogress = updateProgress;
+		    reader.onabort = function(e) {
+		      alert('File read cancelled');
+		    };
+		    reader.onloadstart = function(e) {
+		      document.getElementById('progress_bar').className = 'loading';
+		    };
+		    reader.onload = function(e) {
+		      // Ensure that the progress bar displays 100% at the end.
+		      progress.style.width = '100%';
+		      progress.textContent = '100%';
+		      setTimeout("document.getElementById('progress_bar').className='';", 2000);
+		    }
+
+		    // Read in the image file as a binary string.
+		    reader.readAsBinaryString(evt.target.files[0]);
+		    
+			var files = evt.target.files; // FileList object
+			// files is a FileList of File objects. List some properties.
+			var output = [];
+			for ( var i = 0, f; f = files[i]; i++) {
+				//console.log('files%d:%r', i, files[i]);
+				output.push('<li><strong>', escape(f.name), '</strong> (',
+						f.type || 'n/a', ') - ', f.size,
+						' bytes, last modified: ', f.lastModifiedDate
+								.toLocaleDateString(), '</li>');
+			}
+			document.getElementById('list').innerHTML = '<ul>'
+					+ output.join('') + '</ul>';
+		}
+		function abortRead() {
+		    reader.abort();
+		}
+		function errorHandler(evt) {
+			switch (evt.target.error.code) {
+			case evt.target.error.NOT_FOUND_ERR:
+				alert('File Not Found!');
+				break;
+			case evt.target.error.NOT_READABLE_ERR:
+				alert('File is not readable');
+				break;
+			case evt.target.error.ABORT_ERR:
+				break; // noop
+			default:
+				alert('An error occurred reading this file.');
+			}
+		}
+
+		function updateProgress(evt) {
+			// evt is an ProgressEvent.
+			if (evt.lengthComputable) {
+				var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+				// Increase the progress bar length.
+				if (percentLoaded < 100) {
+					progress.style.width = percentLoaded + '%';
+					progress.textContent = percentLoaded + '%';
+				}
+			}
+		}
+		document.getElementById('files').addEventListener('change',
+				handleFileSelect, false);
+
+		function handleDropFiles(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+
+			var files = evt.dataTransfer.files; // FileList object.
+
+			// files is a FileList of File objects. List some properties.
+			var output = [];
+			for ( var i = 0, f; f = files[i]; i++) {
+
+				output.push('<li><strong>', escape(f.name), '</strong> (',
+						f.type || 'n/a', ') - ', f.size,
+						' bytes, last modified: ', f.lastModifiedDate
+								.toLocaleDateString(), '</li>');
+
+				// Only process image files.
+				if (!f.type.match('image.*')) {
+					continue;
+				}
+
+				var reader = new FileReader();
+				// Closure to capture the file information.
+				reader.onload = (function(theFile) {
+					return function(e) {
+						// Render thumbnail.
+						var span = document.createElement('span');
+						span.innerHTML = [ '<img class="thumb" src="',
+								e.target.result, '" title="',
+								escape(theFile.name), '"/>' ].join('');
+						document.getElementById('list')
+								.insertBefore(span, null);
+
+						//console.log(e.target);
+						//console.log(['</li><img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/></li>'].join(''));
+						//console.log('in function reader.onload');
+						//output.push(['<li><img class="thumb" src="', e.target.result,
+						//             '" title="', escape(theFile.name), '"/></li>']);//.join('')
+
+					};
+				})(f);
+				// Read in the image file as a data URL.
+				reader.readAsDataURL(f);
+			}
+			//console.log(output.join(''));
+			//document.getElementById('list').innerHTML = '<ul>'
+			//		+ output.join('') + '</ul>';
+		}
+
+		function handleDragOver(evt) {
+			evt.stopPropagation();
+			evt.preventDefault();
+			evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+		}
+
+		// Setup the dnd listeners.
+		var dropZone = document.getElementById('drop_zone');
+		dropZone.addEventListener('dragover', handleDragOver, false);
+		dropZone.addEventListener('drop', handleDropFiles, false);
+	</script>
+
+</body>
+</html>
+
+
+<!--
+#holder { border: 10px dashed #ccc; width: 300px; height: 300px; margin: 20px auto;}
+#holder.hover { border: 10px dashed #333; }
+// prevent default behavior from changing page on dropped file
+window.ondragover = function(e) { e.preventDefault(); return false };
+window.ondrop = function(e) { e.preventDefault(); return false };
+
+var holder = document.getElementById('holder');
+holder.ondragover = function () { this.className = 'hover'; return false; };
+holder.ondragend = function () { this.className = ''; return false; };
+holder.ondrop = function (e) {
+  e.preventDefault();
+
+  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+    console.log(e.dataTransfer.files[i]);
+  }
+  return false;
+};
+*/
+-->

@@ -1,0 +1,137 @@
+<html>
+<head>
+  <title> Menu </title>
+</head>
+<body>
+<script>
+function browser(){
+  var ua = window.navigator.userAgent,
+      ret = "";
+  if(/Firefox/g.test(ua)){
+    ua = ua.split(" ");
+    ret="Firefox|"+ua[ua.length-1].split("/")[1];
+  }
+  else if(/Fuck/g.test(ua)){
+    ua = ua.split(" ");
+    ret = "Fuck|"+ua[ua.length-1].split("/")[1];
+  }
+  else if(/MSIE/g.test(ua)){
+    ua = ua.split(";");
+    ret = "IE|"+ua[1].split(" ")[2];
+  }
+  else if(/Opera/g.test(ua)){
+    ua = ua.split(" ");
+    ret = "Opera|"+ua[ua.length-1].split("/")[1];
+  }
+  else if(/Chrome/g.test(ua)){
+    ua = ua.split(" ");
+    ret = "Chrome|"+ua[ua.length-2].split("/")[1];
+  }
+  else if(/^apple\s+/i.test(navigator.vendor)){
+    ua = ua.split(" ");
+    ret = "Safair|"+ua[ua.length-2].split("/")[1];
+  }
+  else{
+    ret = "未知浏览器";
+  }
+  return ret.split("|");
+}
+
+// Load native UI library
+var gui = require('nw.gui');
+
+// Get the current window
+var win = gui.Window.get();
+
+// Listen to the minimize event
+win.on('minimize', function() {
+  console.log('Window is minimized');
+});
+// Minimize the window
+//win.minimize();
+
+//test shell in nw.gui
+//gui.Shell.openExternal('https://github.com/rogerwang/node-webkit');
+gui.Shell.openItem('index.html');
+
+// Create a new window and get it
+//var new_win = gui.Window.get(
+//  window.open('https://github.com')
+//);
+
+// Create an empty menu
+var menu = new gui.Menu();
+
+// Add some items with label
+menu.append(new gui.MenuItem({ label: 'Item A' }));
+menu.append(new gui.MenuItem({ label: 'Item B' }));
+menu.append(new gui.MenuItem({ type: 'separator' }));
+menu.append(new gui.MenuItem({ label: 'Item C' }));
+
+// Remove one item
+menu.removeAt(1);
+
+// Iterate menu's items
+for (var i = 0; i < menu.items.length; ++i) {
+  console.log(menu.items[i]);
+}
+
+// Add a item and bind a callback to item
+menu.append(new gui.MenuItem({
+label: 'Click Me',
+click: function() {
+  // Create element in html body
+  var element = document.createElement('div');
+  element.appendChild(document.createTextNode('Clicked OK'));
+  document.body.appendChild(element);
+}
+}));
+
+// Popup as context menu
+document.body.addEventListener('contextmenu', function(ev) { 
+  ev.preventDefault();
+  // Popup at place you click
+  menu.popup(ev.x, ev.y);
+  return false;
+}, false);
+
+// Get the current window
+var win = gui.Window.get();
+
+// Create a menubar for window menu
+var menubar = new gui.Menu({ type: 'menubar' });
+
+// Create a menuitem
+var sub1 = new gui.Menu();
+
+
+sub1.append(new gui.MenuItem({
+label: 'Test1',
+click: function() {
+  var element = document.createElement('div');
+  element.appendChild(document.createTextNode('Test 1'));
+  document.body.appendChild(element);
+}
+}));
+
+// You can have submenu!
+menubar.append(new gui.MenuItem({ label: 'Sub1', submenu: sub1}));
+
+//assign the menubar to window menu
+win.menu = menubar;
+
+// add a click event to an existing menuItem
+menu.items[0].click = function() { 
+    console.log("CLICK"); 
+};
+
+//var os = require('os');
+//document.write('Our computer is: ', os.platform());
+//document.write('<br>');
+//document.write('Your browser is:' + browser());
+//document.write('<br>');
+//document.write('type of browser is:' + typeof(browser()));
+
+</script>  
+</body>
+</html>

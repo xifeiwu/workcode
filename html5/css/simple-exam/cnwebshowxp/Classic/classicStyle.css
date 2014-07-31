@@ -1,0 +1,106 @@
+BODY
+{
+	background-color:#ffffff;
+	overflow-x:hidden;
+	filter : progid:DXImageTransform.Microsoft.Gradient (enabled=false);
+}
+.MenuItemLabel,.MenuItemLabelDisabled,.MenuItemLabelMouseOver
+{	/*标准链接标签样式*/
+	FONT:11px Tahoma,verdana;color:#000000;
+}
+.MenuItemLabelDisabled
+{	/*无链接命令的标签样式*/
+	color:#000000; cursor:default;
+}
+.MenuItemLabelMouseOver
+{	/*有链接命令的标签鼠标浮动样式*/
+	color:#000000;text-decoration:underline;cursor:pointer!important;cursor:hand;
+	
+}
+.MenuItemRow
+{	/*每个条目的高度*/
+	height:20px;
+}
+.IconContainer
+{
+	overflow:hidden;font-size:1px;width:18px;height:18px;
+}
+/*********************************************/
+.MenuTitlebar
+{
+	position:absolute;top:0px;over-flow:hidden;cursor:pointer!important;cursor:hand;z-index:100;
+}
+.MenuTitle,.MenuTitle_MouseOver,.MenuTitle_Head,.MenuTitle_MouseOver_Head
+{
+	font:bold 11px Tahoma,verdana;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.MenuTitle
+{
+	color:#000000;
+}
+.MenuTitle_Head
+{
+	color:#ffffff;
+}
+.MenuTitle_MouseOver
+{
+	color:#000000;
+}
+
+.MenuTitle_MouseOver_Head
+{
+	color:#ffffff;
+}
+.MenuTitlebarLeft
+{
+	background-image:url("titlebarLeft.gif");
+}
+.MenuTitlebarLeft_Head
+{
+	background-image:url("titlebarLeft_Head.gif");background-position:right;
+}
+.MenuTitlebarMiddle,MenuTitlebarMiddle_Head
+{
+	background-image:url("titlebarMiddle.gif");background-repeat:repeat-y;background-position:right;
+}
+.MenuTitlebarMiddle_Head
+{
+	background-image:url("titlebarMiddle_Head.gif");
+}
+.MenuTitlebarRight_Close,.MenuTitlebarRight_Open,.MenuTitlebarRight_Open_MouseOver,.MenuTitlebarRight_Close_MouseOver
+{
+	background-image:url("titlebarRight.gif");background-repeat: norepeat;
+}
+.MenuTitlebarRight_Close_Head,.MenuTitlebarRight_Open_Head,.MenuTitlebarRight_Open_MouseOver_Head,.MenuTitlebarRight_Close_MouseOver_Head
+{
+	background-image:url("titlebarRight_Head.gif");background-repeat: norepeat;
+}
+.MenuTitlebarRight_Open_Head,.MenuTitlebarRight_Open
+{
+	background-position:0 0;
+}
+.MenuTitlebarRight_Open_MouseOver_Head,.MenuTitlebarRight_Open_MouseOver
+{
+	background-position:-25 0;
+}
+.MenuTitlebarRight_Close_Head,.MenuTitlebarRight_Close
+{
+	background-position:-50 0;
+}
+.MenuTitlebarRight_Close_MouseOver_Head,.MenuTitlebarRight_Close_MouseOver
+{
+	background-position:-75 0;
+}
+/************************************************************/
+.MenuBody,.MenuBody_Head
+{
+	font-size:0px;position:absolute;border-style:solid;border-top-width:0px;filter:alpha(opacity = 100);moz-opacity:1.0;z-index:99;
+}
+.MenuBody
+{
+	background-color:#ffffff;border-color:#d4d0c8;
+}
+.MenuBody_Head
+{
+	background-color:#ffffff;border-color:#0a246a;
+}

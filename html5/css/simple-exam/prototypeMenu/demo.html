@@ -1,0 +1,29 @@
+<html>
+<head>
+<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript" src="proto.menu.js"></script>
+<link rel="stylesheet" href="Proto.Menu.css" type="text/css" media="screen">
+</head>
+<body>
+<script type="text/javascript">
+var myLinks = [
+        {name: 'Back', callback: function(){alert('back function called')}},
+        {name: 'Forward', callback: function(){alert('Forward function called')}},
+        {separator: true},
+        {name: 'Reload', callback: function(){alert('Reload function called')}},
+        {name: 'Disabled option', disabled: true},
+        {name: 'Toggle previous option', callback: function(){
+                var item = oLinks.find(function(l){return l.name == 'Disabled option'});
+                item.disabled = item.disabled == false ? true : false;
+        }}
+];
+
+new Proto.Menu({
+        selector: '.contextmenu' // context menu will be shown when element with class name of "contextmenu" is clicked
+        className: 'myContextMenu', // this is a class which will be attached to menu container (used for css styling)
+        menuItems: myLinks // array of menu items
+})
+</script>
+<div class="contextmenu">fuck</div>
+</body>
+</html>

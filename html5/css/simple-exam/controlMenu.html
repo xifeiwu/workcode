@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>中国站长天空-网页特效-导航菜单-完美控制的伸缩菜单</title>
+<meta http-equiv="content-Type" content="text/html;charset=gb2312">
+</head>
+<body>
+<!--把下面代码加到<body>与</body>之间-->
+<a href="###" onclick="show_all([1001,1000,1002])">全部打开</a> | <a href="###" onclick="hid_all([1001,1000,1002])">全部隐藏</a><hr>
+<a onclick="onclick_folder('1000,1001,1002');"><img id="CategoryFolder_1000" src="http://www.zzsky.cn/effect/images/200809010820_minus.gif" alt="" />目录一</a>
+<div style="display:block" id="HiddenCategoryFolder_1000">内容一</div><br />
+<a onclick="onclick_folder('1001,1000,1002');"><img id="CategoryFolder_1001" src="http://www.zzsky.cn/effect/images/200809010820_minus.gif" alt="" />目录二</a>
+<div style="display:block" id="HiddenCategoryFolder_1001">内容二</div><br />
+<a onclick="onclick_folder('1002,1000,1001');"><img id="CategoryFolder_1002" src="http://www.zzsky.cn/effect/images/200809010820_minus.gif" alt="" />目录三</a>
+<div style="display:block" id="HiddenCategoryFolder_1002">内容三</div>
+<script type="text/javascript">
+var hc='HiddenCategoryFolder_',fd='CategoryFolder_';
+var show_fd_src='http://www.zzsky.cn/effect/images/200809010820_minus.gif';
+var hid_fd_src= 'http://www.zzsky.cn/effect/images/200809010820_plus.gif';
+function getobj(str){return document.getElementById(str)}//获取对象
+function show_all(_array){//显示所有DIV
+	for (var i=0;i<_array.length;i++){
+		getobj(hc+_array[i]).style.display = 'block';
+		getobj(fd+_array[i]).src =show_fd_src;
+	}
+}
+function hid_all(_array){//隐藏所有DIV
+	for (var i=0;i<_array.length;i++){
+		getobj(hc+_array[i]).style.display = 'none';
+		getobj(fd+_array[i]).src =hid_fd_src;
+	}
+}
+function onclick_folder(_show) {//显示ONCLICK的DIV
+var objArray=_show.split(",")
+var _Hid=getobj(hc+objArray[0]).style.display;
+hid_all(objArray);
+if (_Hid == 'block'){return}
+getobj(hc+objArray[0]).style.display = 'block';
+getobj(fd+objArray[0]).src = show_fd_src;
+}
+</script>
+</body>
+</html>

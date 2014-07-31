@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="./jquery/jquery-1.7.2.js"></script>
+<link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="../bootstrap-3.1.1/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+<h1>title</h1>
+</body>
+<script>
+$('h1').grumble({
+    text: 'Bubble-tastic!', 
+    angle: 85, 
+    distance: 100, 
+    showAfter: 500 
+});
+    $(document).ready(function() {
+        var contents = ['动作', '剧情', '恐怖', '更多类型'];
+        $('body').append(gen_right_menu(contents));
+        $('.dropdown-menu').css({'display':'block', 'left': '10px', 'top': '10px'});
+    });
+</script>
+</html>

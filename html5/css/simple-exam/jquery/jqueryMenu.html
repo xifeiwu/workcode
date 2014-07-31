@@ -1,0 +1,61 @@
+<script type="text/javascript" src="jQuery.js" mce_src="jQuery.js"></script>
+
+<script type="text/javascript">
+      $(document).ready(function() {
+         $('#InfoDL').find('dd').hide();
+         $('#InfoDL').find('dt').click(function() {
+      		var answer = $(this).next();
+      		if (answer.is(':visible')) {
+        		answer.slideUp("fast"); 
+      		} else {
+              $("dd > dl").height('190px');
+              answer.slideDown("fast");
+      		}      
+		 });    
+	  });
+</script>
+<!– www.geto.cn–>
+
+<style type="text/css">
+<!– dt {
+color: #d2232a;
+cursor:hand;
+font-size:14px;
+height:25px;
+}
+.dt2 {
+ color: #d2232a;
+ cursor:hand;
+ font-size:12px;
+ height:25px;
+font
+}
+.dl2 {
+ background-color: #f3f3f3;
+ border: 1px solid #DDDDDD;
+ padding-top:10px;
+ padding-left:10px;
+}
+–>
+</style>
+<dl id="InfoDL">
+  <dt> <u>银行已经扣款，但“交易管理"中的交易状态仍然显示“等待买家付款"？</u> </dt>
+  <dd>这是网络传输问题造成的，请不要担心。我们会在第二个工作日和银行对账，并为您恢复这笔付款。 </dd>
+  <dt> <u>银行没有扣款？</u> </dt>
+  <dd>建议您<a href="#" mce_href="#" class="red">重新支付</a>一次试试看。如果仍然无法支付成功，建议用户拨打95588咨询工商银行客户服务中心。 </dd>
+  <dt> <u>遇到错误提示看不懂？</u> </dt>
+  <dd>
+    <dl class="dl2">
+      <dt class="dt2"><u>1、页面提示——重置密码</u> </dt>
+      <dd>开通工行网上银行后，第一次使用前需要重新设置密码，请登录工行网银重新设置，然后再支付。 </dd>
+      <dt class="dt2"><u>2、页面要求填写"右侧显示的验证码"，验证码的框里是红叉。</u> </dt>
+      <dd>用户未安装工行的安全控件，请下载并安装工商银行安全控件。 </dd>
+      <dt class="dt2"><u>3、工行E卡用户，申请了口令卡，卡里有足够的余额，但页面提示余额不足。</u> </dt>
+      <dd>请先登录工行网上银行，将卡内余额充值到电子支付卡（E卡），然后就可以用E卡进行网上支付。 </dd>
+      <dt class="dt2"><u>4、页面提示——对不起，用户的电子商务功能暂未开通。</u> </dt>
+      <dd>用户还没有开通网上支付功能，请到工商银行柜台申请电子口令卡或者U盾。 </dd>
+      <dt class="dt2"><u>5、信息代码：31871。</u> </dt>
+      <dd>用户还没有开通网上支付功能，请到工商银行柜台申请电子口令卡或者U盾。 </dd>
+    </dl>
+  </dd>
+</dl>

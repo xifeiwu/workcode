@@ -1,0 +1,208 @@
+<body>
+<style>
+<!--
+
+/*
+Maximus' Slide-In Menu (By Maximus at http://absolutegb.com/maximus/)
+Submitted and featured on Dynamicdrive.com
+For full source, usage terms, and 100's more DHTML scripts, visit http://www.dynamicdrive.com
+*/
+
+#ssm2 A {
+	color:black;
+	text-decoration:none; 
+	font-size:12;
+	font-family:verdana;
+	}
+
+#ssm2 A:hover {
+	color:red;
+	 }
+
+
+-->
+</style>
+            <script language="JavaScript1.2">
+
+function MM_displayStatusMsg(msgStr) { 
+  status=msgStr;
+  document.MM_returnValue = true;
+}
+
+function highlight(x){
+document.forms[x].elements[0].focus()
+document.forms[x].elements[0].select()
+}
+
+function MM_jumpMenu(targ,selObj,restore){ 
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+
+var NS
+IE=document.all;
+NS=document.layers;
+
+
+hdrFontFamily="Verdana";
+hdrFontSize="2";
+hdrFontColor="white";
+hdrBGColor="#666666";
+linkFontFamily="Verdana";
+linkFontSize="2";
+linkBGColor="white";
+linkOverBGColor="#CCCCCC";
+linkTarget="_top";
+YOffset=60;
+staticYOffset=20;
+menuBGColor="black";
+menuIsStatic="no";
+menuHeader="Main Index"
+menuWidth=150; // Must be a multiple of 5!
+staticMode="advanced"
+barBGColor="#1298fd";
+barFontFamily="Verdana";
+barFontSize="2";
+barFontColor="white";
+barText="MENU";
+
+function moveOut() {
+if (window.cancel) {
+  cancel="";
+}
+
+if (window.moving2) {
+  clearTimeout(moving2);
+  moving2="";
+}
+if ((IE && ssm2.style.pixelLeft<0)||(NS && document.ssm2.left<0)) {
+  if (IE) {ssm2.style.pixelLeft += (5%menuWidth);
+}
+if (NS) {
+  document.ssm2.left += (5%menuWidth);
+}
+
+moving1 = setTimeout('moveOut()', 5)
+}
+else {
+  clearTimeout(moving1)
+  }
+};
+
+function moveBack() {
+  cancel = moveBack1()
+}
+function moveBack1() {
+  if (window.moving1) {
+    clearTimeout(moving1)
+}
+
+if ((IE && ssm2.style.pixelLeft>(-menuWidth))||(NS && document.ssm2.left>(-150))) {
+  if (IE) {ssm2.style.pixelLeft -= (5%menuWidth);
+}
+if (NS) {
+  document.ssm2.left -= (5%menuWidth);
+}
+moving2 = setTimeout('moveBack1()', 5)}
+  else {
+    clearTimeout(moving2)
+  }
+};
+
+lastY = 0;
+function makeStatic(mode) {
+if (IE) {winY = document.body.scrollTop;var NM=ssm2.style
+}
+if (NS) {winY = window.pageYOffset;var NM=document.ssm2
+}
+if (mode=="smooth") {
+  if ((IE||NS) && winY!=lastY) {
+    smooth = .2 * (winY - lastY);
+      if(smooth > 0) smooth = Math.ceil(smooth);
+    else smooth = Math.floor(smooth);
+      if (IE) NM.pixelTop+=smooth;
+        if (NS) NM.top+=smooth;
+      lastY = lastY+smooth;
+}
+setTimeout('makeStatic("smooth")', 1)
+}
+
+else if (mode=="advanced") {
+  if ((IE||NS) && winY>YOffset-staticYOffset) {
+    if (IE) {NM.pixelTop=winY+staticYOffset
+  }
+if (NS) {NM.top=winY+staticYOffset
+  }
+}
+else {
+if (IE) {NM.pixelTop=YOffset
+}
+ if (NS) {NM.top=YOffset-7
+ }
+}
+setTimeout('makeStatic("advanced")', 1)
+ }
+}
+
+function init() {
+if (IE) {
+ssm2.style.pixelLeft = -menuWidth;
+ssm2.style.visibility = "visible"
+}
+else if (NS) {
+document.ssm2.left = -menuWidth;
+document.ssm2.visibility = "show"
+}
+else {
+alert('Choose either the "smooth" or "advanced" static modes!')
+}
+}
+
+
+function MM_displayStatusMsg(msgStr) { 
+  status=msgStr;
+  document.MM_returnValue = true;
+}
+</script>
+            <script language="JavaScript1.2">
+if (IE) {document.write('<DIV ID="ssm2" style="visibility:hidden;Position : Absolute ;Left : 0px ;Top : '+YOffset+'px ;Z-Index : 20;width:1px" onmouseover="moveOut()" onmouseout="moveBack()">')}
+if (NS) {document.write('<LAYER visibility="hide" top="'+YOffset+'" name="ssm2" bgcolor="'+menuBGColor+'" left="0" onmouseover="moveOut()" onmouseout="moveBack()">')}
+tempBar=""
+for (i=0;i<barText.length;i++) {
+tempBar+=barText.substring(i, i+1)+"<BR>"}
+document.write('<table border="0" cellpadding="0" cellspacing="1" width="'+(menuWidth+16+2)+'" bgcolor="'+menuBGColor+'"><tr><td bgcolor="'+hdrBGColor+'" WIDTH="'+menuWidth+'"> <font face="'+hdrFontFamily+'" Size="'+hdrFontSize+'" COLOR="'+hdrFontColor+'"><b>'+menuHeader+'</b></font></td><td align="center" rowspan="100" width="16" bgcolor="'+barBGColor+'"><p align="center"><font face="'+barFontFamily+'" Size="'+barFontSize+'" COLOR="'+barFontColor+'"><B>'+tempBar+'</B></font></p></TD></tr>')
+function addItem(text, link, target) {
+if (!target) {target=linkTarget}
+document.write('<TR><TD BGCOLOR="'+linkBGColor+'" onmouseover="bgColor=\''+linkOverBGColor+'\'" onmouseout="bgColor=\''+linkBGColor+'\'"><ILAYER><LAYER onmouseover="bgColor=\''+linkOverBGColor+'\'" onmouseout="bgColor=\''+linkBGColor+'\'" WIDTH="100%"><FONT face="'+linkFontFamily+'" Size="'+linkFontSize+'"> <A HREF="'+link+'" target="'+target+'" CLASS="ssm2Items">'+text+'</A></FONT></LAYER></ILAYER></TD></TR>')}
+function addHdr(text) {
+document.write('<tr><td bgcolor="'+hdrBGColor+'" WIDTH="140"> <font face="'+hdrFontFamily+'" Size="'+hdrFontSize+'" COLOR="'+hdrFontColor+'"><b>'+text+'</b></font></td></tr>')}
+
+//Only edit the script between HERE
+
+addItem('Dynamic Drive', 'http://www.dynamicdrive.com', '');
+addItem('What\'s New', 'http://www.dynamicdrive.com/new.htm', '');
+addItem('What\'s Hot', 'http://www.dynamicdrive.com/hot.htm', '');
+addItem('Forum', 'http://wsabstract.com/cgi-bin/Ultimate.cgi', '');
+addItem('FAQs', 'http://www.dynamicdrive.com/faqs.htm', '');
+addItem('Submit', 'http://www.dynamicdrive.com/submitscript.htm', '');
+addHdr('External Links');
+addItem('Website Abstraction', 'http://wsabstract.com', '_blank');
+addItem('Freewarejava', 'http://freewarejava.com', '_blank');
+addItem('DHTML Zone', 'http://www.dhtml-zone.com/', '_blank');
+addItem('Active-X.com', 'http://www.active-x.com', '_blank');
+addItem('Web Review', 'http://www.webreview.com', '_blank');
+addItem('David\'s Website', 'http://www.david-thurston.co.uk', '_blank');
+
+
+// and HERE! No more!
+
+document.write('<tr><td bgcolor="'+hdrBGColor+'"><font size="0" face="Arial"> </font></td></TR></table>')
+if (IE) {document.write('</DIV>')}
+if (NS) {document.write('</LAYER>')}
+if ((IE||NS) && (menuIsStatic=="yes"&&staticMode)) {makeStatic(staticMode);}
+
+</script>
+<script>
+window.onload=init
+</script>
+</body>

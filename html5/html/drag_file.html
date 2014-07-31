@@ -1,0 +1,26 @@
+<html>
+<body>
+<style>
+#holder { border: 10px dashed #ccc; width: 300px; height: 300px; margin: 20px auto;}
+#holder.hover { border: 10px dashed #333; }
+</style>
+<div id="holder"></div>
+<script>
+// prevent default behavior from changing page on dropped file
+window.ondragover = function(e) { e.preventDefault(); return false };
+window.ondrop = function(e) { e.preventDefault(); return false };
+
+var holder = document.getElementById('holder');
+holder.ondragover = function () { this.className = 'hover'; return false; };
+holder.ondragend = function () { this.className = ''; return false; };
+holder.ondrop = function (e) {
+  e.preventDefault();
+console.log("e.dataTransfer.files: %r", e.dataTransfer.files);
+  for (var i = 0; i < e.dataTransfer.files.length; ++i) {
+    console.log(e.dataTransfer.files[i]);
+  }
+  return false;
+};
+</script>
+</body>
+</html>

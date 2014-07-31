@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0036)http://vip.5d.cn/flood/menu/drdc.htm -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<SCRIPT>
+var menus    = new Array();
+var isShow   = new Boolean(); 
+isShow=false;
+var isdown   = new Boolean();
+isdown=false;
+var srcel; 
+var fromel;  
+var toel; 
+var usestatus=false;
+var thestatus="";
+var popTimer = 0;
+menucolor='#EEBF99';fontcolor='MenuText';menuoutcolor='#F3D5B8';menuincolor='#F8E8D6';menuoutbordercolor='#FCF3EF';menuinbordercolor='#000000';midoutcolor='#F2D0B5';midincolor='#9E7F66';menuovercolor='#E80005';menuunitwidth=160;menuitemwidth=160;menuheight=180;menuwidth='160';menuadjust=0;
+menualign='center';leftchar='(无)';rightchar='(无)';fonts='font-family: 宋体; font-size: 9pt; color: MenuText; ';cursor='default';
+var fadeSteps = 5;
+var fademsec = 20;
+var fadeArray = new Array();
+function fade(el, fadeIn, steps, msec) {
+ if (steps == null) steps = fadeSteps;
+ if (msec == null) msec = fademsec;
+ if (el.fadeIndex == null)
+  el.fadeIndex = fadeArray.length;
+ fadeArray[el.fadeIndex] = el;
+ if (el.fadeStepNumber == null) {
+  if (el.style.visibility == "hidden")
+   el.fadeStepNumber = 0;
+  else
+   el.fadeStepNumber = steps;
+  if (fadeIn)
+   el.style.filter = "Alpha(Opacity=0)";
+  else
+   el.style.filter = "Alpha(Opacity=100)";
+ }
+ window.setTimeout("repeatFade(" + fadeIn + "," + el.fadeIndex + "," + steps + "," + msec + ")", msec);
+}
+function repeatFade(fadeIn, index, steps, msec) { 
+ el = fadeArray[index];
+ 
+ c = el.fadeStepNumber;
+ if (el.fadeTimer != null)
+  window.clearTimeout(el.fadeTimer);
+ if ((c == 0) && (!fadeIn)) {
+  el.style.visibility = "hidden";
+  return;
+ }
+ else if ((c==steps) && (fadeIn)) {
+  el.style.filter = "";
+  el.style.visibility = "visible";
+  return;
+ }
+ else {
+  (fadeIn) ?  c++ : c--;
+  el.style.visibility = "visible";
+  el.style.filter = "Alpha(Opacity=" + 100*c/steps + ")";
+  el.fadeStepNumber = c;
+  el.fadeTimer = window.setTimeout("repeatFade(" + fadeIn + "," + index + "," + steps + "," + msec + ")", msec);
+ }
+}
+function popOut() {
+popTimer = setTimeout('allhide()', 1000);
+}
+function getReal(el, type, value) {
+ temp = el;
+ while ((temp != null) && (temp.tagName != "BODY")) {
+  if (eval("temp." + type) == value) {
+   el = temp;
+   return el;
+  }
+  temp = temp.parentElement;
+ }
+ return el;
+}
+function MenuRegister(menu) 
+{
+  menus[menus.length] = menu
+  return (menus.length - 1)
+}
+function MenuItem(caption,command,target,isline,statustxt){
+ this.caption=caption;
+ this.command=command;
+ this.target=target;
+ this.isline=isline;
+ this.statustxt=statustxt;
+}
+function Menu(caption,command,target){
+ this.items = new Array();
+ this.caption=caption;
+ this.command=command;
+ this.target=target;
+ this.id=MenuRegister(this);
+}
+function MenuAddItem(item)
+{
+  this.items[this.items.length] = item
+  item.parent = this.id;
+  this.children=true;
+}
+Menu.prototype.addItem = MenuAddItem;
+function toout(src){
+src.style.borderLeftColor=menuoutbordercolor;
+src.style.borderRightColor=menuinbordercolor;
+src.style.borderTopColor=menuoutbordercolor;
+src.style.borderBottomColor=menuinbordercolor;
+src.style.backgroundColor=menuoutcolor;
+src.style.color=menuovercolor;
+}
+function toin(src){
+src.style.borderLeftColor=menuinbordercolor;
+src.style.borderRightColor=menuoutbordercolor;
+src.style.borderTopColor=menuinbordercolor;
+src.style.borderBottomColor=menuoutbordercolor;
+src.style.backgroundColor=menuincolor;
+src.style.color=menuovercolor;
+}
+function nochange(src){
+src.style.borderLeftColor=menucolor;
+src.style.borderRightColor=menucolor;
+src.style.borderTopColor=menucolor;
+src.style.borderBottomColor=menucolor;
+src.style.backgroundColor=menucolor;
+src.style.color=fontcolor;
+}
+function allhide(){
+ for(var nummenu=0;nummenu<menus.length;nummenu++){
+  var themenu=document.all['menu'+nummenu]
+  var themenudiv=document.all['menudiv'+nummenu]
+                nochange(themenu);
+                menuhide(themenudiv);
+                }
+}
+function menuhide(menuid){
+fade(menuid,false,6);
+isShow=false;
+}
+function menushow(menuid,pid){
+menuid.style.left=menutable.offsetLeft+menuadjust+parseInt(menuwidth);menuid.style.top=menutable.offsetTop+pid.offsetTop;fade(menuid,true,6);
+isShow=true;
+}
+function menu_over(menuid,x){
+toEl = getReal(window.event.toElement, "className", "coolButton");
+fromEl = getReal(window.event.fromElement, "className", "coolButton");
+if (toEl == fromEl) return;
+srcel = window.event.srcElement;
+if(menus[x].command==""){
+  allhide();
+  toin(srcel);
+  menushow(menuid,eval("menu"+x));
+}else{
+  isShow = false;
+  allhide();
+  toout(srcel);
+}
+clearTimeout(popTimer);
+}
+function menu_out(menuid){
+toEl = getReal(window.event.toElement, "className", "coolButton");
+fromEl = getReal(window.event.fromElement, "className", "coolButton");
+if (toEl == fromEl) return; 
+srcel = window.event.srcElement;
+if (isShow){
+toin(srcel);
+}else{
+nochange(srcel);
+}
+popOut()
+}
+function menu_down(menuid,x){
+srcel = getReal(window.event.srcElement, "className", "coolButton");
+if(menus[x].command==""){
+  if(isShow){
+  menuhide(menuid);
+  toout(srcel);
+  }
+  else{
+  toin(srcel);
+  menushow(menuid,eval("menu"+x));
+  isdown=true;
+  }
+}else{
+  toin(srcel);
+  isdown=true;
+}
+}
+function menu_up(){
+  isdown=false;
+}
+function menuitem_over(menuid){
+srcel = getReal(window.event.srcElement, "className", "coolButton");
+if(isdown){
+ toin(srcel);
+}
+else{
+toout(srcel);
+}
+if(thestatus!=""){
+ usestatus=true;
+ window.status=thestatus;
+}
+clearTimeout(popTimer);
+}
+function menuitem_out(menuid){
+srcel = getReal(window.event.srcElement, "className", "coolButton");
+nochange(srcel);
+if(usestatus)window.status="";
+popOut()
+}
+function menuitem_down(menuid){
+srcel = getReal(window.event.srcElement, "className", "coolButton");
+toin(srcel)
+isdown=true;
+}
+function menuitem_up(menuid){
+srcel = getReal(window.event.srcElement, "className", "coolButton");
+toout(srcel)
+isdown=false;
+}
+function exec2(x){
+var cmd;
+if(menus[x].target=="blank"){
+  cmd = "window.open('"+menus[x].command+"')";
+}else{
+  cmd = menus[x].target+".location='"+menus[x].command+"'";
+}
+eval(cmd);
+}
+function exec(x,i){
+var cmd;
+if(menus[x].items[i].target=="blank"){
+  cmd = "window.open('"+menus[x].items[i].command+"')";
+}else{
+  cmd = menus[x].items[i].target+".location='"+menus[x].items[i].command+"'";
+}
+eval(cmd);
+}
+function body_click(){
+if (isShow){
+ srcel = getReal(window.event.srcElement, "className", "coolButton");
+ for(var x=0;x<=menus.length;x++){
+  if(srcel.id=="menu"+x)
+  return;
+ }
+ allhide();
+}
+}
+document.onclick=body_click;
+var MenuBodyRef;
+function writetodocument(){
+      var wb=1;
+      for(var i in document.all){
+              if (document.all[i].tagName == 'BODY'){
+                     MenuBodyRef = document.all[i]
+                     var stringx='<table id=menutable border=0 cellpadding=0 cellspacing=2 width='+menuwidth+' height='+menuheight+' bgcolor='+menucolor+
+                     ' onselectstart="event.returnValue=false"'+
+                     ' style="position:absolute;top=170;left=8;cursor:'+cursor+';'+fonts+
+                     ' border-left: '+wb+'px solid '+menuoutbordercolor+';'+
+                     ' border-right: '+wb+'px solid '+menuinbordercolor+'; '+
+                     'border-top: '+wb+'px solid '+menuoutbordercolor+'; '+
+                     'border-bottom: '+wb+'px solid '+menuinbordercolor+'; padding:0px"><tr>'
+                     if(leftchar!="(无)")stringx+='<td width="100%" align="center">'+leftchar+'</td></tr><tr>'      
+                     for(var x=0;x<menus.length;x++){
+                      var thismenu=menus[x];
+                      stringx += "<td class=coolButton id=menu"+x+" style='border: 1px solid "+menucolor+
+                      "' width="+menuunitwidth+"px onmouseover=menu_over(menudiv"+x+
+                      ","+x+") onmouseout=menu_out(menudiv"+x+
+                      ") onmousedown=menu_down(menudiv"+x+","+x+")";
+                            if(thismenu.command!=""){
+                                stringx += " onmouseup=exec2("+x+");menu_up();";
+                            }else{
+                               stringx += " onmouseup=menu_up()";
+                            }
+                      stringx += " align="+menualign+">"+thismenu.caption+"</td></tr><tr>"
+                     }
+                     if(rightchar!="(无)")stringx+='<td width="100%" align="center">'+rightchar+'</td>'
+                     stringx+="</tr></table>";          
+                     for(var x=0;x<menus.length;x++){
+                      thismenu=menus[x];
+                        if(x==0||x==4||x==5){
+                        stringx+='<div id=menudiv'+x+' style="visiable:none"></div>';
+                        }else{
+                        stringx+='<div id=menudiv'+x+
+                        ' style="cursor:'+cursor+';position:absolute;'+
+                        'width:'+menuitemwidth+'px; z-index:'+(x+100)+
+                        ';border-left: 1px solid '+midoutcolor+'; '+
+                        'border-right: 1px solid '+menuinbordercolor+';'+
+                        ' border-top: 1px solid '+midoutcolor+'; '+
+                        'border-bottom: 1px solid '+menuinbordercolor+';visibility:hidden" onselectstart="event.returnValue=false">\n'+
+                      '<table width="100%" border="0" height="100%" align="center" cellpadding="0" cellspacing="2" '+
+                      'style="'+fonts+' border-left: 1px solid '+menuoutbordercolor+';'+
+                      ' border-right: 1px solid '+midincolor+';'+
+                      ' border-top: 1px solid '+menuoutbordercolor+'; '+
+                      'border-bottom: 1px solid '+midincolor+'; padding: 4px" bgcolor='+menucolor+'>\n'
+                      for(var i=0;i<thismenu.items.length;i++){
+                       var thismenuitem=thismenu.items[i];
+                       if(!thismenuitem.isline){
+                       stringx += "<tr><td class=coolButton style='border: 1px solid "+menucolor+
+                       "' width=100% height=15px onmouseover=\"thestatus='"+thismenuitem.statustxt+"';menuitem_over(menudiv"+x+
+                       ");\" onmouseout=menuitem_out(menudiv"+x+
+                       ") onmousedown=menuitem_down(menudiv"+x+") onmouseup=";
+     stringx += "exec("+x+","+i+");menuitem_up(menudiv"+x+")>"+ thismenuitem.caption +"</td></tr>\n";
+                              }else{
+                       stringx+='<tr><td height="1" background="hr.gif"><img border="0" src="none.gif" width="1" height="1"></td></tr>\n';
+                       }
+                      }
+                      }
+                      stringx+='</table>\n</div>'
+                }
+                
+                     document.write(stringx);
+      break
+    }
+  }
+}
+function document_load(){
+ writetodocument();
+}
+pmenu1=new Menu('扯 淡 首 页','#','self');
+pmenu2=new Menu('明 星 壁 纸','','self');
+pmenu2.addItem(new MenuItem('      大陆明星壁纸','wpaper/html/dl/index.htm','top',false,'大陆明星壁纸'));
+pmenu2.addItem(new MenuItem('      港台明星壁纸','wpaper/html/gt/index.htm','top',false,'港台明星壁纸'));
+pmenu2.addItem(new MenuItem('      欧美明星壁纸','wpaper/html/ur/index.htm','top',false,'欧洲明星壁纸'));
+pmenu2.addItem(new MenuItem('      日本明星壁纸','wpaper/html/jp/index.htm','top',false,'日本明星壁纸,因为空间不够，没有上传完，请原谅'));
+pmenu2.addItem(new MenuItem('      韩国明星壁纸','wpaper/html/ko/index.htm','top',false,'韩国明星壁纸'));
+pmenu3=new Menu('明 星 写 真','','self');
+pmenu3.addItem(new MenuItem('      韩国明星写真','#','self',false,'因为空间不够，没有上传，请原谅'));
+pmenu3.addItem(new MenuItem('      港台明星写真','#','self',false,'因为空间不够，没有上传，请原谅'));
+pmenu3.addItem(new MenuItem('      欧美明星写真','#','self',false,'因为空间不够，没有上传，请原谅'));
+pmenu3.addItem(new MenuItem('      日本明星写真','#','self',false,'因为空间不够，没有上传，请原谅'));
+pmenu3.addItem(new MenuItem('      韩国明星写真','#','self',false,'因为空间不够，没有上传，请原谅'));
+pmenu4=new Menu('新 闻 中 心','','self');
+pmenu4.addItem(new MenuItem('      娱 乐 新 闻','','self',false,'制作中'));
+pmenu4.addItem(new MenuItem('      社 会 新 闻','','self',false,'制作中'));
+pmenu4.addItem(new MenuItem('      游 戏 新 闻','','self',false,'制作中'));
+pmenu4.addItem(new MenuItem('      新 闻 首 页','','self',false,'制作中'));
+pmenu5=new Menu('游 人 天 地','#','self');
+pmenu6=new Menu('扯 淡 论 坛','#','blank');
+document.write("<body bgcolor='#FCF1DC'>")
+document_load()
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY></BODY></HTML>

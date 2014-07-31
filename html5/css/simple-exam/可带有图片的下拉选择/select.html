@@ -1,0 +1,19 @@
+<head>
+<link type="text/css" rel="STYLESHEET" href="classic.css">
+<script type="text/javascript" src="fade.js"></script>
+<script type="text/javascript" src="select.js"></script>
+<script type="text/javascript" src="writeSelect.js"></script>
+<head>
+<body>
+<script> 
+topArray = new Array();
+topArray[0] = new Option('<nobr title="访问无忧脚本主页"><img src="img/home.gif" width=16 height=17 border=0 align="absmiddle"> <span style="font-family: arial black; font-style: italic; font-weight: bold;">51JS.COM</span> Home</nobr>', "http://www.51js.com");
+topArray[1] = new Option('<nobr title="JavaScript实例宝库"><img src="img/htmlicon.gif" width=16 height=16 border=0 align="absmiddle"> 脚本实例宝库</nobr>', "http://www.51js.com/js.php");
+topArray[2] = new Option('<nobr><img src="img/htmlicon.gif" width=16 height=16 border=0 align="absmiddle"> 提示资料库</nobr>', "http://www.51js.com/article.php");
+
+writeSelectBox(topArray, "select2", 1, "window.open(this.options[this.selectedIndex].value, '_blank')", "margin-left: 10; width: 150;");
+
+</script>
+ 
+
+</body>

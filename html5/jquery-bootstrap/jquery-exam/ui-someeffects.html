@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link  type="text/css" rel="stylesheet" href="../jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+<style type="text/css">
+#toggle {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+  }
+</style>
+<script src="../jquery-ui-1.10.4/js/jquery-1.10.2.js"></script>
+<script src="../jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript">
+$( document ).click(function() {
+  $( "#toggle" ).toggle("slide");
+  // "blind"
+  //"bounce", { times: 10 }, "slow"
+  // "clip"
+  //"drop"
+  //"explode"
+  //"fade"
+  //"fold"
+  //"highlight"
+  // "puff"
+  //"pulsate"
+  //"shake"
+  //{effect: "scale", direction: "horizontal"}
+});
+$(document).ready(function(){
+});
+</script>
+
+</head>
+<body>
+<p>点击任意地方进行切换。</p>
+<div id="toggle"></div>
+</body>
+</html>

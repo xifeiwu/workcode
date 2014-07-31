@@ -1,0 +1,235 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0042)http://www.kxbd.com/mylab/080723accordion/ -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Accordion</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR>
+<META content="Aken li" name=author>
+<META content="" name=keywords>
+<META content="" name=description>
+<STYLE type=text/css> {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+BODY {
+	FONT-SIZE: 12px; LINE-HEIGHT: 180%
+}
+P {
+	MARGIN: 10px 0px
+}
+A {
+	COLOR: #e37e07; TEXT-DECORATION: none
+}
+UL {
+	LIST-STYLE-TYPE: none
+}
+#Accordion {
+	LEFT: 50px; WIDTH: 150px; POSITION: absolute; TOP: 70px
+}
+#Accordion2 {
+	LEFT: 250px; WIDTH: 150px; POSITION: absolute; TOP: 70px
+}
+#Accordion3 {
+	LEFT: 450px; WIDTH: 150px; POSITION: absolute; TOP: 70px
+}
+#Accordion4 {
+	LEFT: 20px; POSITION: absolute; TOP: 420px; HEIGHT: 150px
+}
+#Accordion5 {
+	LEFT: 450px; POSITION: absolute; TOP: 420px; HEIGHT: 150px
+}
+#Accordion P {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px
+}
+#Accordion2 P {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px
+}
+#Accordion3 P {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px
+}
+#Accordion4 P {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px
+}
+#Accordion5 P {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-TOP: 2px
+}
+#Accordion LI {
+	BORDER-RIGHT: #e4ed81 1px solid; BORDER-TOP: #e4ed81 1px solid; BORDER-LEFT: #e4ed81 1px solid; BORDER-BOTTOM: #e4ed81 1px solid
+}
+#Accordion2 LI {
+	BORDER-RIGHT: #e4ed81 1px solid; BORDER-TOP: #e4ed81 1px solid; BORDER-LEFT: #e4ed81 1px solid; BORDER-BOTTOM: #e4ed81 1px solid
+}
+#Accordion3 LI {
+	BORDER-RIGHT: #e4ed81 1px solid; BORDER-TOP: #e4ed81 1px solid; BORDER-LEFT: #e4ed81 1px solid; BORDER-BOTTOM: #e4ed81 1px solid
+}
+#Accordion4 LI {
+	BORDER-RIGHT: #e4ed81 1px solid; BORDER-TOP: #e4ed81 1px solid; BORDER-LEFT: #e4ed81 1px solid; BORDER-BOTTOM: #e4ed81 1px solid
+}
+#Accordion5 LI {
+	BORDER-RIGHT: #e4ed81 1px solid; BORDER-TOP: #e4ed81 1px solid; BORDER-LEFT: #e4ed81 1px solid; BORDER-BOTTOM: #e4ed81 1px solid
+}
+#Accordion .nav {
+	DISPLAY: block; BACKGROUND: #62661d; WIDTH: 100%; COLOR: #ffffff; LINE-HEIGHT: 25px; HEIGHT: 25px; TEXT-ALIGN: center
+}
+#Accordion2 .nav {
+	DISPLAY: block; BACKGROUND: #62661d; WIDTH: 100%; COLOR: #ffffff; LINE-HEIGHT: 25px; HEIGHT: 25px; TEXT-ALIGN: center
+}
+#Accordion3 .nav {
+	DISPLAY: block; BACKGROUND: #62661d; WIDTH: 100%; COLOR: #ffffff; LINE-HEIGHT: 25px; HEIGHT: 25px; TEXT-ALIGN: center
+}
+#Accordion .sub_mask {
+	BACKGROUND: #e2e5a6
+}
+#Accordion2 .sub_mask {
+	BACKGROUND: #e2e5a6
+}
+#Accordion3 .sub_mask {
+	BACKGROUND: #e2e5a6
+}
+#Accordion4 .sub_mask {
+	BACKGROUND: #e2e5a6
+}
+#Accordion5 .sub_mask {
+	BACKGROUND: #e2e5a6
+}
+#Accordion4 LI {
+	FLOAT: left
+}
+#Accordion5 LI {
+	FLOAT: left
+}
+#Accordion4 .nav {
+	DISPLAY: block; BACKGROUND: #62661d; FLOAT: left; WIDTH: 30px; COLOR: #ffffff; HEIGHT: 148px; TEXT-ALIGN: center
+}
+#Accordion5 .nav {
+	DISPLAY: block; BACKGROUND: #62661d; FLOAT: left; WIDTH: 30px; COLOR: #ffffff; HEIGHT: 148px; TEXT-ALIGN: center
+}
+#Accordion4 .sub_mask {
+	FLOAT: left; HEIGHT: 148px
+}
+#Accordion5 .sub_mask {
+	FLOAT: left; HEIGHT: 148px
+}
+#Accordion5 .sub_mask {
+	WIDTH: 400px
+}
+</STYLE>
+
+<SCRIPT src="prototype-1.6.0.2.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="effects.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="Accordion.js" type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+	document.observe("dom:loaded",function(){
+		new Accordion('Accordion');
+		var acc2 = new Accordion('Accordion2',{isOne:false});
+		new Accordion('Accordion3',{dur:0});
+		new Accordion('Accordion4',{type:1});
+		new Accordion('Accordion5',{type:1});
+
+		$('showAll').observe('click',acc2.showAll.bind(acc2));
+		$('hideAll').observe('click',acc2.hideAll.bind(acc2));
+	});
+  </SCRIPT>
+</HEAD>
+<BODY>第一个为默认状态，有动画并只展开一个；第二个有动画可以全展开；第三个去除了动画效果只能展开一个。<BR>第四个和第五个为横向展开，第五个通过CSS固定了展开的宽度，第四个通过内容来确定宽度。<BR><A 
+id=showAll href="javascript:void(0);">第二个全部展开</A> <A id=hideAll 
+href="javascript:void(0);">第二个全部关闭</A> 
+<UL id=Accordion>
+  <LI><A class=nav href="javascript:void(0);">目 录 一</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 二</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 三</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 四</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI></UL>
+<UL id=Accordion2>
+  <LI><A class=nav href="javascript:void(0);">目 录 一</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 二</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 三</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 四</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI></UL>
+<UL id=Accordion3>
+  <LI><A class=nav href="javascript:void(0);">目 录 一</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 二</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 三</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV>
+  <LI><A class=nav href="javascript:void(0);">目 录 四</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI></UL>
+<UL id=Accordion4>
+  <LI><A class=nav href="javascript:void(0);">目录一</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 二</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 三</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 四</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI></UL>
+<UL id=Accordion5>
+  <LI><A class=nav href="javascript:void(0);">目 录 一</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 二</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 三</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI>
+  <LI><A class=nav href="javascript:void(0);">目 录 四</A> 
+  <DIV class=sub_mask>
+  <P>很多很多的文字，很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P>
+  <P>很多很多的文字<BR>很多很多的文字<BR>很多很多的文字</P></DIV></LI></UL>
+<SCRIPT type=text/javascript>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+var pageTracker = _gat._getTracker("UA-2020457-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</SCRIPT>
+</BODY></HTML>

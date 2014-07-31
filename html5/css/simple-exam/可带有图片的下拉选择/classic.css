@@ -1,0 +1,18 @@
+.select {
+	BORDER-RIGHT: buttonface 0px inset; BORDER-TOP: buttonface 0px inset; FONT: icon; BORDER-LEFT: buttonface 0px inset; WIDTH: 100px; CURSOR: default; BORDER-BOTTOM: buttonface 0px inset
+}
+.selected {
+	BORDER-RIGHT: buttonface 0px inset; PADDING-RIGHT: 0px; BORDER-TOP: buttonface 0px inset; PADDING-LEFT: 0px; BACKGROUND: window; PADDING-BOTTOM: 0px; FONT: icon; BORDER-LEFT: buttonface 0px inset; PADDING-TOP: 0px; BORDER-BOTTOM: buttonface 0px inset
+}
+.selectTable {
+	BORDER-RIGHT: buttonhighlight 2px inset; BORDER-TOP: buttonhighlight 2px inset; BACKGROUND: buttonface; BORDER-LEFT: buttonhighlight 2px inset; WIDTH: 100%; BORDER-BOTTOM: buttonhighlight 2px inset; HEIGHT: 100%
+}
+.option {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 1px; FONT: icon; WIDTH: 100%; PADDING-TOP: 1px
+}
+.dropDown {
+	BORDER-RIGHT: windowtext 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: windowtext 1px solid; PADDING-LEFT: 0px; BACKGROUND: window; VISIBILITY: hidden; PADDING-BOTTOM: 0px; BORDER-LEFT: windowtext 1px solid; WIDTH: 100%; COLOR: windowtext; PADDING-TOP: 0px; BORDER-BOTTOM: windowtext 1px solid; POSITION: absolute
+}
+.select .button {
+	BORDER-RIGHT: buttonhighlight 2px outset; PADDING-RIGHT: 0px; BORDER-TOP: buttonhighlight 2px outset; PADDING-LEFT: 0px; FONT-SIZE: 11px; PADDING-BOTTOM: 0px; BORDER-LEFT: buttonhighlight 2px outset; WIDTH: 16px; PADDING-TOP: 0px; BORDER-BOTTOM: buttonhighlight 2px outset; FONT-FAMILY: webdings; HEIGHT: 5px
+}

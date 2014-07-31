@@ -1,0 +1,17 @@
+{
+"name": "nw-demo",
+"main": "drag_file.html",
+"window": {
+    "title": "node-webkit demo",
+    "icon": "link.png",
+    "toolbar": true,
+//    "frame": false,
+    "width": 800,
+    "height": 500,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600
+  }
+}

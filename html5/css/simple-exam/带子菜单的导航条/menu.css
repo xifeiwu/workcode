@@ -1,0 +1,24 @@
+.menu {
+	BORDER-RIGHT: silver 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: silver 1px solid; PADDING-LEFT: 0px; BACKGROUND: #ffffff; LEFT: 0px; VISIBILITY: hidden; PADDING-BOTTOM: 0px; MARGIN: 0px; OVERFLOW: visible; BORDER-LEFT: silver 1px solid; WIDTH: 150px; PADDING-TOP: 0px; BORDER-BOTTOM: silver 1px solid; POSITION: absolute; TOP: 0px
+}
+.menu A {
+	PADDING-LEFT: 10px; FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #e2e2e2; WIDTH: 150px; COLOR: black; FONT-FAMILY: Tahoma; TEXT-DECORATION: none
+}
+.menu A:visited {
+	PADDING-LEFT: 10px; FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #e2e2e2; WIDTH: 150px; COLOR: black; FONT-FAMILY: Tahoma; TEXT-DECORATION: none
+}
+.menu A:hover {
+	PADDING-LEFT: 10px; FONT-WEIGHT: normal; FONT-SIZE: 11px; BACKGROUND: #f4f4ff; WIDTH: 150px; COLOR: black; FONT-FAMILY: Tahoma; TEXT-DECORATION: none
+}
+.menu .border {
+	BORDER-RIGHT: #808080 1px solid; BORDER-TOP: #f4f4f4 1px solid; BORDER-LEFT: #f4f4f4 1px solid; BORDER-BOTTOM: #808080 1px solid
+}
+.menu .text {
+	OVERFLOW: hidden; WIDTH: 125px; HEIGHT: 15px
+}
+.menu .arrow {
+	PADDING-LEFT: 5px; OVERFLOW: hidden; WIDTH: 15px; PADDING-TOP: 3px; HEIGHT: 12px
+}
+.menu .arrow IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 6px; BORDER-BOTTOM: 0px; HEIGHT: 7px
+}

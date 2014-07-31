@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0046)http://vip.5d.cn/flood/myjs/htm/menu/qqhtm.htm -->
+<!--版权归flashsoft2000所有，伟COOL改编--><HTML><HEAD><TITLE>CreateCode</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<SCRIPT language=javascript>
+//生成代码
+function createCode()
+{
+	totalheight = parseInt(fcreate.bodyheight.value) + fcreate.headheight.value * (fcreate.itemcount.value - 1);
+	textCode.value = text1.value +
+		"var headHeight = " + fcreate.headheight.value + ";" +
+		"var bodyHeight = " + fcreate.bodyheight.value + ";" +
+		"var objcount = " + fcreate.itemcount.value + ";" +
+		"var step = " + fcreate.mspeed.value + ";" +
+		text2.value +
+		".headtd1 {  background: #" + fcreate.headcolorn.value + "; border: 2px outset; border-color: #" + fcreate.lbordern.value + " #" + fcreate.dbordern.value + " #" + fcreate.dbordern.value + " #" + fcreate.lbordern.value + "; cursor: hand; font-size: 9pt}" +
+		".headtd2 {  background: #" + fcreate.headcolora.value + "; border: 2px outset; border-color: #" + fcreate.lbordera.value + " #" + fcreate.dbordera.value + " #" + fcreate.dbordera.value + " #" + fcreate.lbordera.value + "; cursor: hand; font-size: 9pt}" +
+		".bodytd  {  background: #" + fcreate.bodycolor.value + "; border: 2px outset; border-color: #" + fcreate.lborderb.value + " #" + fcreate.dborderb.value + " #" + fcreate.dborderb.value + " #" + fcreate.lborderb.value + "; font-size: 9pt}" +
+		text3.value +
+		"<div id='mainboard' style='position:absolute; left:2px; top:2px; width:120px; height:" + totalheight + "px; z-index:1; overflow: hidden; background: #" + fcreate.bodycolor.value + ";'> ";
+
+	itemtop = 0;
+	for (i = 1; i <= parseInt(fcreate.itemcount.value); i++)
+	{
+		textCode.value += "<div id='item" + i + "body' style='position:absolute; left:0; top:" + itemtop + "; width:120px; height:" + fcreate.bodyheight.value + "px; z-index:" + (i+1) +"; overflow: hidden'>" +
+		"<table width='100%' border='0' height='100%' cellpadding='2' cellspacing='0'>" +
+		"<tr>" +
+	"<td id='item" + i + "head' height='" + (fcreate.headheight.value-2) + "' class=";
+if (i == 1)
+	textCode.value += "'headtd2'";
+else textCode.value += "'headtd1'";
+textCode.value += " onclick='showme(item" + i + "body,this)' align='center'>";
+//textCode.value += getValue("fcreate.item" + i);
+textCode.value +=document.all["item"+i].value+"</td>"+
+		"</tr>" +
+		"<tr>" +
+	"<td class='bodytd' align='center'>" +
+	"test" +
+	"</td>" +
+		"</tr>" +
+			"</table>" +
+			"</div>";
+		if (i == 1)
+			itemtop += parseInt(fcreate.bodyheight.value);
+		else itemtop += parseInt(fcreate.headheight.value);
+	}
+	textCode.value += "</div></body></html>"
+}
+//获取对象的值
+function getValue(obj)
+{
+	//obj = Object(obj);
+	return obj.value;
+}
+//清空代码
+function clearCode()
+{
+	textCode.value = "";
+}
+//预览代码
+function prevCode()
+{
+	createCode();
+	open().document.write(textCode.value);
+}
+//选择代码
+function selectCode()
+{
+	textCode.select();
+}
+//根据输入的数字，自动生成子菜单的填写项
+function checkItems()
+{
+	if ((fcreate.itemcount.value.length > 0 && isNaN(fcreate.itemcount.value)) || fcreate.itemcount.value.length == 0)
+	{
+		alert("请输入数字！");
+		fcreate.itemcount.focus();
+	}
+	else
+	{
+		if (fcreate.itemcount.value > 50)
+		{
+			alert("太夸张了吧，小一点呀，不用这么玩命吧！（50以下，含50）")
+			fcreate.itemcount.focus();
+			return;
+		}
+		if (fcreate.itemcount.value < 1)
+		{
+			alert("太夸张了吧，一个不要你要做什么！（1以上，含1）")
+			fcreate.itemcount.focus();
+			return;
+		}
+		itemtext = "<table width='700' border='0' align='center' cellpadding='1' cellspacing='1'>";
+		for (i = 1; i <= fcreate.itemcount.value; i++)
+		{
+
+			itemtext += "<tr>"+
+				"<td class='td2' width='76'>菜单项目"+i+"</td>" +
+				"<td colspan='2' class='td2'>" +
+			"	<input type='text' name='item" + i + "' class='back2' style='width:200' value='菜单" + i + "'>" +
+				"</td>" +
+				"<td class='td2' width='173'>菜 单 项 目 内  容  网  页</td>" +
+				"<td colspan='2' class='td2'>" +
+			"	<input type='file' name='itemsrc" + i + "' class='back2' style='width:200'>" +
+				"</td>" +
+				"</tr>";
+		}
+		itemtext+="</table>"
+		document.all.itemmenu.innerHTML = itemtext;
+	}
+}
+//检查是否是一个合法的颜色数值
+function changebkclr(obj)
+{
+	hexv = new Array("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+	flag = false;
+	if (obj.value.length != 6)
+	{
+		alert("请用正确填写！（六位数）");
+		obj.focus();
+	}
+	else
+	{
+		for (i = 0; i < 6; i++)
+		{
+			for (j = 0; j <16; j++)
+				if (obj.value.charAt(i).toLowerCase() == hexv[j])
+					flag = true;
+			if (!flag)
+			{
+				alert("请用十六进制填写。（0-9，a-f）");
+				obj.focus();
+				return;
+			}
+			flag = false;
+		}
+		obj.style.background=obj.value;
+	}
+}
+//检查是否是一个合法的数字
+function checknum(obj)
+{
+	if (isNaN(obj.value))
+	{
+		alert("请输入数字！");
+		obj.focus();
+		return;
+	}
+}
+//检查改变数值的速度合法性
+function changespd(obj)
+{
+	fcreate.mspeed.value = 1;
+}
+//检查是否是一个合法的速度
+function checkspeed(obj)
+{
+	if (isNaN(obj.value))
+	{
+		alert("请输入数字！");
+		obj.focus();
+	}
+	else
+	{
+		if ((obj.form.bodyheight.value - obj.form.headheight.value)%obj.value != 0)
+		{
+			alert("请确认可以被 “菜单体高度 - 菜单题头高度” 整除");
+			obj.focus();
+		}
+	}
+}
+//控制总题目的填写
+function ctrltitle(obj)
+{
+	if (obj.value == "有")
+		obj.form.titlename.disabled = false;
+	else
+		obj.form.titlename.disabled = true;
+}
+</SCRIPT>
+
+<STYLE type=text/css>.td1 {
+	FONT-SIZE: 9pt; BACKGROUND: #66ccff
+}
+.td2 {
+	FONT-SIZE: 9pt; BACKGROUND: #66aaff
+}
+.back1 {
+	FONT-SIZE: 9pt; WIDTH: 100px
+}
+.back2 {
+	FONT-SIZE: 9pt; BACKGROUND: #becfee
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY text=#000000 bgColor=#ffffff>
+<DIV align=center><TEXTAREA class=back2 style="WIDTH: 700px" name=textCode rows=28 readOnly></TEXTAREA> 
+<BR><INPUT class=back2 style="WIDTH: 150px" accessKey=m onclick=createCode() type=button value="<- 生成代码 (ALT+M)" name=btnCreate> 
+<INPUT class=back2 style="WIDTH: 150px" accessKey=c onclick=clearCode() type=button value="#= 清空代码 (ALT+C)" name=btnClear> 
+<INPUT class=back2 style="WIDTH: 150px" accessKey=p onclick=prevCode() type=button value="O- 预览效果 (ALT+P)" name=btnPrev> 
+<INPUT class=back2 style="WIDTH: 150px" accessKey=a onclick=selectCode() type=button value="@@ 全选代码 (ALT+A)" name=btnSelect> 
+</DIV>
+<FORM name=fcreate action="" method=post>
+<TABLE cellSpacing=1 cellPadding=2 width=700 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD class=td1 width="13%" height=13>菜单项目个数</TD>
+    <TD class=td1 width="12%" height=13><INPUT class=back2 onblur=checkItems() 
+      style="WIDTH: 40px" value=2 name=itemcount> </TD>
+    <TD class=td1 width="13%" height=13>菜单题头高度</TD>
+    <TD class=td1 width="12%" height=13><INPUT class=back2 
+      onblur=checknum(this) style="WIDTH: 50px" 
+      onchange=checkspeed(fcreate.mspeed) value=22 name=headheight> </TD>
+    <TD class=td1 width="13%" height=13>菜单体高度</TD>
+    <TD class=td1 width="12%" height=13><INPUT class=back2 
+      onblur=checknum(this) style="WIDTH: 50px" 
+      onchange=checkspeed(fcreate.mspeed) value=202 name=bodyheight> </TD>
+    <TD class=td1 width="13%" height=13>填写移动速度</TD>
+    <TD class=td1 width="12%" height=13><INPUT class=back2 
+      onblur=checkspeed(this) style="WIDTH: 50px" value=10 name=mspeed> </TD></TR>
+  <TR>
+    <TD class=td1 colSpan=8 height=55>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0 
+      dwcopytype="CopyTableRow">
+        <TBODY>
+        <TR>
+          <TD class=td1 width="20%">一 般 题 头 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #00a4e1" maxLength=6 
+            value=00A4E1 name=headcolorn> </TD>
+          <TD class=td1 width="16%">亮 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #00bbff" maxLength=6 
+            value=00BBFF name=lbordern> </TD>
+          <TD class=td1 width="16%">暗 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #0077ff" maxLength=6 
+            value=0077FF name=dbordern> </TD></TR>
+        <TR>
+          <TD class=td1 width="20%">当 前 题 头 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #20c1ff" maxLength=6 
+            value=20C1FF name=headcolora> </TD>
+          <TD class=td1 width="16%">亮 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #60d3ff" maxLength=6 
+            value=60D3FF name=lbordera> </TD>
+          <TD class=td1 width="16%">暗 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #0077ff" maxLength=6 
+            value=0077FF name=dbordera> </TD></TR>
+        <TR>
+          <TD class=td1 width="20%">菜 单 主 体 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #99ccff" maxLength=6 
+            value=99CCFF name=bodycolor> </TD>
+          <TD class=td1 width="16%">亮 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #b0d8ff" maxLength=6 
+            value=B0D8FF name=lborderb> </TD>
+          <TD class=td1 width="16%">暗 边 颜 色</TD>
+          <TD class=td1 width="16%"><INPUT class=back1 
+            onblur=changebkclr(this) style="BACKGROUND: #0077ff" value=0077FF 
+            name=dborderb> </TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD class=td1 width=80>菜单 总题目</TD>
+    <TD class=td1 width=85><SELECT class=back2 style="WIDTH: 40px" 
+      onchange=ctrltitle(this) name=title> <OPTION value=有>有</OPTION> <OPTION 
+        value=无 selected>无</OPTION></SELECT> </TD>
+    <TD class=td1 width=95>题目名称</TD>
+    <TD class=td1 colSpan=5><INPUT class=back2 disabled value=填写总题目 
+      name=titlename> </TD></TR></TBODY></TABLE>
+<DIV id=itemmenu>
+<TABLE cellSpacing=1 cellPadding=1 width=700 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD class=td2 width=76>菜单项目1</TD>
+    <TD class=td2 colSpan=2><INPUT class=back2 style="WIDTH: 200px" value=菜单1 
+      name=item1> </TD>
+    <TD class=td2 width=173>菜 单 项 目 内 容 网 页</TD>
+    <TD class=td2 colSpan=2><INPUT class=back2 style="WIDTH: 200px" type=file 
+      name=itemsrc1> </TD></TR>
+  <TR>
+    <TD class=td2 width=76>菜单项目2</TD>
+    <TD class=td2 colSpan=2><INPUT class=back2 style="WIDTH: 200px" value=菜单2 
+      name=item2> </TD>
+    <TD class=td2 width=173>菜 单 项 目 内 容 网 页</TD>
+    <TD class=td2 colSpan=2><INPUT class=back2 style="WIDTH: 200px" type=file 
+      name=itemsrc2> </TD></TR></TBODY></TABLE></DIV></FORM>
+<DIV style="DISPLAY: none"><TEXTAREA class=back1 style="WIDTH: 700px" name=text1 rows=5 readOnly>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;QQ菜单&lt;/title&gt;
+&lt;meta http-equiv='Content-Type' content='text/html; charset=gb2312'&gt;
+&lt;script language='JavaScript'&gt;
+</TEXTAREA> <TEXTAREA class=back1 style="WIDTH: 700px" name=text2 rows=5 readOnly>var moving = false;
+function showme(obj1, obj2)
+{
+	if (moving)
+		return;
+	moving = true;
+	for(i=0;i&lt;document.all.tags('td').length;i++)
+		if (document.all.tags('td')[i].className.indexOf('headtd') == 0)
+			document.all.tags('td')[i].className = 'headtd1';
+	obj2.className = 'headtd2';
+	moveme(obj1);
+}
+function moveme(obj)
+{
+	idnumber = parseInt(obj.id.substr(4));
+	objtop = headHeight * (idnumber - 1);
+	objbuttom = bodyHeight + headHeight * (idnumber - 2);
+	currenttop = parseInt(obj.style.top);
+	if (currenttop &gt;= objbuttom)
+	{
+		countid = 1;
+		for(i=0;i&lt;document.all.tags('div').length;i++)
+			if (document.all.tags('div')[i].id == 'item'+countid+'body')
+			{
+				obj = document.all.tags('div')[i];
+				objtop = headHeight * (countid - 1);
+				if (countid == idnumber)
+				{
+					moveup(obj,objtop,false);
+					break;
+				}
+				else
+					moveup(obj,objtop,true);
+				countid++;
+			}
+	}
+	else if ((currenttop &lt;= objtop) &amp;&amp; (idnumber &lt; objcount))
+	{
+		idnumber++;
+		countid = objcount;
+		for(i=document.all.tags('div').length-1;i&gt;=0;i--)
+			if (document.all.tags('div')[i].id == 'item'+countid+'body')
+			{
+				obj = document.all.tags('div')[i];
+				objbuttom = bodyHeight + headHeight * (countid - 2);
+				if (countid == idnumber)
+				{
+					movedown(obj,objbuttom,false);
+					break;
+				}
+				else
+					movedown(obj,objbuttom,true);
+				countid--;
+			}
+	}
+}
+function moveup(obj,objtop,ismove)
+{
+	currenttop = parseInt(obj.style.top);
+	if (currenttop &gt; objtop)
+	{
+		obj.style.top = currenttop - step;
+		setTimeout('moveup('+obj.id+','+objtop+','+ismove+')',1)
+		return;
+	}
+	moving = ismove;
+}
+function movedown(obj,objbuttom,ismove)
+{
+	currenttop = parseInt(obj.style.top);
+	if (currenttop &lt; objbuttom)
+	{
+		obj.style.top = currenttop + step;
+		setTimeout('movedown('+obj.id+','+objbuttom+','+ismove+')',1)
+		return;
+	}
+	moving = ismove;
+}
+&lt;/script&gt;
+&lt;/script&gt;
+&lt;style type='text/css'&gt;
+</TEXTAREA> <TEXTAREA class=back1 style="WIDTH: 700px" name=text3 rows=5 readOnly>
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body bgcolor='#FFFFFF' text='#000000'&gt;
+</TEXTAREA> </DIV></BODY></HTML>

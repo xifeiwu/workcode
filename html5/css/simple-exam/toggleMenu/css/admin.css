@@ -1,0 +1,86 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+tr{
+	}
+td {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.top_td{
+	height:30px;
+	background-color:#666666;
+	font-size:12px;
+	color:#347f7b;
+	font-weight:bold;
+	padding_left:10px;
+	}
+.top_dq{
+	height:20px;
+	background-color:#e4efee;
+	font-size:12px;
+	color:#0000ff;
+	padding-left:10px;
+	}
+.top1_td{
+	height:22px;
+	background-color:#c6e5e9;
+	font-size:12px;
+	color:#347f7b;
+	}
+.top_other_td{
+	height:22px;
+	background-color:#edf4f4;
+	font-size:12px;
+	color:#424242;
+	}
+.td_padding{
+	padding-left:8px;}
+.type_button{
+	height:20px;}
+/*单行文本样式*/
+.type_text{
+	height:14px;
+	background-color:#d2f3f7;
+	font-size:12px;
+	border:none;
+	border-top:1px solid #989898;
+	border-left:1px solid #989898;
+	border-right:1px solid #fff;
+	border-bottom:1px solid #fff;
+	}
+/*文本区域样式*/
+.type_textarea{
+	background-color:#d2f3f7;
+	font-size:12px;
+	border:none;
+	border-top:1px solid #989898;
+	border-left:1px solid #989898;
+	border-right:1px solid #fff;
+	border-bottom:1px solid #fff;
+	}
+/*说明字段样式*/
+.notice{
+	color:#da251d;
+	padding-left:10px;}
+/*下拉列表样式*/
+.type_select{
+	width:130px;
+	background-color:#d2f3f7;
+	font-size:12px;
+	border:none;
+	border-top:1px solid #989898;
+	border-left:1px solid #989898;
+	border-right:1px solid #fff;
+	border-bottom:1px solid #fff;
+	}
+a{
+	color:#0000ff;
+	text-decoration:underline;}
+a:hover{
+	text-decoration:none;
+	color:#3b61dc;
+	}

@@ -1,0 +1,151 @@
+<head>
+<style>
+<!--
+
+#slidemenubar, #slidemenubar2{
+position:absolute;
+left:-155px;
+width:160px;
+top:170px;
+border:1.5px solid green;
+background-color:lightyellow;
+layer-background-color:lightyellow;
+font:bold 12px Verdana;
+line-height:20px;
+}
+-->
+</style>
+</head>
+<body>
+xz<script language="JavaScript1.2">
+
+/*
+Sliding Menu Bar Script- 
+?Dynamic Drive (www.dynamicdrive.com)
+For full source code, installation instructions,
+100's more DHTML scripts, and Terms Of
+Use, visit dynamicdrive.com
+*/
+
+function showtip(nulling){
+if (document.all){
+if (nulling==0&&slidemenubar2.style.pixelLeft==-150)
+slidemenubar2.title='Press "x" to expand the menu, "z" to contract it'
+else
+slidemenubar2.title=''
+}
+else if (document.layers){
+if (nulling==0&&!window.pullit)
+window.status='Press "x" to expand the menu, "z" to contract it'
+else
+window.status=''
+}
+}
+if (document.all)
+document.write('<div id="slidemenubar2" style="left:-150" onMouseover="showtip(0)" onMouseout="showtip(1)">')
+</script>
+<layer id="slidemenubar" onMouseover="showtip(0)" onMouseout="showtip(1)">
+<script language="JavaScript1.2">
+var sitems=new Array()
+var sitemlinks=new Array()
+
+//extend or shorten this list
+sitems[0]="Home"
+sitems[1]="Take our survey!"
+sitems[2]="Menus And Navigation"
+sitems[3]="Document Effects"
+sitems[4]="Scrollers"
+sitems[5]="Image Effects"
+sitems[6]="Links And Buttons"
+sitems[7]="Dynamic Clocks & Dates"
+sitems[8]="Text Animations"
+sitems[9]="Browser Window"
+sitems[10]="User System Information"
+sitems[11]="Cascading Style Sheets"
+sitems[12]="Other"
+
+
+//These are the links pertaining to the above text.
+sitemlinks[0]="../test.htm"
+sitemlinks[1]=".."
+sitemlinks[2]="../dynamicindex1/index.html"
+sitemlinks[3]="../dynamicindex3/index.html"
+sitemlinks[4]="../dynamicindex2/index.html"
+sitemlinks[5]="../dynamicindex4/index.html"
+sitemlinks[6]="../dynamicindex5/index.html"
+sitemlinks[7]="../dynamicindex6/index.html"
+sitemlinks[8]="../dynamicindex10/index.html"
+sitemlinks[9]="../dynamicindex8/index.html"
+sitemlinks[10]="../dynamicindex9/index.html"
+sitemlinks[11]="../dynamicindex7/index.html"
+sitemlinks[12]="../dynamicindex11/index.html"
+
+for (i=0;i<=sitems.length-1;i++)
+document.write('<a href='+sitemlinks[i]+'>'+sitems[i]+'</a><br>')
+</script>
+</layer><script language="JavaScript1.2">
+
+function regenerate(){
+window.location.reload()
+}
+function regenerate2(){
+if (document.layers)
+setTimeout("window.onresize=regenerate",400)
+}
+window.onload=regenerate2
+if (document.all){
+document.write('</div>')
+themenu=document.all.slidemenubar2.style
+rightboundary=0
+leftboundary=-150
+}
+else{
+themenu=document.layers.slidemenubar
+rightboundary=150
+leftboundary=10
+}
+function pull(){
+if (window.drawit)
+clearInterval(drawit)
+pullit=setInterval("pullengine()",50)
+}
+function draw(){
+clearInterval(pullit)
+drawit=setInterval("drawengine()",50)
+}
+function pullengine(){
+if (document.all&&themenu.pixelLeft<rightboundary)
+themenu.pixelLeft+=5
+else if(document.layers&&themenu.left<rightboundary)
+themenu.left+=5
+else if (window.pullit)
+clearInterval(pullit)
+}
+function drawengine(){
+if (document.all&&themenu.pixelLeft>leftboundary)
+themenu.pixelLeft-=5
+else if(document.layers&&themenu.left>leftboundary)
+themenu.left-=5
+else if (window.drawit)
+clearInterval(drawit)
+}
+
+if (document.layers)
+document.captureEvents(Event.KEYPRESS)
+function menuengine(e){
+if (document.layers){
+if (e.which==120)
+pull()
+if (e.which==122)
+draw()
+}
+else if (document.all){
+if (event.keyCode==120)
+pull()
+if (event.keyCode==122)
+draw()
+}
+}
+document.onkeypress=menuengine
+</script>
+</body>

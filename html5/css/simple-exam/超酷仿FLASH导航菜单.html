@@ -1,0 +1,230 @@
+<html>
+<head>
+<title>中国站长天空-网页特效-导航菜单-超酷仿FLASH导航菜单</title>
+<meta http-equiv="content-Type" content="text/html;charset=gb2312">
+<!--把下面代码加到<head>与</head>之间-->
+<script language="javascript">
+//item object
+//alert("arrived here");
+function PhenItem(id,pid,label,url,type,img,over,img2,over2,title,target){	
+   this.id=id;
+   this.pid=pid;
+   this.label=label;
+   this.url=url;
+   this.title=title;
+   this.target=target;
+   this.img=img;
+   this.over=over;
+   this.img2=img2;
+   this.over2=over2;
+   this.type=type;
+   //this._ih = false;	//is it the head item?
+   this._hc = false;   //has the child item?
+   this._ls = false;	//has sibling item?
+   this._io = false;	//whether the panelbar is open?
+};
+//menu object
+function PhenMenu(objName) {
+    this.config = {
+		closeSameLevel	: true
+	};
+	//alert("asdsdf");
+	this.obj = objName;
+	this.items = [];	
+	this.root = new PhenItem(-1);		
+};
+//add a new item to the item array
+PhenMenu.prototype.add = function(id,pid,label,url,type,img,over,img2,over2,title,target){
+	this.items[this.items.length] = new PhenItem(id,pid,label,url,type,img,over,img2,over2,title,target);
+};
+// Outputs the menu to the page
+PhenMenu.prototype.toString = function() {
+	//alert("arrived here");
+	var str = '<div>\n';
+	if (document.getElementById) {
+		str += this.addItem(this.root);
+	} else str += 'Browser not supported.';
+	str += '\n</div>';
+    //alert(str);
+	//document.write(str);
+	//alert(this.items[0]._hc);
+	return str;
+};
+// Creates the menu structure
+PhenMenu.prototype.addItem = function(pItem) {
+	var str = '';
+	//var n=0;
+	for (var n=0; n<this.items.length; n++) {		
+		if(this.items[n].pid == pItem.id){			
+			var ci = this.items[n];
+			//alert(ci.pid);
+			//alert(ci.id);
+			this.setHS(ci);
+			//alert("item:"+ci._hc);
+			//alert(ci._ls);
+			str += this.itemCreate(ci, n);			
+			if(ci._ls) break;			
+		}
+	}
+	return str;
+};
+// Creates the node icon, url and text
+PhenMenu.prototype.itemCreate = function(pItem, itemId) {
+//alert(pItem.type.toLowerCase());
+	var str = '';	
+    if(pItem.type == 'header')
+    	str = '<table width="100%" class="header" valign="middle" onmouseover="this.className=\'headerSelected\'" onmouseout="this.className=\'header\'" onclick="'+this.obj+'.o('+itemId+')"><tr><td>';
+	else
+		str = '<table width="100%" class="item" valign="middle" onmouseover="this.className=\'itemOver\'" onmouseout="this.className=\'item\'" onclick="'+this.obj+'.o('+itemId+')"><tr><td>';
+	if (pItem.img) {
+		str += '  <img id="i' + this.obj + itemId + '" src="' + pItem.img + '" alt="" />';
+	}
+	if (pItem.url) {
+		str += '<a id="s' + this.obj + itemId + '" class="navigation_item" href="' + pItem.url + '"';
+		if (pItem.title) str += ' title="' + pItem.title + '"';
+		if (pItem.target) str += ' target="' + pItem.target + '"';
+		str += ' onmouseover="window.status=\'' + pItem.label + '\';return true;" onmouseout="window.status=\'\';return true;"';
+		str += '>';
+	}
+	str += '    ' + pItem.label;
+	if (pItem.url) str += '</a>';
+	str += '</td></tr></table>';
+	//alert(pItem.url);
+	//alert(str);
+	if (pItem._hc) {
+		str += '<table id="ct' + this.obj + itemId + '" width="100%" style="display:' + ((pItem._io) ? 'block' : 'none') + '; FILTER: blendTrans(Duration=3.0); VISIBILITY: hidden"><tr><td>';
+		str += this.addItem(pItem);
+		str += '</td></tr></table>';
+		//alert(str);
+		//document.write(str);
+	}
+	return str;
+};
+// Checks whether a item has child and if it is the last sibling
+PhenMenu.prototype.setHS = function(pItem) {
+	var lastId;
+	for (var n=0; n<this.items.length; n++) {
+		if (this.items[n].pid == pItem.id) pItem._hc = true;
+		if (this.items[n].pid == pItem.pid) lastId = this.items[n].id;
+	}
+	if (lastId==pItem.id) pItem._ls = true;
+};
+// Toggle Open or close
+PhenMenu.prototype.o = function(id) {
+	//alert(this.items.length);
+	var ci = this.items[id];
+    //alert(ci);
+	//this.setHS(ci);
+	//alert(this.items[id]._hc);
+	this.itemStatus(!ci._io, id);
+	ci._io = !ci._io;    
+	if (this.config.closeSameLevel) this.closeLevel(ci);
+};
+// Change the status of a item(open or closed)
+PhenMenu.prototype.itemStatus = function(status, id) {
+	cTable	= document.getElementById('ct' + this.obj + id);
+	if(status){			
+		cTable.filters.item(0).Apply();
+		cTable.style.display = 'block';
+		cTable.style.visibility = "";
+		cTable.filters.item(0).Play();
+	}
+	else
+		cTable.style.display = 'none';	
+	//cDiv.style.display = (status) ? 'block': 'none';
+};
+// Closes all items on the same level as certain item
+PhenMenu.prototype.closeLevel = function(pItem) {
+               //alert(this.items[0]._hc);
+	for (var n=0; n<this.items.length; n++) {
+            //alert(this.items[n]._hc);
+		if ((this.items[n].pid == pItem.pid) && (this.items[n].id != pItem.id) && this.items[n]._hc) {			
+			this.itemStatus(false, n);
+			this.items[n]._io = false;
+			this.closeAllChildren(this.items[n]);
+		}
+	}
+};
+PhenMenu.prototype.closeAllChildren = function(pItem) {
+	for (var n=0; n<this.items.length; n++) {
+		if (this.items[n].pid == pItem.id && this.items[n]._hc) {
+			if (this.items[n]._io) this.itemStatus(false, n);
+			this.items[n]._io = false;
+			this.closeAllChildren(this.items[n]);		
+		}
+	}
+};
+</script>
+<style>
+.header {
+	height:25px;
+	FONT-FAMILY: Arial,Verdana;
+	background-image:url(images/sideNavCategoryBg.gif);
+	font-size:11px;
+	color: #666666;  
+}
+.headerSelected {	
+	height:25px;
+	FONT-FAMILY: Arial,Verdana;
+	background-image:url(images/sideNavCategorySelectedBg.gif);
+	font-size:11px;
+	background-repeat:repeat-x; 
+	COLOR: #333333;
+	CURSOR: pointer;
+}
+.navigation_item {
+	PADDING-LEFT: 20px; FONT-SIZE: 11px; CURSOR: pointer; COLOR: #000000; FONT-FAMILY: Arial,Verdana; HEIGHT: 20px; TEXT-DECORATION: none
+}
+.item {
+    PADDING-LEFT: 2px; FONT-SIZE: 11px; CURSOR: pointer; COLOR: #000000; FONT-FAMILY: Arial,Verdana; HEIGHT: 20px; 
+}
+.itemOver {
+	PADDING-LEFT: 2px; FONT-SIZE: 11px; CURSOR: pointer; COLOR: #333333; FONT-FAMILY: Arial,Verdana; HEIGHT: 20px; font-weight:bold; background-color:#EDEDED
+}
+.itemSelected {
+	PADDING-LEFT: 20px; FONT-SIZE: 11px; CURSOR: pointer; COLOR: #000000; FONT-FAMILY: Arial,Verdana; HEIGHT: 20px; TEXT-DECORATION: underline;
+}
+A.headerSelected {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND-IMAGE: none; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; HEIGHT: 10px
+}
+</style>
+</head>
+<body>
+<!--把下面代码加到<body>与</body>之间-->
+<table width="221" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+	<p>Phenix panelbar</p>
+	<script type="text/javascript">
+		p = new PhenMenu('p');
+        //alert("asds");
+		p.add(0,-1,'label1凤凰','','header','http://www.telerik.com/images/ProductImages//e.gif');
+		p.add(1,0,'label1.1凤凰','www.sina.com.cn');
+		p.add(2,0,'label1.2','www.sina.com.cn');
+		p.add(3,0,'label1.3','www.sina.com.cn');
+		p.add(4,0,'label1.4','www.sina.com.cn');		
+		p.add(5,-1,'label2','','header','http://www.telerik.com/images/ProductImages//c.gif');
+		p.add(6,5,'label2.1','www.seu.edu.cn');
+		p.add(7,5,'label2.2','www.seu.edu.cn');
+		p.add(8,5,'label2.3','www.seu.edu.cn');
+		p.add(9,5,'label2.4','www.seu.edu.cn');		
+		p.add(10,-1,'label3','','header','http://www.telerik.com/images/ProductImages//m.gif');
+		p.add(11,10,'label3.1','www.seu.edu.cn');
+		p.add(12,10,'label3.2','www.seu.edu.cn');
+		p.add(13,10,'label3.3','www.seu.edu.cn');
+		p.add(14,10,'label3.4','www.seu.edu.cn');		
+		p.add(15,-1,'label4','','header','http://www.telerik.com/images/ProductImages//r.gif');
+		p.add(16,15,'label4.1','www.seu.edu.cn');
+		p.add(17,15,'label4.2','www.seu.edu.cn');
+		p.add(18,15,'label4.3','www.seu.edu.cn');
+		p.add(19,15,'label4.4','www.seu.edu.cn');
+        //alert(p.items.length)
+		document.write(p);		
+		//p.toString();
+        //alert(p.items.length);
+		//delete(p);
+	</script>	</td>
+  </tr>
+</table>
+</body>
+</html>

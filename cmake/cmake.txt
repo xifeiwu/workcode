@@ -1,0 +1,15 @@
+set(mylist "a" "b" c "d")  
+foreach(_var ${mylist})  
+    message("当前变量是：${_var}")  
+endforeach() 
+
+set(result 0)  
+foreach(_var RANGE 0 100)  
+    math(EXPR result "${result}+${_var}")  
+endforeach()  
+message("from 0 plus to 100 is:${result}")  
+
+# list(LENGTH <list> <output variable>)  
+set(mylist a b c d )  
+list(LENGTH mylist _length)  
+message("列表中元素的个数为:${_length}")   

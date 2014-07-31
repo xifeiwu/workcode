@@ -1,0 +1,14 @@
+macro(sum outvar)  
+    set(_args ${ARGN})  
+    set(result 0)  
+      
+    foreach(_var ${_args})  
+        math(EXPR result "${result}+${_var}")  
+    endforeach()  
+      
+    set(${outvar} ${result})  
+endmacro()  
+  
+  
+sum(addResult 1 2 3 4 5)  
+message("Result is :${addResult}")   

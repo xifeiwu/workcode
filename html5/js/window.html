@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>HTML Model</title>
+  </head>
+  <body>
+<script type="text/javascript">
+/*
+ * This function parses ampersand-separated name=value argument pairs from
+ * the query string of the URL. It stores the name=value pairs in
+ * properties of an object and returns that object. Use it like this:
+ *
+ * var args = urlArgs();  // Parse args from URL
+ * var q = args.q || "";  // Use argument, if defined, or a default value
+ * var n = args.n ? parseInt(args.n) : 10;
+ */
+function urlArgs() {
+    var args = {};                             // Start with an empty object
+    var query = location.search.substring(1);  // Get query string, minus '?'
+    var pairs = query.split("&");              // Split at ampersands
+    for(var i = 0; i < pairs.length; i++) {    // For each fragment
+        var pos = pairs[i].indexOf('=');       // Look for "name=value"
+        if (pos == -1) continue;               // If not found, skip it
+        var name = pairs[i].substring(0,pos);  // Extract the name
+        var value = pairs[i].substring(pos+1); // Extract the value
+        value = decodeURIComponent(value);     // Decode the value
+        args[name] = value;                    // Store as a property
+    }
+    return args;                               // Return the parsed arguments
+}
+function writelabel(str)
+{
+  document.getElementById('fname').value=str
+}
+function getinfo()
+{
+var browser = (function() {
+     var s = navigator.userAgent.toLowerCase();
+     var match = /(webkit)[ \/]([\w.]+)/.exec(s) ||
+	 /(opera)(?:.*version)?[ \/]([\w.]+)/.exec(s) ||
+	 /(msie) ([\w.]+)/.exec(s) ||
+	 !/compatible/.test(s) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(s) ||
+	 [];
+     writelabel("name:" + match[1] + "\tversion:" + match[2]);
+     return { name: match[1] || "", version: match[2] || "0" };
+}());
+}
+function popalert()
+{
+  setTimeout(function(){alert("hello js.")}, 2000 );
+}
+function dialog()
+{
+  do{
+  var name=prompt("What is your name?");
+  var correct=confirm("Your entered: " + name);
+  }while(!correct)
+  alert("hello," + name);
+}
+</script>
+<input type="text" id="fname" value="output:"></input>
+<br>
+<input type="button" onclick="getinfo()" value="urlargs"></input>
+<br>
+<input type="text" id="fname" value="init value"/>
+<br>
+<button id="alert" onclick="popalert()">alert</button>
+<br>
+<br>
+<a href="javascript:new Date().toLocaleTimeString();">What time is it?</a>
+<br>
+<button onclick="dialog()">dialog</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+  </body>
+</html>

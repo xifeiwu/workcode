@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>HTML Model</title>
+  </head>
+  <body>
+<script src="jquery/jquery.js"></script>
+<script type="text/javascript">
+  function clickHandler () {
+     alert ("Hello, World!");
+  }
+
+  var points=[{x:0,y:0}, {x:1,y:1}];
+  points.dist=function(){
+    var p1=this[0];
+    var p2=this[1];
+    var a=p2.x-p1.x
+    var b=p2.y-p1.y;
+    return Math.sqrt(a*a+b*b);
+  }
+
+//function moveon(){
+//  var answer=confirm("Are you ready?");
+//  if(answer)
+//  {
+//    window.location="http://www.iscas.ac.cn";
+//  }
+//  setTimeout(moveon, 6000);
+//}
+
+//function debug(msg) {
+//  var log = document.getElementById("debuglog");
+//  if (!log) {
+//  log = document.createElement("div");
+//  log.id = "debuglog";
+//  log.innerHTML = "<h1>Debug Log</h1>";
+//  document.body.appendChild(log);
+//  }
+//  var pre = document.createElement("pre");
+//  var text = document.createTextNode(msg);
+//  pre.appendChild(text);
+//  log.appendChild(pre);
+//}
+function debug(msg) {
+  var log = $("#debuglog");
+  if (log.length == 0) {
+    log = $("<div id='debuglog'><h1>Debug Log</h1></div>");
+    log.appendTo(document.body);
+  }
+  log.append($("<pre/>").text(msg)); // Wrap msg in <pre> and append to
+}
+function gotourl(url)
+{
+  window.location=url;
+}
+
+function upperCase(x)
+{
+  var y=document.getElementById(x).value
+  document.getElementById(x).value=y.toUpperCase()
+}
+console.log(points.dist());
+</script>
+<span onclick="clickHandler();">
+<input type="button" value="Click Here"></button>
+</span>
+<br>
+<br>
+<input type="button" value="JQuery-Study" onclick="debug('study js.');"></input> <br>
+<br>
+<br>
+<input type="button" value="gotoUrl" onclick="gotourl('tapmodo-Jcrop');"></input> <br>
+<br>
+<br>
+<input type="text" id="fname" onchange="upperCase('fname')" value="init value"/>
+<br>
+<br>
+<a href='javascript:
+var e = "", r = ""; /* Expression to evaluate and the result */
+do {
+/* Display expression and result and ask for a new expression */
+e = prompt("Expression: " + e + "\n" + r + "\n", e);
+try { r = "Result: " + eval(e); } /* Try to evaluate the expression */
+catch(ex) { r = ex; }
+/* Or remember the error instead */
+} while(e); /* Continue until no expression entered or Cancel clicked */
+void 0;
+/* This prevents the current document from being overwritten */
+'>
+JavaScript Evaluator
+</a>
+<br>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+<style >
+ul {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	border 1px solid #ccc;
+}
+li {
+	float: left;
+	width: 160px;
+}
+li ul {
+	display: none;
+	top: 20px;
+}
+li:hover ul, li.over ul {
+	display: block;
+}
+ul li a {
+	display: block;
+	font-size:12px;
+	border 1px solid #ccc;
+	padding: 3px;
+	text-decoration: none;
+	color: #777;
+}
+ul li a:hover {
+	background-color: #f4f4f4;
+}
+</style>
+ <script type="text/javascript">
+ 
+ startlist = function(){
+ if(document && document.getElementById){
+     nav = document.getElementById("nav");
+         for(i=0;i<nav.childNodes.length;i++){
+             node = nav.childNodes[i];
+             if(node.nodeName=="LI"){
+                 node.onmouseover=function(){
+                     this.className += " over";
+                 }
+                 node.onmouseout=function(){
+                     this.className=this.className.replace(" over", "");
+                 }
+             }
+         }
+     }
+ }
+ 
+ textContent = function(e) {
+  var child, type, s="";
+  for(child=e.firstChild; child!=null; child=child.nextSibling){
+   console.log(child);
+   type=child.nodeType;
+   if(type===3)
+   {
+    s+=child.nodeValue;
+   }
+   else if(type===1)
+   {
+    s+=textContent(child);
+   }
+   }
+   return s;
+ }
+ showChildElement = function(e){
+    for(var child = e.firstElementChild; child != null; child = child.nextElementSibling){
+        console.log(child);
+        if(child.id == 'test'){
+        	textContent(child);
+        }else{
+            console.log(child.innerHTML);
+        }
+    }
+ }
+ onLoad = function(){
+  nav = document.getElementById("getul");
+  //textContent(nav);
+  //console.log(textContent(nav));
+  showChildElement(nav);
+ }
+ window.onload=onLoad;
+</script>
+  </head>
+  <body>
+<p id="testp">This is a <i>simple</i> document</p>
+<ul id="nav">
+ <li id="getli"><a id="geta" href="#">文章</a>
+  <ul id="getul">
+   <li id='test'><a href="#">CSS教程</a></li>
+   <li><a href="#">DOM教程</a></li>
+   <li><a href="#">XML教程</a></li>
+   <li><a href="#">Flash教程</a></li>
+   <li><a href="#">JavaScript教程</a></li>
+  </ul>
+ </li>
+ <li><a href="#">参考</a>
+  <ul>
+   <li><a href="#">XHTML</a></li>
+   <li><a href="#">XML</a></li>
+   <li><a href="#">CSS</a></li>
+   <li><a href="#">JAVASCRIPT</a></li>
+   <li><a href="#"></a></li>
+  </ul>
+ </li>
+ <li><a href="#">Blog</a>
+  <ul>
+   <li><a href="#">全部</a></li>
+   <li><a href="#">网页技术</a></li>
+   <li><a href="#">UI技术</a></li>
+   <li><a href="#">FLASH技术</a></li>
+  </ul>
+ </li>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<script language = JavaScript>
+function popmenu(id) {
+  console.log("id: "+id);
+  var list = document.getElementById("list"+id);
+  var menu = document.getElementById("menu"+id)
+  if (list.style.display=="none") 
+  {
+    document.getElementById("list"+id).style.display="block";
+    menu.className = "title1";
+  }else 
+  {
+    document.getElementById("list"+id).style.display="none";
+    menu.className = "title";
+  }
+} 
+</script>
+<style type="text/css">
+*{margin:0;padding:0;list-style:none;font-size:14px}
+#nav {margin:10px;text-align:center;line-height:25px;width:200px;}
+.title{background:#336699;color:#fff;border-bottom:1px solid #fff;cursor:pointer;}
+.title1{background:#888;color:#000;border-bottom:1px solid #666;cursor:pointer;}
+.content li{color:#336699;background:#ddd;border-bottom:1px solid #fff;}
+</style>
+</head>
+<body>
+<div id="nav">  
+<div class="title" id="menu1"  onclick="popmenu(1)">Menu1</div>
+  <div id="list1" class="content">
+     <ul>
+      <li>subMenu01</li>
+      <li>subMenu02</li>
+      <li>subMenu03</li>
+     </ul>
+  </div> 
+<div class="title" id="menu2"  onclick="popmenu(2)">Menu2</div>
+  <div id="list2" class="content">
+     <ul>
+     <li>subMenu04</li>
+     <li>subMenu05</li>
+     <li>subMenu06</li>
+     </ul>
+  </div> 
+</div>

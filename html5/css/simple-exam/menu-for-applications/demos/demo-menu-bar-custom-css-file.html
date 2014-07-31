@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+	<title>Demo 4 - Menu bar using a custom css file</title>
+	<link rel="stylesheet" href="css/demos.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="css/demo-menu-item.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="css/demo-menu-bar.css" media="screen" type="text/css">
+	<script type="text/javascript" src="../js/menu-for-applications.js"></script>
+	<style type="text/css">
+	body{
+		margin:0px;
+		text-align:center;
+	}
+	
+	#mainContentainer{
+		width:760px;
+		margin:0 auto;
+		text-align:left;
+	}
+	#mainContent{
+		border:1px solid #000;
+	}
+	
+	#textContent{
+		height:400px;
+		overflow:auto;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#menuDiv{
+		width:100%;
+		overflow:hidden;
+	}
+	pre{
+		color:#F00;
+	}
+	p,pre{
+
+	}
+	</style>
+</head>
+<body>
+<div id="mainContentainer">
+	<div id="header">
+		<img src="../images/heading3.gif">
+	</div>	
+	<div id="mainContent">
+		<!-- This <ul><li> list is the source of a menuModel object -->
+		<ul id="menuModel" style="display:none">
+			<li id="50000" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+				<ul width="150">
+					<li id="500001" jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Save your work">Save</a></li>
+					<li id="500002"><a href="#">Save As</a></li>
+					<li id="500003" itemType="separator"></li>
+					<li id="500004" itemIcon="../images/open.gif"><a href="#">Open</a></li>
+				</ul>
+			</li>
+			<li id="50001"><a href="#">View</a>
+				<ul width="130">
+					<li id="500011"><a href="#">Source</a></li>
+					<li id="500012"><a href="#">Debug info</a></li>
+					<li id="500013"><a href="#">Layout</a>
+						<ul width="150">
+							<li id="5000131"><a href="#">CSS</a>	
+							<li id="5000132"><a href="#">HTML</a>	
+							<li id="5000133"><a href="#">Javascript</a>	
+						</ul>
+					</li>
+				
+				</ul>
+			</li>
+			<li id="50002" itemType="separator"></li>
+			<li id="50003"><a href="#">Tools</a></li>
+		</ul>	
+		<!-- End data source for the menu -->
+		<div id="menuDiv"></div>
+		<div id="textContent">
+		<h4>Define alternative css for the menu</h4>
+		<p>A menu with a custom layout requires us to point the script to different css files. The default css files used by this menu are:</p>
+		<ul>
+			<li>css_dhtmlsuite/menu-item.scs</li>
+			<li>css_dhtmlsuite/menu-bar.css</li>
+		</ul>
+		<p>In this demo, I want to use some custom css files. I have made a copy of menu-item.css and menu-bar.css, made some changes to the css and saved them 
+		in a different folder(a sub folder of this html file named "css"). </p>
+		<p>To use these two css files instead of originals, I call the DHTMLSuite.configObj.setCssPath method: </p>
+		<pre>DHTMLSuite.configObj.setCssPath('css/');</pre>
+		<p>That's actually all you have to do. Now the script will load the css from css/menu-item.css and css/menu-bar.css instead of from the default location which is
+		../css_dhtmlsuite/menu-item.css and ../css_dhtmlsuite/menu-bar.css. </p>
+		<p>This is the entire js code for this menu:</p>
+		<pre>
+	&lt;script type="text/javascript">
+	var menuModel = new DHTMLSuite.menuModel();
+	DHTMLSuite.configObj.setCssPath('css/');
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setTarget('menuDiv');
+	menuBar.init();	
+	&lt;/script>
+		</pre>
+		<p>Notice that the setCssPath is called at line 2. The DHTMLSuite.configObj object doesn't exists until we have created the menuModel object. </p>
+		<h4>When you use more than one widgets on a page</h4>
+		<p>If you have more than one widget on a page, example: a menu bar and a table widget and the css for these widgets are located in different folders, remember to
+		call the setCssPath several times in order to specify the new css path for each widget. example. call DHTMLSuite.configObj.setCssPath('../css_dhtmlsuite/'); right after
+		a tableWidget object is created if the css for the table widget is located inside the css_dhtmlsuite folder.</p>
+		<h4>Specify css file name instead of css file path.</h4>
+		<p>It is also possible to specify another css file name instead of css path. This is done by calling the methods setLayoutCss and setMenuItemLayoutCss for the menuBar object. Example:</p>
+		<pre>
+	menuBar.setMenuItemLayoutCss('menu-item-demo');// name for the menu items
+	menuBar.setLayoutCss('menu-bar-demo');// name for the menu bar	
+		</pre>
+		</div>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	//download by http://www.codefans.net
+	var menuModel = new DHTMLSuite.menuModel();
+	DHTMLSuite.configObj.setCssPath('css/');
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setTarget('menuDiv');
+	menuBar.init();	
+	</script>
+	
+</body>
+</html>

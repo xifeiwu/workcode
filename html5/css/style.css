@@ -1,0 +1,39 @@
+body {
+  color: #000;
+  margin: 10;
+  padding: 20px;
+  background-color: white;
+}
+h1 {font-size: 0.5cm;}
+/*body{
+    background:#fff;
+    color:#777;
+}
+h1{
+    font: bold italic sans-serif;
+    font-style: italic;
+    color: blue;
+}*/
+/*id selector*/
+#red {
+color:red;
+border: 1px dotted #000;
+padding: 10px;
+}
+#green {color:green;}
+
+/*class selector*/
+.center
+{
+text-align: center;
+color: blue; 
+}
+.upper
+{
+text-transform: uppercase
+}
+
+a:link {color:#FF0000;}		/* 未被访问的链接 */
+a:visited {color:#00FF00;}	/* 已被访问的链接 */
+a:hover {color:#FF00FF; font-size:30px;}	/* 鼠标指针移动到链接上 */
+a:active {color:#0000FF;}	/* 正在被点击的链接 */

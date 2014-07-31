@@ -1,0 +1,345 @@
+
+
+
+
+
+
+
+<HTML>
+<HEAD>
+  <LINK rel="stylesheet" type="text/css" href="/stylesheet/amex_style.css">
+  <SCRIPT src="/scripts/common.js" type="text/javascript"></SCRIPT>
+  <SCRIPT src="/scripts/script.js" type="text/javascript"></SCRIPT>
+
+  <SCRIPT language = "javascript">
+		function openW(mypage,myname,w,h) 
+		{
+			baseHref = "http://" + location.hostname;
+
+			mypage = baseHref + mypage;
+			if(screen.width){
+			var winl = (screen.width-w)/2;
+			var wint = (screen.height-h)/2;
+			}else{winl = 0;wint =0;}
+			if (winl < 0) winl = 0;
+			if (wint < 0) wint = 0;
+
+			var settings = 'height=' + h + ',';
+			settings += 'width=' + w + ',';
+			settings += 'top=' + wint + ',';
+			settings += 'left=' + winl + ',';
+			
+			win = window.open(mypage,myname,settings);
+			
+			win.window.focus();
+		}
+
+		function setProductName(symbol)
+		{
+			top.productName = symbol;
+			
+		}
+  </SCRIPT>	  
+</HEAD>
+
+
+<BODY onload="setProductName('AMZN')">
+<BR>		
+	  
+			<TABLE border='0' cellspacing='0' cellpadding='0' width='100%'><TR><TD width='100%' class='ttitle'><TABLE border='0' cellspacing='1' width='100%'><TR class='tcontent'><TD colspan='5'><TABLE border='0' cellspacing='0' cellpadding='0' width='100%'><TR><TD class='title'>Amazon.com, Inc - AMZN</TD><TD align='right'><A href="#null" onclick="window.open('/nourl.htm','page','toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=450,height=350,top=250,left=350');"><img src='/images/logo_blank.gif' alt='Logo' border="0"></A></TD></TR></TABLE></TD></TR><TR class='tcontent'><TD colspan='5'> &nbsp;<A href="#null" onclick="window.open('/nourl.htm','page','toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=450,height=350,top=250,left=350');"> </A></TD></TR>
+
+	  
+	
+	 
+
+
+
+
+
+
+	<TR><TH class="header">Last Sale</TH><TH class="header">Net Change</TH><TH class="header">% Change</TH><TH class="header"><A HREF="#null" class="definationbld" onClick="dictionarySearch(&quot;Volume&quot;)">Volume</A></TH><TH class="header">Last Updated</TH></TR><TR class="tcontent"><TD class="value">$132.49</TD><TD class="up">7.66<IMG border="0" src="/images/up.gif" width="9" height="7" ></TD><TD class="up">6.14<IMG border="0" src="/images/up.gif" width="9" height="7" ></TD><TD class="value">7,138,237</TD><TD class="date">09/01/10 4:00 PM ET</TD></TR></TABLE></TD></TR></TABLE>
+
+
+
+
+	<!-- Changed this -->
+	<!-- 
+	
+
+
+
+
+
+
+
+
+
+	-->
+	<jsp:include page="EqLCNOTA.jsp" flush="true">
+	<jsp:param name="listedYear" value="null" />
+	<jsp:param name="Product_Symbol" value="AMZN" />
+	</jsp:include >
+
+<BR>
+<TABLE border="0" cellspacing="0" cellpadding="0" width="100%">
+		<TR>
+			<TD><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD>
+			
+		</TR>
+		
+	</TABLE>
+ 
+	<BR>
+	<TABLE border="0" width="100%" cellspacing="3">
+	    <TR>
+			<TD>
+	<table cellspacing=0 cellpadding=0 width=100% border=0>
+	<tr valign=bottom>
+	<td width=5 align=right><img src="/images/tabs_top_left.gif" height=4 width=5></td>
+	<td background="/images/tabs_top_text.gif"><img src="/images/blank.gif"></td>
+	<td width=6><img src="/images/tabs_top_middle.gif" height=4 width=6></td>
+	<td background="/images/tabs_top_text.gif"><img src="/images/blank.gif"></td>
+	<td width=15 valign=bottom><img src="/images/tabs_top_slope.gif" height=4 width=15></td>
+	</tr>
+	<tr>
+	<td align=right><img src="/images/tabs_middle_left.gif" width=5 height=17></td>
+	<td class="tabSelected" nowrap><a href="EqLCCmpDesc.jsp?Product_Symbol=AMZN&listedYear=null" class="tabs">Profile</a></td>
+	<td><img src="/images/tabs_middle_middle.gif" width=6 height=17></td>
+	<td class="tabUnselected" nowrap><a href="EqLCCmpNews.jsp?Product_Symbol=AMZN&listedYear=null&BLOCKSIZE=30&OFFSET=0" class="tabs">News</a></td>
+	<TD valign=bottom  background="/images/tabs_slop_back.gif" width="100%"><img border="0" src="/images/tabs_slope_new.gif" width="29" height="17"></TD>
+	</tr>
+	<tr><td height="1" colspan="7"><img src="/images/blank.gif" height="1" width="1"></td></tr>
+	<tr background="/images/tabs_slop_back.gif">
+	<td colspan=1 bgcolor="#000080" align=right><img src="/images/spacer_449442.gif"></td>
+	<td class="tabSelected"><img src="/images/blank.gif"></td>
+	<td colspan=3 bgcolor="#000080" height=1 width=1 align=left><img src="/images/spacer_449442.gif"></td>
+	</tr>
+	</table>
+			</TD>
+		</TR>
+	</TABLE>
+	<BR>
+	
+	
+	<BR>
+		<TABLE border="0" width="98%" cellspacing="1" cellpadding="0">
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+			<TR><TD class="title">Description</TD></TR>
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+		</TABLE>
+	<BR />
+	<CENTER>
+	<TABLE border="0" cellspacing="1">
+		<TR>
+			<TD valign="top">
+	
+	
+		</TD>
+	  </TR>
+	</TABLE>
+	</CENTER>
+	
+		<TABLE border="0" width="98%" cellspacing="1" cellpadding="0">
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+			<TR><TD class="title">Quote</TD></TR>
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+		</TABLE>
+	<BR />
+
+    
+	
+
+
+
+
+
+
+	
+	<BR><CENTER><TABLE cellpadding="0" cellpadding="1" border="0"><TR class="borderspacer"><TD colspan="5"><img border="0" src="/images/blank.gif" width="1" height="2"></TD></TR><TR class="odd"><TD class="bold">Last Sale</TD><TD class="value">$132.49 <BR>  (05/16/07)</TD></TR><TR class="even"><TD class="bold">Net Change</TD><TD class="up">7.66<IMG border="0" src="/images/up.gif" width="9" height="7" ></TD></TR><TR class="odd"><TD class="bold">% Change</TD><TD class="up">6.14<IMG border="0" src="/images/up.gif" width="9" height="7" ></TD></TR><TR class="even"><TD class="bold">Previous Close</TD><TD class="value">$124.83</TD></TR><TR class="odd"><TD class="bold">Today’s Open</TD><TD class="value">$126.36</TD></TR><TR class="even"><TD class="bold">Today’s High</TD><TD class="value">$132.60</TD></TR><TR class="odd"><TD class="bold">Today’s Low</TD><TD class="value">$126.17</TD></TR><TR class="even"><TD class="bold"><A HREF="#null" class="definationbld" onClick="dictionarySearch(&quot;Volume&quot;)">Volume</A></TD><TD class="value">7,138,237</TD></TR><TR class="odd"><TD class="bold">52 Week High</TD><TD class="value">$151.09</TD></TR><TR class="even"><TD class="bold">52 Week Low</TD><TD class="value">$77.51</TD></TR><TR class="borderspacer"><TD colspan="2"><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD></TR></TABLE></CENTER>
+ 
+
+		<TABLE border="0" width="98%" cellspacing="1" cellpadding="0">
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+			<TR><TD class="title">Chart</TD></TR>
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+		</TABLE>
+	<BR />
+<a name="chart"></a>
+	
+
+	<BR>
+	
+
+
+
+
+
+
+
+
+
+
+
+<CENTER>
+	<TABLE border='0' width='100%' cellpadding='0' cellspacing='1'>
+		<tr>
+			<td width='100%' align='center'>
+	
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=3&Product_Symbol=AMZN">3mo</A> | 
+	
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=6&Product_Symbol=AMZN">6mo</A> | 
+	
+		12mo |
+		
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=24&Product_Symbol=AMZN">24mo</A> | 
+	
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=36&Product_Symbol=AMZN">36mo</A> | 
+		
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=48&Product_Symbol=AMZN">48mo</A> | 
+	
+		<A href="/equities/listCmp/EqLCCmpDesc.jsp?monthVal=60&Product_Symbol=AMZN">60mo</A>
+	
+			</td>
+		</tr>
+	</TABLE>
+	<TABLE border="0" width="80%" cellspacing="1" cellpadding="0">
+			
+			<TR>
+				<TD align="CENTER">
+					<img border="0" src="/charts/AMZN_12mths_priceVolChart.gif">					
+				</TD>
+			</TR>
+			<TR>
+				<TD align="CENTER">
+					<A href="/equities/listCmp/EqLCChartDet.jsp?monthVal=12&Product_Symbol=AMZN">
+						Click here to view the data behind the chart.
+					</A>
+				</TD>
+			</TR>
+			
+	</TABLE>
+</CENTER>
+
+	<BR>
+		<TABLE border="0" width="98%" cellspacing="1" cellpadding="0">
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+			<TR><TD class="title">Fundamentals</TD></TR>
+			<TR class="spacer"><TD><SPACER type="block" height="1"></TD></TR>
+		</TABLE>
+	<BR />
+
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+
+
+<script language="javascript">
+
+	function openDividendSearch()
+	{
+		window.open('/amextrader/dailylist/search.jsp?pop_searchby=dividends&pop_fromdate=10/09/2014&pop_todate=04/09/2014&pop_eventtype=0&pop_searchtext=AMZN','dividendSearch');
+	}	
+
+</script>
+
+	<CENTER><TABLE cellpadding="0" border="0" >
+		<TR class="borderspacer">
+			<TD colspan="5"><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD>
+		</TR>
+		<TR class="odd">
+		    <TD class="bold"><A HREF="#null" class="definationbld" onClick="dictionarySearch(&quot;Price Earnings Ratio&quot;)">P/E ratio</A></TD>
+		    <TD class="value">52.00</TD>
+			<TD width="10"></TD>
+			<TD class="bold"><A HREF="#null" class="definationbld" onClick="dictionarySearch(&quot;Short Interest&quot;)">Short Interest</A></TD>
+		    <TD class="value">N.A.</TD>
+	  	</TR>
+		<TR class="even">
+		    <TD class="bold">Earnings Per Share</TD>
+		    <TD class="value">2.00</TD>
+			<TD width="10"></TD>
+			<TD class="bold"><A HREF="#null" class="definationbld" onClick="dictionarySearch(&quot;Current yield&quot;)">Current yield</A></TD>
+		    <TD class="value">N.A.</TD>
+	  	</TR>
+		<TR class="odd">
+		    <TD class="bold">Shares Outstanding</TD>
+		    <TD class="value">447,825,000</TD>
+			<TD class="bold"></TD>
+		    <TD class="value"></TD>
+	  	</TR>
+		<TR class="even">
+		    <TD class="bold">Market Cap</TD>
+		    <TD class="value">59,332,334,250</TD>
+			<TD width="10"></TD>
+			<TD class="bold"></TD>
+		    <TD class="value"></TD>
+	  	</TR>
+		<TR class="borderspacer">
+			<TD colspan="5"><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD>
+		</TR>
+		</TABLE>
+	 </CENTER>
+
+ 
+
+
+
+	
+	<BR>
+	<TABLE cellpadding="0" border="0" width="100%" cellspacing="0">
+		<TR class="borderspacer">
+			<TD colspan="2"><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD>
+		</TR>	
+    </TABLE>
+	<TABLE border="0" cellspacing="0" cellpadding="0" width="100%">
+		<TR>
+			<TD><IMG border="0" src="/images/blank.gif" width="1" height="2"></TD>
+		</TR>
+		
+	</TABLE>
+
+<SCRIPT language="JavaScript">
+var s_pageName="Eq|Companies|Descriptions"
+var s_server=""
+var s_channel="Equities"
+var s_pageType=""
+
+/*
+ SiteCatalyst code version: G.7.
+ Copyright 1997-2004 Omniture, Inc.
+ More info available at http://www.omniture.com
+*/
+
+var sc_siteID = "amexCom";
+var sc_tag = "<SCR" + "IPT LANGUAGE='JavaScript' " +
+ 			 "SRC='/scripts/sc_" + sc_siteID + "_remote.js' " + 
+			 "></SCR" + "IPT>";
+document.write(sc_tag);
+</SCRIPT>
+
+<!-- End SiteCatalyst code version: G.7. -->
+
+	
+	<SCRIPT src="/scripts/eqStdPoors.js" type="text/javascript"></SCRIPT>
+
+	
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<html > 
+  <head> 
+    <title>动态添加表单元素</title> 
+  </head> 
+  <script language="javascript"> 
+    function AddElement(mytype){ 
+      var mytype,TemO=document.getElementById("add"); 
+      var newInput = document.createElement("input");  
+      newInput.type=mytype;  
+      newInput.name="input1"; 
+      TemO.appendChild(newInput); 
+      var newline= document.createElement("br"); 
+      TemO.appendChild(newline); 
+    }
+function DeleteElement(){
+  var delbtn=document.getElementById("del");
+  var addbtn=document.getElementById("add");
+  var cnt=addbtn.childNodes.length;
+  delbtn.value="DELETE"+cnt;
+  console.log(addbtn);
+  for(var c = addbtn.firstChild; c != null; c = c.nextSibling){
+    console.log(c.nodeType);
+  }
+
+//  for(var i=0;i<cnt;i++){
+//    console.log("%d: %s, %s", i, addbtn.childNodes[i], addbtn.childNodes[i].nodeType==3 ? addbtn.childNodes[i].nodeValue:addbtn.childNodes[i].nodeType);
+//    for(var c = addbtn.firstChild; c != null; c = c.nextSibling){
+//      console.log()
+//    }
+//  }
+}
+  </script> 
+<body> 
+  <form action="" method="get" name="frm"> 
+  <div id="add"> 
+    <input id="del" type="button" value="删除" onclick="DeleteElement()">
+  </div> 
+  </form> 
+  <input name="" type="button" value="新建文本框" onClick="AddElement('text')" /> 
+  <input name="" type="button" value="新建复选框" onClick="AddElement('checkbox')" /> 
+  <input name="" type="button" value="新建单选框" onClick="AddElement('radio')" /> 
+  <input name="" type="button" value="新建文件域" onClick="AddElement('file')" /> 
+  <input name="" type="button" value="新建密码框" onClick="AddElement('password')" /> 
+  <input name="" type="button" value="新建提交按钮" onClick="AddElement('submit')" /> 
+  <input name="" type="button" value="新建恢复按钮" onClick="AddElement('reset')" /> 
+</body> 
+</html>
+

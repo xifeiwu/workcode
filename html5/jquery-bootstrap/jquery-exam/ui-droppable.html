@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link  type="text/css" rel="stylesheet" href="../jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+<style type="text/css">
+  #draggable {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+  }
+  #droppable {
+    position: absolute;
+    left: 250px;
+    top: 0;
+    width: 125px;
+    height: 125px;
+    background: #999;
+    color: #fff;
+    padding: 10px;
+  }
+</style>
+<script src="../jquery-ui-1.10.4/js/jquery-1.10.2.js"></script>
+<script src="../jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$( "#draggable" ).draggable();
+$( "#droppable" ).droppable({
+  drop: function(event, ui) {
+    console.log("event:", event);
+    console.log("ui:", ui);
+    alert( "dropped" );
+  }
+});
+});
+</script>
+
+</head>
+<body>
+<div id="droppable">请放置到这里！</div>
+<div id="draggable">请拖拽我！</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<h1>Table of Factorials</h1>
+<script>
+function factorial(n) {                 // A function to compute factorials
+    if (n <= 1) return n;
+    else return n*factorial(n-1);
+}
+
+document.write("<table border=\"1\">");                         // Begin an HTML table
+document.write("<caption>caption of table</caption>");  // Output table header
+document.write("<tr><th>n</th><th>n!</th></tr>");  // Output table header
+for(var i = 1; i <= 10; i++) {                     // Output 10 rows
+    document.write("<tr><td>" + i + "</td><td>" + factorial(i) + "</td></tr>");
+}
+document.write("</table>");                        // End the table
+document.write("Generated at " + new Date());      // Output a timestamp
+</script>
+<label value="label">label in file</label>

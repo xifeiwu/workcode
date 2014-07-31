@@ -1,0 +1,282 @@
+<html>
+<head>
+<style type="Text/css">
+<!--
+BODY{margin:0px;border:0px;background-color:#ffffff}
+//-->
+</style>
+</head>
+<body>
+<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=#666666>
+  <tr height=50>
+    <td width=100% bgcolor=#cecfff style='font:bold 18px Tahoma,Verdana;padding-left:50px'>
+	TaskMenu 3.0 API
+    </td>
+  </tr>
+  <tr height=30>
+    <td width=100% bgcolor=#cccccc style='font:bold 13px Tahoma,Verdana;padding-left:50px'>
+	<B style=''>TaskMenuItem 类</B>
+    </td>
+  </tr>
+
+  <tr align=top bgcolor=#ffffff>
+    <td>
+      <table width=100% align=center style='table-layout:fixed' cellpadding=0 cellspacing=0>
+        <tr bgcolor=#ffffff>
+          <td style=';font:12px Tahoma;padding:10px'>
+<pre style='line-height:30px;font:12px Tahoma'>
+构造函数(1): <B style='color:orange'>TaskMenuItem</B>(strLabel);
+&nbsp;&nbsp;功能: 创建菜单的条目，条目的连接描述为strLabel变量。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签");
+
+构造函数(2): <B style='color:orange'>TaskMenuItem</B>(strLabel , strLabel);
+&nbsp;&nbsp;功能: 创建菜单的条目，条目的连接描述为strLabel变量。条目图片地址为strlabel变量。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , "d:\ex.gif");
+
+构造函数(3): <B style='color:orange'>TaskMenuItem</B>(strLabel , strLabel , strCommand);
+&nbsp;&nbsp;功能: 创建菜单的条目，条目的连接描述为strLabel变量。条目图片地址为strlabel变量。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , "d:\ex.gif" , "alert('this is a label.')");
+          var menuitem = new TaskMenuItem("标签" , null , "alert('this is a label.')";
+
+属性 (1): <B style='color:purple'>container</B>;
+             功能: 返回该条目的容器菜单。
+             例子: var menuitem = new TaskMenuItem();
+                   var menu = new TaskMenu("菜单");
+                       menu.add(menuitem);
+                       alert(menuitem.container.label) //返回"菜单";
+
+功能函数(1): <B style='color:blue'>getLagel</B>( );
+&nbsp;&nbsp;功能: 返回该条目的链接描述。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签");
+          var l = menuitem.getLabel();
+
+功能函数(2): <B style='color:blue'>setLagel</B>( strLabel );
+&nbsp;&nbsp;功能: 设定该条目的链接描述。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem();
+          menuitem.setLabel("新标签");
+
+功能函数(3): <B style='color:blue'>getIcon</B>( );
+&nbsp;&nbsp;功能: 返回该条目的图片地址。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , "d:\ex.gif");
+          var i = menuitem.getIcon();
+
+功能函数(4): <B style='color:blue'>setLagel</B>(strLabel);
+&nbsp;&nbsp;功能: 设定该条目的图标。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , null);
+          menuitem.setIcon("d:\ex.gif");
+
+功能函数(5): <B style='color:blue'>getCommand</B>( );
+&nbsp;&nbsp;功能: 返回该条目的Javascript语句。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , null , "alert('Hello')");
+          var c = menuitem.getCommand();
+
+功能函数(6): <B style='color:blue'>setCommand</B>( strLabel );
+&nbsp;&nbsp;功能: 设定该条目的click 事件语句。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , null , null);
+          menuitem.setCommand("alert('hello')");
+
+功能函数(7): <B style='color:blue'>cloneNode</B>(  );
+&nbsp;&nbsp;功能: 返回该条目的科隆对象。
+&nbsp;&nbsp;例子: var menuitem = new TaskMenuItem("标签" , null , null);
+                  var menuclone = menuitem.cloneNode();
+</pre>
+	  </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr height=30>
+    <td width=100% bgcolor=#cccccc style='font:bold 13px Tahoma,Verdana;padding-left:50px'>
+	<B style=''>TaskMenu 类</B>
+    </td>
+  </tr>
+
+  <tr align=top bgcolor=#ffffff>
+    <td>
+      <table width=100% align=center style='' cellpadding=0 cellspacing=0>
+        <tr bgcolor=#ffffff>
+          <td style=';font:12px Tahoma;padding:10px;word-break:break-all'>
+<pre style='line-height:30px;font:12px Tahoma;word-break:break-all'>
+构造函数(1): <B style='color:orange'>TaskMenu</B>(strLabel);
+&nbsp;&nbsp;功能: 构建新的菜单，菜单的标题为strLabel。
+&nbsp;&nbsp;例子: var menu1 = new TaskMenu("菜单标签");
+
+构造函数(2): <B style='color:orange'>TaskMenuItem</B>(strLabel , bOpen);
+&nbsp;&nbsp;功能: 构建新的菜单，菜单的标题为strLabel，bOpen为bool变量，决定菜单在初始化后是否为打开状态，默认为true。
+&nbsp;&nbsp;例子: var menu1 = new TaskMenu("菜单标签" , false);
+
+
+属性 (1): <b style='color:purple'>previous</b>;
+             功能: 返回该菜单的上一个菜单。
+             例子: var menu1 = new TaskMenu("菜单1");
+                   var menu2 = new TaskMenu("菜单2");
+                       menu1.init();
+                       menu2.init(); 
+                       alert(menu2.previous.label) //返回 "菜单1";
+
+属性 (2): <b style='color:purple'>next</b>;
+             功能: 返回该菜单的下一个菜单。
+             例子: var menu1 = new TaskMenu("菜单1");
+                   var menu2 = new TaskMenu("菜单2");
+                       menu1.init();
+                       menu2.init(); 
+                       alert(menu1.next.label) //返回 "菜单2";
+
+属性 (3): <b style='color:purple'>items</b>;
+             功能: 返回该菜单的TaskMenuItem类型的条目的数组。
+             例子: var menu1 = new TaskMenu("菜单1");
+                   var itemArr = new Array(new TaskMenuItem("1") , new TaskMenuItem(2));
+                       menu1.add(itemArr);
+                   var items = new Array();
+                       items = menu1.items;
+
+功能函数(1): <B style='color:blue'>add</B>( menuitem );
+             功能: 向菜单添加条目menuitem。
+             例子: var menuitem = new TaskMenuItem("标签" , null , "alert('Hello')");
+                     var menu = new TaskMenu( "菜单1" );
+	     menu.add( menuitem )
+
+功能函数(2): <B style='color:blue'>add</B>( menuitem , iPosition ); [add重载];
+             功能: 向菜单添加条目menuitem，条目在该菜单中的位置为iPosition。
+             例子: var menuitem = new TaskMenuItem("标签" , null , "alert('Hello')");
+                     var menu = new TaskMenu( "菜单1" );
+	     menu.add( menuitem , 0)
+
+
+功能函数(3): <B style='color:blue'>add</B>( itemArray );[add重载]
+             功能: 向菜单添加条目，itemArray 为 TaskMenuItem 类型数组。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array( menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr );
+
+功能函数(4): <B style='color:blue'>add</B>( itemArray , iPosition);[add重载]
+             功能: 向菜单添加条目，itemArray 为 TaskMenuItem 类型数组。该数组在菜单的添加位置为iPosition。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array(menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr , 1 );
+
+功能函数(5): <B style='color:blue'>remove</B>( iIndex );
+             功能: 从菜单中删除位置为iIndex 的条目。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array( menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr );
+                    menu.remove(0);
+
+功能函数(6): <B style='color:blue'>remove</B>( iIndex , iCount );[remove重载]
+             功能: 从菜单中删除位置为iIndex 的条目，删除个数为iCount。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array( menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr );
+                    menu.remove(0 , 2);
+
+功能函数(7): <B style='color:blue'>remove</B>( item );[remove重载]
+             功能: 从菜单中删除item对象，item为TaskMenuItem对象。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array( menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr );
+                    menu.remove( menu.items[0] );
+
+功能函数(8): <B style='color:blue'>remove</B>(  );[remove重载]
+             功能: 清空菜单。和clear功能相同。
+              例子: var menuitem1 = new TaskMenuItem("标签" , null , "alert('Hello')");
+                    var menuitem2 = new TaskMenuItem( "标签2" );
+                    var menuArr = new Array( menuitem1 , menuitem2);
+                    var menu = new TaskMenu( "菜单1" );
+                    menu.add( menuArr );
+                    menu.remove( );
+
+功能函数(9): <B style='color:blue'>clear</B>(  );
+             功能: 清空菜单。功能与无参数调用remove功能相同。
+              例子: menu.clear( );
+
+功能函数(10): <B style='color:blue'>item</B>( n );
+             功能: 返回该TaskMenu的第n个TaskMenuItem对象条目
+              例子: var menu = new TaskMenu();
+                    menu.add( new item("条目") );
+                    alert(menu.item(0).label);  //返回 "条目";
+
+功能函数(11): <B style='color:blue'>getLabel</B>(  );
+             功能: 返回该菜单的标题。
+              例子: var menu = new TaskMenu( "菜单1" );
+                    var l = menu.getLabel();
+
+
+功能函数(12): <B style='color:blue'>setLabel</B>( strLabel );
+             功能: 设定该菜单的标题。
+              例子: var menu = new TaskMenu(  );
+                    menu.setLabel( "新菜单" );
+
+
+功能函数(13): <B style='color:blue'>setBackground</B>( strbg );
+             功能: 设定该菜单的背景图片。
+              例子: var menu = new TaskMenu( "菜单" );
+                    menu.setBackground( "d:\bg.gif" );
+
+功能函数(14): <B style='color:blue'>init</B>(  );
+             功能: 初始化，并在文档页面中显示菜单；在调用init之后，用add方法添加的条目将被动态添入。
+              例子: var menuitem1 = new TaskMenuItem("条目1");
+                    var menuitem2 = new TaskMenuItem("被动态添入的条目");
+                    var menu = new TaskMenu( "菜单" );
+                    menu.add( menuitem1 );
+                    menu.init();
+                    menu.add( menuitem2 );
+
+功能函数(15): <B style='color:blue'>invalidate</B>(  );
+             功能: 刷新菜单，使菜单找到最佳大小，默认条件，菜单在条目发生改变后，会自动调用此函数，
+        您可以在初始化菜单前调用TaskMenu.setAutoBehavior(false)，这样便必须手动调用invalidate()。
+              例子: TaskMenu.setAutoBehavior(false);
+                    var menu = new TaskMenu( "菜单" );
+                    menu.init();
+                    menu.add(menuitem1);
+                    menu.add(menuitem2);
+                    menu.invalidate();
+
+静态方法(1): <B style='color:green'>setHeadMenuSpecial</B>( bValue );
+             功能: 设定页面菜单的一个第一个菜单是否样式特殊化。不调用此函数，默认效果为false。
+         请在初始化页面菜单之前调用此方法。
+             例子: TaskMenu.setHeadMenuSpecial( true ); 
+                   new TaskMenu( "第一个菜单" ).init();
+
+静态方法(2): <B style='color:green'>setAutoBehavior</B>( bValue );
+             功能: 设定页面菜单是否自动调整最佳大小，默认为true，您可以调用此方法，并传递false 参数,
+         关闭自动调整进行动手调整，这样，就必须在每个菜单条目改变后，您手动调用 invalidate()方法。
+         虽然此模式下，效率最好。但建议您使用自动模式。请在初始化菜单之前就调用此函数。
+             例子: TaskMenu.setAutoBehavior( false ); 
+                   var menu = new TaskMenu("菜单");
+                   menu.init();
+                   menu.add(item1);
+                   menu.add(item2);
+                   menu.invalidate();
+
+静态方法(3): <B style='color:green'>setScrollbarEnabled</B>( bValue );
+             功能: 设定菜单页面的滚动条是否可用，默认为true，当菜单超出文档长度，菜单将变窄，
+         并刷新所有菜单，页面出现滚动条。 传递false参数后,菜单宽度不变，滚动条也不会出现，请在初始化
+         菜单之前就调用此函数。
+             例子: TaskMenu.setScrollbarEnabled( false ); 
+                   new TaskMenu( "第一个菜单" ).init();
+
+静态方法(4): <B style='color:green'>setStyle</B>( cssFile );
+             功能: 加载为TaskMenu编写的样式文件，cssFile为样式文件的路径及文件名。请在初始化
+         菜单之前就调用此函数。
+             例子: TaskMenu.setStyle( "css/blue.css" ); 
+                   new TaskMenu( "第一个菜单" ).init();
+
+</pre>
+	  </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

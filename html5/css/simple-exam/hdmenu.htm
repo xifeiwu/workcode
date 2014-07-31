@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://vip.5d.cn/flood/menu/hdmenu.htm -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY>
+<SCRIPT language=JavaScript>
+function goToURL() { history.go(-1); }
+</SCRIPT>
+
+<STYLE>.menu {
+	BORDER-RIGHT: darkblue 1px solid; BORDER-TOP: darkblue 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BORDER-LEFT: darkblue 1px solid; WIDTH: 150px; CURSOR: se-resize; BORDER-BOTTOM: darkblue 1px solid; FONT-FAMILY: verdana; POSITION: absolute; BACKGROUND-COLOR: gold
+}
+.item_panel {
+	BORDER-RIGHT: darkblue 1px solid; BORDER-LEFT: darkblue 1px solid; WIDTH: 150px; CLIP: rect(0px 150px 0px 0px); POSITION: absolute
+}
+.item_panel A {
+	CURSOR: hand; COLOR: black; TEXT-DECORATION: none
+}
+.item {
+	FONT-SIZE: 10px; WIDTH: 148px; FONT-FAMILY: verdana; BACKGROUND-COLOR: lightyellow
+}
+</STYLE>
+
+<SCRIPT language=JavaScript>
+  var height = 20; // height of the menu headers
+  var iheight = 15; // height of the menu_items
+  
+  var bgc = "lightyellow" // background color of the item
+  var tc = "black" // text color of the item
+  
+  var over_bgc = "silver";
+  var over_tc = "red";
+  
+  var speed = 0;
+  var timerID = "";
+  var N = (document.all) ? 0 : 1;
+  var width = 152
+  
+
+  var self_menu = new Array();
+function write_menu()
+{
+  smc = 0; // count the position of the self_menu
+  document.write("<div style='position:absolute'>");
+  mn = 0;
+  mni = 1;
+  start = -1;
+  
+  for(i=0;i<Link.length;i++)
+  {
+   la = Link[i].split("|");
+   if (la[0] == "0")
+   {
+    if(start == 0) 
+     {
+      document.write("</div>");
+      h =  csmc * iheight;
+      tmn = mn; //-h
+      self_menu[smc] = new Array(tmn,h,0,-2);
+      smc++;
+      mn--;
+     }
+     csmc = 0;
+    document.write("<div class='menu' style='top:"+mn+";height:"+height+"' id='down"+smc+"' onclick='pull_down("+smc+","+mni+")'> "+ la[1] + "</div>");
+    self_menu[smc] = new Array(mn,height,0,mni);
+    smc++;
+    mni++;
+    mn+=height;
+    start = 1;
+   }
+   else
+   {
+    if(start == 1) 
+     {
+      if(N)mn+=2;
+       document.write("<div class='item_panel' id='down"+smc+"' style='top:"+mn+"'>");
+       start = 0;
+     }
+    
+    document.write("<a href='"+la[2]+"'");
+    if (la[3] != "") document.write(" target='" + la[3] + "' ");
+    document.write("><div class='item' id='d"+i+"' style='height:"+iheight);
+    if (N) document.write(";width:150");
+    document.write("' onmouseover='color(this.id)' onmouseout='uncolor(this.id)'>  "+ la[1] + "</div></a>");
+    csmc++;
+   }
+  }
+  if (start == 0) 
+   {
+     document.write("</div>");
+     h =  csmc * iheight;
+     tmn = mn + 5; //-h
+     self_menu[smc] = new Array(tmn,h,0);
+     name = "down" + (self_menu.length-1);
+     obj = document.getElementById(name);
+     obj.style.borderBottomColor = "darkblue";
+     obj.style.borderBottomWidth = 1;
+     obj.style.borderBottomStyle = "solid";
+   }
+  document.write("</div>");
+}
+  
+function color(obj)
+{
+ document.getElementById(obj).style.backgroundColor = over_bgc;
+ document.getElementById(obj).style.color = over_tc
+}
+function uncolor(obj)
+{
+ document.getElementById(obj).style.backgroundColor = bgc;
+ document.getElementById(obj).style.color = tc
+}
+function pull_down(nr,c)
+{
+ if (timerID == "")
+ {
+ to = self_menu[nr+1][1]
+ begin = nr + 2;
+ if (timerID != "") clearTimeout(timerID);
+ if (self_menu[nr+1][2] == 0)
+ {
+  self_menu[nr+1][2] = 1;
+  if(nr == self_menu.length-2) {to++;}
+  epull_down(begin,to,0);
+ }
+ else
+ {
+  to = 0;
+  self_menu[nr+1][2] = 0;
+  name = "down"+(nr+2);
+  open_item = 0;
+  for(i=0;i<nr;i++)
+  {
+   if(self_menu[i][2] == 1) 
+    {open_item += self_menu[i][1];
+    }
+  }
+  if (N == false) {open_item-= (c*1)};
+  if (nr== self_menu.length-2) {val = self_menu[self_menu.length-1][1];to=-1;}
+  else  val = parseInt(document.getElementById(name).style.top) -(open_item)-(c*height);
+  epull_up(begin,to,val);
+ }
+ }
+}
+function epull_down(nr,to,nowv)
+{
+ name = "down" + (nr-1);
+ obj = document.getElementById(name).style.clip = "rect(0,"+width+","+(nowv+1)+",0)";
+ for (i=nr;i<self_menu.length;i++)
+ {
+  name = "down" + i;
+  obj = document.getElementById(name);
+  obj.style.top = parseInt(obj.style.top)+1;
+ }
+ nowv++;
+ if(nowv < to) timerID = setTimeout("epull_down("+nr+","+to+","+nowv+")",speed);
+ else timerID = "";
+}
+function epull_up(nr,to,nowv)
+{
+ name = "down" + (nr-1);
+ obj = document.getElementById(name).style.clip = "rect(0,"+width+","+nowv+",0)";
+ for (i=nr;i<self_menu.length;i++)
+ {
+  name = "down" + i;
+  obj = document.getElementById(name);
+  obj.style.top = parseInt(obj.style.top)-1;
+ }
+ nowv--;
+ if(nowv > to) timerID = setTimeout("epull_up("+nr+","+to+","+nowv+")",speed);
+ else timerID = "";
+}
+function startup(nr)
+{
+ write_menu();
+ if (nr != 0)
+ {
+ for(i=0;i<self_menu.length;i++)
+ {
+  if(self_menu[i][3] == nr) pull_down(i,nr)
+  i==self_menu.length;
+ }
+ }
+} 
+</SCRIPT>
+
+<CENTER>
+<TABLE width=150>
+  <TBODY>
+  <TR>
+    <TD>
+      <SCRIPT language=JavaScript>
+//Link[nr] = "position [0 is menu/1 is item],Link name,url,target (blank|top|frame_name)"
+var Link = new Array();
+Link[0] = "0|Home";
+Link[1] = "1|Home|http://www.javascriptsource.com|";
+Link[2] = "1|More Scripts|http://www.javascript.com|";
+Link[3] = "1|Contact|http://www.javascriptsource.com/contact-us.html|";
+Link[4] = "1|Traffic|http://www.thecounter.com|";
+Link[5] = "0|Access";
+Link[6] = "1|Login|Login.asp|";
+Link[7] = "1|Logout|Logout.asp|"
+Link[8] = "0|Scripts";
+Link[9] = "1|Asp|http://www.javascriptsource.com|";
+Link[10] = "1|JavaScript|http://www.javascriptsource.com|";
+Link[11] = "0|Links";
+Link[12] = "1|JavaScript sites|http://www.javascripts.com|blank";
+startup(4);
+</SCRIPT>
+  </TR></TBODY></TABLE></CENTER></BODY></HTML>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0049)http://vip.5d.cn/flood/myjs/htm/menu/coolmenu.htm -->
+<HTML><HEAD><TITLE>下滑菜单</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR>
+<META content=FrontPage.Editor.Document name=ProgId>
+<STYLE type=text/css>.menubar {
+	BORDER-RIGHT: 1px outset; BORDER-TOP: 1px outset; BACKGROUND: #0099cc; BORDER-LEFT: 1px outset; WIDTH: 100px; CURSOR: default; COLOR: yellow; BORDER-BOTTOM: 1px outset; POSITION: absolute; TOP: 10px; HEIGHT: 20px
+}
+.menu {
+	BORDER-RIGHT: 2px outset; PADDING-RIGHT: 15px; BORDER-TOP: white 2px outset; DISPLAY: none; PADDING-LEFT: 15px; BACKGROUND: yellow; PADDING-BOTTOM: 15px; BORDER-LEFT: 2px outset; WIDTH: 140px; PADDING-TOP: 15px; BORDER-BOTTOM: 2px outset; POSITION: absolute; TOP: 30px
+}
+.menu A {
+	COLOR: blue; TEXT-DECORATION: none
+}
+.menu A:hover {
+	COLOR: #00ffff
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+function menuControl(show)
+{
+window.event.cancelBubble=true;
+var objID=event.srcElement.id;
+var index=objID.indexOf("_");
+var mainID=objID.substring(0,index);
+var numID=objID.substring(index+1,objID.length);
+if(mainID=="menubar")
+{
+if(show==1)
+{
+eval("showMenu("+"menu_"+numID+")");
+}
+else
+{
+eval("hideMenu("+"menu_"+numID+")");
+}
+}
+
+}
+
+var nbottom=0,speed=1;
+function displayMenu(obj)
+{
+obj.style.clip="rect(0 100% "+nbottom+"% 0)";
+nbottom+=speed;
+if(nbottom<=100) 
+{
+timerID=setTimeout("displayMenu("+obj.id+"),70");
+}
+else clearTimeout(timerID);
+}
+function showMenu(obj)
+{
+obj.style.display="block";
+obj.style.clip="rect(0 0 0 0)";
+nbottom=5;
+displayMenu(obj);
+}
+function hideMenu(obj)
+{
+nbottom=0;
+obj.style.display="none";
+}
+function keepMenu(obj)
+{
+obj.style.display="block";
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<TABLE style="FONT-SIZE: 15px" cellSpacing=0 cellPadding=0 width=400 border=0>
+  <TBODY>
+  <TR>
+    <TD width="20%">
+      <DIV class=menubar id=menubar_1 onmouseover=menuControl(1) 
+      onmouseout=menuControl(0) align=center>教育网站 </DIV></TD>
+    <TD width="20%">
+      <DIV class=menubar id=menubar_2 onmouseover=menuControl(1) 
+      onmouseout=menuControl(0) align=center>电脑网站 </DIV></TD>
+    <TD width="20%">
+      <DIV class=menubar id=menubar_3 onmouseover=menuControl(1) 
+      onmouseout=menuControl(0) align=center>免费邮件 </DIV></TD>
+    <TD width="20%">
+      <DIV class=menubar id=menubar_4 onmouseover=menuControl(1) 
+      onmouseout=menuControl(0) align=center>其它网站 </DIV></TD></TR>
+  <TR>
+    <TD width="20%">
+      <DIV class=menu id=menu_1 onmouseover=keepMenu(this) 
+      onmouseout=hideMenu(this) align=left><A 
+      href="http://www.cqcas.edu.cn/">重庆民政学校</A><BR><A 
+      href="http://www.cqu.edu.cn/">重庆大学</A><BR><A 
+      href="http://www.cquc.edu.cn/">重庆交通学院</A> </DIV></TD>
+    <TD width="20%">
+      <DIV class=menu id=menu_2 onmouseover=keepMenu(this) 
+      onmouseout=hideMenu(this) align=left><A 
+      href="http://www.yesky.com/">天极网</A><BR><A 
+      href="http://www.cfan.cn.net/">电脑爱好者</A><BR><A 
+      href="http://www.intoweb.com.cn/">上网杂志</A> </DIV></TD>
+    <TD width="20%">
+      <DIV class=menu id=menu_3 onmouseover=keepMenu(this) 
+      onmouseout=hideMenu(this) align=left><A 
+      href="http://www.163.com/">163电子邮件</A><BR><A 
+      href="http://freemail.263.net/">首都在线</A><BR><A 
+      href="http://www.21cn.com/">21CN电子邮件</A><BR><A 
+      href="http://www.chinese.com/">炎皇在线</A> </DIV></TD>
+    <TD width="20%">
+      <DIV class=menu id=menu_4 onmouseover=keepMenu(this) 
+      onmouseout=hideMenu(this) align=left><A 
+      href="http://www.sohu.com.cn/">搜狐</A><BR><A 
+      href="http://www.yahoo.com/">雅虎</A><BR><A 
+      href="http://www.cseek.com/">搜索客</A><BR><A 
+      href="http://www.sina.com/">新浪网</A><BR><A 
+      href="http://vip.5d.cn/flood/myjs/htm/menu/httP;//www.cqcas.edu.cn/user/sailing">远航网站</A> 
+      </DIV></TD></TR></TBODY></TABLE></SCRIPT></BODY></HTML>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+  <style >
+ul {
+	margin:5px auto; 
+	text-align: center;
+}
+#nav {
+	height: 26px;
+	border-bottom: 2px solid #2788da;
+	list-style: none;
+}
+#nav li {
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+}
+#nav li a{
+	color: #fff;
+	text-decoration: none;
+	padding-top: 7px;
+	display: block;
+	width: 97px;
+	height: 19px;
+	text-align: center;
+	background-color: #ccc;
+	margin-left: 2px;
+}
+#nav li a.current{
+	background-color: #2788da;
+	color: #fff;
+}
+
+a:hover {color:red;}
+  </style>
+  <script type='text/javascript'>
+  function changefocus(){
+      nav = document.getElementById("nav");
+      for(var child=nav.firstElementChild; child!=null; child=child.nextElementSibling){
+          ele_a = child.firstElementChild;
+          if(ele_a == this){
+        	  ele_a.className='current';
+          }else{
+        	  ele_a.className='none';
+          }
+      }
+  }
+  function init_nav(e){
+	  var child=e.firstElementChild;
+      var ele_a = child.firstElementChild;
+	  ele_a.onclick=changefocus;
+      ele_a.className='current';
+	  for(; child!=null; child=child.nextElementSibling){
+		  ele_a = child.firstElementChild;
+	      ele_a.onclick=changefocus;
+	      //ele_a.className='none';	
+	  }
+      //console.log(ele_a);
+  }
+  window.onload=function(){
+	  nav = document.getElementById("nav");
+	  //console.log('nav:%s', nav);
+	  init_nav(nav);
+  }
+  </script>
+  </head>
+  <body>
+<ul id="nav">
+<li><a href="#">首页</a></li>
+<li><a href="#">文章</a></li>
+<li><a href="#">参考</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">论坛</a></li>
+<li><a href="#">联系</a></li>
+</ul>
+  </body>
+</html>

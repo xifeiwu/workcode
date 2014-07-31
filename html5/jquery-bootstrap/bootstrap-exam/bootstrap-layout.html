@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="../jquery/jquery-1.7.2.js"></script>
+<link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.show-grid{
+    border: 1px red solid;
+}
+.sidebar {
+background-color: green;
+margin-right: 20px;
+}
+.main {
+background-color: blue;
+}
+</style>
+<script src="../bootstrap-3.1.1/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
+</head>
+<body>
+<!--
+<div class="container-fluid">
+  <div class="row show-grid">
+    <div class="col-md-2">
+      Sidebar content
+    </div>
+    <div class="col-md-10">
+      Body content
+    </div>
+  </div>
+</div>
+-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar well well-sm show-grid">
+            this is my fixed sidebar
+        </div>
+        <div class="col-md-10 main show-grid">
+                <div class="row-fluid">
+                    <div class="col-md-2 show-grid">this is fluid</div>
+                    <div class="col-md-3 col-sm-offset-1 show-grid">yeah!</div>
+                    <div class="col-md-6 show-grid">Awesome!</div>
+                </div>
+                <div class="row-fluid">
+                    <div class="col-md-6 show-grid">1 half</div>
+                    <div class="col-md-6 show-grid">2 half</div>
+                </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

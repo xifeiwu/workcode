@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0042)http://vip.5d.cn/flood/myjs/baoku/0038.htm -->
+<!-- saved from url=(0032)http://www.ie-zone.com/index.php --><HTML><HEAD><TITLE>带子菜单的导航条</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../../fav.ico" rel="shortcut icon">
+<STYLE type=text/css>BODY {
+	MARGIN: 25px
+}
+#all TD {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+INPUT {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+SELECT {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+P {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+TEXTAREA {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+#all A:active {
+	COLOR: #7d070c
+}
+#all A:visited {
+	COLOR: #7d070c
+}
+#all A:hover {
+	COLOR: #336699
+}
+#all A:link {
+	COLOR: #7d070c
+}
+</STYLE>
+
+<SCRIPT language=JavaScript src="带子菜单的导航条.files/menu.js"></SCRIPT>
+<LINK href="带子菜单的导航条.files/menu.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript>
+<!--
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+function JM_cc(ob){
+var obj=MM_findObj(ob); if (obj) { 
+obj.select();js=obj.createTextRange();js.execCommand("Copy");}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+//-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY id=all text=#000000 bgColor=#336699>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=14 src="带子菜单的导航条.files/sq_1.gif" width=11></TD>
+    <TD width="100%"></TD>
+    <TD><IMG height=14 src="带子菜单的导航条.files/sq_2.gif" 
+width=11></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=1 src="" width=11></TD>
+    <TD width="100%">
+      <TABLE cellPadding=8 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle>
+            <SCRIPT language=JavaScript>
+function getPos(el,sProp) { //最得对象在浏览者屏幕的位置
+	var iPos = 0
+	while (el!=null) {
+		iPos+=el["offset" + sProp]
+		el = el.offsetParent
+	}
+	return iPos
+
+}
+</SCRIPT>
+
+            <SCRIPT language=JavaScript>
+document.write("<font color=#7d070c style=\"font-size: 14px\">"+document.title+"</font>");
+</SCRIPT>
+          </TD></TR>
+        <TR>
+          <TD bgColor=#f7f7f7>提示:把鼠标放到下面的连接上看看<A 
+            onmouseover="expandMenu(null,'menuSimple',50 ,getPos(this,'Top')+this.offsetHeight);" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"> <BR>Simple</A> 
+            <A 
+            onmouseover="expandMenu(null,'menuFancy',getPos(this,'Left'),getPos(this,'Top')+this.offsetHeight);" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Fancy</A> <!-- Simple -->
+            <DIV class=menu id=menuSimple onmouseout=hideMe();><A 
+            onmouseover="expandMenu('menuSimple');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            1</A><BR><A onmouseover="expandMenu('menuSimple');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            2</A><BR><A onmouseover="expandMenu('menuSimple');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            3</A><BR><A 
+            onmouseover="expandMenu('menuSimple','menuSimpleSub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 4 
+            &gt;</A><BR><A 
+            onmouseover="expandMenu('menuSimple','menuSimpleSub02');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 5 
+            &gt;</A><BR></DIV>
+            <DIV class=menu id=menuSimpleSub01 onmouseout=hideMe();><A 
+            onmouseover="expandMenu('menuSimpleSub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            1</A><BR><A onmouseover="expandMenu('menuSimpleSub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            2</A><BR><A onmouseover="expandMenu('menuSimpleSub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            3</A><BR><A 
+            onmouseover="expandMenu('menuSimpleSub01','menuSimpleSub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 4 
+            &gt;</A><BR></DIV>
+            <DIV class=menu id=menuSimpleSub0101 onmouseout=hideMe();><A 
+            onmouseover="expandMenu('menuSimpleSub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            1</A><BR><A onmouseover="expandMenu('menuSimpleSub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            2</A><BR><A onmouseover="expandMenu('menuSimpleSub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            3</A><BR><A 
+            onmouseover="expandMenu('menuSimpleSub0101','menuSimpleSub010101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 4 
+            &gt;</A><BR></DIV>
+            <DIV class=menu id=menuSimpleSub010101 onmouseout=hideMe();><A 
+            onmouseover="expandMenu('menuSimpleSub010101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            1</A><BR><A onmouseover="expandMenu('menuSimpleSub010101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            2</A><BR><A onmouseover="expandMenu('menuSimpleSub010101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            3</A><BR></DIV>
+            <DIV class=menu id=menuSimpleSub02 onmouseout=hideMe();><A 
+            onmouseover="expandMenu('menuSimpleSub02');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            1</A><BR><A onmouseover="expandMenu('menuSimpleSub02');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            2</A><BR><A onmouseover="expandMenu('menuSimpleSub02');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#">Menu Item 
+            3</A><BR></DIV><!-- Fancy Simple -->
+            <DIV class=menu id=menuFancy onmouseout=hideMe();>
+            <DIV class=border><A onmouseover="expandMenu('menuFancy');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 1</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancy');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 2</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancy');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 3</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancy','menuFancySub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 4</SPAN><SPAN class=arrow><IMG 
+            src="带子菜单的导航条.files/arrow.png"></SPAN></A><BR></DIV></DIV>
+            <DIV class=menu id=menuFancySub01 onmouseout=hideMe();>
+            <DIV class=border><A onmouseover="expandMenu('menuFancySub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 1</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancySub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 2</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancySub01');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 3</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancySub01','menuFancySub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 4</SPAN><SPAN class=arrow><IMG 
+            src="带子菜单的导航条.files/arrow.png"></SPAN></A><BR></DIV></DIV>
+            <DIV class=menu id=menuFancySub0101 onmouseout=hideMe();>
+            <DIV class=border><A onmouseover="expandMenu('menuFancySub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 1</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancySub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 2</SPAN></A><BR><A 
+            onmouseover="expandMenu('menuFancySub0101');" 
+            href="http://vip.5d.cn/flood/myjs/baoku/0038.htm#"><SPAN 
+            class=text>Menu Item 3</SPAN></A><BR></DIV></DIV></TD></TR>
+        <TR>
+          <TD><IMG height=30 src="带子菜单的导航条.files/step.gif" width=30>.将下面的代码复制到 
+            &lt;head&gt; 内<BR>
+            <TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#dddddd 
+            border=0>
+              <TBODY>
+              <TR>
+                <TD><FONT color=#990000>&lt;script language="JavaScript" 
+                  src="include/menu.js"&gt;&lt;/script&gt;<BR>&lt;link 
+                  rel="stylesheet" type="text/css" 
+                  href="include/menu.css"&gt;</FONT></TD></TR></TBODY></TABLE><BR><IMG 
+            height=30 src="带子菜单的导航条.files/step2.gif" width=30> 
+            如何创建自己的菜单呢？先看看下面这段代码:<BR>
+            <TABLE cellSpacing=0 cellPadding=7 width="100%" bgColor=#dddddd 
+            border=0>
+              <TBODY>
+              <TR>
+                <TD>&lt;href="#" <FONT 
+                  color=#990000>onMouseOver="expandMenu(null,'menuSimple',10,120);</FONT>"&gt;Simple&lt;/a&gt; 
+                  &lt;!--在你想出现菜单的对象中加入红色字体的部分 ，'menuSimple'所指的是你将展开哪一个菜单，看看下面对应的 
+                  &lt;div id="menuSimple".........&gt; 10,120代表菜单出现的位置x,y--&gt; 
+                  <P>&lt;div id="menuSimple" class="menu" 
+                  onMouseOut="hideMe();"&gt; //创建菜单 menuSimple<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimple');"&gt;Menu Item 
+                  1&lt;/a&gt;&lt;br&gt; //菜单的栏目<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimple');"&gt;Menu Item 
+                  2&lt;/a&gt;&lt;br&gt;<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimple');"&gt;Menu Item 
+                  3&lt;/a&gt;&lt;br&gt;<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimple','<FONT 
+                  color=#990000>menuSimpleSub01</FONT>');"&gt;Menu Item 4 
+                  &amp;gt;&lt;/a&gt;&lt;br&gt; 如果还有子菜单的话，要给出子菜单的名字 
+                  menuSimpleSub01<BR>&lt;/div&gt;</P>
+                  <P>&lt;div id="menuSimpleSub01" class="menu" 
+                  onMouseOut="hideMe();"&gt; //创建子菜单 menuSimpleSub01<BR>&lt;a 
+                  href="#" onMouseOver="expandMenu('menuSimpleSub01');"&gt;Menu 
+                  Item 1&lt;/a&gt;&lt;br&gt;<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimpleSub01');"&gt;Menu Item 
+                  2&lt;/a&gt;&lt;br&gt;<BR>&lt;a href="#" 
+                  onMouseOver="expandMenu('menuSimpleSub01');"&gt;Menu Item 
+                  3&lt;/a&gt;&lt;br&gt;<BR>&lt;/div&gt;<BR></P></TD></TR></TBODY></TABLE><BR><BR><IMG 
+            height=30 src="带子菜单的导航条.files/step3.gif" width=30> <A 
+            href="http://vip.5d.cn/flood/myjs/baoku/xmenu.zip" 
+            target=_blank>点这里下载需要用到文件</A>，已经打包</TD></TR></TBODY></TABLE></TD>
+    <TD><IMG height=1 src="" width=11></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=14 src="带子菜单的导航条.files/sq_3.gif" width=11></TD>
+    <TD width="100%"></TD>
+    <TD><IMG height=14 src="带子菜单的导航条.files/sq_4.gif" 
+width=11></TD></TR></TBODY></TABLE></BODY></HTML>

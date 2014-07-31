@@ -1,0 +1,131 @@
+<head>
+<style>
+<!--
+#foldheader{cursor:hand ; font-weight:bold ;
+list-style-image:url(fold.gif)}
+#foldinglist{list-style-image:url(list.gif)}
+//-->
+</style>
+<script language="JavaScript1.2">
+<!--
+/** 
+ *  Based on Folding Menu Tree 
+ *  Dynamic Drive (www.dynamicdrive.com)
+ *  For full source code, installation instructions,
+ *  100's more DHTML scripts, and Terms Of
+ *  Use, visit dynamicdrive.com
+ *
+ *  Updated to support arbitrarily nested lists
+ *  by Mark Quinn (mark@robocast.com) November 2nd 1998
+ */
+
+var head="display:''"
+img1=new Image()
+img1.src="fold.gif"
+img2=new Image()
+img2.src="open.gif"
+
+function change(){
+   if(!document.all)
+      return
+   if (event.srcElement.id=="foldheader") {
+      var srcIndex = event.srcElement.sourceIndex
+      var nested = document.all[srcIndex+1]
+      if (nested.style.display=="none") {
+         nested.style.display=''
+         event.srcElement.style.listStyleImage="url(open.gif)"
+      }
+      else {
+         nested.style.display="none"
+         event.srcElement.style.listStyleImage="url(fold.gif)"
+      }
+   }
+}
+
+document.onclick=change
+
+//-->
+</script>
+</head>
+<body>
+<ul>
+   <li id="foldheader">News</li>
+   <ul id="foldinglist" style="display:none">
+      <li><a href="../../../www.cnn.com/index.html">CNN</a></li>
+      <li><a href="../../../www.abcnews.com/index.html">ABC News</a></li>
+      <li><a href="../../../www.vancouversun.com/index.html">Vancouver Sun</a></li>
+   </ul>
+
+   <li id="foldheader">Games</li>
+   <ul id="foldinglist" style="display:none">
+      <li><a href="../../../www.gamespot.com/index.html">GameSpot</a></li>
+      <li><a href="../../../www.happypuppy.com/index.html">Happy Puppy</a></li>
+      <li><a href="../../../www.gamecenter.com/index.html">Game Center</a></li>
+   </ul>
+
+   <li id="foldheader">Software</li>
+   <ul id="foldinglist" style="display:none">
+      <li><a href="../../../www.download.com/index.html">outer 1</a></li>
+      <li><a href="../../../www.hotfiles.com/index.html">outer 2</a></li>
+      <li id="foldheader">Nested</li>
+      <ul id="foldinglist" style="display:none">
+         <li><a href="../../../www.windows95.com/index.html">nested 1</a></li>
+         <li><a href="../../../www.shareware.com/index.html">nested 2</a></li>
+      </ul>
+      <li><a href="../../../www.windows95.com/index.html">outer 3</a></li>
+      <li><a href="../../../www.shareware.com/index.html">outer 4</a></li>
+   </ul>
+</ul>
+<script language="JavaScript1.2">
+<!--
+/**
+ * Get cookie routine by Shelley Powers 
+ * (shelley.powers@ne-dev.com)
+ */
+function get_cookie(Name) {
+  var search = Name + "="
+  var returnvalue = "";
+  if (document.cookie.length > 0) {
+    offset = document.cookie.indexOf(search)
+    // if cookie exists
+    if (offset != -1) { 
+      offset += search.length
+      // set index of beginning of value
+      end = document.cookie.indexOf(";", offset);
+      // set index of end of cookie value
+      if (end == -1) end = document.cookie.length;
+      returnvalue=unescape(document.cookie.substring(offset, end))
+      }
+   }
+  return returnvalue;
+}
+
+if (get_cookie(window.location.pathname) != ''){
+  var openresults=get_cookie(window.location.pathname).split(" ")
+  for (i=0 ; i < openresults.length ; i++){
+    foldinglist[openresults[i]].style.display=''
+    document.all[foldinglist[openresults[i]].sourceIndex -
+1].style.listStyleImage="url(open.gif)"
+  }
+}
+
+if (document.all){
+  var nodelength=foldinglist.length-1
+  var nodes=new Array(nodelength)
+  var openones=''
+}
+
+function check(){
+  for (i=0 ; i <= nodelength ; i++){
+    if (foldinglist[i].style.display=='')
+       openones=openones + " " + i
+  }
+  document.cookie=window.location.pathname+"="+openones
+}
+
+if (document.all)
+  document.body.onunload=check
+//-->
+</script>
+
+</body>

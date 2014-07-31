@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)http://vip.5d.cn/flood/myjs/htm/menu/show.htm -->
+<HTML><HEAD><TITLE>spook-office</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE>#D1 {
+	BORDER-RIGHT: white 2px outset; BORDER-TOP: white 2px outset; LEFT: 0px; VISIBILITY: hidden; BORDER-LEFT: white 2px outset; WIDTH: 300px; BORDER-BOTTOM: white 2px outset; POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: lightgreen; layer-background-color: lightgreen
+}
+A {
+	FONT-SIZE: 9pt
+}
+A:link {
+	TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+.40pt {
+	FONT-SIZE: 40pt; COLOR: #3399ff; FONT-FAMILY: 文鼎琥珀繁
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+function menuIn() //菜单隐藏
+{
+        if(n4) {
+                clearTimeout(out_ID)
+                if( menu.top > menuH*-1+20+10 ) {  
+                        menu.top -= 8
+                        in_ID = setTimeout("menuIn()", 1)
+                }
+                else if( menu.top > menuH*-1+20 ) {
+                        menu.top--
+                        in_ID = setTimeout("menuIn()", 1)
+                }
+        }
+        else { 
+                clearTimeout(out_ID)
+                if( menu.pixelTop > menuH*-1+20+10 ) {
+                        menu.pixelTop -= 8
+                        in_ID = setTimeout("menuIn()", 1) 
+                }
+                else if( menu.pixelTop > menuH*-1+20 ) {
+                        menu.pixelTop--
+                        in_ID = setTimeout("menuIn()", 1)
+                }
+        }
+}
+function menuOut() //菜单显示
+{
+        if(n4) {
+                clearTimeout(in_ID)
+                if( menu.top < -10) { 
+                        menu.top += 4
+                        out_ID = setTimeout("menuOut()", 1)
+                }
+                else if( menu.top < 0) { 
+                        menu.top++
+                        out_ID = setTimeout("menuOut()", 1)
+                }
+                
+        }
+        else { 
+                clearTimeout(in_ID)
+                if( menu.pixelTop < -10) {
+                        menu.pixelTop += 2
+                        out_ID = setTimeout("menuOut()", 1)
+                }
+                else if( menu.pixelTop < 0 ) {
+                        menu.pixelTop++
+                        out_ID = setTimeout("menuOut()", 1)
+                }
+        }
+}
+function fireOver() { 
+        clearTimeout(F_out)	       
+        F_over = setTimeout("menuOut()", 10) 
+}
+function fireOut() { 
+        clearTimeout(F_over)
+         F_out = setTimeout("menuIn()", 10)
+}
+function init() {
+        if(n4) {
+                menu = document.D1
+                menuH = menu.document.height
+                menu.top = menu.document.height*-1+20 
+                menu.onmouseover = menuOut
+                menu.onmouseout = menuIn
+		menu.visibility = "visible"
+        }
+        else if(e4) {
+                menu = D1.style
+                menuH = D1.offsetHeight
+                D1.style.pixelTop = D1.offsetHeight*-1+20
+                D1.onmouseover = fireOver
+                D1.onmouseout = fireOut
+                D1.style.visibility = "visible"
+        }
+}
+F_over=F_out=in_ID=out_ID=null
+n4 = (document.layers)?1:0
+e4 = (document.all)?1:0;
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY onload=init()>
+<DIV id=D1>
+<TABLE width=294 border=0>
+  <TBODY>
+  <TR>
+    <TD align=middle width=14 bgColor=#008000 rowSpan=2><FONT 
+      color=#ffffff>M<BR>E<BR>N<BR>U</FONT></TD>
+    <TD width=127>
+      <UL>
+        <LI><A href="javascript:void(0)">选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项 1</A> 
+        <LI><A href="javascript:void(0)">选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项 2</A> 
+        <LI><A href="javascript:void(0)">选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项 3</A> 
+        <LI><A href="javascript:void(0)">选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项 4</A> 
+        <LI><A href="javascript:void(0)">选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项 5</A> 
+        </LI></UL></TD>
+    <TD width=133></TD></TR>
+  <TR>
+    <TD align=right width=266 
+colSpan=2></TD></TR></TBODY></TABLE></DIV><BR><BR><FONT 
+class=40pt>111<BR><BR></FONT></BODY></HTML>

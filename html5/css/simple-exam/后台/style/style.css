@@ -1,0 +1,97 @@
+﻿body,td,th,div,a,h3,textarea,input{
+	font-family: "宋体", "Times New Roman", "Courier New";
+	font-size: 14px;
+	color: #333333;
+}
+html{
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+.menuHtml{
+	overflow-y:auto;
+}
+body {
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+img{
+	border: none;
+}
+form{
+	margin: 0px;
+	padding: 0px;
+}
+input{
+	color: #000000;
+	height: 22px;
+	vertical-align: middle;
+}
+textarea{
+	width: 80%;
+	font-weight: normal;
+	color: #000000;
+}
+a{
+	text-decoration: underline;
+	color: #666666;
+}
+a:hover{
+	text-decoration: none;
+}
+.menuDiv{
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+	padding: 1px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-bottom: 0px;
+}
+.menuDiv h3{
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	background-color: #999999;
+	margin: 0px;
+}
+.menuDiv ul{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+.menuDiv ul li{
+	color: #666666;
+	background-color: #EEEEEE;
+	display: block;
+	padding: 5px 5px 5px 15px;
+	font-size: 14px;
+	margin-top: 1px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	height: 16px;
+}
+.menuDiv ul li a{
+	color: #666666;
+	background-color: #F4F4F4;
+	display: block;
+	padding: 5px 5px 5px 15px;
+	font-size: 14px;
+	margin-top: -5px;
+	margin-right: -5px;
+	margin-bottom: -5px;
+	margin-left: -15px;
+	text-decoration: none;
+	height: 16px;
+}
+.menuDiv ul li a:hover{	
+	color: #FFFFFF;
+	background-color: #DDDDDD;	
+}
+.red{
+	color:#FF0000;
+}

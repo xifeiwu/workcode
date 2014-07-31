@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link  type="text/css" rel="stylesheet" href="../jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+<style type="text/css">
+  #mySliderDiv .ui-slider-range { background: #08c; }
+  #mySliderDiv .ui-slider-handle { border-color: #08c; }
+</style>
+<script src="../jquery-ui-1.10.4/js/jquery-1.10.2.js"></script>
+<script src="../jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript">
+function change_value(){
+    console.log($("#mySliderDiv").slider("value"));
+}
+$(document).ready(function(){
+    $("#date").datepicker();
+
+    $("#mySliderDiv").slider({
+        orientation: "horizontal",
+        min: 0,
+        max: 100,
+        range: "min",
+        value: 50,
+        change: change_value,
+    });
+    $("#mySliderDiv").slider("value", 30);
+});
+</script>
+</head>
+<body style="font-size: 13px;">
+<input type="text" name="date" id="date" />
+<div id="mySliderDiv" style="width:20%;"></div>
+</body>
+</html>

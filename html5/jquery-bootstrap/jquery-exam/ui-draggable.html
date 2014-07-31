@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<link  type="text/css" rel="stylesheet" href="../jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+<style type="text/css">
+#draggable {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+  }
+</style>
+<script src="../jquery-ui-1.10.4/js/jquery-1.10.2.js"></script>
+<script src="../jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#draggable").draggable(
+{
+cursor: "crosshair",
+cursorAt: { left: 5 },
+delay: "300", 
+distance: "10",
+//elper: "clone",
+revert: "true" ,
+drag: function(event, ui){
+    console.log($(this).offset());
+}
+}
+);
+//var addClasses = $( ".selector" ).draggable( "option", "addClasses" );
+//console.log("addClasses", addClasses);
+});
+</script>
+
+</head>
+<body>
+<div id="draggable">请拖拽我！</div>
+</body>
+</html>

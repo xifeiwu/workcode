@@ -1,0 +1,137 @@
+<style>DIV {
+POSITION: absolute
+}
+#divBottomButtons {
+HEIGHT: 30px; TOP: 130px; VISIBILITY: hidden; WIDTH: 200px
+}
+#divBottomText {
+HEIGHT: 30px; VISIBILITY: inherit; WIDTH: 200px
+}
+#divBottomCont {
+CLIP: rect(0px 100px 30px 0px); HEIGHT: 30px; VISIBILITY: hidden; WIDTH: 100px
+}
+</style>
+<script>
+/********************************************************************************
+Copyright (C) 1999 Thomas Brattli
+This script is made by and copyrighted to Thomas Brattli at www.bratta.com
+********************************************************************************/
+var n = (document.layers) ? 1:0;
+var ie = (document.all) ? 1:0;
+//Page object, and cross-browser objects.
+function makePageCoords(){this.x2=(n)?innerWidth:document.body.offsetWidth;
+this.y2=(n)?innerHeight:document.body.offsetHeight;return this;}
+function makeObj(obj,nest){nest=(!nest) ? '':'document.'+nest+'.' 
+this.css=(n) ? eval(nest+'document.'+obj):eval('document.all.'+obj+'.style') 
+this.ref=(n) ? eval(nest+'document.'+obj+'.document'):eval('document'); 
+this.x=(n)? this.css.left:this.css.pixelLeft;this.y=(n)? this.css.top:this.css.pixelTop;	
+
+this.showIt=b_showIt;this.moveIt=b_moveIt;return this}
+function b_showIt(){this.css.visibility="visible"}
+function b_moveIt(x,y){this.x=x; this.y=y;this.css.left=this.x;this.css.top=this.y}
+//预先下载图片函数
+function preLoad(num,path,path2){for(i=0; i<=num; i++){this[i]=new Image(); 
+
+this[i].src=path+(i+1)+path2+'.gif'}return this}
+//CHANGE AFTER THIS ********************************************************
+/************************************************************************************
+Variables: (change this to adapt the script to your needs
+************************************************************************************/
+//图片的高度:
+var imageHeight=30
+//预先下载图片 栏目图片 原始 .gif step1.gif step2.gif ....
+pre=new preLoad(5,'imgs/step','')
+//预先下载图片 栏目图片 鼠标onMouseover .gif step1.gif step2.gif....
+preb=new preLoad(5,'imgs/step','')
+//速度:
+var mspeed=20
+/************************************************************************************
+Remember that if you change the size of the text images you need to change the 
+clip
+values and height and width on the divCont layer in the style tag.
+************************************************************************************/
+/************************************************************************************
+Init, change the values is here.
+************************************************************************************/
+function init(){
+page=new makePageCoords()
+oBButtons=new makeObj('divBottomButtons')
+oBText=new makeObj('divBottomText',' divBottomCont')
+oBCont=new makeObj('divBottomCont')
+//Change the values in here to get the menu to show another place on the page.
+//Look at the documentsize tutorial for info on how to use the page object.
+//设置显示的位置
+oBButtons.moveIt(400,70)
+oBCont.moveIt(oBButtons.x-120,70)
+oBText.moveIt(0,3)
+oBButtons.showIt()
+oBCont.showIt()
+}
+//Mouseover and mouseout
+function mover(num){oBButtons.ref["img"+num].src=preb[num].src; moveTo(num)}
+function mout(num){oBButtons.ref["img"+num].src=pre[num].src; moveBack()}
+//Moving the text layer, you shouldn't need to change anything here.
+var tim;
+function moveTo(num){
+clearTimeout(tim)
+gt=-((num+1)*imageHeight)+3
+if(oBText.y!=gt){
+if(oBText.y<gt) oBText.moveIt(oBText.x,oBText.y+5)
+else oBText.moveIt(oBText.x,oBText.y-5)
+tim=setTimeout("moveTo("+num+")",mspeed)
+}
+}
+function moveBack(){
+clearTimeout(tim)
+if(oBText.y!=3){oBText.moveIt(oBText.x,oBText.y+5); tim=setTimeout("moveBack()",mspeed)}
+}
+onload=init;
+</script>
+</font>
+<div id=divBottomCont> 
+<div id=divBottomText> 
+<!-- 把显示栏目介绍的图片放到这里.-->
+<img 
+border=0 height=30 src="imgs/o.gif" 
+width=30><br>
+<img border=0 height=30 
+src="imgs/step.gif" width=30><br>
+<img border=0 height=30 
+src="imgs/step2.gif" width=30><br>
+<img border=0 height=30 
+src="imgs/step3.gif" width=30><br>
+<img border=0 height=30 
+src="imgs/step4.gif" width=30><br>
+<img border=0 height=30 
+src="imgs/step5.gif" width=30><br>
+<img border=0 height=30 
+src="imgs/step6.gif" width=30> </div>
+</div>
+<div 
+id=divBottomButtons> 
+<!-- 把栏目的图片放到这里-->
+<a 
+href="http://www.51js.com" 
+onMouseOut=mout(0) onMouseOver=mover(0)><img border=0 height=30 name=img0 
+
+src="imgs/step.gif" width=30></a> <a 
+href="http://www.51js.com" 
+onMouseOut=mout(1) onMouseOver=mover(1)><img border=0 height=30 name=img1 
+
+src="imgs/step2.gif" width=30></a> <a 
+href="http://www.51js.com" 
+onMouseOut=mout(2) onMouseOver=mover(2)><img border=0 height=30 name=img2 
+
+src="imgs/step3.gif" width=30></a> <a 
+href="http://www.51js.com" 
+onMouseOut=mout(3) onMouseOver=mover(3)><img border=0 height=30 name=img3 
+
+src="imgs/step4.gif" width=30></a> <a 
+href="http://www.51js.com" 
+onMouseOut=mout(4) onMouseOver=mover(4)><img border=0 height=30 name=img4 
+
+src="imgs/step5.gif" width=30></a> <a 
+href="http://www.51js.com" 
+onMouseOut=mout(5) onMouseOver=mover(5)><img border=0 height=30 name=img5 
+
+src="imgs/step6.gif" width=30></a> </div> 

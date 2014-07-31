@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://vip.5d.cn/flood/menu/ssmenu.htm -->
+<HTML><HEAD><TITLE>New Page 1</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR>
+<META content=FrontPage.Editor.Document name=ProgId>
+<STYLE>.menuover {
+	BORDER-RIGHT: #1a71e6 1px solid; BORDER-TOP: #1a71e6 1px solid; BORDER-LEFT: #1a71e6 1px solid; CURSOR: hand; BORDER-BOTTOM: #1a71e6 1px solid; BACKGROUND-COLOR: #eaf2fd
+}
+.menuout {
+	CURSOR: hand
+}
+TD {
+	FONT-SIZE: 12px; COLOR: #1a71e6; FONT-FAMILY: 宋体; TEXT-DECORATION: none
+}
+A {
+	FONT-SIZE: 12px; COLOR: #1a71e6; FONT-FAMILY: 宋体; TEXT-DECORATION: none
+}
+</STYLE>
+
+<SCRIPT>
+var moveStep = 15; // 移动单位
+var moveTime = 10; //移动时间
+
+function MoveMenuBox()
+{
+ if(MenuBox.doing)
+ {
+  clearInterval(MenuBox.doing)
+ }
+ 
+ moveStep *= -1
+ 
+ MenuBox.doing = setInterval("DoMoveAction()",moveTime)
+}
+function DoMoveAction()
+{
+ var judger = MenuBox.style.pixelTop + moveStep;
+ if(moveStep>0)
+ {
+  if(judger <= MenuBox.parentElement.offsetHeight)
+  {
+   MenuBox.style.pixelTop = judger
+  }
+  else
+  {
+   MenuBox.style.pixelTop = MenuBox.parentElement.offsetHeight;
+   clearInterval(MenuBox.doing);
+   MenuBox.doing = false;
+  }
+ }
+ else
+ {
+  if(judger >= 0)
+  {
+   MenuBox.style.pixelTop = judger
+  }
+  else
+  {
+   MenuBox.style.pixelTop = 0;
+   clearInterval(MenuBox.doing);
+   MenuBox.doing = false;
+  } 
+ }
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 border=0>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <DIV style="OVERFLOW: hidden; WIDTH: 100%; HEIGHT: 100%">
+      <TABLE id=MenuBox 
+      style="BORDER-RIGHT: #1a71e6 1px solid; BORDER-TOP: #1a71e6 1px solid; VISIBILITY: hidden; BORDER-LEFT: #1a71e6 20px solid; BORDER-BOTTOM: #1a71e6 1px solid; POSITION: relative" 
+      cellSpacing=4 cellPadding=0 width=130>
+        <TBODY>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>关 于 我 们</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>加 入 我 们</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>交 易 市 场</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>网 页 超 市</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>域 名 注 册</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>虚 拟 主 机</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>服 务 中 心</TD></TR>
+        <TR>
+          <TD class=menuout onmouseover="this.className='menuover';" 
+          onmouseout="this.className='menuout';" vAlign=center align=middle 
+          height=20>合 作 伙 伴</TD></TR></TBODY></TABLE></DIV></TD></TR>
+  <TR>
+    <TD width="100%">
+      <TABLE id=judgerBox height=29 cellSpacing=0 cellPadding=0 width=130>
+        <TBODY>
+        <TR>
+          <TD style="FONT-SIZE: 6px" vAlign=center align=middle width=128 
+          bgColor=#ffffff height=4></TD></TR>
+        <TR>
+          <TD 
+          style="BORDER-RIGHT: #ffffff 1px outset; BORDER-TOP: #ffffff 1px outset; BORDER-LEFT: #ffffff 1px outset; CURSOR: hand; COLOR: #ffffff; BORDER-BOTTOM: #ffffff 1px outset; BACKGROUND-COLOR: #1a71e6" 
+          onclick=MoveMenuBox() vAlign=center align=middle width=128 
+            height=25>控 制 按 钮</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<SCRIPT>
+function window.onload()
+{
+ MenuBox.style.pixelTop = MenuBox.parentElement.offsetHeight;
+ MenuBox.style.visibility = "visible"
+}
+</SCRIPT>
+</BODY></HTML>

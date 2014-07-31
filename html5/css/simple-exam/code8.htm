@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://vip.5d.cn/flood/menu/ssmenu1.htm -->
+<HTML><HEAD><TITLE>无标题文档</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY onload=MFXinitMenu()><!--步骤一: 请将下面的原代码插入到<body>下面 -->
+<SCRIPT language=JavaScript>
+<!--
+function MFXinitMenu(){
+IE = document.all ? 1:0;
+NN = document.layers ? 1:0;
+HIDDEN = (NN) ? 'hide' : 'hidden';
+VISIBLE = (NN) ? 'show' : 'visible';
+myLayer=new Array();
+mySpeed=5;
+subLeft=0;
+closes=true;
+myLayer[0]=(NN) ? document.MFX0 : document.all.MFX0.style;
+myLayer[1]=(NN) ? document.MFX1 : document.all.MFX1.style;
+myLayer[2]=(NN) ? document.MFX2 : document.all.MFX2.style;
+myLayer[3]=(NN) ? document.MFX3 : document.all.MFX3.style;
+myLayer[4]=(NN) ? document.MFX4 : document.all.MFX4.style;
+myLayer[5]=(NN) ? document.MFX5 : document.all.MFX5.style;
+myLayer[6]=(NN) ? document.MFX6 : document.all.MFX6.style;
+myLayer[7]=(NN) ? document.MFX7 : document.all.MFX7.style;
+myLayer[8]=(NN) ? document.MFX8 : document.all.MFX8.style;
+myLayer[9]=(NN) ? document.MFX9 : document.all.MFX9.style;
+running=false;
+whichOpen=-1;
+lastMain=myLayer.length-2;
+MFXmain=new Array();
+for(i=0; i<myLayer.length; i++){
+mainORsub= i % 2;
+MFXmain[i] = mainORsub ? 0:1;
+}
+myTop=new Array();
+myLeft=new Array();
+myHeight=new Array();
+myWidth=new Array();
+mySlide=new Array();
+for(i=0; i<myLayer.length; i++){
+if(NN&&MFXmain[i]){
+if(i==0){
+myTop[i]=myLayer[i].top;
+myLeft[i]=myLayer[i].left;}
+else{
+myLeft[i]=myLeft[i-2];
+myTop[i]=myTop[i-2]+myHeight[i-2];}
+myHeight[i]=myLayer[i].clip.height;
+myWidth[i]=myLayer[i].clip.width;
+myLayer[i].left=myLeft[i];
+myLayer[i].top=myTop[i];
+myLayer[i].visibility=VISIBLE;}
+if(NN&&!MFXmain[i]){
+myTop[i]=myTop[i-1]+myHeight[i-1];
+myLeft[i]=myLeft[i-1];
+myHeight[i]=myLayer[i].clip.height;
+myWidth[i]=myLayer[i].clip.width;
+mySlide[i]=myTop[i]+myHeight[i];
+myLayer[i].left=myLeft[i]+subLeft;
+myLayer[i].top=myTop[i];}
+if(IE&&MFXmain[i]){
+if(i==0){
+myLeft[i]=myLayer[i].pixelLeft;
+myTop[i]=myLayer[i].pixelTop;}
+else{
+myLeft[i]=myLeft[i-2];
+myTop[i]=myTop[i-2]+myHeight[i-2];}
+myHeight[i]=myLayer[i].pixelHeight;
+myWidth[i]=myLayer[i].pixelWidth;
+myLayer[i].left=myLeft[i];
+myLayer[i].top=myTop[i];
+myLayer[i].visibility=VISIBLE;}
+if(IE&&!MFXmain[i]){
+myTop[i]=myTop[i-1]+myHeight[i-1];
+myLeft[i]=myLeft[i-1];
+myHeight[i]=myLayer[i].pixelHeight;
+myWidth[i]=myLayer[i].pixelWidth;
+myLayer[i].pixelLeft=myLeft[i]+subLeft;
+myLayer[i].pixelTop=myTop[i];
+mySlide[i]=myTop[i]+myHeight[i];
+}
+}
+}
+function MFXrunMenu(myName,newspeed){
+ieStep=0;
+thereS=false;
+thereC=false;
+if(newspeed>0){mySpeed=newspeed;}
+first=myName;
+if(whichOpen==-1&&!running&&MFXmain[myName]&&!(whichOpen==myName)){
+running=true;
+if(NN){
+myLayer[myName+1].clip.height=0;
+myLayer[myName+1].visibility=VISIBLE;
+}
+if(IE){
+myLayer[myName+1].clip= "rect(" + ("auto") +" "+ ("auto") +" "+ (0) +" "+ ("auto") +")";
+myLayer[myName+1].visibility=VISIBLE;
+}
+MFXopenMenuS(myName);
+MFXopenMenuC(myName);
+}
+if(whichOpen>=0&&!running&&!(whichOpen==myName)){
+running=true;
+second=whichOpen;
+ieStep1=myHeight[second+1];
+thereCS=false;
+thereCC=false;
+MFXcloseMenuS(second);
+MFXcloseMenuC(second);
+}
+if(whichOpen>=0&&!running&&whichOpen==myName&&closes){
+running=true;
+second=whichOpen;
+ieStep1=myHeight[second+1];
+thereCS=false;
+thereCC=false;
+MFXcloseMenuS(second);
+MFXcloseMenuC(second);
+	}
+}
+function MFXstopCloseS(myName){
+running=false;
+thereCS=true;
+if(closes&&first==whichOpen){whichOpen=-1;}
+else{whichOpen=-1;
+MFXrunMenu(first);
+}
+}
+function MFXstopOpenS(myName){
+running=false;
+thereS=true;
+if(IE){myLayer[myName+1].clip= "rect(" + ("auto") +" "+ ("auto") +" "+ ("auto") +" "+ ("auto") +")";}
+whichOpen=myName;
+}
+function MFXopenMenuS(myName){
+myStep=mySpeed;
+if(NN&&!thereS&&!(first==lastMain)){
+if(myLayer[first+2].top+myStep>mySlide[first+1]){
+myStep=mySlide[first+1]-myLayer[first+2].top;
+}
+for(i=first+2; i<myLayer.length; i+=2){
+myLayer[i].top+=myStep;
+}
+if(myLayer[first+2].top==mySlide[first+1]){
+MFXstopOpenS(first)
+}
+if(running)setTimeout('MFXopenMenuS(first)',10);
+}
+if(IE&&!thereS&&!(first==lastMain)){
+if(myLayer[first+2].pixelTop+myStep>mySlide[first+1]){
+myStep=mySlide[first+1]-myLayer[first+2].pixelTop;
+}
+for(i=first+2; i<myLayer.length; i+=2){
+myLayer[i].pixelTop+=myStep;
+}
+if(myLayer[first+2].pixelTop==mySlide[first+1]){
+MFXstopOpenS(first)
+}
+if(running)setTimeout('MFXopenMenuS(first)',10);
+}
+}
+function MFXopenMenuC(myName){
+myStep=mySpeed;
+if(NN&&!thereC){
+if ((myLayer[first+1].clip.height+myStep)>myHeight[first+1]){
+myLayer[first+1].clip.height=myHeight[first+1]
+}
+if(myLayer[first+1].clip.height==myHeight[first+1]){
+thereC=true;
+whichOpen=first;
+MFXstopOpenS(first)
+
+}else{
+myLayer[first+1].clip.height+=myStep;
+
+}
+if(running)setTimeout('MFXopenMenuC(first)',10);
+}
+if(IE&&!thereC){
+ieStep+=myStep;
+myLayer[myName+1].clip= "rect(" + ("auto") +" "+ ("auto") +" "+ (ieStep) +" "+ ("auto") +")";
+
+if(ieStep>=myHeight[first+1]){
+thereC=true;
+whichOpen=first;
+MFXstopOpenS(first)
+}
+if(running)setTimeout('MFXopenMenuC(first)',10);
+}
+}
+function MFXcloseMenuS(myName){
+myStep=mySpeed;
+if(NN&&!thereCS&&!(second==lastMain)){
+if(myLayer[second+2].top-myStep<myTop[second+2]){
+myStep=myLayer[second+2].top-myTop[second+2];
+}
+for(i=second+2; i<myLayer.length; i+=2){
+myLayer[i].top-=myStep;
+
+}
+if(myLayer[second+2].top==myTop[second+2]){
+MFXstopCloseS(second);
+}
+if(running)setTimeout('MFXcloseMenuS(second)',10);
+}
+if(IE&&!thereCS&&!(second==lastMain)){
+if(myLayer[second+2].pixelTop-myStep<myTop[second+2]){
+myStep=myLayer[second+2].pixelTop-myTop[second+2];
+}
+for(i=second+2; i<myLayer.length; i+=2){
+myLayer[i].pixelTop-=myStep;
+
+}
+if(myLayer[second+2].pixelTop==myTop[second+2]){
+MFXstopCloseS(second);
+}
+if(running)setTimeout('MFXcloseMenuS(second)',10);
+}
+}
+function MFXcloseMenuC(myName){
+myStep=-mySpeed;
+ieStep1-=mySpeed;
+if(NN&&!thereCC){
+if ((myLayer[second+1].clip.bottom+myStep)<0){
+myLayer[second+1].clip.bottom=0;
+}
+if(myLayer[second+1].clip.bottom==0){
+thereCC=true;
+
+if(second==lastMain)MFXstopCloseS(second);
+}else{
+myLayer[second+1].clip.bottom+=myStep;
+
+}
+if(running)setTimeout('MFXcloseMenuC(second)',10);
+}
+if(IE&&!thereCC){
+if(ieStep1<=0){
+myLayer[myName+1].clip= "rect(" + ("auto") +" "+ ("auto") +" "+ (0) +" "+ ("auto") +")";
+thereCC=true;
+if(second==lastMain)MFXstopCloseS(second);
+}else{
+myLayer[myName+1].clip= "rect(" + ("auto") +" "+ ("auto") +" "+ (ieStep1) +" "+ ("auto") +")";
+
+}
+if(running)setTimeout('MFXcloseMenuC(second)',10);
+}
+}
+//-->
+</SCRIPT>
+
+<STYLE>.cn {
+	FONT-SIZE: 9pt; COLOR: #ffff00; FONT-FAMILY: 宋体
+}
+A:link {
+	FONT-SIZE: 9pt; COLOR: blue; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 9pt; COLOR: blue; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: ""; TEXT-DECORATION: none
+}
+</STYLE>
+
+<DIV id=MFX0 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 2; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 20px; HEIGHT: 20px; BACKGROUND-COLOR: #cc6666; layer-background-color: #CC6666">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#568ac2 cellPadding=0 width="100%" 
+bgColor=#568ac2 borderColorLight=#ffffff border=1>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <P class=cn align=center><A onclick=MFXrunMenu(0,5) 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      color=#ffff00>数字音效</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX1 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 1; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 40px; HEIGHT: 60px; BACKGROUND-COLOR: #cccccc; layer-background-color: #CCCCCC">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#ffffff cellPadding=0 width="100%" 
+borderColorLight=#ff0000 border=1>
+  <TBODY>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu2</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu3</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV><BR></DIV>
+<DIV id=MFX2 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 2; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 100px; HEIGHT: 20px; BACKGROUND-COLOR: #cc6666; layer-background-color: #CC6666">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#568ac2 cellPadding=0 width="100%" 
+bgColor=#568ac2 borderColorLight=#ffffff border=1>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <P class=cn align=center><A onclick=MFXrunMenu(2,5) 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      color=#ffff00>图像处理</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX3 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 1; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 120px; HEIGHT: 60px; BACKGROUND-COLOR: #cccccc; layer-background-color: #CCCCCC">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#ffffff cellPadding=0 width="100%" 
+borderColorLight=#ff0000 border=1>
+  <TBODY>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu2</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P class=eng align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu3</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV><BR></DIV>
+<DIV id=MFX4 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 2; LEFT: 19px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 178px; HEIGHT: 20px; BACKGROUND-COLOR: #cc6666; layer-background-color: #CC6666">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#568ac2 cellPadding=0 width="100%" 
+bgColor=#568ac2 borderColorLight=#ffffff border=1>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <P class=cn align=center><A onclick=MFXrunMenu(4,5) 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      color=#ffff00>三维视频</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX5 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 1; LEFT: 19px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 199px; HEIGHT: 64px; BACKGROUND-COLOR: #cccccc; layer-background-color: #CCCCCC">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#ffffff cellPadding=0 width="100%" 
+borderColorLight=#ff0000 border=1>
+  <TBODY>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu</FONT><FONT size=2>2</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A 
+      href="http://pcafei.3322.net/script/java/best-menu.HTM#"><FONT 
+      size=2>menu</FONT><FONT 
+size=2>3</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV><BR></DIV>
+<DIV id=MFX6 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 2; LEFT: 18px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 251px; HEIGHT: 20px; BACKGROUND-COLOR: #cc6666; layer-background-color: #CC6666">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#568ac2 cellPadding=0 width="100%" 
+bgColor=#568ac2 borderColorLight=#ffffff border=1>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <P class=cn align=center><A onclick=MFXrunMenu(6,5) 
+      href="http://www.3610.com/"><FONT 
+  color=#ffff00>多媒体开发</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX7 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 1; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 280px; HEIGHT: 60px; BACKGROUND-COLOR: #cccccc; layer-background-color: #CCCCCC">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#ffffff cellPadding=0 width="100%" 
+borderColorLight=#ff0000 border=1>
+  <TBODY>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX8 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 2; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 340px; HEIGHT: 20px; BACKGROUND-COLOR: #cc6666; layer-background-color: #CC6666">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#568ac2 cellPadding=0 width="100%" 
+bgColor=#568ac2 borderColorLight=#ffffff border=1>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <P class=cn align=center><A onclick=MFXrunMenu(8,5) 
+      href="http://www.3610.com/"><FONT 
+  color=#ffff00>网站建设</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV>
+<DIV id=MFX9 
+style="BORDER-RIGHT: #000000 1px; BORDER-TOP: #000000 1px; Z-INDEX: 1; LEFT: 20px; VISIBILITY: hidden; BORDER-LEFT: #000000 1px; WIDTH: 150px; BORDER-BOTTOM: #000000 1px; POSITION: absolute; TOP: 360px; HEIGHT: 60px; BACKGROUND-COLOR: #cccccc; layer-background-color: #CCCCCC">
+<DIV align=center>
+<CENTER>
+<TABLE cellSpacing=0 borderColorDark=#ffffff cellPadding=0 width="100%" 
+borderColorLight=#ff0000 border=1>
+  <TBODY>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR>
+  <TR>
+    <TD class=eng width="100%">
+      <P align=center><A href="http://www.3610.com/"><FONT 
+      size=2>menu1</FONT></A></P></TD></TR></TBODY></TABLE></CENTER></DIV></DIV><!--步骤二: , 把<body>中的内容改为： --></BODY></HTML>

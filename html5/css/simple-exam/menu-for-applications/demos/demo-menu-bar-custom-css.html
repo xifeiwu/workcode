@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+	<title>Demo 3: Menu bar using custom css</title>
+	<link rel="stylesheet" href="css/demos.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="css/demo-menu-item.css" media="screen" type="text/css">
+	<link rel="stylesheet" href="css/demo-menu-bar.css" media="screen" type="text/css">
+	<script type="text/javascript" src="../js/menu-for-applications.js"></script>
+	<style type="text/css">
+	body{
+		margin:0px;
+		text-align:center;
+	}
+	
+	#mainContentainer{
+		width:760px;
+		margin:0 auto;
+		text-align:left;
+	}
+	#mainContent{
+		border:1px solid #000;
+	}
+	
+	#textContent{
+		height:400px;
+		overflow:auto;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#menuDiv{
+		width:100%;
+		overflow:hidden;
+	}
+	pre{
+		color:#F00;
+	}
+	p,pre{
+
+	}
+	</style>
+</head>
+<body>
+<div id="mainContentainer">
+	<div id="header">
+		<img src="../images/heading3.gif">
+	</div>	
+	<div id="mainContent">
+		<!-- This <ul><li> list is the source of a menuModel object -->
+		<ul id="menuModel" style="display:none">
+			<li id="50000" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+				<ul width="150">
+					<li id="500001" jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Save your work">Save</a></li>
+					<li id="500002"><a href="#">Save As</a></li>
+					<li id="500003" itemType="separator"></li>
+					<li id="500004"><a href="#">Open</a>
+						<ul width="130">
+							<li id="5000041"><a href="#">CSS</a>	
+							<li id="5000042"><a href="#">HTML</a>	
+							<li id="5000043"><a href="#">Javascript</a>	
+						</ul>					
+					</li>
+				</ul>
+			</li>
+			<li id="50001"><a href="#">View</a>
+				<ul width="130">
+					<li id="500011"><a href="#">Source</a></li>
+					<li id="500012"><a href="#">Debug info</a></li>
+					<li id="500013"><a href="#">Layout</a>
+						<ul width="150">
+							<li id="5000131"><a href="#">CSS</a>	
+							<li id="5000132"><a href="#">HTML</a>	
+							<li id="5000133"><a href="#">Javascript</a>	
+						</ul>
+					</li>
+				
+				</ul>
+			</li>
+			<li id="50002" itemType="separator"></li>
+			<li id="50003"><a href="#">Tools</a></li>
+		</ul>	
+		<ul id="menuModel2" style="display:none">
+			<li id="70000" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+				<ul width="150">
+					<li id="700001" jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Save your work">Save</a></li>
+					<li id="700002"><a href="#">Save As</a></li>
+					<li id="700004" itemType="separator"></li>
+					<li id="700003"><a href="#">Open</a></li>
+				</ul>
+			</li>
+			<li id="70001"><a href="#">View</a>
+				<ul width="130">
+					<li id="700011"><a href="#">Source</a></li>
+					<li id="700012"><a href="#">Debug info</a></li>
+					<li id="700013"><a href="#">Layout</a>
+						<ul width="150">
+							<li id="7000131"><a href="#">CSS</a>	
+							<li id="7000132"><a href="#">HTML</a>	
+							<li id="7000133"><a href="#">Javascript</a>	
+						</ul>
+					</li>
+				
+				</ul>
+			</li>
+			<li id="70003" itemType="separator"></li>
+			<li id="70002"><a href="#">Tools</a></li>
+		</ul>	
+			
+		<!-- This is the datasource for menu items which are added dynamically to the menu -->
+		<ul id="additionalModel" style="display:none">
+			<li id="60000"><a href="#">Internet Option</a></li>
+			<li id="60001"><a href="#">Debug URL</a></li>
+			<li id="60001"><a href="#">CVS</a>
+				<ul width="100">
+					<li id="600011"><a href="#">Check out</a></li>
+					<li id="600012"><a href="#">Update</a></li>
+				</ul>
+			</li>		
+		</ul>
+		
+		<div id="menuDiv"></div>
+		<div id="textContent">
+		<h4>A menu bar with custom CSS</h4>
+		<p>This is a demo where we are using custom css for the menu bar. This is how it is done:</p>
+		<h4>Create custom css files</h4>
+		<p>First I have created two css files and saved them as demo-menu-item.css and demo-menu-bar.css. They are based on the original menu-item.css and 
+		menu-bar.css which you will find inside the css_dhtmlsuite folder. </p>
+		<p>I have included these files by using the &lt;link> attribute in the head section of this HTML file:</p>
+		<pre>
+	&lt;link rel="stylesheet" href="css/demo-menu-item.css" media="screen" type="text/css">
+	&lt;link rel="stylesheet" href="css/demo-menu-bar.css" media="screen" type="text/css">
+		</pre>		 
+		<p>If you open the css files menu-item.css and menu-bar.css, you will see that all classes starts with the "prefix" DHTMLSuite_. In the new css files, I want to use a custom
+		prefix instead of "DHTMLSuite_". So I did a global search and replace in the new css files and replaced "DHTMLSuite_" with "Custom_".</p>
+		<p>Then I called two methods for the menuBar object in order to notify the script of the new css prefix:</p>
+		<pre>
+	menuBar.setMenuItemCssPrefix('Custom_');
+	menuBar.setCssPrefix('Custom_');		
+		</pre>
+	<p>This is the entire js code for the menu bar you see above:</p>
+	<pre>
+	var menuModel = new DHTMLSuite.menuModel();
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setMenuItemCssPrefix('Custom_');
+	menuBar.setCssPrefix('Custom_');
+	menuBar.setTarget('menuDiv');
+	
+	menuBar.init();
+	</pre>
+	<div id="menu2" style="width:200px"></div>
+	<h4>An other way to define alternative css</h4>
+		<p>There's also another way of doing this. The method described above is very useful if you want to have more than one menu on a page and with different styling(as we have here). If all your menus got the same styling, then
+		you can follow a simpler procedure.</p>
+		<p>The first thing you do is to make a copy of menu-item.css and menu-bar.css and save them in the same folder as the originals(example: menu-item-2.css and menu-bar-2.css). Then make your changes to these
+		two css files.(NB! You don't have to change the prefix of the css class when you're using this method). </p>
+		<p>The last thing you have to do is to make the menuBar object aware of these two css files:</p>
+		<pre>
+	menuBar.setCssLayout('menu-bar-2.css');
+	menuBar.setMenuItemLayoutCss('menu-item-2.css');
+		</pre>
+		<p>The script will load these two css files dynamically, so you don't have to include them by using &lt;LINK> tags.</p>
+		</div>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	var menuModel = new DHTMLSuite.menuModel();
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setMenuItemCssPrefix('Custom_');
+	menuBar.setCssPrefix('Custom_');
+	menuBar.setTarget('menuDiv');
+	
+	menuBar.init();
+	
+	var menuModel2 = new DHTMLSuite.menuModel();
+	menuModel2.addItemsFromMarkup('menuModel2');
+	menuModel2.setMainMenuGroupWidth(00);	
+	menuModel2.init();
+	
+	var menuBar2 = new DHTMLSuite.menuBar();
+	menuBar2.addMenuItems(menuModel2);
+	menuBar2.setTarget('menu2');
+	
+	menuBar2.init();
+	
+	/* Create menu model for additional elements */
+	
+	var menuModel_add = new DHTMLSuite.menuModel();
+	menuModel_add.addItemsFromMarkup('additionalModel');
+	menuModel_add.init();
+	//download by http://www.codefans.net
+	document.getElementById('textContent').onscroll = menuBar2.hideSubMenus;
+	</script>
+	
+</body>
+</html>

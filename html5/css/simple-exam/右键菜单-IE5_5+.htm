@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0042)http://vip.5d.cn/flood/myjs/baoku/0141.htm -->
+<!-- saved from url=(0032)http://www.ie-zone.com/index.php --><HTML><HEAD><TITLE>右键菜单-IE5.5+</TITLE><!-- #BeginTemplate "/Templates/JsExample.dwt" --><!-- #BeginEditable "doctitle" --><!-- #EndEditable -->
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../fav.ico" rel="shortcut icon">
+<STYLE type=text/css>BODY {
+	MARGIN: 25px
+}
+#all TD {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+INPUT {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+SELECT {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+P {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+TEXTAREA {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Verdana", "Arial","新宋体", "宋体"
+}
+#all A:active {
+	COLOR: #7d070c
+}
+#all A:visited {
+	COLOR: #7d070c
+}
+#all A:hover {
+	COLOR: #336699
+}
+#all A:link {
+	COLOR: #7d070c
+}
+</STYLE>
+
+<SCRIPT language=JavaScript>
+<!--
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+function JM_cc(ob){
+ob.select();js=ob.createTextRange();js.execCommand("Copy");
+}
+//-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY id=all text=#000000 bgColor=#336699>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=14 src="右键菜单-IE5_5+.files/sq_1.gif" width=11></TD>
+    <TD width="100%"></TD>
+    <TD><IMG height=14 src="右键菜单-IE5_5+.files/sq_2.gif" 
+width=11></TD></TR></TBODY></TABLE><!-- #BeginEditable "Example%20and%20Sources" -->
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=1 src="" width=11></TD>
+    <TD width="100%">
+      <TABLE cellPadding=8 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle><!-- #BeginLibraryItem "/Library/js_title.lbi" -->
+            <SCRIPT language=JavaScript>
+document.write("<font color=#7d070c style=\"font-size: 14px\">"+document.title+"</font>");
+</SCRIPT>
+<!-- #EndLibraryItem --></TD></TR>
+        <TR>
+          <TD bgColor=#f7f7f7>
+            <SCRIPT language=JavaScript1.2>
+<!--
+
+/*
+Context Menu script II (By Dheera Venkatraman at dheera@usa.net)
+Submitted to Dynamic Drive to feature script in archive
+For full source, usage terms, and 100's more DHTML scripts, visit http://dynamicdrive.com
+*/
+
+var isie=0;
+if(window.navigator.appName=="Microsoft Internet Explorer"&&window.navigator.appVersion.substring(window.navigator.appVersion.indexOf("MSIE")+5,window.navigator.appVersion.indexOf("MSIE")+8)>=5.5) {
+isie=1;
+}
+else {
+isie=0;
+}
+if(isie) {
+var html="";
+html+='<TABLE STYLE="border:1pt solid #808080" BGCOLOR="#CCCCCC" WIDTH="140" HEIGHT="220" CELLPADDING="0" CELLSPACING="1">';
+html+='<ST'+'YLE TYPE="text/css">\n';
+html+='a:link {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
+html+='a:visited {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
+html+='td {font-size:8pt;}\n';
+html+='</ST'+'YLE>\n';
+html+='<SC'+'RIPT LANGUAGE="JavaScript">\n';
+html+='\n<'+'!--\n';
+html+='window.onerror=null;\n';
+html+='/'+' -'+'->\n';
+html+='</'+'SCRIPT>\n';
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i0" ONMOUSEOVER="document.all.i0.style.background=\'#CFD6E8\';document.all.i0.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i0.style.background=\'#CCCCCC\';document.all.i0.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.history.go(-1);">&nbsp;<IMG SRC="menu/menuback.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Back</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i1" ONMOUSEOVER="document.all.i1.style.background=\'#CFD6E8\';document.all.i1.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i1.style.background=\'#CCCCCC\';document.all.i1.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.history.go(1);">&nbsp;<IMG SRC="menu/menuforward.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Forward</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC"><IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"></TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i4" ONMOUSEOVER="document.all.i4.style.background=\'#CFD6E8\';document.all.i4.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i4.style.background=\'#CCCCCC\';document.all.i4.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.external.AddFavorite(window.top.location.href,window.top.document.title);">&nbsp;<IMG SRC="menu/menufavorite.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Add to Favorites...</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i5" ONMOUSEOVER="document.all.i5.style.background=\'#CFD6E8\';document.all.i5.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i5.style.background=\'#CCCCCC\';document.all.i5.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.location=\'view-source:\'+window.parent.location.href;">&nbsp;<IMG SRC="menu/menusource.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;View Source</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC"><IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"></TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i6" ONMOUSEOVER="document.all.i6.style.background=\'#CFD6E8\';document.all.i6.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i6.style.background=\'#CCCCCC\';document.all.i6.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.print();">&nbsp;<IMG SRC="menu/menuprint.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Print</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i7" ONMOUSEOVER="document.all.i7.style.background=\'#CFD6E8\';document.all.i7.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i7.style.background=\'#CCCCCC\';document.all.i7.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.location.href=window.parent.location.href;">&nbsp;<IMG SRC="menu/menurefresh.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Refresh</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC"><IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"></TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i8" ONMOUSEOVER="document.all.i8.style.background=\'#CFD6E8\';document.all.i8.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i8.style.background=\'#CCCCCC\';document.all.i8.style.border=\'1pt solid #CCCCCC\';" ONCLICK="if(window.parent.document.body.style.zoom!=0) window.parent.document.body.style.zoom*=1.6; else window.parent.document.body.style.zoom=1.6;">&nbsp;<IMG SRC="menu/menuzoom.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Zoom In</TD></TR>';
+
+html+='<TR><TD STYLE="border:1pt solid #CCCCCC" ID="i9" ONMOUSEOVER="document.all.i9.style.background=\'#CFD6E8\';document.all.i9.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i9.style.background=\'#CCCCCC\';document.all.i9.style.border=\'1pt solid #CCCCCC\';" ONCLICK="if(window.parent.document.body.style.zoom!=0) window.parent.document.body.style.zoom*=0.625; else window.parent.document.body.style.zoom=0.625;">&nbsp;<IMG SRC="menu/menuzoom.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle">&nbsp;Zoom Out</TD></TR>';
+
+html+='</TABLE>';
+
+var oPopup = window.createPopup();
+
+}
+
+function dopopup(x,y) {
+if(isie) {
+var oPopupBody = oPopup.document.body;
+oPopupBody.innerHTML = html;
+oPopup.show(x, y, 140, 220, document.body);
+}
+}
+
+function click(e) {
+if(isie) {
+if(document.all) {
+if(event.button==2||event.button==3) {
+dopopup(event.x-1,event.y-1);
+}
+}
+}
+}
+
+if(isie) {
+document.oncontextmenu = function() { dopopup(event.x,event.y);return false; }
+document.onmousedown = click;
+}
+// --> 
+</SCRIPT>
+            提示：只对IE5.5有效果，如果你使用的是IE5.5试试按下鼠标右键，哈哈Cool吧！！！！！</TD></TR>
+        <TR>
+          <TD>1.很简单将下面的代码复制到 &lt;body&gt; 内 <INPUT onclick=JM_cc(js_1) type=button value=复制到我的剪贴板 name=Button> 
+            <BR><TEXTAREA name=js_1 rows=10 wrap=VIRTUAL cols=80>&lt;script language="JavaScript1.2"&gt;
+&lt;!--
+
+/*
+Context Menu script II (By Dheera Venkatraman at dheera@usa.net)
+Submitted to Dynamic Drive to feature script in archive
+For full source, usage terms, and 100's more DHTML scripts, visit http://dynamicdrive.com
+*/
+
+var isie=0;
+if(window.navigator.appName=="Microsoft Internet Explorer"&amp;&amp;window.navigator.appVersion.substring(window.navigator.appVersion.indexOf("MSIE")+5,window.navigator.appVersion.indexOf("MSIE")+8)&gt;=5.5) {
+isie=1;
+}
+else {
+isie=0;
+}
+if(isie) {
+var html="";
+html+='&lt;TABLE STYLE="border:1pt solid #808080" BGCOLOR="#CCCCCC" WIDTH="140" HEIGHT="220" CELLPADDING="0" CELLSPACING="1"&gt;';
+html+='&lt;ST'+'YLE TYPE="text/css"&gt;\n';
+html+='a:link {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
+html+='a:visited {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
+html+='td {font-size:8pt;}\n';
+html+='&lt;/ST'+'YLE&gt;\n';
+html+='&lt;SC'+'RIPT LANGUAGE="JavaScript"&gt;\n';
+html+='\n&lt;'+'!--\n';
+html+='window.onerror=null;\n';
+html+='/'+' -'+'-&gt;\n';
+html+='&lt;/'+'SCRIPT&gt;\n';
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i0" ONMOUSEOVER="document.all.i0.style.background=\'#CFD6E8\';document.all.i0.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i0.style.background=\'#CCCCCC\';document.all.i0.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.history.go(-1);"&gt;&amp;nbsp;&lt;IMG SRC="menu/menuback.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Back&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i1" ONMOUSEOVER="document.all.i1.style.background=\'#CFD6E8\';document.all.i1.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i1.style.background=\'#CCCCCC\';document.all.i1.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.history.go(1);"&gt;&amp;nbsp;&lt;IMG SRC="menu/menuforward.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Forward&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC"&gt;&lt;IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"&gt;&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i4" ONMOUSEOVER="document.all.i4.style.background=\'#CFD6E8\';document.all.i4.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i4.style.background=\'#CCCCCC\';document.all.i4.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.external.AddFavorite(window.top.location.href,window.top.document.title);"&gt;&amp;nbsp;&lt;IMG SRC="menu/menufavorite.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Add to Favorites...&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i5" ONMOUSEOVER="document.all.i5.style.background=\'#CFD6E8\';document.all.i5.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i5.style.background=\'#CCCCCC\';document.all.i5.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.location=\'view-source:\'+window.parent.location.href;"&gt;&amp;nbsp;&lt;IMG SRC="menu/menusource.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;View Source&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC"&gt;&lt;IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"&gt;&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i6" ONMOUSEOVER="document.all.i6.style.background=\'#CFD6E8\';document.all.i6.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i6.style.background=\'#CCCCCC\';document.all.i6.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.print();"&gt;&amp;nbsp;&lt;IMG SRC="menu/menuprint.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Print&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i7" ONMOUSEOVER="document.all.i7.style.background=\'#CFD6E8\';document.all.i7.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i7.style.background=\'#CCCCCC\';document.all.i7.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.location.href=window.parent.location.href;"&gt;&amp;nbsp;&lt;IMG SRC="menu/menurefresh.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Refresh&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC"&gt;&lt;IMG SRC="menu/pixel.gif" WIDTH="130" HEIGHT="1"&gt;&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i8" ONMOUSEOVER="document.all.i8.style.background=\'#CFD6E8\';document.all.i8.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i8.style.background=\'#CCCCCC\';document.all.i8.style.border=\'1pt solid #CCCCCC\';" ONCLICK="if(window.parent.document.body.style.zoom!=0) window.parent.document.body.style.zoom*=1.6; else window.parent.document.body.style.zoom=1.6;"&gt;&amp;nbsp;&lt;IMG SRC="menu/menuzoom.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Zoom In&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;TR&gt;&lt;TD STYLE="border:1pt solid #CCCCCC" ID="i9" ONMOUSEOVER="document.all.i9.style.background=\'#CFD6E8\';document.all.i9.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i9.style.background=\'#CCCCCC\';document.all.i9.style.border=\'1pt solid #CCCCCC\';" ONCLICK="if(window.parent.document.body.style.zoom!=0) window.parent.document.body.style.zoom*=0.625; else window.parent.document.body.style.zoom=0.625;"&gt;&amp;nbsp;&lt;IMG SRC="menu/menuzoom.gif" WIDTH="12" HEIGHT="12" BORDER="0" HSPACE="0" VSPACE="0" ALIGN="absmiddle"&gt;&amp;nbsp;Zoom Out&lt;/TD&gt;&lt;/TR&gt;';
+
+html+='&lt;/TABLE&gt;';
+
+var oPopup = window.createPopup();
+
+}
+
+function dopopup(x,y) {
+if(isie) {
+var oPopupBody = oPopup.document.body;
+oPopupBody.innerHTML = html;
+oPopup.show(x, y, 140, 220, document.body);
+}
+}
+
+function click(e) {
+if(isie) {
+if(document.all) {
+if(event.button==2||event.button==3) {
+dopopup(event.x-1,event.y-1);
+}
+}
+}
+}
+
+if(isie) {
+document.oncontextmenu = function() { dopopup(event.x,event.y);return false; }
+document.onmousedown = click;
+}
+// --&gt; 
+&lt;/script&gt;</TEXTAREA> <BR><BR>1.使用到此Script时相信你有能力自己修改为自己的菜单了，<A 
+            href="http://vip.5d.cn/www.ie-zone.com/index.php">有什么不明可到论坛中发表你的疑问</A>.<BR></TD></TR></TBODY></TABLE></TD>
+    <TD><IMG height=1 src="" width=11></TD></TR></TBODY></TABLE><!-- #EndEditable -->
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR bgColor=#ffffff>
+    <TD><IMG height=14 src="右键菜单-IE5_5+.files/sq_3.gif" width=11></TD>
+    <TD width="100%"></TD>
+    <TD><IMG height=14 src="右键菜单-IE5_5+.files/sq_4.gif" 
+width=11></TD></TR></TBODY></TABLE><!-- #EndTemplate --></BODY></HTML>

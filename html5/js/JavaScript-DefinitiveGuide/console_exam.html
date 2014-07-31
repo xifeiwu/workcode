@@ -1,0 +1,35 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>用 console.log 打印调试js对象和数组</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var obj = {
+            'id':100,
+            'alert':'把我弹出来吧',
+            'name':function(){
+                document.getElementById("ftname").value="xxxx";
+            },
+            'sex':function(){
+                document.getElementById('sexs').value = "youcancc";
+            }
+        };
+        var testArray = new Array();
+        for (i = 0; i < 10; i++)
+        {
+           testArray[i] = i;
+        }       
+          
+        <!--- 打印对象 ---->
+        console.log(obj);  
+        console.log(testArray);    
+	window.onload=obj.sex;
+    </script>
+      
+    <input type="text" id="ftname" name="ftname"/>
+    <input type="text" id="sexs" name="sexs" />
+</body>
+</html>

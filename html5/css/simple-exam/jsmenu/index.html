@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JavaScript可伸缩菜单 - Oncoding编码营原创</title>
+<script type="text/javascript" src="jsmenu.js"></script>
+<style>
+  body {
+  	font-size:12px;
+  }
+  p {
+  	margin:0;
+  	padding:0
+  }
+  .jsmenu {
+  	width:160px;
+  	background:url(images/pm_leftbg.gif) repeat-y;
+  	border-bottom:#C4DE9C solid 1px;
+  }
+  .jsmenu div {
+  	background:url(images/jm_tab.gif) no-repeat;
+  	overflow:hidden;
+  }
+  .jsmenu div.collapsed {
+  	height:28px;
+  }
+  .jsmenu div .fath {
+  	height:11px;
+  	overflow:hidden;
+  	display:block;
+  	padding:8px 0 8px 26px;
+  	color:#2754bb;
+  	font-size:14px;
+  	cursor:default;
+  	background:url(images/jm_exp.gif) no-repeat 10px 10px;
+  	border-top:#C4DE9C solid 1px;
+  	cursor:pointer;
+  }
+  .jsmenu div .single {
+  	height:27px;
+  	overflow:hidden;
+  	display:block;
+  	padding:0;
+  	font-size:14px;
+  	background:url(images/jm_sgl.gif) no-repeat 10px 10px;
+  	border-top:#C4DE9C solid 1px;
+  }
+  .jsmenu div .single a {
+  	padding:8px 0 8px 26px;
+  	display:block;
+  	text-decoration:none;
+  	font-size:14px;
+  	color:#2754bb;
+  	cursor:pointer;
+  }
+  .jsmenu div .single a.current {
+  	background:url(images/jm_tabon.gif) no-repeat left top;
+  }
+  .jsmenu div.collapsed .fath {
+  	background:url(images/jm_col.gif) no-repeat 10px 10px;
+  }
+  .jsmenu div .son {
+  	border-top:#C4DE9C solid 1px;
+  	padding:8px 0;
+  }
+  .jsmenu a {
+  	padding:7px 0 6px 34px;
+  	display:block;
+  	color:#565656;
+  	text-decoration:none;
+  }
+  .jsmenu a:hover {
+  	color:#F60;
+  	text-decoration:none;
+  }
+  .jsmenu a.current {
+  	background:url(images/jm_li.gif) no-repeat;
+  }
+</style>
+</head>
+<body onload = "initMenu()">
+  <div class="jsmenu" id="js_menu">
+    <div>
+      <span class="fath">业界资讯</span>
+      <p class="son">
+        <a class="current" href="#">业界新闻</a>
+        <a href="#">技术动态</a>
+        <a href="#">八卦评论</a>
+      </p>
+     </div>
+     <div class="collapsed">
+       <span class="fath">交互设计</span>
+         <p class="son">
+           <a href="#">交互设计思想</a>
+           <a href="#">用户行为研究</a>
+           <a href="#">设计教程</a>
+         </p>
+     </div>
+     <div class="collapsed">
+       <span class="fath">视觉设计</span>
+         <p class="son">
+           <a href="#">配色构图</a>
+           <a href="#">技术教程</a>
+         </p>
+     </div>
+     <div class="collapsed">
+       <span class="fath">JavaScript</span>
+         <p class="son">
+           <a href="#">JavaScript基础</a>
+           <a href="#">JavaScript框架</a>
+           <a href="#">JavaScript源码范例</a>
+         </p>
+      </div>
+      <div><span class="single"><a href="#">酷站</a></span></div>
+      <div><span class="single"><a href="#">专题</a></span></div>
+     </div>
+  </body>
+</html>

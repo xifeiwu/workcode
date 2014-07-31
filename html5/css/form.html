@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+<style >
+.textInput {
+background-color: #ccc;
+border-width:2px;
+border-style: border;
+border-color: #1a3f95
+}
+select option {
+background-color: #dae5f5;
+}
+select .l1 {
+background-color: #fff;
+}
+select .l2 {
+background-color: #435269;
+color: white;
+}
+</style>
+<script type="text/javascript">
+rename=function() {
+    label=document.getElementById("lg1");
+    if(label)
+    {
+        //label.innerHTML="change name function";
+        console.log(label.childNodes[0].nodeValue);
+    }
+    else
+    {
+        alert("label not found.");
+    }
+}
+window.onload=rename;
+</script>
+  </head>
+<body>
+<form name="form1" id="form1" method="post" action="">
+您是否试用表格式布局？
+是<input name="c1" type="radio" value="yes" checked="checked"></input>
+否<input name="c1" type="radio" value="no"></input>
+<br />
+<br />
+您是否开始试用CSS布局？
+是<input name="c2" type="radio" value="yes" checked="checked"></input>
+否<input name="c2" type="radio" value="no"></input>
+<br />
+<br />
+您是否订阅CSS邮件？
+是的<input name="submail" type="checkbox" value="sub"></input>
+<br />
+<br />
+您所从事的行业：
+<select name="job">
+<option class="l1">-请选择您从事的行业-</option>
+ <option class="l2">-IT行业-</option>
+ <option>设计师</option>
+ <option>程序员</option>
+ <option>总监</option>
+ <option class="l2">-传统行业-</option>
+ <option>美术编辑</option>
+ <option>项目经理</option>
+ <option>游戏策划</option>
+</select>
+<br />
+<br />
+请留下您的姓名：<input type="text" name="name" class="textInput">
+<br />
+<br />
+请留下您的Email地址：<input type="text" name="email" class="textInput">
+<br />
+<br />
+请留下您的建议：<textarea name="comment" class="textInput"></textarea>
+<br />
+<br />
+<label id="lg1" for="g1">点击此文本</label>
+<input type="checkbox" name="g1" id="g1" value="checkbox" />
+</form>
+</body>
+</html>

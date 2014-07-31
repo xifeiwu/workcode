@@ -1,0 +1,21 @@
+<html>
+<head>
+<script language="JavaScript" src="menu.js"></script>
+<link rel="stylesheet" type="text/css" href="menu.css"> 
+</head>
+<body>
+<href="#" onMouseOver="expandMenu(null,'menuSimple',10,120);">Simple</a> <!--在你想出现菜单的对象中加入红色字体的部分 ，'menuSimple'所指的是你将展开哪一个菜单，看看下面对应的 <div id="menuSimple".........> 10,120代表菜单出现的位置x,y--> 
+<div id="menuSimple" class="menu" onMouseOut="hideMe();"> //创建菜单 menuSimple
+<a href="#" onMouseOver="expandMenu('menuSimple');">Menu Item 1</a><br> //菜单的栏目
+<a href="#" onMouseOver="expandMenu('menuSimple');">Menu Item 2</a><br>
+<a href="#" onMouseOver="expandMenu('menuSimple');">Menu Item 3</a><br>
+<a href="#" onMouseOver="expandMenu('menuSimple','menuSimpleSub01');">Menu Item 4 &gt;</a><br> 如果还有子菜单的话，要给出子菜单的名字 menuSimpleSub01
+</div>
+
+<div id="menuSimpleSub01" class="menu" onMouseOut="hideMe();"> //创建子菜单 menuSimpleSub01
+<a href="#" onMouseOver="expandMenu('menuSimpleSub01');">Menu Item 1</a><br>
+<a href="#" onMouseOver="expandMenu('menuSimpleSub01');">Menu Item 2</a><br>
+<a href="#" onMouseOver="expandMenu('menuSimpleSub01');">Menu Item 3</a><br>
+</div>
+</body> 
+</html>

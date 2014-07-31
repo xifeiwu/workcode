@@ -1,0 +1,2 @@
+/home/cos/Public/cstudy/cmake/tutorial/MathFunctions/CMakeFiles/MathFunctions.dir
+/home/cos/Public/cstudy/cmake/tutorial/CMakeFiles/Tutorial.dir

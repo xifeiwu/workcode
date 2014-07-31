@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="../jquery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="../jquery/jquery.qrcode.min.js"></script>
+<link href="../bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="../bootstrap-3.1.1/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$(function () { $("[data-toggle='popover']").popover(); });
+$('#qrcode').on('click', function(){
+    $('#qrcode').popover({
+    html: true,
+    title: '扫描二维码',
+    width: 200, 
+    //container: 'body',
+    content: function () {
+        var div_qr=$('<div></div>');
+        var url='http://www.baidu.com'
+        jQuery(function(){
+            div_qr.qrcode({
+                text: url,
+                width: 150,
+                height: 150
+            });
+        });
+        return div_qr;
+     }
+    });
+    console.log('qrcode button is pressed.');
+});
+});
+</script>
+</head>
+
+<body>
+	<button id="qrcode" style="position:absolute; right:0px; top:0px; color:black; padding: 4px; line-height:1; font-size: 26px" type="button" class="btn btn-default" data-placement="auto"><span class="glyphicon glyphicon-qrcode"></span></button>
+<br>
+<br>
+
+  <h3>Live demo</h3>
+  <div class="bs-example" style="padding-bottom: 24px;">
+    <a class="btn btn-lg btn-danger" data-toggle="popover" title="A Title" data-content="And here's some amazing content. It's very engaging. right?" role="button">Click to toggle popover</a>
+  </div>
+  <h4>Four directions</h4>
+  <div class="bs-example tooltip-demo">
+    <div class="bs-example-tooltips">
+      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="auto" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        Popover on left
+      </button>
+      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        Popover on top
+      </button>
+      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        Popover on bottom
+      </button>
+      <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+        Popover on right
+      </button>
+    </div>
+<br>
+<div>
+<a href="#" id="example" class="btn btn-success" rel="popover" data-content="It's so simple to create a tooltop for my website!" data-original-title="Bootstrap Popover">hover for popover</a>
+</div>
+  </div><!-- /example -->
+<br>
+<br>
+<br>
+  <h3>Static popover</h3>
+  <p>Four options are available: top, right, bottom, and left aligned.</p>
+  <div class="bs-example bs-example-popover">
+    <div class="popover top">
+      <div class="arrow"></div>
+      <h3 class="popover-title">Popover top</h3>
+      <div class="popover-content">
+        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      </div>
+    </div>
+
+    <div class="popover right">
+      <div class="arrow"></div>
+      <h3 class="popover-title">Popover right</h3>
+      <div class="popover-content">
+        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      </div>
+    </div>
+
+    <div class="popover bottom">
+      <div class="arrow"></div>
+      <h3 class="popover-title">Popover bottom</h3>
+      <div class="popover-content">
+        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      </div>
+    </div>
+
+    <div class="popover left">
+      <div class="arrow"></div>
+      <h3 class="popover-title">Popover left</h3>
+      <div class="popover-content">
+        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

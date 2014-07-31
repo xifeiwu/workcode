@@ -1,0 +1,669 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0039)http://vip.5d.cn/flood/menu/xmlmenu.htm -->
+<HTML xmlns:ie><HEAD><TITLE>拖动改变次序的XML树型菜单</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE>UNKNOWN {
+	TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: none
+}
+A:link {
+	TEXT-DECORATION: none
+}
+BODY {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: "MS Shell Dlg", "Tahoma", "sans-serif"; TEXT-DECORATION: none
+}
+TR {
+	FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg, Tahoma,sans-serif
+}
+TD {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg,Tahoma, sans-serif
+}
+FORM {
+	FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg,tahoma,宋体
+}
+.black {
+	FONT-SIZE: 9pt; COLOR: #000000
+}
+.white {
+	FONT-SIZE: 9pt; COLOR: #ffffff
+}
+.red {
+	FONT-SIZE: 9pt; COLOR: #ff0000
+}
+.green {
+	FONT-SIZE: 9pt; COLOR: #009900
+}
+.c990000 {
+	FONT-SIZE: 9pt; COLOR: #990000
+}
+.cFF9900 {
+	FONT-SIZE: 9pt; COLOR: #ff9900
+}
+.c333399 {
+	FONT-SIZE: 9pt; COLOR: #333399
+}
+.blue {
+	FONT-SIZE: 9pt; COLOR: #0000ff
+}
+.blue1 {
+	FONT-SIZE: 9pt; COLOR: #3300cc
+}
+.gray {
+	FONT-SIZE: 9pt; COLOR: #666666
+}
+.row {
+	LINE-HEIGHT: 15pt
+}
+.bottom {
+	BORDER-RIGHT: #665b8e 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ffffff 1px solid; COLOR: #000000; BORDER-BOTTOM: #665b8e 1px solid; FONT-FAMILY: "宋体"; HEIGHT: 18px; BACKGROUND-COLOR: #cccccc
+}
+.editbox2 {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 9pt; PADDING-BOTTOM: 1px; CURSOR: text; COLOR: #000000; PADDING-TOP: 1px; FONT-FAMILY: 宋体; BACKGROUND-COLOR: #dbdbdb
+}
+.size {
+	FONT-SIZE: 9px; FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif"
+}
+</STYLE>
+<LINK href="css/style.css" type=text/css rel=stylesheet>
+<SCRIPT>
+self.moveTo(0,0)
+self.resizeTo(screen.availWidth,screen.availHeight)
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY style="FONT-SIZE: 12px; FONT-FAMILY: verdana" bgColor=#ffffff leftMargin=0 
+topMargin=0 onload=initial()>
+<DIV align=center>
+<CENTER><BR>
+<TABLE cellSpacing=0 cellPadding=0 width="98%" borderColorLight=#000000 
+border=1>
+  <TBODY>
+  <TR bgColor=#cccccc>
+    <TD class=title width="100%" background="" height=20>
+      <DIV class=title align=center><B><FONT color=#000000>标题：</FONT> 
+      </B>拖动改变次序的XML树型菜单 </DIV></TD></TR>
+  <TR>
+    <STYLE>ie\:tree {
+	DISPLAY: block
+}
+ie\:treeitem {
+	BORDER-TOP: white 2px solid; DISPLAY: block; ; FONT-WEIGHT: expression(this.children.length > 1 ? 'bold' : 'normal'); VISIBILITY: inherit; MARGIN-LEFT: 20px; OVERFLOW: hidden; WIDTH: 100%
+}
+ie\:label {
+	DISPLAY: inline; CURSOR: hand
+}
+ie\:label {
+	BEHAVIOR: url(tree2.htc)
+}
+UNKNOWN {
+	TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: none
+}
+A:link {
+	TEXT-DECORATION: none
+}
+BODY {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: "MS Shell Dlg", "Tahoma", "sans-serif"; TEXT-DECORATION: none
+}
+TR {
+	FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg, Tahoma,sans-serif
+}
+TD {
+	FONT-WEIGHT: normal; FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg,Tahoma, sans-serif
+}
+FORM {
+	FONT-SIZE: 9pt; FONT-FAMILY: MS Shell Dlg,tahoma,宋体
+}
+.black {
+	FONT-SIZE: 9pt; COLOR: #000000
+}
+.white {
+	FONT-SIZE: 9pt; COLOR: #ffffff
+}
+.red {
+	FONT-SIZE: 9pt; COLOR: #ff0000
+}
+.green {
+	FONT-SIZE: 9pt; COLOR: #009900
+}
+.c990000 {
+	FONT-SIZE: 9pt; COLOR: #990000
+}
+.cFF9900 {
+	FONT-SIZE: 9pt; COLOR: #ff9900
+}
+.c333399 {
+	FONT-SIZE: 9pt; COLOR: #333399
+}
+.blue {
+	FONT-SIZE: 9pt; COLOR: #0000ff
+}
+.blue1 {
+	FONT-SIZE: 9pt; COLOR: #3300cc
+}
+.gray {
+	FONT-SIZE: 9pt; COLOR: #666666
+}
+.row {
+	LINE-HEIGHT: 15pt
+}
+.bottom {
+	BORDER-RIGHT: #665b8e 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ffffff 1px solid; COLOR: #000000; BORDER-BOTTOM: #665b8e 1px solid; FONT-FAMILY: "宋体"; HEIGHT: 18px; BACKGROUND-COLOR: #cccccc
+}
+.editbox1 {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: 宋体; HEIGHT: 18px; BACKGROUND-COLOR: #dbdbdb
+}
+.editbox3 {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: 宋体; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff
+}
+.editbox2 {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 9pt; PADDING-BOTTOM: 1px; CURSOR: text; COLOR: #000000; PADDING-TOP: 1px; FONT-FAMILY: 宋体; BACKGROUND-COLOR: #dbdbdb
+}
+.size {
+	FONT-SIZE: 9px; FONT-FAMILY: "Verdana", "Arial", "Helvetica", "sans-serif"
+}
+A.yellow:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.yellow:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.yellow:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.yellow:hover {
+	COLOR: #ffff33; TEXT-DECORATION: none
+}
+</STYLE>
+
+    <SCRIPT language=JavaScript>
+<!--
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+function JM_cc(ob){
+var obj=MM_findObj(ob); if (obj) { 
+obj.select();js=obj.createTextRange();js.execCommand("Copy");}
+}
+
+function MM_findObj(n, d) { //v4.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+//-->
+</SCRIPT>
+
+    <META content="MSHTML 6.00.2600.0" name=GENERATOR></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=600 align=center border=0>
+  <TBODY>
+  <TR bgColor=#7285cf>
+    <TD width=10 height=18>&nbsp;</TD>
+    <TD class=white width=590 bgColor=#7285cf 
+  height=18>这是一个可以拖动改变次序的XML树型菜单</TD></TR>
+  <TR bgColor=#e7e7e7>
+    <TD width=10>&nbsp;</TD>
+    <TD class=row width=590 bgColor=#e7e7e7 
+  height=30>这是一个可以拖动改变次序的XML树型菜单</TD></TR>
+  <TR bgColor=#f2f2f2>
+    <TD width=10 bgColor=#f2f2f2>&nbsp;</TD>
+    <TD width=590 bgColor=#f2f2f2 height=70>&nbsp; 
+      <H3>Animating Expanding/Collapsing List with Drag/Drop <I>e.c. 
+      listus</I></H3><ie:tree id=TheTree><ie:treeitem><ie:label id=Label1>1.0 
+      FirstSet</ie:label> <ie:treeitem><ie:label>1.1 
+      Megalosaurus</ie:label></ie:treeitem> <ie:treeitem><ie:label>1.2 
+      Iguanodon</ie:label></ie:treeitem> <ie:treeitem><ie:label>1.3 
+      Hylaeosaurus</ie:label></ie:treeitem> <ie:treeitem><ie:label>1.4 
+      Tyrannosaurus rex</ie:label></ie:treeitem> 
+      </ie:treeitem><ie:treeitem><ie:label>2.0 Later Set</ie:label> 
+      <ie:treeitem><ie:label>2.1 Mammoths</ie:label></ie:treeitem> <ie:treeitem><!--S--><ie:label>2.2 Mastodons</ie:label> 
+      <ie:treeitem><ie:label>2.2.1 Plesiosaurs</ie:label></ie:treeitem> 
+      <ie:treeitem><ie:label>2.2.2 Ichthyosaurs</ie:label></ie:treeitem> 
+      <ie:treeitem><ie:label>2.2.3 Dimetrodon 
+      </ie:label></ie:treeitem><ie:treeitem><ie:label>2.2.4 
+      Sinapsid</ie:label></ie:treeitem> 
+      </ie:treeitem><!--  E--><ie:treeitem><ie:label>2.3 
+      Stegosaurus</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.4 
+      Apatosaurus</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.5 
+      Mammals</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.6 
+      Tetrapods</ie:label> <ie:treeitem><ie:label>2.6.1 
+      Amphibians</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.6.2 
+      Whales</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.6.3 
+      Crocodiles</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.6.4 Sea 
+      Turtles</ie:label></ie:treeitem> </ie:treeitem><ie:treeitem><ie:label>2.7 
+      Late Permian</ie:label></ie:treeitem> <ie:treeitem><ie:label>2.8 
+      Mesozoic</ie:label></ie:treeitem> </ie:treeitem><ie:treeitem><ie:label>3.0 
+      Archosaurs</ie:label> <ie:treeitem><ie:label>3.1 Mandibular 
+      fenestra</ie:label></ie:treeitem> <ie:treeitem><ie:label>3.2 Pointed 
+      Snout</ie:label></ie:treeitem> <ie:treeitem><ie:label>3.3 Theocodant Tooth 
+      Implantation</ie:label></ie:treeitem> <ie:treeitem><ie:label>3.4 Modified 
+      Ankle</ie:label></ie:treeitem> </ie:treeitem><ie:treeitem><ie:label>4.0 
+      Mesozoic</ie:label> <ie:treeitem><ie:label>4.1 Middle 
+      Animals</ie:label></ie:treeitem> </ie:treeitem></ie:tree>
+      <SCRIPT>
+// variables for drag/drop
+var dragElement = null;
+var dropElement = null;
+var currOver = null;
+
+// variables for expanding/collapsing
+var flyCount = 5;
+var msecs = 5;
+var currCount = 0;
+
+// event handler hookup
+TheTree.onmousedown = preselect;
+TheTree.ondragstart = dragstart;
+TheTree.ondragend = dragend;
+TheTree.ondragenter = dragover;
+TheTree.ondragover = dragover;
+TheTree.ondragend = dragend;
+TheTree.ondrop = dragdrop;
+document.onclick = click;
+
+// drag/drop code
+function dragstart() {
+  var e;
+  e = window.event.srcElement;
+  if (e.tagName != "label") 
+    return false;
+
+  dragElement = e.parentElement;
+}
+
+// method called as we start drag/drop
+
+// called as we mouse over - note that there is special handling for dragover code
+// as dragleave doesn't track the toElement/fromElement as mouseover/mouseout does
+function dragover() {
+  if (window.event.srcElement.tagName != "treeitem") 
+    return;
+
+  if (!dragElement.contains(window.event.srcElement)) {
+    if (currOver) {
+      currOver.style.borderTopColor = "";
+    }
+    currOver = window.event.srcElement;
+    window.event.srcElement.style.borderTopColor = "black";
+    event.returnValue = false;
+  }
+}
+
+// called when drag is ended - always
+function dragend() {
+  if (currOver) {
+    currOver.style.borderTopColor = "";
+  }
+}
+
+// called on drop
+function dragdrop() {
+  if (currOver) {
+    currOver.style.borderTopColor = "";
+  }
+  t = currOver;
+  t.parentElement.insertBefore(dragElement, t);
+}
+
+// needed to select items so they can be dragged
+// drag drop only supported on selection and images
+function preselect() {
+  var e;
+
+  e = window.event.srcElement;
+  if (e.tagName != "label") {
+    return;
+  }
+  r = document.body.createTextRange();
+  r.moveToElementText(e);
+  r.select();
+  window.event.cancelBubble = true;
+}
+
+// beginning of expand/collapse code
+
+// called to handle document click, starts toggling
+function click() {
+  if (window.event.srcElement.tagName != "label") {
+    return;
+  }
+  if (window.event.srcElement.parentElement.children.length > 1) {
+    toggleState(window.event.srcElement.parentElement);
+  }
+}
+
+// toggles expanding/collapse state of an element - does setup
+function toggleState(e) {
+   e.oHeight = e.scrollHeight + 2;
+   e.style.posHeight = e.offsetHeight;
+  
+   if (e.scrollHeight >= e.offsetHeight) {
+      growIt(e);
+   } else {
+      shrinkIt(e);
+   }
+}
+
+// called to initiate growing an element
+function growIt(e) {
+  currCount = 0;
+
+  window.setTimeout("doGrow(" + e.uniqueID + ");", msecs);
+}
+
+// called to initiate shrinking an element
+function shrinkIt(e) {
+  currCount = 0;
+  window.setTimeout("doShrink(" + e.uniqueID + ");", msecs);
+}
+
+// inner loop for growing an object
+function doGrow(e) {
+  var dh;
+  var lineHeight = e.children[0].offsetHeight;
+
+  currCount++;
+
+  dh = e.oHeight / flyCount;
+
+
+  if (e.style.posHeight != e.oHeight) {
+    e.style.posHeight += dh;
+  }
+
+  if (currCount < flyCount) {
+      window.setTimeout("doGrow(" + e.uniqueID + ");", msecs);
+  }
+  else {
+      e.style.height = "";
+  }
+}
+
+// inner loop for shrinking an object
+function doShrink(e) {
+  var dh, dw;
+  var lineHeight = e.children[0].offsetHeight;
+  var p;
+
+  currCount++;
+
+  dh = (e.oHeight - lineHeight) / flyCount;
+
+  e.style.posHeight -= dh;
+
+  if (currCount < flyCount) {
+        window.setTimeout("doShrink(" + e.uniqueID + ");", msecs);
+  }
+  else {
+    e.style.posHeight = lineHeight;
+  }
+}
+
+</SCRIPT>
+    </TD></TR></TBODY></TABLE><BR>
+<TABLE cellSpacing=0 cellPadding=0 width=600 align=center border=0>
+  <TBODY>
+  <TR bgColor=#7285cf>
+    <TD width=8 height=18>&nbsp;</TD>
+    <TD class=white bgColor=#7285cf colSpan=3 height=18>制作方法</TD></TR>
+  <TR bgColor=#e7e7e7>
+    <TD width=8 height=18>&nbsp;</TD>
+    <TD width=35 height=18>1. </TD>
+    <TD width=369 height=18>
+      <P>将头部&lt;html&gt;中改成&lt;html xmlns:ie&gt;</P>
+      <P>将下面的样式复制到&lt;head&gt;</P></TD>
+    <TD width=188 height=18><INPUT class=bottom onclick="JM_cc('js_1')" type=button value=复制到我的剪贴板 name=Button> 
+    </TD></TR>
+  <TR bgColor=#7285cf>
+    <TD width=8 bgColor=#f2f2f2 height=18>&nbsp;</TD>
+    <TD align=middle bgColor=#f2f2f2 colSpan=3 height=18><TEXTAREA class=editbox2 name=js_1 rows=10 wrap=VIRTUAL cols=80>&lt;STYLE&gt;ie\:tree {
+	DISPLAY: block
+}
+ie\:treeitem {
+	BORDER-TOP: white 2px solid; DISPLAY: block; ; FONT-WEIGHT: expression(this.children.length &gt; 1 ? 'bold' : 'normal'); VISIBILITY: inherit; MARGIN-LEFT: 20px; OVERFLOW: hidden; WIDTH: 100%
+}
+ie\:label {
+	DISPLAY: inline; CURSOR: hand
+}
+	ie\:label {behavior:url(tree2.htc)}		
+&lt;/STYLE&gt;
+</TEXTAREA> </TD></TR>
+  <TR bgColor=#7285cf>
+    <TD width=8 bgColor=#f2f2f2 height=18>&nbsp;</TD>
+    <TD bgColor=#e7e7e7 colSpan=3 height=18>&nbsp;</TD></TR></TBODY></TABLE>
+<P>&nbsp;</P>
+<TABLE cellSpacing=0 cellPadding=0 width=600 align=center border=0>
+  <TBODY>
+  <TR bgColor=#e7e7e7>
+    <TD width=8 height=18>&nbsp;</TD>
+    <TD width=35 height=18>2. </TD>
+    <TD width=369 height=18>将下面的代码复制到&lt;body&gt;~&lt;/body&gt;内</TD>
+    <TD width=188 height=18><INPUT class=bottom onclick="JM_cc('js_1')" type=button value=复制到我的剪贴板 name=Button2> 
+    </TD></TR>
+  <TR bgColor=#7285cf>
+    <TD width=8 bgColor=#f2f2f2 height=18>&nbsp;</TD>
+    <TD align=middle bgColor=#f2f2f2 colSpan=3 height=18><TEXTAREA class=editbox2 name=textarea rows=10 wrap=VIRTUAL cols=80>&lt;H3&gt;Animating Expanding/Collapsing List with Drag/Drop &lt;I&gt;e.c. 
+listus&lt;/I&gt;&lt;/H3&gt;&lt;ie:tree id=TheTree&gt;
+&lt;ie:treeitem&gt;&lt;ie:label id=Label1&gt;1.0 FirstSet&lt;/ie:label&gt; 
+
+&lt;ie:treeitem&gt;&lt;ie:label&gt;1.1 Megalosaurus&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;1.2 Iguanodon&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;1.3 Hylaeosaurus&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;1.4 Tyrannosaurus rex&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;/ie:treeitem&gt;
+
+&lt;ie:treeitem&gt;
+&lt;ie:label&gt;2.0 Later Set&lt;/ie:label&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.1 Mammoths&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+
+&lt;ie:treeitem&gt;&lt;!--S--&gt;
+&lt;ie:label&gt;2.2 Mastodons&lt;/ie:label&gt;
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.2.1 Plesiosaurs&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.2.2 Ichthyosaurs&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.2.3 Dimetrodon &lt;/ie:label&gt;&lt;/ie:treeitem&gt;
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.2.4 Sinapsid&lt;/ie:label&gt;&lt;/ie:treeitem&gt;
+&lt;/ie:treeitem&gt;&lt;!--  E--&gt;
+
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.3 
+Stegosaurus&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;ie:treeitem&gt;&lt;ie:label&gt;2.4 
+Apatosaurus&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;ie:treeitem&gt;&lt;ie:label&gt;2.5 
+Mammals&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;ie:treeitem&gt;&lt;ie:label&gt;2.6 Tetrapods&lt;/ie:label&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.6.1 Amphibians&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.6.2 Whales&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.6.3 Crocodiles&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.6.4 Sea Turtles&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;/ie:treeitem&gt;&lt;ie:treeitem&gt;&lt;ie:label&gt;2.7 Late Permian&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;2.8 Mesozoic&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;/ie:treeitem&gt;&lt;ie:treeitem&gt;&lt;ie:label&gt;3.0 Archosaurs&lt;/ie:label&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;3.1 Mandibular fenestra&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;3.2 Pointed Snout&lt;/ie:label&gt;&lt;/ie:treeitem&gt; 
+&lt;ie:treeitem&gt;&lt;ie:label&gt;3.3 Theocodant Tooth 
+Implantation&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;ie:treeitem&gt;&lt;ie:label&gt;3.4 Modified 
+Ankle&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;/ie:treeitem&gt;&lt;ie:treeitem&gt;&lt;ie:label&gt;4.0 
+Mesozoic&lt;/ie:label&gt; &lt;ie:treeitem&gt;&lt;ie:label&gt;4.1 Middle 
+Animals&lt;/ie:label&gt;&lt;/ie:treeitem&gt; &lt;/ie:treeitem&gt;&lt;/ie:tree&gt;
+&lt;SCRIPT&gt;
+// variables for drag/drop
+var dragElement = null;
+var dropElement = null;
+var currOver = null;
+
+// variables for expanding/collapsing
+var flyCount = 5;
+var msecs = 5;
+var currCount = 0;
+
+// event handler hookup
+TheTree.onmousedown = preselect;
+TheTree.ondragstart = dragstart;
+TheTree.ondragend = dragend;
+TheTree.ondragenter = dragover;
+TheTree.ondragover = dragover;
+TheTree.ondragend = dragend;
+TheTree.ondrop = dragdrop;
+document.onclick = click;
+
+// drag/drop code
+function dragstart() {
+  var e;
+  e = window.event.srcElement;
+  if (e.tagName != "label") 
+    return false;
+
+  dragElement = e.parentElement;
+}
+
+// method called as we start drag/drop
+
+// called as we mouse over - note that there is special handling for dragover code
+// as dragleave doesn't track the toElement/fromElement as mouseover/mouseout does
+function dragover() {
+  if (window.event.srcElement.tagName != "treeitem") 
+    return;
+
+  if (!dragElement.contains(window.event.srcElement)) {
+    if (currOver) {
+      currOver.style.borderTopColor = "";
+    }
+    currOver = window.event.srcElement;
+    window.event.srcElement.style.borderTopColor = "black";
+    event.returnValue = false;
+  }
+}
+
+// called when drag is ended - always
+function dragend() {
+  if (currOver) {
+    currOver.style.borderTopColor = "";
+  }
+}
+
+// called on drop
+function dragdrop() {
+  if (currOver) {
+    currOver.style.borderTopColor = "";
+  }
+  t = currOver;
+  t.parentElement.insertBefore(dragElement, t);
+}
+
+// needed to select items so they can be dragged
+// drag drop only supported on selection and images
+function preselect() {
+  var e;
+
+  e = window.event.srcElement;
+  if (e.tagName != "label") {
+    return;
+  }
+  r = document.body.createTextRange();
+  r.moveToElementText(e);
+  r.select();
+  window.event.cancelBubble = true;
+}
+
+// beginning of expand/collapse code
+
+// called to handle document click, starts toggling
+function click() {
+  if (window.event.srcElement.tagName != "label") {
+    return;
+  }
+  if (window.event.srcElement.parentElement.children.length &gt; 1) {
+    toggleState(window.event.srcElement.parentElement);
+  }
+}
+
+// toggles expanding/collapse state of an element - does setup
+function toggleState(e) {
+   e.oHeight = e.scrollHeight + 2;
+   e.style.posHeight = e.offsetHeight;
+  
+   if (e.scrollHeight &gt;= e.offsetHeight) {
+      growIt(e);
+   } else {
+      shrinkIt(e);
+   }
+}
+
+// called to initiate growing an element
+function growIt(e) {
+  currCount = 0;
+
+  window.setTimeout("doGrow(" + e.uniqueID + ");", msecs);
+}
+
+// called to initiate shrinking an element
+function shrinkIt(e) {
+  currCount = 0;
+  window.setTimeout("doShrink(" + e.uniqueID + ");", msecs);
+}
+
+// inner loop for growing an object
+function doGrow(e) {
+  var dh;
+  var lineHeight = e.children[0].offsetHeight;
+
+  currCount++;
+
+  dh = e.oHeight / flyCount;
+
+
+  if (e.style.posHeight != e.oHeight) {
+    e.style.posHeight += dh;
+  }
+
+  if (currCount &lt; flyCount) {
+      window.setTimeout("doGrow(" + e.uniqueID + ");", msecs);
+  }
+  else {
+      e.style.height = "";
+  }
+}
+
+// inner loop for shrinking an object
+function doShrink(e) {
+  var dh, dw;
+  var lineHeight = e.children[0].offsetHeight;
+  var p;
+
+  currCount++;
+
+  dh = (e.oHeight - lineHeight) / flyCount;
+
+  e.style.posHeight -= dh;
+
+  if (currCount &lt; flyCount) {
+        window.setTimeout("doShrink(" + e.uniqueID + ");", msecs);
+  }
+  else {
+    e.style.posHeight = lineHeight;
+  }
+}
+
+&lt;/SCRIPT&gt;</TEXTAREA> </TD></TR>
+  <TR bgColor=#7285cf>
+    <TD width=8 bgColor=#f2f2f2 height=18>&nbsp;</TD>
+    <TD bgColor=#e7e7e7 colSpan=3 height=18>至此你就可以完成这个实例了，快去试试吧！ 
+</TD></TR></TBODY></TABLE>
+<P><BR><BR></P></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=560 border=0>
+  <TBODY>
+  <TR>
+    <TD><IMG height=13 src="" width=560></TD></TR></TBODY></TABLE></CENTER></DIV>
+<P align=center><A href="javascript:self.close()">『关闭窗口』</A><B></B></P>
+<P align=center></P></BODY></HTML>

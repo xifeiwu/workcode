@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0049)http://vip.5d.cn/flood/myjs/htm/menu/sidemenu.htm -->
+<!-- This script has been in the http://www.javascripts.com Javascript Public Library! --><!-- Note that though this material may have been in a public depository, certain author copyright restrictions may apply. --><HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY>&lt;---Must place in exact areas----&gt;
+<SCRIPT language=JavaScript1.2>
+
+function move(x) {
+if (document.all) {
+object1.style.pixelLeft += x;
+object1.style.visibility = "visible"}
+else if (document.layers) {
+document.object1.left += x;
+document.object1.visibility = "show"}};
+
+function makeStatic() {
+if (document.all) {object1.style.pixelTop=document.body.scrollTop+20}
+else {eval(document.object1.top=eval(window.pageYOffset+20));}
+setTimeout("makeStatic()",0);}
+</SCRIPT>
+ 
+<STYLE>.hl {
+	CURSOR: n-resize; BACKGROUND-COLOR: yellow
+}
+.n {
+	CURSOR: n-resize
+}
+</STYLE>
+<LAYER onmouseover=move(132) onmouseout=move(-132) left="0" bgcolor="black" 
+name="object1" top="20" visibility="hide">
+<SCRIPT language=JavaScript1.2>
+
+function positionmenu(){
+move(-132)
+}
+
+if (document.all) {document.write('<DIV ID="object1" style="visibility:hidden;cursor:hand; Position : Absolute ;Left : 0px ;Top : 20px ;Z-Index : 20" onmouseover="move(132)" onmouseout="move(-132)">')}
+</SCRIPT>
+
+<TABLE cellSpacing=1 cellPadding=0 width=150 bgColor=#000000 border=0>
+  <TBODY>
+  <TR>
+    <TD bgColor=#0099ff><FONT face=Arial size=4><B>Menu</B></FONT></TD>
+    <SCRIPT language=JavaScript1.2>
+document.write('<td align="center" rowspan="100" width="16" bgcolor="#FF6666"><span style="font-size:13px"><p align="center"><font face="Arial Black">S<br>I<br>D<br>E<br>M<br>E<br>N<BR>U</font></p></span></TD>')
+</SCRIPT>
+  </TR>
+  <SCRIPT language=JavaScript1.2><!--
+if (document.all||document.layers) {
+makeStatic();}
+
+var text=new Array();
+var thelink=new Array();
+
+//configure thelinks below. Extend as desired
+
+text[0]="Link1";
+text[1]="link2";
+text[2]="link3";
+text[3]="link4";
+text[4]="link5";
+text[5]="link6";
+text[6]="link7";
+text[7]="link8";
+
+thelink[0]="http://link1";
+thelink[1]="http://link2";
+thelink[2]="http://link3";
+thelink[3]="http://link4";
+thelink[4]="http://link5";
+thelink[5]="http://link6";
+thelink[6]="http://link7";
+thelink[7]="http://link8";
+
+
+//enter target of above links
+//Valid values are '', 'new', or 'framename' (where 'framename' is the name of the frame you wish the links to target)
+var linktarget=''
+
+///DO NOT EDIT BELOW THIS LINE////////////////
+
+function navigateie(which){
+if (linktarget=='')
+window.location=thelink[which]
+else if (linktarget=='new')
+window.open(thelink[which])
+else{
+temp_var=eval("window.parent."+linktarget)
+temp_var.location=thelink[which]
+}
+}
+
+for (i=0;i<=text.length-1;i++)
+if (document.all) {document.write('<TR><TD height=20 bgcolor=white onclick="navigateie('+i+')" onmouseover="className=\'hl\'" onmouseout="className=\'n\'"><FONT SIZE=2 FACE=ARIAL>&nbsp;'+text[i]+'</FONT></TD></TR>')}
+else {document.write('<TR><TD bgcolor="white"><ILAYER><LAYER HEIGHT="18" onmouseover="this.bgColor=\'yellow\'" onmouseout="this.bgColor=\'white\'" width=131><FONT SIZE=2 FACE=ARIAL>&nbsp;<A HREF="'+thelink[i]+'" target="'+linktarget+'" id="nounderline">'+text[i]+'</A></FONT></LAYER></ILAYER></TD></TR>')}
+
+//-->
+</SCRIPT>
+
+  <TR>
+    <TD bgColor=#0099ff><FONT face=Arial size=1></FONT></TD></TR></TBODY></TABLE>
+<SCRIPT language=JavaScript1.2>
+if (document.all) {document.write('</DIV>')}
+window.onload=positionmenu
+</SCRIPT>
+</LAYER>
+<CENTER>Scroll down the screen 
+=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>=<BR>Amazing 
+eaaa? <!-- Simba says Roar. --></CENTER></BODY></HTML>

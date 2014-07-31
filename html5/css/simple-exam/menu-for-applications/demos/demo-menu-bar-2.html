@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+	<title>Demo 2: Menu bar_http://www.codefans.net</title>
+	<link rel="stylesheet" href="css/demos.css" media="screen" type="text/css">
+	<script type="text/javascript" src="../js/menu-for-applications.js"></script>
+	<style type="text/css">
+	body{
+		margin:0px;
+		text-align:center;
+	}
+	
+	#mainContentainer{
+		width:760px;
+		margin:0 auto;
+		text-align:left;
+	}
+	#mainContent{
+		border:1px solid #000;
+	}
+	
+	#textContent{
+		height:400px;
+		overflow:auto;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#menuDiv{
+		width:100%;
+		overflow:hidden;
+	}
+	pre{
+		color:#F00;
+	}
+	p,pre{
+
+	}
+	</style>
+</head>
+<body>
+<div id="mainContentainer">
+	<div id="header">
+		<img src="../images/heading3.gif">
+	</div>	
+	<div id="mainContent">
+		<!-- This <ul><li> list is the source of a menuModel object -->
+		<ul id="menuModel" style="display:none">
+			<li id="50000"jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Open the file menu">File</a>
+				<ul width="150">
+					<li id="500001" jsFunction="saveWork()" itemIcon="../images/disk.gif"><a href="#" title="Save your work">Save</a></li>
+					<li id="500002"><a href="#">Save As</a></li>
+					<li id="500004" itemType="separator"></li>
+					<li id="500003"><a href="#">Open</a>
+						<ul width="130">
+							<li id="5000031"><a href="#">Project</a>	
+							<li id="5000032"><a href="#">Template</a>	
+							<li id="5000033"><a href="#">File</a>	
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li id="50001"><a href="#">View</a>
+				<ul width="130">
+					<li id="500011"><a href="#">Source</a></li>
+					<li id="500012"><a href="#">Debug info</a></li>
+					<li id="500013"><a href="#">Layout</a></li>
+				</ul>
+			</li>
+			<li id="50003" itemType="separator"></li>
+			<li id="50002"><a href="#">Tools</a></li>
+		</ul>	
+			
+		<!-- This is the datasource for menu items which are added dynamically to the menu -->
+		<ul id="additionalModel" style="display:none">
+			<li id="60000"><a href="#">Internet Option</a></li>
+			<li id="60001"><a href="#">Debug URL</a></li>
+			<li id="60001"><a href="#">CVS</a>
+				<ul width="100">
+					<li id="600011"><a href="#">Check out</a></li>
+					<li id="600012"><a href="#">Update</a></li>
+				</ul>
+			</li>		
+		</ul>
+		
+		<div id="menuDiv"></div>
+		<div id="textContent">
+		<h4>General description</h4>
+		<p>The menu above has been created dynamically based on an unordered list. Here's the code for that list:</p>
+		<p>
+			<pre>
+&lt;ul id="menuModel5" style="display:none">
+	&lt;li id="50000" itemIcon="../images/disk.gif">&lt;a href="#" title="Open the file menu">File&lt;/a>
+		&lt;ul width="150">
+			&lt;li id="500001" jsFunction="saveWork()" itemIcon="../images/disk.gif">
+				&lt;a href="#" title="Save your work">Save&lt;/a>
+			&lt;/li>
+			&lt;li id="500002">&lt;a href="#">Save As&lt;/a>&lt;/li>
+			&lt;li id="500004" itemType="separator">&lt;/li>
+			&lt;li id="500003">&lt;a href="#">Open&lt;/a>&lt;/li>
+		&lt;/ul>
+	&lt;/li>
+	&lt;li id="50001">&lt;a href="#">View&lt;/a>
+		&lt;ul width="130">
+			&lt;li id="500011">&lt;a href="#">Source&lt;/a>&lt;/li>
+			&lt;li id="500012">&lt;a href="#">Debug info&lt;/a>&lt;/li>
+			&lt;li id="500013">&lt;a href="#">Layout&lt;/a>
+				&lt;ul width="150">
+					&lt;li id="5000131">&lt;a href="#">CSS&lt;/a>	
+					&lt;li id="5000132">&lt;a href="#">HTML&lt;/a>	
+					&lt;li id="5000133">&lt;a href="#">Javascript&lt;/a>	
+				&lt;/ul>
+			&lt;/li>
+		
+		&lt;/ul>
+	&lt;/li>
+	&lt;li id="50003" itemType="separator">&lt;/li>
+	&lt;li id="50002">&lt;a href="#">Options&lt;/a>&lt;/li>
+&lt;/ul>			
+			</pre>
+		</p>
+		<p>A menu item could have these attributes:</p>
+		<ul>
+			<li>id = Unique numeric id for a menu item. (the "id" of the &lt;li> tag) </li>
+			<li>parentId = Id of parent element. The script fetches this dynamically from the ul list. </li>
+			<li>itemText = Text of menu item. The content of the &lt;A> tag in the list</li>
+			<li>itemIcon = A custom attribute which you can add to the &lt;LI> tag</li>
+			<li>type = Attibute for the &lt;LI> tag. Example: "separator"</li>
+			<li>jsFunction = Attribute for the &lt;LI> tag. This js code will be executed when someone clicks on the menu item.</li>
+			<li>url = The href attribute of the &lt;A> tag.</li>
+		</ul>
+		<p>Also notice &lt;UL width="150">. The width attribute sets the width of a sub menu group</li>
+		<p>The menu is then created with the following Javascript syntax:</p>
+		<pre>
+&lt;script type="text/javascript">
+var menuModel = new DHTMLSuite.menuModel();
+menuModel.addItemsFromMarkup('menuModel');
+menuModel.setMainMenuGroupWidth(00);	
+menuModel.init();
+
+var menuBar = new DHTMLSuite.menuBar();
+menuBar.addMenuItems(menuModel);
+menuBar.setTarget('menuDiv');
+
+menuBar.init();
+&lt;/script>		
+		
+		</pre>
+		<h4>Append menu items dynamically</h4>
+		<p>It is also possible to update the menu dynamically after is has been loaded. You can add nodes, delete nodes or replace nodes. All this is done from some simple methods. </p>
+		<p>Example: <a href="#" onclick="menuBar.replaceMenuItems(50002,menuModel_add);return false">Click here to add some menu items under Tools</a>.</p>
+		<p>What I have done is to create a new menuModel object based on another unordered list: </p>
+		<p>The list:</p>
+		<pre>
+&lt;ul id="additionalModel" style="display:none">
+	&lt;li id="60000">&lt;a href="#">Internet Option&lt;/a>&lt;/li>
+	&lt;li id="60001">&lt;a href="#">Debug URL&lt;/a>&lt;/li>
+	&lt;li id="60001">&lt;a href="#">CVS&lt;/a>
+		&lt;ul width="100">
+			&lt;li id="600011">&lt;a href="#">Check out&lt;/a>&lt;/li>
+			&lt;li id="600012">&lt;a href="#">Update&lt;/a>&lt;/li>
+		&lt;/ul>
+	&lt;/li>		
+&lt;/ul>		
+		</pre>
+		<p>The js code for the menuModel:</p>
+		<pre>
+var menuModel_add = new DHTMLSuite.menuModel();
+menuModel_add.addItemsFromMarkup('additionalModel');
+menuModel_add.init();	
+		</pre>
+		<p>Finally, I have created an &lt;a> tag which calls the replaceMenuItems method when you click on it:</p>
+		<pre>&lt;a href="#" onclick="menuBar.replaceMenuItems(50002,menuModel_add);return false">Click here...&lt;/a></pre>	
+		<h4>Show/Hide menu items</h4>
+		<p>There are two methods which you can use to show or hide a menu item. These menu items won't be deleted from the menu model. </p>
+		<p>Here are some examples of how this works:</p>
+		<p>	<a href="#" onclick="menuBar.hideMenuItem(50000);return false">Hide item (File menu)</a>
+		<a href="#" onclick="menuBar.showMenuItem(50000);return false">Show item (File menu) </a>
+		</p>
+		<p>Here's the code for these two &lt;A> tags:</p>
+		<pre>
+	&lt;a href="#" onclick="menuBar.hideMenuItem(50000);return false">Hide item (File menu)</a>
+	&lt;a href="#" onclick="menuBar.showMenuItem(50000);return false">Show item (File menu) </a>
+		</pre>
+		<p>They are both methods on the menuBar object. The argument sent to this method(50000) is the id of the menu item you want to show or hide.</p>
+		</div>
+	</div>
+</div>
+
+	<script type="text/javascript">
+	var menuModel = new DHTMLSuite.menuModel();
+	menuModel.addItemsFromMarkup('menuModel');
+	menuModel.setMainMenuGroupWidth(00);	
+	menuModel.init();
+	
+	var menuBar = new DHTMLSuite.menuBar();
+	menuBar.addMenuItems(menuModel);
+	menuBar.setTarget('menuDiv');
+	
+	menuBar.init();
+	
+	/* Create menu model for additional elements */
+	
+	var menuModel_add = new DHTMLSuite.menuModel();
+	menuModel_add.addItemsFromMarkup('additionalModel');
+	menuModel_add.init();
+	
+	
+	</script>
+	
+</body>
+</html>

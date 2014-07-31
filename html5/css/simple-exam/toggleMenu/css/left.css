@@ -1,0 +1,47 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+td {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+#menu{
+	padding-top:40px;
+	padding-left:0px;
+	*padding-left:15px;
+	border-right:1px solid #00837c;
+	}
+#menu ul{
+	margin-top:0px;
+	*margin-top:-20px;
+	font-size:12px;
+	color:#005752;
+	list-style-image:url../images/bg_1.gif);
+	}
+
+.submenu{
+	font-size:12px;
+	color:#006633;}
+	
+ul{
+	list-style:none;
+	margin-left:-20px;
+	*margin:0;
+	}
+a{
+	color:#000000;
+	text-decoration:none;
+	}
+a:hover{
+	color:#da251d;
+	text-decoration:underline;
+	}
+#menu ul li ul li{
+	margin-left:0px;
+	*margin-left:26px;
+	margin-top:5px;
+	}

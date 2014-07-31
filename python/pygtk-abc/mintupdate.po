@@ -1,0 +1,333 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmint\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-04-04 15:09+0100\n"
+"PO-Revision-Date: 2011-04-09 08:10+0000\n"
+"Last-Translator: 山龙岗 <Unknown>\n"
+"Language-Team: Simplified Chinese <zh_CN@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-05-04 16:13+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
+
+msgid "%(recommended)d recommended updates available (%(size)s)"
+msgstr "%(recommended)d 项推荐的更新可用 (%(size)s)"
+
+msgid ""
+"%(recommended)d recommended updates available (%(size)s), %(ignored)d ignored"
+msgstr "%(recommended)d 项推荐的更新可用 (%(size)s)，%(ignored)d 项被忽略"
+
+msgid "%(recommended)d recommended updates available (%(size)s), 1 ignored"
+msgstr "%(recommended)d 项推荐的更新可用 (%(size)s)， 1 项被忽略"
+
+msgid "%(selected)d update selected (%(size)s)"
+msgstr "选择了 %(selected)d 项更新 (%(size)s)"
+
+msgid "%(selected)d updates selected (%(size)s)"
+msgstr "选择了 %(selected)d 项更新 (%(size)s)"
+
+msgid "1 recommended update available (%(size)s)"
+msgstr "1 项推荐的更新可用 (%(size)s)"
+
+msgid "1 recommended update available (%(size)s), %(ignored)d ignored"
+msgstr "1 项推荐的更新可用 (%(size)s)，%(ignored)d 项被忽略"
+
+msgid "1 recommended update available (%(size)s), 1 ignored"
+msgstr "1 项推荐的更新可用 (%(size)s)，1 项被忽略"
+
+msgid "A new version of the update manager is available"
+msgstr "有新版本的更新管理器可用"
+
+msgid "About"
+msgstr "关于"
+
+msgid "All available upgrades for this package will be ignored."
+msgstr "这个软件包的所有可用升级都将被忽略。"
+
+msgid "Another application is using APT"
+msgstr "另一个程序正在使用 APT"
+
+msgid "Applying updates"
+msgstr "正在应用更新"
+
+msgid "Auto-Refresh"
+msgstr "自动刷新"
+
+msgid "B"
+msgstr "B"
+
+msgid "Busy"
+msgstr "系统忙"
+
+msgid ""
+"Certified packages. Tested through Romeo or directly maintained by Linux "
+"Mint."
+msgstr "通过了认证的软件包，即通过了 Romeo 的测试或者直接由 Linux Mint 维护。"
+
+msgid "Changelog"
+msgstr "变更日志"
+
+msgid "Checking for updates"
+msgstr "正在检查更新"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid ""
+"Click on Edit->Software Sources and tick the 'Source code' option to enable "
+"access to the changelogs"
+msgstr "点击“编辑→软件源”并勾选“源代码”选项来启用对更新日志的访问"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Could not install the security updates"
+msgstr "无法安装安全更新"
+
+msgid "Could not refresh the list of packages"
+msgstr "软件包列表刷新失败"
+
+msgid ""
+"Dangerous packages. Known to affect the stability of the systems depending "
+"on certain specs or hardware."
+msgstr "危险的软件包，已知在某些条件或者特定的硬件环境下会影响系统的稳定性。"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Downloading changelog..."
+msgstr "正在下载更新日志..."
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Finding the list of updates..."
+msgstr "正在查找更新列表..."
+
+msgid "GB"
+msgstr "GB"
+
+msgid "History of updates"
+msgstr "更新的历史记录"
+
+msgid "Icon"
+msgstr "图标"
+
+msgid "Icons"
+msgstr "图标"
+
+msgid "Ignore a package"
+msgstr "忽略软件包"
+
+msgid "Ignore updates for this package"
+msgstr "忽略此软件包的更新"
+
+msgid "Ignored packages"
+msgstr "忽略的软件包"
+
+msgid ""
+"Include updates which require the installation or the removal of other "
+"packages"
+msgstr "包括需要安装或删除其他软件包的更新"
+
+msgid "Information"
+msgstr "信息"
+
+msgid "Install Updates"
+msgstr "安装更新"
+
+msgid "Installing updates"
+msgstr "正在安装更新"
+
+msgid "Internet check (domain name or IP address):"
+msgstr "检查网络连接(域名或 IP 地址)："
+
+msgid "KB"
+msgstr "KB"
+
+msgid "Level"
+msgstr "级别"
+
+msgid "Levels"
+msgstr "级别"
+
+msgid "Linux Mint"
+msgstr "Linux Mint"
+
+msgid "Log file"
+msgstr "日志文件"
+
+msgid "Log file:"
+msgstr "日志文件："
+
+msgid "MB"
+msgstr "MB"
+
+msgid "New Icon"
+msgstr "新图标"
+
+msgid "New version"
+msgstr "新版本"
+
+msgid "No changelog available"
+msgstr "没有变更日志"
+
+msgid "No updates selected"
+msgstr "没有选择任何更新"
+
+msgid ""
+"Note: The list only gets refreshed while the update manager window is closed "
+"(system tray mode)."
+msgstr "注：只有在更新管理器窗口关闭(系统托盘方式)时该列表才会更新。"
+
+msgid "Old version"
+msgstr "旧版本"
+
+msgid "Origin"
+msgstr "来源"
+
+msgid "Package"
+msgstr "软件包"
+
+msgid "Package name:"
+msgstr "软件包名称："
+
+msgid "Permissions:"
+msgstr "权限："
+
+msgid "Please enter a package name:"
+msgstr "请输入软件包名称："
+
+msgid "Please enter your password to restart the update manager"
+msgstr "请输入您的密码以便重新启动更新管理器"
+
+msgid "Please enter your password to start the update manager"
+msgstr "请输入您的密码来启动更新管理器"
+
+msgid "Please wait, this can take some time"
+msgstr "请稍候，这将花费一些时间"
+
+msgid "Preferences"
+msgstr "首选项"
+
+msgid "Process ID:"
+msgstr "进程 ID："
+
+msgid "Recommended packages. Tested and approved by Linux Mint."
+msgstr "推荐的软件包，经过 Linux Mint 测试并通过。"
+
+msgid "Refresh"
+msgstr "刷新"
+
+msgid "Refresh the list of updates every:"
+msgstr "刷新更新列表的时间间隔："
+
+msgid "Safe packages. Not tested but believed to be safe."
+msgstr "安全的软件包，虽然没有经过测试，但可以认为是安全的。"
+
+msgid "Safe?"
+msgstr "安全？"
+
+msgid "Select All"
+msgstr "选择全部"
+
+msgid "Show and install available updates"
+msgstr "显示并安装可用更新"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Software Updates"
+msgstr "软件更新"
+
+msgid "Software sources"
+msgstr "软件源"
+
+msgid "Starting refresh..."
+msgstr "开始刷新..."
+
+msgid "Startup delay (in seconds):"
+msgstr "启动延时(秒)："
+
+msgid "Status"
+msgstr "状态"
+
+msgid "System up-to-date"
+msgstr "系统安装了所有的更新"
+
+msgid "Tested?"
+msgstr "已测试？"
+
+msgid "The following %d packages will be installed:"
+msgstr "将安装以下 %d 个软件包："
+
+msgid "The following %d packages will be removed:"
+msgstr "将移除以下 %d 个软件包："
+
+msgid "The following package will be installed:"
+msgstr "将安装下列软件包："
+
+msgid "The following package will be removed:"
+msgstr "将删除下列软件包："
+
+msgid "This upgrade will trigger additional changes"
+msgstr "此更新将触发其他的更改"
+
+msgid "Unknown state"
+msgstr "未知状态"
+
+msgid "Unsafe packages. Could potentially affect the stability of the system."
+msgstr "不安全的软件包，可能会影响系统的稳定性。"
+
+msgid "Update Manager"
+msgstr "更新管理器"
+
+msgid "Update Method"
+msgstr "更新方式"
+
+msgid "Update is complete"
+msgstr "更新完成"
+
+msgid "Updates available"
+msgstr "有可用的更新"
+
+msgid "Upgrade"
+msgstr "升级"
+
+msgid "Upstream"
+msgstr "上游"
+
+msgid "Visible columns"
+msgstr "可见栏"
+
+msgid "Visible?"
+msgstr "更新可见？"
+
+msgid "Your system is up to date"
+msgstr "您的系统已经安装了所有的更新"
+
+msgid "_Edit"
+msgstr "编辑(_E)"
+
+msgid "_File"
+msgstr "文件(_F)"
+
+msgid "_Help"
+msgstr "帮助(_H)"
+
+msgid "_View"
+msgstr "查看(_V)"
+
+msgid "days"
+msgstr "天"
+
+msgid "hours"
+msgstr "小时"
+
+msgid "minutes"
+msgstr "分钟"

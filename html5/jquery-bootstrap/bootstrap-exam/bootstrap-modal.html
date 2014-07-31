@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+<script src="./jquery-1.7.2.js"></script>
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="./bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script>
+</head>
+
+<body>
+        <button type="button" data-toggle="modal" data-target="#myModal">启动对话框</button>
+        <br>
+        <br>
+          <h2>示例</h2>
+          <p>对话框精简而灵活。</p>
+
+          <h3>静态示例</h3>
+          <p>页头，主体，带一些动作按钮的页脚，这里显示的就是一个对话框。</p>
+          <div class="bs-docs-example" style="background-color: #f5f5f5;">
+            <div class="modal" style="position: relative; top: auto; left: auto; right: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>对话框标题</h3>
+              </div>
+              <div class="modal-body">
+                <p>这里是主体内容…</p>
+              </div>
+              <div class="modal-footer">
+                <a href="http://bootstrap.ninghao.net/javascript.html#" class="btn">关闭</a>
+                <a href="http://bootstrap.ninghao.net/javascript.html#" class="btn btn-primary">保存修改</a>
+              </div>
+            </div>
+          </div>
+
+<br>
+<br>
+<br>
+          <h3>实时预览</h3>
+          <p>点击下面按钮会通过 JavaScript 切换显示对话框。从页面上方渐变向下显示弹出对话框。</p>
+
+          <!-- sample modal content -->
+          <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel">对话框标题</h3>
+            </div>
+            <div class="modal-body">
+              <h4>对话框里的文字</h4>
+              <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
+
+              <h4>对话框里的 Popover </h4>
+              <p>这个 <a href="http://bootstrap.ninghao.net/javascript.html#" role="button" class="btn popover-test" title="" data-content="And here&#39;s some amazing content. It&#39;s very engaging. right?" data-original-title="A Title">按钮</a> 可以触发显示 Popover。</p>
+
+              <h4>对话框中的工具提示</h4>
+              <p><a href="http://bootstrap.ninghao.net/javascript.html#" class="tooltip-test" title="" data-original-title="Tooltip">这个链接</a> 还有 <a href="http://bootstrap.ninghao.net/javascript.html#" class="tooltip-test" title="" data-original-title="Tooltip">这个链接</a> 在鼠标悬停在上面的时候会显示工具提示。</p>
+
+              <hr>
+
+              <h4>溢出的文字会显示一个可选的滚动条</h4>
+              <p>我们可以为 <code>.modal-body</code> 设置一个固定的 <code>max-height</code> （最大高度），这样溢出的文字就可以使用滚动条来滚动显示了。</p>
+              <p>下面是一些没有意义的演示文字 ... Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+              <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal">关闭</button>
+              <button class="btn btn-primary">保存修改</button>
+            </div>
+          </div>
+          <div class="bs-docs-example" style="padding-bottom: 24px;">
+            <a data-toggle="modal" href="http://bootstrap.ninghao.net/javascript.html#myModal" class="btn btn-primary btn-large">启动对话框演示</a>
+          </div>
+</body>
+
+</html>

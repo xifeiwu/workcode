@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0040)http://vip.5d.cn/flood/menu/mutimenu.htm -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE>BODY {
+	FONT-SIZE: 9pt; COLOR: black; TEXT-DECORATION: none
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: black; TEXT-DECORATION: none
+}
+A {
+	FONT-SIZE: 9pt; COLOR: black; TEXT-DECORATION: none
+}
+.normal {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+.up {
+	BORDER-RIGHT: #999999 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #999999 1px solid; PADDING-LEFT: 1px; BACKGROUND: #cccccc; PADDING-BOTTOM: 1px; BORDER-LEFT: #999999 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #999999 1px solid
+}
+.down {
+	BORDER-RIGHT: #dbdbdb 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #dbdbdb 1px solid; PADDING-LEFT: 1px; BACKGROUND: #dbdbdb; PADDING-BOTTOM: 1px; BORDER-LEFT: #dbdbdb 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #dbdbdb 1px solid
+}
+.menuv {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FILTER: revealTrans(transition=23,duration=0.5); PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+</STYLE>
+
+<SCRIPT>
+//闪烁的表格边框
+function flashit(){if(!document.all)return;if (td123.style.borderColor=="black")td123.style.borderColor="#999999";else td123.style.borderColor="black"}setInterval("flashit()",500)
+//渐入的效果,改变alpha值
+function high(image){theobject=image,highlighting=setInterval("highlightit(theobject)",100)}function low(image){clearInterval(highlighting),image.filters.alpha.opacity=50}function highlightit(cur2){if (cur2.filters.alpha.opacity<100)cur2.filters.alpha.opacity+=20;else if(window.highlighting)clearInterval (highlighting)}
+//拖动层的js
+var over=false,down=false,divleft,divtop;function move(){if(down){plane.style.left=event.clientX-divleft;plane.style.top=event.clientY-divtop;}}
+//滑动层
+function bodyload()
+{
+if(plane.style.pixelTop!=0)
+{
+plane.style.pixelTop-=10
+setTimeout('bodyload()',1)
+}
+}
+//渐变显示层
+function Show(divid) {
+divid.filters.revealTrans.apply();
+divid.style.visibility = "visible";
+divid.filters.revealTrans.play();
+}
+function Hide(divid) {
+divid.filters.revealTrans.apply();
+divid.style.visibility = "hidden";
+divid.filters.revealTrans.play();
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.3492" name=GENERATOR></HEAD>
+<BODY onmousemove=move() onload=bodyload()>
+<DIV onmouseup=down=false 
+onmousedown=down=true;divleft=event.clientX-parseInt(plane.style.left);divtop=event.clientY-parseInt(plane.style.top) 
+id=plane 
+style="Z-INDEX: 1; LEFT: 0px; WIDTH: 1px; POSITION: absolute; TOP: 500px; HEIGHT: 1px">
+<TABLE id=td123 
+style="BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; CURSOR: hand; BORDER-BOTTOM: #999999 1px solid" 
+cellSpacing=2 cellPadding=0 width=100 bgColor=#f4f4f4 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; CURSOR: move; BORDER-BOTTOM: #999999 1px solid" 
+    bgColor=#cccccc height=20>
+      <DIV align=center>多级滑动菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this),Show(menu1)&#13;&#10;" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this),menu1.style.visibility='hidden'">
+      <DIV align=right>有下级菜单&gt;&gt;</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this),Show(menu2)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this),menu2.style.visibility='hidden'">
+      <DIV align=right>有下级菜单&gt;&gt;</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=right>无下级菜单&gt;&gt;</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=right>无下级菜单&gt;&gt;</DIV></TD></TR></TBODY></TABLE>
+<DIV class=menuv id=menu1 onmouseover="this.style.visibility='visible'" 
+style="Z-INDEX: 1; LEFT: 96px; VISIBILITY: hidden; WIDTH: 105px; POSITION: absolute; TOP: 24px" 
+onmouseout="this.style.visibility='hidden'">
+<TABLE 
+style="BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; CURSOR: hand; BORDER-BOTTOM: #999999 1px solid" 
+cellSpacing=2 cellPadding=0 width=100 align=right bgColor=#f4f4f4 border=0>
+  <TBODY>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR></TBODY></TABLE></DIV>
+<DIV class=menuv id=menu2 onmouseover="this.style.visibility='visible'" 
+style="Z-INDEX: 1; LEFT: 96px; VISIBILITY: hidden; WIDTH: 105px; POSITION: absolute; TOP: 45px" 
+onmouseout="this.style.visibility='hidden'">
+<TABLE 
+style="BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; CURSOR: hand; BORDER-BOTTOM: #999999 1px solid" 
+cellSpacing=2 cellPadding=0 width=100 align=right bgColor=#f4f4f4 border=0>
+  <TBODY>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR>
+  <TR>
+    <TD onmouseup="this.className='up'" class=normal 
+    onmousedown="this.className='down'" 
+    onmouseover="this.className='up',high(this)" 
+    style="FILTER: alpha(opacity=50)" 
+    onmouseout="this.className='normal',low(this)">
+      <DIV align=center>子菜单</DIV></TD></TR></TBODY></TABLE></DIV></DIV></BODY></HTML>
