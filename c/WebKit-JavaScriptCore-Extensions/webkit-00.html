@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>TestGTKWebKit JS</title>
+<script type="text/javascript">
+    function show(){
+        var str = document.getElementById("text").value;
+        document.getElementById("size").innerHTML = "Sizeof Str:" + Away.show(str);
+        Away.print(str);
+    }
+</script>
+</head>
+<body>
+
+<input id="text" type="text" value="你好,Webkit!">
+</input>
+<input type="button" onclick="show()" value="Show"><span id="size"></span>
+</input>
+<br>
+<h2>Away Info:</h2>
+<div id="AInfo">
+</div>
+
+<script type="text/javascript">
+document.getElementById("AInfo").innerHTML = Away.Version + "<br />";
+</script>
+
+</body>

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 #include <JavaScriptCore/JavaScript.h>
@@ -17,87 +18,138 @@ static void class_finalize_cb(JSObjectRef object)
     g_print("Custom class finalize.\n");
 }
 
-//static void custom_feedback_cb()
-//{
-//
-//    g_print("Custom feedback.\n");
-//}
-JSValueRef custom_feedback_cb(JSContextRef ctx,
-                       JSObjectRef function,
-                       JSObjectRef thisObject,
-                       size_t argumentCount,
-                       const JSValueRef arguments[],
-                       JSValueRef *exception)
-{
- JSStringRef str = JSValueToStringCopy(ctx, arguments[0], exception);
- size_t size = JSStringGetMaximumUTF8CStringSize(str);
- char* utf8 = (char*)malloc(size * sizeof(char));
-//new char [size];
- 
- JSStringGetUTF8CString(str, utf8, size);
- 
- fprintf(stderr, "utf8 = %s(%u)\n", utf8, size);
- return JSValueMakeNull(ctx);
-}
-/* Class method declarations */
-static const JSStaticFunction custom_staticfuncs[] =
-{
-    { "feedback", custom_feedback_cb, kJSPropertyAttributeReadOnly },
-    { NULL, NULL, 0 }
-};
-
-/* Class constructor. Called at "new CustomClass()" */
-JSObjectRef class_constructor_cb(JSContextRef ctx,
-                                 JSObjectRef constructor,
-                                 size_t argumentCount,
-                                 const JSValueRef arguments[],
-                                 JSValueRef* exception)
-{
-    g_print("Custom class constructor\n");
-}
-
-static const JSClassDefinition class_def =
-{
-    0,                     // version
-    kJSClassAttributeNone, // attributes
-    "CustomClass",         // className
-    NULL,                  // parentClass
-    NULL,                  // staticValues
-    custom_staticfuncs,                  // staticFunctions
-    class_init_cb,         // initialize
-    class_finalize_cb,     // finalize
-    NULL,                  // hasProperty
-    NULL,                  // getProperty
-    NULL,                  // setProperty
-    NULL,                  // deleteProperty
-    NULL,                  // getPropertyNames
-    NULL,                  // callAsFunction
-    NULL,  // callAsConstructor class_constructor_cb
-    NULL,                  // hasInstance  
-    NULL                   // convertToType
-};
-
-/* Callback - JavaScript window object has been cleared */
-static void window_object_cleared_cb(WebKitWebView  *web_view,
-                                     WebKitWebFrame *frame,
-                                     gpointer        context,
-                                     gpointer        window_object,
-                                     gpointer        user_data)
-
-{
-    /* Add classes to JavaScriptCore */
-    JSClassRef classDef = JSClassCreate(&class_def);
-    JSObjectRef classObj = JSObjectMake(context, classDef, context);
-    JSObjectRef globalObj = JSContextGetGlobalObject(context);
-    JSStringRef str = JSStringCreateWithUTF8CString("CustomClass");
-    JSObjectSetProperty(context, globalObj, str, classObj, kJSPropertyAttributeNone, NULL);
-}
-
 /* Destroy callback */
 static void destroy(GtkWidget *widget,
                     gpointer   data )
 {
     gtk_main_quit();
+}
+/************************************************/
+
+void away_Initialize(JSContextRef ctx, JSObjectRef object)
+{
+}
+
+void away_Finalize(JSObjectRef object)
+{
+}
+
+JSValueRef away_GetVerbose(
+        JSContextRef ctx,
+        JSObjectRef object,
+        JSStringRef propertyName,
+        JSValueRef *exception)
+{
+    // verbose is false
+    return JSValueMakeBoolean(ctx, false);
+}
+
+JSValueRef away_GetVersion(
+        JSContextRef ctx,
+        JSObjectRef object,
+        JSStringRef propertyName,
+        JSValueRef *exception)
+{
+    // verbose is false
+    static JSStringRef version = NULL;
+    if (version == NULL)
+    {
+        version = JSStringCreateWithUTF8CString("0.1");
+    }
+    return JSValueMakeString(ctx, version);
+}
+
+JSValueRef away_Show(JSContextRef ctx,
+    JSObjectRef function,
+    JSObjectRef thisObject,
+    size_t argumentCount,
+    const JSValueRef arguments[],
+    JSValueRef *exception)
+{
+    JSStringRef str = JSValueToStringCopy(ctx, arguments[0], exception);
+    size_t size = JSStringGetMaximumUTF8CStringSize(str);
+    char* utf8 = (char*)malloc(size * sizeof(char));
+//NEW(char, size);
+    
+    JSStringGetUTF8CString(str, utf8, size);
+    
+    GtkWidget *dia = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, utf8);
+    
+    gtk_dialog_run(dia);
+    
+    gtk_widget_destroy(dia);
+    
+    return JSValueMakeNumber(ctx, size);
+}
+
+JSValueRef away_Print(JSContextRef ctx,
+            JSObjectRef function,
+            JSObjectRef thisObject,
+            size_t argumentCount,
+            const JSValueRef arguments[],
+            JSValueRef *exception)
+{
+    JSStringRef str = JSValueToStringCopy(ctx, arguments[0], exception);
+    size_t size = JSStringGetMaximumUTF8CStringSize(str);
+    char* utf8 = (char*)malloc(size * sizeof(char));
+//NEW(char, size);
+
+    JSStringGetUTF8CString(str, utf8, size);
+    
+    fprintf(stderr, "%s\n", utf8);
+    
+    return JSValueMakeNumber(ctx, size);
+}
+JSClassRef Away_ClassCreate(JSContextRef ctx)
+{
+    static JSClassRef awayClass = NULL;
+    if (awayClass)
+    {
+        // already created, just return
+        return awayClass;
+    }
+
+    JSStaticFunction awayStaticFunctions[] =
+    {
+        { "show", away_Show, kJSPropertyAttributeNone },
+        { "print", away_Print, kJSPropertyAttributeNone },
+        { NULL, 0, 0 },
+    };
+
+    JSStaticValue awayStaticValues[] =
+    {
+        { "Version", away_GetVersion, NULL, kJSPropertyAttributeDontDelete | kJSPropertyAttributeReadOnly },
+        { "Verbose", away_GetVerbose, NULL, kJSPropertyAttributeDontDelete | kJSPropertyAttributeReadOnly },
+        { NULL, 0, 0, 0},
+    };
+
+    JSClassDefinition classdef = kJSClassDefinitionEmpty;
+    classdef.className = "Away";
+    classdef.initialize = away_Initialize;
+    classdef.finalize = away_Finalize;
+    classdef.staticValues = awayStaticValues;
+    classdef.staticFunctions = awayStaticFunctions;
+
+    return awayClass = JSClassCreate(&classdef);
+}
+
+
+void window_object_cleared_cb(
+WebKitWebView *wv,
+WebKitWebFrame *wf,
+gpointer ctx,
+gpointer arg3,
+gpointer user_data)
+{
+    JSStringRef name = JSStringCreateWithUTF8CString("Away");
+    // Make the javascript object
+    JSObjectRef obj = JSObjectMake(ctx, Away_ClassCreate(ctx), NULL);
+    // Set the property
+    JSObjectSetProperty(ctx, JSContextGetGlobalObject(ctx), name, obj,kJSPropertyAttributeNone, NULL);
+    
+    JSObjectRef obj2 = JSObjectMake(ctx, Away_ClassCreate(ctx), NULL);
+    // Set the property
+    JSObjectSetProperty(ctx, obj, name, obj2,kJSPropertyAttributeNone, NULL);
 }
 
 int
@@ -115,7 +167,7 @@ main (int argc, char* argv[])
     
     /* Connect the window object cleared event with callback */
     g_signal_connect (G_OBJECT (web_view), "window-object-cleared", G_CALLBACK(window_object_cleared_cb), web_view);
-
+    webkit_web_view_set_custom_encoding(WEBKIT_WEB_VIEW(web_view), "UTF-8"); /*设置编码为UTF-8 */
 
     /* Place the WebKitWebView in the GtkScrolledWindow */
     gtk_container_add (GTK_CONTAINER (scrolled_window), web_view);
@@ -125,7 +177,7 @@ main (int argc, char* argv[])
     g_signal_connect (G_OBJECT (main_window), "destroy", G_CALLBACK (destroy), NULL);
     
     /* Open webpage */
-    webkit_web_view_load_uri (WEBKIT_WEB_VIEW (web_view), "file:///home/cos/Public/ccode/c/WebKit-JavaScriptCore-Extensions/webkit-02.html");
+    webkit_web_view_load_uri (WEBKIT_WEB_VIEW (web_view), "file:///home/cos/Public/ccode/c/WebKit-JavaScriptCore-Extensions/webkit-00.html");
 
     /* Create the main window */
     gtk_window_set_default_size (GTK_WINDOW (main_window), 800, 600);
