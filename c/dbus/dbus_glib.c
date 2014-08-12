@@ -3,7 +3,6 @@
 #include <glib.h>
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
-#include <dbus/dbus-glib-lowlevel.h>
 int main (int argc, char **argv)
 {
   DBusGConnection *connection;
