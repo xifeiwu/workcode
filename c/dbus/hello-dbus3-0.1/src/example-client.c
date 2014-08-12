@@ -58,18 +58,43 @@ main (int argc, char **argv)
     lose_gerror ("Couldn't connect to session bus", error);
 
   remote_object = dbus_g_proxy_new_for_name (bus,
-					     "org.fmddlmyy.Test",
+					     "org.ztb.Test",
 					     "/TestObj",
 					     "org.fmddlmyy.Test.Basic");
-
+/*
   if (!dbus_g_proxy_call (remote_object, "Add", &error,
 			  G_TYPE_INT, 100, G_TYPE_INT, 999, G_TYPE_INVALID,
 			  G_TYPE_INT, &sum, G_TYPE_INVALID))
     lose_gerror ("Failed to call Add", error);
   printf("sum is %d\n", sum);
 
+  if (!dbus_g_proxy_call (remote_object, "Sub", &error,
+			  G_TYPE_INT, 100, G_TYPE_INT, 999, G_TYPE_INVALID,
+			  G_TYPE_INT, &sum, G_TYPE_INVALID))
+    lose_gerror ("Failed to call Sub", error);
+  printf("sub is %d\n", sum);
+*/
+  if (!dbus_g_proxy_call (remote_object, "Get", &error, G_TYPE_INVALID,
+			  G_TYPE_INT, &sum, G_TYPE_INVALID))
+    lose_gerror ("Failed to call Get", error);
+  printf("count is %d\n", sum);
+
+for(i=0;i<100;i++){
+  if (!dbus_g_proxy_call (remote_object, "count_add", &error, G_TYPE_INVALID,
+			  NULL, G_TYPE_INVALID))
+    lose_gerror ("Failed to call count_add", error);
+  printf("count++\n");
+
+  if (!dbus_g_proxy_call (remote_object, "Get", &error, G_TYPE_INVALID,
+			  G_TYPE_INT, &sum, G_TYPE_INVALID))
+    lose_gerror ("Failed to call Get", error);
+  printf("count is %d\n", sum);
+}
+
+  g_object_unref (G_OBJECT (remote_object));
+
   remote_object_introspectable = dbus_g_proxy_new_for_name (bus,
-							    "org.fmddlmyy.Test",
+							    "org.ztb.Test",
 							    "/TestObj",
 							    "org.freedesktop.DBus.Introspectable");
   if (!dbus_g_proxy_call (remote_object_introspectable, "Introspect", &error,
@@ -80,7 +105,6 @@ main (int argc, char **argv)
   g_free (introspect_data);
 
   g_object_unref (G_OBJECT (remote_object_introspectable));
-  g_object_unref (G_OBJECT (remote_object));
 
   exit(0);
 }

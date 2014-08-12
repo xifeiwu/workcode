@@ -7,5 +7,15 @@
        <arg name="arg1" type="i"/>
        <arg name="ret" type="i" direction="out"/>
     </method>
+    <method name="Sub">
+       <arg name="arg0" type="i"/>
+       <arg name="arg1" type="i"/>
+       <arg name="ret" type="i" direction="out"/>
+    </method>
+    <method name="Get">
+       <arg name="ret" type="i" direction="out"/>
+    </method>
+    <method name="count_add">
+    </method>
   </interface>
 </node>

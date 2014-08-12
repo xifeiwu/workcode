@@ -34,6 +34,7 @@ GType test_obj_get_type (void);
 struct TestObj
 {
   GObject parent;
+  gint count;
 };
 
 struct TestObjClass
@@ -51,7 +52,9 @@ struct TestObjClass
 G_DEFINE_TYPE(TestObj, test_obj, G_TYPE_OBJECT)
 
 gboolean test_obj_add (TestObj *obj, int num1, int num2, int *sum, GError **error);
-
+gboolean test_obj_sub (TestObj *obj, int num1, int num2, int *sum, GError **error);
+gboolean test_obj_get (TestObj *obj, int *cnt, GError **error);
+gboolean test_obj_count_add (TestObj *obj, GError **error);
 #include "example-service-glue.h"
 
 static void test_obj_init (TestObj *obj)
@@ -65,6 +68,23 @@ static void test_obj_class_init (TestObjClass *klass)
 gboolean test_obj_add (TestObj *obj, int num1, int num2, int *sum, GError **error)
 {
   *sum = num1 + num2;
+  return TRUE;
+}
+
+gboolean test_obj_sub (TestObj *obj, int num1, int num2, int *sum, GError **error)
+{
+  *sum = num1 - num2;
+  return TRUE;
+}
+
+gboolean test_obj_get (TestObj *obj, int *cnt, GError **error)
+{
+  *cnt = obj->count;
+  return TRUE;
+}
+gboolean test_obj_count_add (TestObj *obj, GError **error)
+{
+  obj->count++;
   return TRUE;
 }
 
@@ -100,7 +120,7 @@ int main (int argc, char **argv)
 					 "org.freedesktop.DBus");
 
   if (!dbus_g_proxy_call (bus_proxy, "RequestName", &error,
-			  G_TYPE_STRING, "org.fmddlmyy.Test",
+			  G_TYPE_STRING, "org.ztb.Test",
 			  G_TYPE_UINT, 0,
 			  G_TYPE_INVALID,
 			  G_TYPE_UINT, &request_name_result,
@@ -108,6 +128,7 @@ int main (int argc, char **argv)
     lose_gerror ("Failed to acquire org.fmddlmyy.Test", error);
 
   obj = g_object_new (TEST_TYPE_OBJECT, NULL);
+  obj->count = 5;
 
   dbus_g_connection_register_g_object (bus, "/TestObj", G_OBJECT (obj));
 
