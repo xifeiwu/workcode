@@ -1,5 +1,8 @@
 #include <gtk/gtk.h>
-
+void print_cb()
+{
+    printf("in callback function");
+}
 int main( int argc, char *argv[])
 {
 GtkWidget *window;
