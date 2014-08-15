@@ -84,6 +84,13 @@ gboolean test_obj_get (TestObj *obj, int *cnt, GError **error)
 }
 gboolean test_obj_count_add (TestObj *obj, GError **error)
 {
+guint i = 0, j=0;
+while(j<1000000){
+  i++;
+  if((i % 500) == 0){
+    j++;
+  }
+}
   obj->count++;
   return TRUE;
 }
