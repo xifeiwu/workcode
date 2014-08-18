@@ -57,7 +57,9 @@ void listen_signal()
             //printf("cnt:%d\n", cnt++);
             continue;
         }
-    
+    printf("message type: %d\n", dbus_message_get_type(msg));
+    printf("message member: %s\n", dbus_message_get_member(msg));
+
         if(dbus_message_is_signal(msg,"test.signal.Type","Test") ){
             if(!dbus_message_iter_init(msg,&arg) )
                 fprintf(stderr,"Message Has no Param");

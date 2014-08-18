@@ -59,7 +59,10 @@ int send_a_signal( char * sigvalue)
     printf("Signal Send\n");
 
     //步骤5: 释放相关的分配的内存。 
-    dbus_message_unref(msg ); 
+    dbus_message_unref(msg );
+//while(1){
+//sleep(1);
+//}
     return 0;
 }
 
