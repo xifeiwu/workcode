@@ -1,0 +1,3 @@
+https://github.com/guelfey/go.dbus.git
+sudo env GOPATH=/home/cos/gocode go get github.com/guelfey/go.dbus
+env GOPATH=`pwd`/gocode go run ./examples/notification.go 
