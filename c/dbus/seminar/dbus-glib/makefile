@@ -33,4 +33,4 @@ example-signal-recipient: example-signal-recipient.c
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
 clean:
-	$(RM) $(targets) example-service-glue.hi example-signal-emitter-glue.h
+	$(RM) $(targets) example-service-glue.h example-signal-emitter-glue.h
