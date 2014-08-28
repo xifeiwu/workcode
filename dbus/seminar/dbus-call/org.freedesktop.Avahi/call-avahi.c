@@ -35,15 +35,37 @@ print_hash_value (gpointer key, gpointer val, gpointer data)
 }
 
 DBusGProxy *avahi_service, *avahi_service_browser;
+#define DBUS_TYPE_G_UCHAR_ARRAY_ARRAY    (dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_UINT_ARRAY ))
 
 static void
 item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *stype, char *domain, unsigned int flags, gpointer user_data)
 {
   GError *error = NULL;
   char *host, *address;
-  gint aprotocol, port;
-  guchar ** byte_arraies;
+  gint aprotocol;
+  gint16 port;
+  GPtrArray *byte_arraies;
   printf ("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+/*
+  if (!dbus_g_proxy_call (avahi_service, "ResolveHostName", &error,
+				G_TYPE_INT, interface,
+				G_TYPE_INT, protocol, 
+				G_TYPE_STRING, name,
+				G_TYPE_INT, -1, 
+				G_TYPE_UINT, 0, 
+            G_TYPE_INVALID, 
+				G_TYPE_INT, &interface,
+				G_TYPE_INT, &protocol, 
+				G_TYPE_STRING, name,
+				G_TYPE_INT, &aprotocol, 
+				G_TYPE_STRING, address,
+				G_TYPE_UINT, &flags, 
+				G_TYPE_INVALID))
+	{
+    lose_gerror ("Failed to call ResolveHostName", error);
+	}
+*/
+/*
   if (!dbus_g_proxy_call (avahi_service, "ResolveService", &error,
 				G_TYPE_INT, interface,
 				G_TYPE_INT, protocol, 
@@ -62,12 +84,13 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
 				G_TYPE_INT, aprotocol, 
 				G_TYPE_STRING, address,
 				G_TYPE_UINT, port, 
-            G_TYPE_STRV, byte_arraies,
+            DBUS_TYPE_G_UCHAR_ARRAY_ARRAY, &byte_arraies,
 				G_TYPE_UINT, flags, 
 				G_TYPE_INVALID))
 	{
     lose_gerror ("Failed to call ServiceBrowserNew", error);
 	}
+*/
 }
 static void
 item_remove (DBusGProxy *proxy, int interface, int protocol, char *name, char *stype, char *domain, unsigned int flags, gpointer user_data)
@@ -160,5 +183,6 @@ G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_INVALID);
   g_main_loop_run (mainloop);
 
   g_object_unref (G_OBJECT (avahi_service));
+  g_object_unref (G_OBJECT (avahi_service_browser));
   exit(0);
 }
