@@ -1,68 +1,60 @@
-#!/usr/bin/env python
+# http://avahi.org/wiki/PythonBrowseExample
+import dbus, gobject, avahi
+from dbus import DBusException
+from dbus.mainloop.glib import DBusGMainLoop
 
-# Copyright (C) 2004-2006 Red Hat Inc. <http://www.redhat.com/>
-# Copyright (C) 2005-2007 Collabora Ltd. <http://www.collabora.co.uk/>
-#
-# Permission is hereby granted, free of charge, to any person
-# obtaining a copy of this software and associated documentation
-# files (the "Software"), to deal in the Software without
-# restriction, including without limitation the rights to use, copy,
-# modify, merge, publish, distribute, sublicense, and/or sell copies
-# of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-# DEALINGS IN THE SOFTWARE.
+# Looks for iTunes shares
 
-import sys
-from traceback import print_exc
+TYPE = "_http._tcp"
 
-import dbus
+def service_resolved(*args):
+    print 'service resolved'
+    print 'name:', args[2]
+    print 'address:', args[7]
+    print 'port:', args[8]
 
-def main():
-    bus = dbus.SessionBus()
+def print_error(*args):
+    print 'error_handler'
+    print args[0]
 
-    try:
-        remote_object = bus.get_object("org.freedesktop.Avahi",
-                                       "/")
-        print remote_object.Introspect(dbus_interface="org.freedesktop.DBus.Introspectable")
+def ItemAdd(interface, protocol, name, stype, domain, flags):
+    print "Found service '%s' type '%s' domain '%s' " % (name, stype, domain)
 
-        # you can either specify the dbus_interface in each call...
-        cnt_value = remote_object.GetHostName(dbus_interface = "org.freedesktop.Avahi.Server")
-       # add_result = remote_object.Add(4, 5, dbus_interface = "org.fmddlmyy.Test.Basic")
-    except dbus.DBusException:
-        print_exc()
-        sys.exit(1)
+    if flags & avahi.LOOKUP_RESULT_LOCAL:
+            # local service, skip
+            pass
 
-    print (cnt_value)
-    #print (add_result)
+    server.ResolveService(interface, protocol, name, stype, 
+        domain, avahi.PROTO_UNSPEC, dbus.UInt32(0), 
+        reply_handler=service_resolved, error_handler=print_error)
+    print "===================================="
+    print "parameters in ResolveService:%d, %d, %s, %s, %s, %d, %d" % (interface, protocol, name, stype, domain, avahi.PROTO_UNSPEC, dbus.UInt32(0))
+    print "===================================="
 
-    # ... or create an Interface wrapper for the remote object
-#    iface = dbus.Interface(remote_object, "com.example.SampleInterface")
-#    hello_reply_tuple = iface.GetTuple()
-#    print hello_reply_tuple
-#    hello_reply_dict = iface.GetDict()
-#    print hello_reply_dict
-    # D-Bus exceptions are mapped to Python exceptions
-#    try:
-#        iface.RaiseException()
-#    except dbus.DBusException as e:
-#        print str(e)
+def ItemRemove(interface, protocol, name, stype, domain, flags):
+    print "service '%s' type '%s' domain '%s' Remove" % (name, stype, domain)
+    print "Addation: interface '%r' protocol '%r' flags '%r'" % (interface, protocol, flags)
 
-    # introspection is automatically supported
-#    print remote_object.Introspect(dbus_interface="org.freedesktop.DBus.Introspectable")
+loop = DBusGMainLoop()
 
-    if sys.argv[1:] == ['--exit-service']:
-        iface.Exit()
+bus = dbus.SystemBus(mainloop=loop)
 
-if __name__ == '__main__':
-    main()
+server = dbus.Interface( bus.get_object(avahi.DBUS_NAME, '/'),
+        'org.freedesktop.Avahi.Server')
+print "parameters in ServiceBrowserNew:%d, %d, %s, %s, %d" % (avahi.IF_UNSPEC, avahi.PROTO_UNSPEC, TYPE, 'local', dbus.UInt32(0))
+service_browser_path = server.ServiceBrowserNew(avahi.IF_UNSPEC,
+            avahi.PROTO_UNSPEC, TYPE, 'local', dbus.UInt32(0))
+sbrowser = dbus.Interface(bus.get_object(avahi.DBUS_NAME,service_browser_path),
+        avahi.DBUS_INTERFACE_SERVICE_BROWSER)
+
+print "avahi.DBUS_NAME: %s" % (avahi.DBUS_NAME)
+print "avahi.DBUS_PATH_SERVER: %s" % (avahi.DBUS_PATH_SERVER)
+print "avahi.DBUS_INTERFACE_SERVER: %s" % (avahi.DBUS_INTERFACE_SERVER)
+print "Service Browser Path: %s" % (service_browser_path)
+print "avahi.DBUS_INTERFACE_SERVICE_BROWSER: %s" % (avahi.DBUS_INTERFACE_SERVICE_BROWSER)
+print "avahi.PROTO_UNSPEC: %s" % (avahi.PROTO_UNSPEC)
+
+sbrowser.connect_to_signal("ItemNew", ItemAdd)
+sbrowser.connect_to_signal("ItemRemove", ItemRemove)
+
+gobject.MainLoop().run()
