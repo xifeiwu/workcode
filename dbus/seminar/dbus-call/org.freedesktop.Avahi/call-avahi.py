@@ -17,6 +17,14 @@ def print_error(*args):
     print 'error_handler'
     print args[0]
 
+def service_resolve_hostname(*args):
+    print 'service resolved'
+    print 'name:', args[0]
+    print 'address:', args[1]
+    print 'port:', args[2]
+    print 'port:', args[3]
+    print 'port:', args[4]
+    print 'port:', args[5]
 def ItemAdd(interface, protocol, name, stype, domain, flags):
     print "Found service '%s' type '%s' domain '%s' " % (name, stype, domain)
 
@@ -27,13 +35,19 @@ def ItemAdd(interface, protocol, name, stype, domain, flags):
     server.ResolveService(interface, protocol, name, stype, 
         domain, avahi.PROTO_UNSPEC, dbus.UInt32(0), 
         reply_handler=service_resolved, error_handler=print_error)
-    print "===================================="
-    print "parameters in ResolveService:%d, %d, %s, %s, %s, %d, %d" % (interface, protocol, name, stype, domain, avahi.PROTO_UNSPEC, dbus.UInt32(0))
-    print "===================================="
+#    server.ResolveHostName(interface, protocol, name,
+#        avahi.PROTO_UNSPEC, dbus.UInt32(0),
+#        reply_handler=service_resolve_hostname, error_handler=print_error)
+#    print "===================================="
+#    print "parameters in ResolveService:%d, %d, %s, %s, %s, %d, %d" % (interface, protocol, name, stype, domain, avahi.PROTO_UNSPEC, dbus.UInt32(0))
+#    print "===================================="
 
 def ItemRemove(interface, protocol, name, stype, domain, flags):
-    print "service '%s' type '%s' domain '%s' Remove" % (name, stype, domain)
-    print "Addation: interface '%r' protocol '%r' flags '%r'" % (interface, protocol, flags)
+    print "Remove service '%s' type '%s' domain '%s'" % (name, stype, domain)
+#    print "Addation: interface '%r' protocol '%r' flags '%r'" % (interface, protocol, flags)
+    server.ResolveService(interface, protocol, name, stype,
+        domain, avahi.PROTO_UNSPEC, dbus.UInt32(0),
+        reply_handler=service_resolved, error_handler=print_error)
 
 loop = DBusGMainLoop()
 

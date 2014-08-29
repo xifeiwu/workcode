@@ -1,7 +1,7 @@
 #include <dbus/dbus-glib.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <dbus/dbus.h>
 #include "marshal.h"
 
 static void lose (const char *fmt, ...) G_GNUC_NORETURN G_GNUC_PRINTF (1, 2);
@@ -42,28 +42,84 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
 {
   GError *error = NULL;
   char *host, *address;
-  gint aprotocol;
+  gint aprotocol = -1;
   gint16 port;
   GPtrArray *byte_arraies;
   printf ("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+
+  DBusConnection* conn;
+  DBusMessage* msg;
+  DBusMessageIter args;
+  DBusPendingCall* pending;
+  DBusError err;
+  conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+  msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                    "/", 							// object to call on
+                                    "org.freedesktop.Avahi.Server",    // interface to call on
+                                    "ResolveService");             // method nameResolveHostName
+  if (NULL == msg) 
+   { 
+      fprintf(stderr, "Message Null\n"); 
+      exit(1); 
+   }
 /*
-  if (!dbus_g_proxy_call (avahi_service, "ResolveHostName", &error,
-				G_TYPE_INT, interface,
-				G_TYPE_INT, protocol, 
-				G_TYPE_STRING, name,
-				G_TYPE_INT, -1, 
-				G_TYPE_UINT, 0, 
-            G_TYPE_INVALID, 
-				G_TYPE_INT, &interface,
-				G_TYPE_INT, &protocol, 
-				G_TYPE_STRING, name,
-				G_TYPE_INT, &aprotocol, 
-				G_TYPE_STRING, address,
-				G_TYPE_UINT, &flags, 
-				G_TYPE_INVALID))
-	{
-    lose_gerror ("Failed to call ResolveHostName", error);
-	}
+  dbus_message_iter_init_append(msg, &args);
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &interface)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &protocol)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, name)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, stype)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, domain)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &aprotocol)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+  if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &flags)) {
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+  }
+*/
+/*
+   if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
+      fprintf(stderr, "Out Of Memory!\n"); 
+      exit(1);
+   }
+   if (NULL == pending) { 
+      fprintf(stderr, "Pending Call Null\n"); 
+      exit(1); 
+   }
+   dbus_connection_flush(conn);
+   
+   printf("Request Sent\n");
+   
+   // free message
+   dbus_message_unref(msg);
+   
+   // block until we recieve a reply
+   dbus_pending_call_block(pending);
+
+   // get the reply message
+   msg = dbus_pending_call_steal_reply(pending);
+   if (NULL == msg) {
+      fprintf(stderr, "Reply Null\n"); 
+      exit(1); 
+   }
+   // free the pending message handle
+   dbus_pending_call_unref(pending);
 */
 /*
   if (!dbus_g_proxy_call (avahi_service, "ResolveService", &error,
@@ -89,6 +145,25 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
 				G_TYPE_INVALID))
 	{
     lose_gerror ("Failed to call ServiceBrowserNew", error);
+	}
+*/
+/*
+  if (!dbus_g_proxy_call (avahi_service, "ResolveHostName", &error,
+				G_TYPE_INT, interface,
+				G_TYPE_INT, protocol, 
+				G_TYPE_STRING, name,
+				G_TYPE_INT, -1, 
+				G_TYPE_UINT, 0, 
+            G_TYPE_INVALID, 
+				G_TYPE_INT, &interface,
+				G_TYPE_INT, &protocol, 
+				G_TYPE_STRING, name,
+				G_TYPE_INT, &aprotocol, 
+				G_TYPE_STRING, address,
+				G_TYPE_UINT, &flags, 
+				G_TYPE_INVALID))
+	{
+    lose_gerror ("Failed to call ResolveHostName", error);
 	}
 */
 }
