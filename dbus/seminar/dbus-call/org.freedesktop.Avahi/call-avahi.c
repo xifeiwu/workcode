@@ -225,11 +225,11 @@ char* resolve_service()
     dbus_uint16_t port;//gint16
     GPtrArray *byte_arraies;
     dbus_uint32_t m_flags;
-DBusMessageIter container_ay, container_y;
     if (!dbus_message_iter_init(msg, &args))
         g_message("dbus_message_iter_init fail\n");
     else
     { 
+g_message("signature of container args: %s", dbus_message_iter_get_signature(&args));
 //g_message("first type: %d", dbus_message_iter_get_arg_type(&args));
 //g_message("DBUS_TYPE_INT32: %d", DBUS_TYPE_INT32);
 //g_message("DBUS_TYPE_STRING: %d", DBUS_TYPE_STRING);
@@ -321,20 +321,38 @@ DBusMessageIter container_ay, container_y;
         else if (strcmp("aay", dbus_message_iter_get_signature(&args))) 
             g_message("Argument is not error!\n"); 
         else{
-            const unsigned char *b_value;int size=3;
+            DBusMessageIter container_ay, container_y;
+            unsigned char *values;int size;
             //dbus_message_iter_get_basic(&args, &flags);
             //dbus_message_iter_open_container(&args, DBUS_TYPE_ARRAY, "ay", &container_ay);
             //dbus_message_iter_open_container(&container_ay, DBUS_TYPE_BYTE, "y", &container_y);
+
             dbus_message_iter_recurse(&args, &container_ay);
+
             dbus_message_iter_recurse(&container_ay, &container_y);
+            dbus_message_iter_get_fixed_array(&container_y, &values, &size);
+            g_message("size: %d, %s", size, values);
+/*
+g_message("container args: %s", dbus_message_iter_get_signature(&args));
 g_message("container_ay: %s", dbus_message_iter_get_signature(&container_ay));
 g_message("container_y: %s", dbus_message_iter_get_signature(&container_y));
 g_message("type of container_y: %d", dbus_message_iter_get_arg_type(&container_y));
 g_message("value of DBUS_TYPE_BYTE: %d", DBUS_TYPE_BYTE);
-            dbus_message_iter_get_fixed_array(&container_y, &b_value, &size);g_message("size: %d, %s", size, b_value);
-            //if(dbus_message_iter_next(&container_y) && (DBUS_TYPE_BYTE == dbus_message_iter_get_arg_type(&container_y))){
-            //    dbus_message_iter_get_basic(&container_y, &b_value);g_message("b_value: %d", b_value);
-            //}
+*/
+// && strcmp("ay", dbus_message_iter_get_signature(&container_ay))
+            while(dbus_message_iter_next(&container_ay)){
+                dbus_message_iter_recurse(&container_ay, &container_y);
+                dbus_message_iter_get_fixed_array(&container_y, &values, &size);
+                g_message("size: %d, %s", size, values);
+            }
+        }
+        if (!dbus_message_iter_next(&args))
+            g_message( "Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &m_flags);
+            printf("m_flags : %d\n", m_flags); 
         }
 
 /*
