@@ -73,7 +73,7 @@ dbusMsg.on ("methodResponse", function (arg) {
 		  }
 		});
 		dbusMonitorSignal.addMatch();
-		dbusMonitorSignal.addMatch(member='ItemRemove');
+		dbusMonitorSignal.addMatch(dbusMonitorSignal.member='ItemRemove');
 		dbusMonitorSignal.on ("signalReceipt", function () {
 		  console.log ("[PASSED] Signal received with data :: ");
 		  console.log (arguments);
