@@ -10,7 +10,7 @@ class ZeroconfService:
     """
 
     def __init__(self, name, port, stype="_http._tcp",
-                 domain="", host="", text=""):
+                 domain="", host="", text="abc"):
         self.name = name
         self.stype = stype
         self.domain = domain

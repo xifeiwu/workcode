@@ -12,6 +12,7 @@ def service_resolved(*args):
     print 'name:', args[2]
     print 'address:', args[7]
     print 'port:', args[8]
+    print 'txt:', args[9]
 
 def print_error(*args):
     print 'error_handler'

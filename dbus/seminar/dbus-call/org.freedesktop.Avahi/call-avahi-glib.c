@@ -35,34 +35,73 @@ print_hash_value (gpointer key, gpointer val, gpointer data)
 }
 
 DBusGProxy *avahi_service, *avahi_service_browser;
-#define DBUS_TYPE_G_UCHAR_ARRAY_ARRAY    (dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_UINT_ARRAY ))
+#define DBUS_TYPE_G_UCHAR_ARRAY_ARRAY    (dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_UCHAR_ARRAY ))
 
 static void
 item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *stype, char *domain, unsigned int flags, gpointer user_data)
 {
   GError *error = NULL;
-  char *host, *address;
-  gint aprotocol = -1;
-  gint16 port;
-  GPtrArray *byte_arraies;
   printf ("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
 
+  char *host, *address;
+  dbus_int32_t aprotocol = -1;
+  dbus_uint32_t m_flags = 0;
+  dbus_uint16_t port;//gint16
+  GPtrArray *byte_arraies;
+/*
+    dbus_int32_t minterface = 2;
+    dbus_int32_t mprotocol = 1;
+    char *mname = "TestService";
+    char *mstype = "_http._tcp";
+    char *mdomain = "local";
+    dbus_int32_t maprotocol = -1;
+    dbus_uint32_t mflags = 0;
+*/
+  printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %d, %d.\n", interface, protocol, name, stype, domain, aprotocol, m_flags);
+  if (!dbus_g_proxy_call (avahi_service, "ResolveService", &error,
+                G_TYPE_INT, interface,
+                G_TYPE_INT, protocol, 
+                G_TYPE_STRING, name,
+                G_TYPE_STRING, stype,
+                G_TYPE_STRING, domain,
+                G_TYPE_INT, aprotocol, 
+                G_TYPE_UINT, m_flags, 
+                G_TYPE_INVALID, 
+                G_TYPE_INT, &interface,
+                G_TYPE_INT, &protocol, 
+                G_TYPE_STRING, &name,
+                G_TYPE_STRING, &stype,
+                G_TYPE_STRING, &domain,
+                G_TYPE_STRING, &host,
+                G_TYPE_INT, &aprotocol, 
+                G_TYPE_STRING, &address,
+                G_TYPE_UINT, &port, 
+                DBUS_TYPE_G_UCHAR_ARRAY_ARRAY, &byte_arraies,
+                G_TYPE_UINT, &flags, 
+                G_TYPE_INVALID
+    ))
+	{
+    lose_gerror ("Failed to call ServiceBrowserNew", error);
+	}
+  printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n", interface, protocol, name, stype, domain, host, aprotocol, address, port,  flags);
+//gpointer* tmp = g_ptr_array_index (byte_arraies, 0);
+//printf("tmp: %s", tmp);
+/*
   DBusConnection* conn;
   DBusMessage* msg;
   DBusMessageIter args;
   DBusPendingCall* pending;
   DBusError err;
   conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
-  msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
-                                    "/", 							// object to call on
-                                    "org.freedesktop.Avahi.Server",    // interface to call on
-                                    "ResolveService");             // method nameResolveHostName
+  msg = dbus_message_new_method_call("org.freedesktop.Avahi",           // target for the method call
+                                    "/", 							                     // object to call on
+                                    "org.freedesktop.Avahi.Server",     // interface to call on
+                                    "ResolveService");                  // method nameResolveHostName
   if (NULL == msg) 
    { 
       fprintf(stderr, "Message Null\n"); 
       exit(1); 
    }
-/*
   dbus_message_iter_init_append(msg, &args);
   if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &interface)) {
       fprintf(stderr, "Out Of Memory!\n"); 
@@ -92,8 +131,6 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
       fprintf(stderr, "Out Of Memory!\n"); 
       exit(1);
   }
-*/
-/*
    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
       fprintf(stderr, "Out Of Memory!\n"); 
       exit(1);
@@ -121,32 +158,8 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
    // free the pending message handle
    dbus_pending_call_unref(pending);
 */
-/*
-  if (!dbus_g_proxy_call (avahi_service, "ResolveService", &error,
-				G_TYPE_INT, interface,
-				G_TYPE_INT, protocol, 
-				G_TYPE_STRING, name,
-				G_TYPE_STRING, stype,
-				G_TYPE_STRING, domain,
-				G_TYPE_INT, -1, 
-				G_TYPE_UINT, 0, 
-            G_TYPE_INVALID, 
-				G_TYPE_INT, interface,
-				G_TYPE_INT, protocol, 
-				G_TYPE_STRING, name,
-				G_TYPE_STRING, stype,
-				G_TYPE_STRING, domain,
-				G_TYPE_STRING, host,
-				G_TYPE_INT, aprotocol, 
-				G_TYPE_STRING, address,
-				G_TYPE_UINT, port, 
-            DBUS_TYPE_G_UCHAR_ARRAY_ARRAY, &byte_arraies,
-				G_TYPE_UINT, flags, 
-				G_TYPE_INVALID))
-	{
-    lose_gerror ("Failed to call ServiceBrowserNew", error);
-	}
-*/
+
+
 /*
   if (!dbus_g_proxy_call (avahi_service, "ResolveHostName", &error,
 				G_TYPE_INT, interface,
@@ -225,7 +238,16 @@ main (int argc, char **argv)
 					G_TYPE_STRING, 
 					G_TYPE_STRING, 
 					G_TYPE_UINT, 
-					G_TYPE_INVALID);  
+					G_TYPE_INVALID);
+  dbus_g_object_register_marshaller (_avahi_marshal_VOID__INT_INT_STRING_STRING_STRING_INT_UINT, G_TYPE_NONE, 
+					G_TYPE_INT, 
+					G_TYPE_INT, 
+					G_TYPE_STRING, 
+					G_TYPE_STRING, 
+					G_TYPE_STRING, 
+					G_TYPE_INT, 
+					G_TYPE_UINT, 
+					G_TYPE_INVALID);
   dbus_g_proxy_add_signal (avahi_service_browser, "ItemNew", 
 					G_TYPE_INT, 
 					G_TYPE_INT, 

@@ -1,0 +1,466 @@
+/*
+* Example low-level D-Bus code.
+* Written by xifei
+*/
+#include <dbus/dbus.h>
+#include <glib.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+char* get_service_browser_path()
+{
+    DBusMessage* msg;
+    DBusMessageIter args;
+    DBusConnection* conn;
+    DBusError err;
+    dbus_error_init(&err);
+    DBusPendingCall* pending;
+    dbus_int32_t interface = -1;
+    dbus_int32_t protocol = -1;
+    char *type = "_http._tcp";
+    char *domain = "local";
+    dbus_uint32_t flags = 0;
+    char *service_browser_path;
+
+   // initialiset the errors
+    printf("Calling remote method: %s\n", "org.freedesktop.Avahi");
+
+   // connect to the system bus and check for errors
+    conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+    if (dbus_error_is_set(&err)) { 
+      fprintf(stderr, "Connection Error (%s)\n", err.message); 
+      dbus_error_free(&err);
+    }
+    if (NULL == conn) { 
+      exit(1);
+    }
+
+    msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                        "/", 							// object to call on
+                                        "org.freedesktop.Avahi.Server",    // interface to call on
+                                        "ServiceBrowserNew");             // method nameResolveHostName
+    if (NULL == msg) 
+     { 
+      fprintf(stderr, "Message Null\n"); 
+      exit(1); 
+    }
+   // append arguments
+    dbus_message_iter_init_append(msg, &args);
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &interface))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &protocol))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &type))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &domain))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &flags))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+      
+   // send message and get a handle for a reply
+    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (NULL == pending) { 
+        fprintf(stderr, "Pending Call Null\n"); 
+        exit(1); 
+    }
+    dbus_connection_flush(conn);
+   
+    printf("Request Sent\n");
+   
+    // free message
+    dbus_message_unref(msg);
+   
+    // block until we recieve a reply
+    dbus_pending_call_block(pending);
+
+    // get the reply message
+    msg = dbus_pending_call_steal_reply(pending);
+    if (NULL == msg) {
+        fprintf(stderr, "Reply Null\n"); 
+        exit(1); 
+    }
+    // free the pending message handle
+    dbus_pending_call_unref(pending);
+
+    // read the parameters
+    if (!dbus_message_iter_init(msg, &args))
+        fprintf(stderr, "Message has no arguments!\n"); 
+    else if (DBUS_TYPE_OBJECT_PATH != dbus_message_iter_get_arg_type(&args)) 
+        fprintf(stderr, "Argument is not boolean!\n"); 
+    else
+        dbus_message_iter_get_basic(&args, &service_browser_path);
+
+
+    printf("Got Reply: %s\n", service_browser_path);
+    dbus_message_unref(msg);  
+    return service_browser_path;
+}
+char* resolve_service()
+{
+    DBusMessage* msg;
+    DBusMessageIter args;
+    DBusConnection* conn;
+    DBusError err;
+    dbus_error_init(&err);
+    DBusPendingCall* pending;
+    dbus_int32_t interface = 2;
+    dbus_int32_t protocol = 1;
+    char *name = "TestService";
+    char *type = "_http._tcp";
+    char *domain = "local";
+    dbus_int32_t aprotocol = -1;
+    dbus_uint32_t flags = 0;
+    printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %d, %d.\n", interface, protocol, name, type, domain, aprotocol, flags);
+
+   // initialiset the errors
+    printf("Calling remote method: %s\n", "org.freedesktop.Avahi");
+
+   // connect to the system bus and check for errors
+    conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+    if (dbus_error_is_set(&err)) { 
+      fprintf(stderr, "Connection Error (%s)\n", err.message); 
+      dbus_error_free(&err);
+    }
+    if (NULL == conn) { 
+      exit(1);
+    }
+
+    msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                        "/", 							// object to call on
+                                        "org.freedesktop.Avahi.Server",    // interface to call on
+                                        "ResolveService");             // method nameResolveHostName
+    if (NULL == msg) 
+     { 
+      fprintf(stderr, "Message Null\n"); 
+      exit(1); 
+    }
+   // append arguments
+    dbus_message_iter_init_append(msg, &args);
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &interface))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &protocol))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &name))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &type))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &domain))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_INT32, &aprotocol))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &flags))
+    {
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+      
+   // send message and get a handle for a reply
+    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+    }
+    if (NULL == pending) { 
+        fprintf(stderr, "Pending Call Null\n"); 
+        exit(1); 
+    }
+    dbus_connection_flush(conn);
+   
+    printf("Request Sent\n");
+
+    // free message
+    dbus_message_unref(msg);
+   
+    // block until we recieve a reply
+    dbus_pending_call_block(pending);
+
+    // get the reply message
+    msg = dbus_pending_call_steal_reply(pending);
+    if (NULL == msg) {
+        fprintf(stderr, "Reply Null\n"); 
+        exit(1); 
+    }
+    // free the pending message handle
+    dbus_pending_call_unref(pending);
+
+
+    char *address;
+    char *host;
+    dbus_uint16_t port;//gint16
+    GPtrArray *byte_arraies;
+    dbus_uint32_t m_flags;
+DBusMessageIter container_ay, container_y;
+    if (!dbus_message_iter_init(msg, &args))
+        g_message("dbus_message_iter_init fail\n");
+    else
+    { 
+//g_message("first type: %d", dbus_message_iter_get_arg_type(&args));
+//g_message("DBUS_TYPE_INT32: %d", DBUS_TYPE_INT32);
+//g_message("DBUS_TYPE_STRING: %d", DBUS_TYPE_STRING);
+//char *value;
+//dbus_message_iter_get_basic(&args, &value);
+//g_message("DBUS_TYPE_STRING: %s", value);
+
+        if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message( "Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &interface);
+            printf("interface : %d\n", interface); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message( "Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &protocol);
+            printf("protocol : %d\n", protocol); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+           dbus_message_iter_get_basic(&args, &name);
+            printf("name : %s\n", name); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+           dbus_message_iter_get_basic(&args, &type);
+            printf("type : %s\n", type); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &domain);
+            printf("domain : %s\n", domain); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &host);
+            printf("host : %s\n", host); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message( "Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &aprotocol);
+            printf("aprotocol : %d\n", aprotocol); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+           dbus_message_iter_get_basic(&args, &address);
+            printf("address : %s\n", address); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message( "Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_UINT16 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &port);
+            printf("port : %d\n", port); 
+        }
+
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (strcmp("aay", dbus_message_iter_get_signature(&args))) 
+            g_message("Argument is not error!\n"); 
+        else{
+            const unsigned char *b_value;int size=3;
+            //dbus_message_iter_get_basic(&args, &flags);
+            //dbus_message_iter_open_container(&args, DBUS_TYPE_ARRAY, "ay", &container_ay);
+            //dbus_message_iter_open_container(&container_ay, DBUS_TYPE_BYTE, "y", &container_y);
+            dbus_message_iter_recurse(&args, &container_ay);
+            dbus_message_iter_recurse(&container_ay, &container_y);
+g_message("container_ay: %s", dbus_message_iter_get_signature(&container_ay));
+g_message("container_y: %s", dbus_message_iter_get_signature(&container_y));
+g_message("type of container_y: %d", dbus_message_iter_get_arg_type(&container_y));
+g_message("value of DBUS_TYPE_BYTE: %d", DBUS_TYPE_BYTE);
+            dbus_message_iter_get_fixed_array(&container_y, &b_value, &size);g_message("size: %d, %s", size, b_value);
+            //if(dbus_message_iter_next(&container_y) && (DBUS_TYPE_BYTE == dbus_message_iter_get_arg_type(&container_y))){
+            //    dbus_message_iter_get_basic(&container_y, &b_value);g_message("b_value: %d", b_value);
+            //}
+        }
+
+/*
+dbus_message_iter_next(&args);
+g_message("g_message_iter_get_signature: %s", dbus_message_iter_get_signature(&args));
+*/
+/*
+        if (!dbus_message_iter_next(&args))
+            g_message("Message has too few arguments!\n"); 
+        else if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not error!\n"); 
+        else
+            dbus_message_iter_get_basic(&args, &flags);
+*/
+  //      printf("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, type, domain, flags);
+    }
+    dbus_message_unref(msg);  
+}
+void signal_itemnew(char *path){
+    DBusMessage* msg;
+    DBusMessageIter args;
+    DBusConnection* conn;
+    DBusError err;
+    dbus_error_init(&err);
+
+    conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+    if (dbus_error_is_set(&err)) { 
+      fprintf(stderr, "Connection Error (%s)\n", err.message); 
+      dbus_error_free(&err);
+    }
+    if (NULL == conn) { 
+      exit(1);
+    }
+
+    gchar* signal_filter = g_new(gchar, strlen("type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path=''") + strlen(path) + 2);
+    sprintf(signal_filter, "type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path='%s'", path);
+    //printf("signal_filter:%s", signal_filter);
+    // add a rule for which messages we want to see
+    dbus_bus_add_match(conn, signal_filter, &err);
+
+    dbus_connection_flush(conn);
+    if (dbus_error_is_set(&err)) { 
+        fprintf(stderr, "Match Error (%s)\n", err.message);
+        exit(1); 
+   }
+    printf("Match rule sent\n");
+
+    int interface;
+    int protocol;
+    char *name;
+    char *stype;
+    char *domain;
+    unsigned int flags;
+//int cnt = 0;
+   // loop listening for signals being emmitted
+    while (true) {
+        // non blocking read of the next available message
+        dbus_connection_read_write(conn, 0);
+        msg = dbus_connection_pop_message(conn);
+        // loop again if we haven't read a message
+        if (NULL == msg) { 
+//g_message("cnt: %d", cnt++);
+           sleep(1);
+           continue;
+    }
+    // check if the message is a signal from the correct interface and with the correct name
+    if (dbus_message_is_signal(msg, "org.freedesktop.Avahi.ServiceBrowser", "ItemNew")) {
+        // read the parameters
+//g_message("is the message we need.%d", cnt++);
+//g_message("Message Has No Parameters\n");
+
+        if (!dbus_message_iter_init(msg, &args))
+            g_message("dbus_message_iter_init fail\n");
+        else
+        { 
+            if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+               g_message( "Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &interface);
+
+            if (!dbus_message_iter_next(&args))
+                g_message( "Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+                dbus_message_iter_get_basic(&args, &protocol);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &name);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &stype);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &domain);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+                dbus_message_iter_get_basic(&args, &flags);
+
+            printf("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+        //printf("Got Signal with value %s\n", sigvalue);
+        }
+
+    }
+    // free the message
+    dbus_message_unref(msg);
+    }
+}
+void main()
+{
+    //signal_itemnew(get_service_browser_path());
+    resolve_service();
+}
