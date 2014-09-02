@@ -41,7 +41,7 @@ static void
 item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *stype, char *domain, unsigned int flags, gpointer user_data)
 {
   GError *error = NULL;
-  printf ("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+  //printf ("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
 
   char *host, *address;
   dbus_int32_t aprotocol = -1;
@@ -57,7 +57,8 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
     dbus_int32_t maprotocol = -1;
     dbus_uint32_t mflags = 0;
 */
-  printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %d, %d.\n", interface, protocol, name, stype, domain, aprotocol, m_flags);
+  printf("\n");
+  printf ("Parameter for ResolvesService:%d, %d, %s, %s, %s, %d, %d.\n", interface, protocol, name, stype, domain, aprotocol, m_flags);
   if (!dbus_g_proxy_call (avahi_service, "ResolveService", &error,
                 G_TYPE_INT, interface,
                 G_TYPE_INT, protocol, 
@@ -83,9 +84,19 @@ item_new (DBusGProxy *proxy, int interface, int protocol, char *name, char *styp
 	{
     lose_gerror ("Failed to call ServiceBrowserNew", error);
 	}
-  printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n", interface, protocol, name, stype, domain, host, aprotocol, address, port,  flags);
-//gpointer* tmp = g_ptr_array_index (byte_arraies, 0);
-//printf("tmp: %s", tmp);
+  printf ("Results of ResolveService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n", interface, protocol, name, stype, domain, host, aprotocol, address, port,  flags);
+int i;
+int length_of_byte_arraies = byte_arraies->len;
+if(length_of_byte_arraies == 0){
+    printf("value of txt: %s\n", "is null.");
+}
+else{
+    for(i=0; i < length_of_byte_arraies; i++){
+    GArray *arr = g_ptr_array_index(byte_arraies, i);
+    //arr = g_ptr_array_index(byte_arraies, 0);
+    printf("value of txt: %d, %s\n",  arr->len, arr->data);
+    }
+}
 /*
   DBusConnection* conn;
   DBusMessage* msg;

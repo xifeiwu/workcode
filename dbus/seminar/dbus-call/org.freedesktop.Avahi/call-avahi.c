@@ -521,7 +521,7 @@ void signal_itemnew(char *path){
                 dbus_message_iter_get_basic(&args, &flags);
             printf("\n");
             printf("removed:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
-            resolve_service(interface, protocol, name, stype, domain);
+            //resolve_service(interface, protocol, name, stype, domain);
         //printf("Got Signal with value %s\n", sigvalue);
         }
             }
