@@ -114,7 +114,7 @@ char* get_service_browser_path()
     dbus_message_unref(msg);  
     return service_browser_path;
 }
-char* resolve_service()
+char* resolve_service(int interface, int protocol, char *name, char *type, char *domain)
 {
     DBusMessage* msg;
     DBusMessageIter args;
@@ -122,11 +122,11 @@ char* resolve_service()
     DBusError err;
     dbus_error_init(&err);
     DBusPendingCall* pending;
-    dbus_int32_t interface = 2;
-    dbus_int32_t protocol = 1;
-    char *name = "TestService";
-    char *type = "_http._tcp";
-    char *domain = "local";
+    //dbus_int32_t interface = 2;
+    //dbus_int32_t protocol = 1;
+    //char *name = "TestService";
+    //char *type = "_http._tcp";
+    //char *domain = "local";
     dbus_int32_t aprotocol = -1;
     dbus_uint32_t flags = 0;
     printf ("parameter for ResolvesService:%d, %d, %s, %s, %s, %d, %d.\n", interface, protocol, name, type, domain, aprotocol, flags);
@@ -229,7 +229,7 @@ char* resolve_service()
         g_message("dbus_message_iter_init fail\n");
     else
     { 
-g_message("signature of container args: %s", dbus_message_iter_get_signature(&args));
+//g_message("signature of container args: %s", dbus_message_iter_get_signature(&args));
 //g_message("first type: %d", dbus_message_iter_get_arg_type(&args));
 //g_message("DBUS_TYPE_INT32: %d", DBUS_TYPE_INT32);
 //g_message("DBUS_TYPE_STRING: %d", DBUS_TYPE_STRING);
@@ -387,11 +387,14 @@ void signal_itemnew(char *path){
       exit(1);
     }
 
-    gchar* signal_filter = g_new(gchar, strlen("type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path=''") + strlen(path) + 2);
-    sprintf(signal_filter, "type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path='%s'", path);
+    gchar* filter_itemnew = g_new(gchar, strlen("type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path=''") + strlen(path) + 2);
+    sprintf(filter_itemnew, "type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemNew', path='%s'", path);
+    gchar* filter_itemremove = g_new(gchar, strlen("type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemRemove', path=''") + strlen(path) + 2);
+    sprintf(filter_itemremove, "type='signal',interface='org.freedesktop.Avahi.ServiceBrowser',member='ItemRemove', path='%s'", path);
     //printf("signal_filter:%s", signal_filter);
     // add a rule for which messages we want to see
-    dbus_bus_add_match(conn, signal_filter, &err);
+    dbus_bus_add_match(conn, filter_itemnew, &err);
+    dbus_bus_add_match(conn, filter_itemremove, &err);
 
     dbus_connection_flush(conn);
     if (dbus_error_is_set(&err)) { 
@@ -467,18 +470,67 @@ void signal_itemnew(char *path){
                 g_message("Argument is not error!\n"); 
             else
                 dbus_message_iter_get_basic(&args, &flags);
-
+            printf("\n");
             printf("discovered:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+            resolve_service(interface, protocol, name, stype, domain);
         //printf("Got Signal with value %s\n", sigvalue);
         }
+    }else if(dbus_message_is_signal(msg, "org.freedesktop.Avahi.ServiceBrowser", "ItemRemove")){
+        if (!dbus_message_iter_init(msg, &args))
+            g_message("dbus_message_iter_init fail\n");
+        else
+        { 
+            if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+               g_message( "Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &interface);
 
-    }
+            if (!dbus_message_iter_next(&args))
+                g_message( "Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+                dbus_message_iter_get_basic(&args, &protocol);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &name);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &stype);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+               dbus_message_iter_get_basic(&args, &domain);
+
+            if (!dbus_message_iter_next(&args))
+                g_message("Message has too few arguments!\n"); 
+            else if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) 
+                g_message("Argument is not error!\n"); 
+            else
+                dbus_message_iter_get_basic(&args, &flags);
+            printf("\n");
+            printf("removed:%d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+            resolve_service(interface, protocol, name, stype, domain);
+        //printf("Got Signal with value %s\n", sigvalue);
+        }
+            }
     // free the message
     dbus_message_unref(msg);
     }
 }
 void main()
 {
-    //signal_itemnew(get_service_browser_path());
-    resolve_service();
+    signal_itemnew(get_service_browser_path());
+    //resolve_service();
 }
