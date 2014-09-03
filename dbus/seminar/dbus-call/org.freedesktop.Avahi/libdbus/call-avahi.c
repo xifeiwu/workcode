@@ -693,7 +693,7 @@ void method_AddService(char *path)
         fprintf(stderr, "Out Of Memory!\n"); 
         exit(1);
     }
-    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &port))
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT16, &port))
     {
         fprintf(stderr, "Out Of Memory!\n"); 
         exit(1);
@@ -735,16 +735,18 @@ void method_AddService(char *path)
 	}
 	dbus_message_iter_close_container(&iter_ay, &iter_y);
 	dbus_message_iter_close_container(&args, &iter_ay);
-	g_message("signature of iter_ay: %s", dbus_message_iter_get_signature(&iter_ay));
-	g_message("signature of args: %s", dbus_message_iter_get_signature(&args));
+	g_message("arrive here1.");
 	g_message("signature of msg: %s", dbus_message_get_signature(msg));
-	printf("arrive here3.");
+//	g_message("signature of iter_ay: %s", dbus_message_iter_get_signature(&iter_ay));
+//	g_message("signature of args: %s", dbus_message_iter_get_signature(&args));
+	g_message("arrive here2.");
 	
   // send message and get a handle for a reply
-  if (!dbus_connection_send (conn, msg, -1)) { // -1 is default timeout
+  if (!dbus_connection_send (conn, msg, NULL)) { // -1 is default timeout
      fprintf(stderr, "Out Of Memory!\n"); 
      exit(1);
      }
+  g_message("arrive here3.");
     dbus_connection_flush(conn);
    
     printf("Request Sent\n");
