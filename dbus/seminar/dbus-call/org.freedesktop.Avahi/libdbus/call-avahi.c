@@ -605,7 +605,7 @@ char* get_entry_group_path()
     return entry_group_path;
 }
 
-char* method_AddService(char *path)
+void method_AddService(char *path)
 {
     DBusMessage* msg;
     DBusMessageIter args;
@@ -620,9 +620,9 @@ char* method_AddService(char *path)
     char *type = "_http._tcp";
     char *domain = "local";
     char *host = "192.168.160.3";
-    dbus_uint16_t flags = 500;
-    char *name = "xifei";
-    char *passwd = "password of xifei";
+    dbus_uint16_t port = 500;
+    char *txt1 = "xifei";
+    char *txt2 = "password of xifei";
  /*
     <arg name="interface" type="i" direction="in"/>
     <arg name="protocol" type="i" direction="in"/>
@@ -648,7 +648,7 @@ char* method_AddService(char *path)
     }
 
     msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
-                                        "/", 							// object to call on
+                                        path, 							// object to call on
                                         "org.freedesktop.Avahi.EntryGroup",    // interface to call on
                                         "AddService");             // method nameResolveHostName
     if (NULL == msg) 
@@ -693,63 +693,68 @@ char* method_AddService(char *path)
         fprintf(stderr, "Out Of Memory!\n"); 
         exit(1);
     }
-    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &flags))
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &port))
     {
         fprintf(stderr, "Out Of Memory!\n"); 
         exit(1);
     }
-
-	DBusMessageIter iter_ay;
+    /*
+	DBusMessageIter iter_ay, iter_y;
 	// Open dict entry container
 	if (!dbus_message_iter_open_container(&args, DBUS_TYPE_ARRAY, "ay", &iter_ay)) {
-			printf("Can't open container for DICT-ENTRY\n");
-			failed = true;
-			break;
+			printf("Can't open container for iter_ay\n");
+			exit(1);
 	}
-   // send message and get a handle for a reply
-    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
-        fprintf(stderr, "Out Of Memory!\n"); 
-        exit(1);
-    }
-    if (NULL == pending) { 
-        fprintf(stderr, "Pending Call Null\n"); 
-        exit(1); 
-    }
+	if (!dbus_message_iter_open_container(&iter_ay, DBUS_TYPE_ARRAY, "y", &iter_y)) {
+			printf("Can't open container for iter_y\n");
+			exit(1);
+	}
+	dbus_uint16_t  bb=98;
+	dbus_uint16_t  cc=97;
+	dbus_message_iter_append_basic(&iter_y, DBUS_TYPE_BYTE, &bb);
+	dbus_message_iter_append_basic(&iter_y, DBUS_TYPE_BYTE, &cc);
+	dbus_message_iter_close_container(&iter_ay, &iter_y);
+	dbus_message_iter_close_container(&args, &iter_ay);
+	g_message("signature of iter_ay: %s", dbus_message_iter_get_signature(&iter_ay));
+	g_message("signature of args: %s", dbus_message_iter_get_signature(&args));
+*/
+
+	 DBusMessageIter iter_ay, iter_y;
+  if (!dbus_message_iter_open_container(&args, DBUS_TYPE_ARRAY, "ay", &iter_ay))
+      {
+		printf("Can't open container for iter_ay\n");
+      exit(1);
+      }
+	if (!dbus_message_iter_open_container(&iter_ay, DBUS_TYPE_ARRAY, "y", &iter_y)) {
+			printf("Can't open container for iter_y\n");
+			exit(1);
+	}
+	if (!dbus_message_iter_append_fixed_array (&iter_y, DBUS_TYPE_BYTE, &txt1, sizeof(txt1)))
+	 {
+	     fprintf (stderr, "No memory!\n");
+	}
+	dbus_message_iter_close_container(&iter_ay, &iter_y);
+	dbus_message_iter_close_container(&args, &iter_ay);
+	g_message("signature of iter_ay: %s", dbus_message_iter_get_signature(&iter_ay));
+	g_message("signature of args: %s", dbus_message_iter_get_signature(&args));
+	g_message("signature of msg: %s", dbus_message_get_signature(msg));
+	printf("arrive here3.");
+	
+  // send message and get a handle for a reply
+  if (!dbus_connection_send (conn, msg, -1)) { // -1 is default timeout
+     fprintf(stderr, "Out Of Memory!\n"); 
+     exit(1);
+     }
     dbus_connection_flush(conn);
    
     printf("Request Sent\n");
    
     // free message
     dbus_message_unref(msg);
-   
-    // block until we recieve a reply
-    dbus_pending_call_block(pending);
-
-    // get the reply message
-    msg = dbus_pending_call_steal_reply(pending);
-    if (NULL == msg) {
-        fprintf(stderr, "Reply Null\n"); 
-        exit(1); 
-    }
-    // free the pending message handle
-    dbus_pending_call_unref(pending);
-
-    // read the parameters
-    if (!dbus_message_iter_init(msg, &args))
-        fprintf(stderr, "Message has no arguments!\n"); 
-    else if (DBUS_TYPE_OBJECT_PATH != dbus_message_iter_get_arg_type(&args)) 
-        fprintf(stderr, "Argument is not boolean!\n"); 
-    else
-        dbus_message_iter_get_basic(&args, &service_browser_path);
-
-
-    printf("Got Reply: %s\n", service_browser_path);
-    dbus_message_unref(msg);  
-    return service_browser_path;
 }
 void main()
 {
   	 //signal_ServiceBrowser_item(get_service_browser_path());
-  	 get_entry_group_path();
+	method_AddService(get_entry_group_path());
     //resolve_service();
 }
