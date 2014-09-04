@@ -585,7 +585,8 @@ char* get_entry_group_path()
     if (NULL == msg) {
         fprintf(stderr, "Reply Null\n"); 
         exit(1); 
-    }else if (dbus_message_get_type(msg) == DBUS_MESSAGE_TYPE_ERROR) {
+    }
+    if (dbus_message_get_type(msg) == DBUS_MESSAGE_TYPE_ERROR) {
 			   fprintf("message returned error: %s", dbus_message_get_error_name(msg));
 	}
     // free the pending message handle
@@ -739,14 +740,13 @@ void method_AddService(char *path)
 	g_message("signature of msg: %s", dbus_message_get_signature(msg));
 //	g_message("signature of iter_ay: %s", dbus_message_iter_get_signature(&iter_ay));
 //	g_message("signature of args: %s", dbus_message_iter_get_signature(&args));
-	g_message("arrive here2.");
 	
   // send message and get a handle for a reply
   if (!dbus_connection_send (conn, msg, NULL)) { // -1 is default timeout
      fprintf(stderr, "Out Of Memory!\n"); 
      exit(1);
      }
-  g_message("arrive here3.");
+
     dbus_connection_flush(conn);
    
     printf("Request Sent\n");
@@ -754,9 +754,145 @@ void method_AddService(char *path)
     // free message
     dbus_message_unref(msg);
 }
+void method_GetState(char *path){
+    DBusMessage* msg;
+    DBusMessageIter args;
+    DBusConnection* conn;
+    DBusError err;
+    dbus_error_init(&err);
+    DBusPendingCall* pending;
+    // connect to the system bus and check for errors
+    conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+    if (dbus_error_is_set(&err)) { 
+      fprintf(stderr, "Connection Error (%s)\n", err.message); 
+      dbus_error_free(&err);
+     }
+    if (NULL == conn) { 
+       exit(1);
+     }
+    //char *path = malloc(sizeof(char) * strlen(mpath));
+    //strcpy(path, mpath);
+    //printf("*0mpath: %s / %s\n", path, mpath);
+    msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                        path, 							// object to call on
+                                        "org.freedesktop.Avahi.EntryGroup",    // interface to call on
+                                        "GetState");             // method nameResolveHostName
+    //printf("*1mpath: %s / %s\n", path, mpath);
+    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
+        fprintf(stderr, "Out Of Memory!\n"); 
+        exit(1);
+     }
+    //printf("*2mpath: %s / %s\n", path, mpath);
+    if (NULL == pending) { 
+        fprintf(stderr, "Pending Call Null\n"); 
+        exit(1); 
+     }
+     dbus_connection_flush(conn);
+
+     printf("Request Sent\n");
+
+     // free message
+     dbus_message_unref(msg);
+    
+     // block until we recieve a reply
+     dbus_pending_call_block(pending);
+
+     // get the reply message
+     msg = dbus_pending_call_steal_reply(pending);
+     if (NULL == msg) {
+         fprintf(stderr, "Reply Null\n"); 
+         exit(1); 
+     }
+     // free the pending message handle
+     dbus_pending_call_unref(pending);
+
+     dbus_uint32_t m_state;
+     if (!dbus_message_iter_init(msg, &args)){
+         g_message("dbus_message_iter_init fail\n");
+     }
+     if(dbus_message_get_type(msg) == DBUS_MESSAGE_TYPE_ERROR){
+         char *result;
+         g_message("arg type: %d", dbus_message_iter_get_arg_type(&args));
+         dbus_message_iter_get_basic(&args, &result);
+         g_message("error:  %s", result);    	 
+     }else{
+         if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+             g_message("Argument is not DBUS_TYPE_INT32!\n"); 
+         else{
+             dbus_message_iter_get_basic(&args, &m_state);
+             printf("m_state : %d\n", m_state);
+         }
+     }
+     dbus_message_unref(msg);
+}
+void method_Commit(char *path){
+    DBusConnection* conn;
+    DBusMessage* msg;
+    DBusError err;
+    dbus_error_init(&err);
+    // connect to the system bus and check for errors
+    conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+    if (dbus_error_is_set(&err)) { 
+      fprintf(stderr, "Connection Error (%s)\n", err.message); 
+      dbus_error_free(&err);
+     }
+     if (NULL == conn) { 
+       exit(1);
+     }
+    msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                        path, 							// object to call on
+                                        "org.freedesktop.Avahi.EntryGroup",    // interface to call on
+                                        "Commit");             // method nameResolveHostName
+    if (!dbus_connection_send (conn, msg, NULL)) { //
+       fprintf(stderr, "Out Of Memory!\n"); 
+       exit(1);
+       }
+    dbus_connection_flush(conn);
+    dbus_message_unref(msg);	
+}
+
+void method_Reset(char *path){
+    DBusMessage* msg;
+    DBusConnection* conn;
+    DBusError err;
+    dbus_error_init(&err);
+    // connect to the system bus and check for errors
+     conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
+     if (dbus_error_is_set(&err)) { 
+       fprintf(stderr, "Connection Error (%s)\n", err.message); 
+       dbus_error_free(&err);
+     }
+     if (NULL == conn) { 
+       exit(1);
+     }
+    msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
+                                        path, 							// object to call on
+                                        "org.freedesktop.Avahi.EntryGroup",    // interface to call on
+                                        "Reset");             // method nameResolveHostName
+    if (!dbus_connection_send (conn, msg, NULL)) { // -1 is default timeout
+       fprintf(stderr, "Out Of Memory!\n"); 
+       exit(1);
+       }
+    dbus_connection_flush(conn);
+    dbus_message_unref(msg);	
+}
 void main()
 {
   	 //signal_ServiceBrowser_item(get_service_browser_path());
-	method_AddService(get_entry_group_path());
     //resolve_service();
+    char *entry_group_path = get_entry_group_path();
+    char *mypath = malloc(sizeof(char) * strlen(entry_group_path));
+    strcpy(mypath, entry_group_path);
+/*
+    printf("*mypath: %s / %s\n", mypath, entry_group_path);
+    method_AddService(entry_group_path);
+    printf("*mypath: %s / %s\n", mypath, entry_group_path);
+    method_Commit(entry_group_path);
+    printf("*mypath: %s / %s\n", mypath, entry_group_path);
+*/
+    method_GetState(mypath);
+    printf("*mypath: %s / %s\n", mypath, entry_group_path);
+	//method_Commit(entry_group_path);
+
+	//printf("*entry_group_path: %s\n", entry_group_path);
 }
