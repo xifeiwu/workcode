@@ -14,7 +14,7 @@ ADD_CFLAGS := -g -Wall  --std=c99
 # Combine user supplied, additional, and pkg-config flags
 CFLAGS  := $(PKG_CFLAGS) $(ADD_CFLAGS) $(CFLAGS)
 LDFLAGS := $(PKG_LDFLAGS) $(LDFLAGS)
-targets = call-avahi call-avahi-glib
+targets = call-avahi 
 .PHONY: all clean
 all: $(targets)
 
@@ -22,13 +22,8 @@ gen_marshal: marshal.list
 	glib-genmarshal --header --prefix "_avahi_marshal" $^  > marshal.h
 	glib-genmarshal --body $^  --prefix "_avahi_marshal" > marshal.c
 
-call-avahi-glib: marshal.c call-avahi-glib.c
-#	$(shell dbus-binding-tool --prefix=test_object --mode=glib-server --output=call-avahi-glue.h ./org.freedesktop.Avahi.ServiceBrowser.xml)
-#	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 call-avahi: call-avahi.c
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
-
 
 clean:
 	$(RM) $(targets)

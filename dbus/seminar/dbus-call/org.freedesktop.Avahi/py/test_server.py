@@ -30,11 +30,11 @@ class ZeroconfService:
                     bus.get_object(avahi.DBUS_NAME,
                                    server.EntryGroupNew()),
                     avahi.DBUS_INTERFACE_ENTRY_GROUP)
-
+        print "avahi.DBUS_INTERFACE_ENTRY_GROUP: ", avahi.DBUS_INTERFACE_ENTRY_GROUP
         g.AddService(avahi.IF_UNSPEC, avahi.PROTO_UNSPEC,dbus.UInt32(0),
                      self.name, self.stype, self.domain, self.host,
                      dbus.UInt16(self.port), self.text)
-
+        print "state:" ,g.GetState()
         g.Commit()
         self.group = g
 
