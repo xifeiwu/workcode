@@ -184,7 +184,7 @@ static void entry_group_AddService(){
             G_TYPE_STRING, type,
             G_TYPE_STRING, domain,
             G_TYPE_STRING, host,
-            DBUS_TYPE_UINT16, port,//G_TYPE_UCAHR
+            G_VARIANT_CLASS_UINT16, port,//G_TYPE_UCAHRDBUS_TYPE_UINT16
             DBUS_TYPE_G_UCHAR_ARRAY_ARRAY, txt,
             G_TYPE_INVALID,
             G_TYPE_INVALID))
@@ -221,7 +221,7 @@ int main(int argc, char **argv) {
             "org.freedesktop.Avahi.Server");
     
     start_avahi_service_browser(bus_system);
-    start_avahi_entry_group(bus_system);
+//    start_avahi_entry_group(bus_system);
     g_main_loop_run(mainloop);
 
     g_object_unref(G_OBJECT(proxy_avahi_service));

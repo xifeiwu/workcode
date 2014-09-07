@@ -26,6 +26,7 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         int aprotocol = 0;
         char *address;
         guint16 port = 0;
+        //GVariant *aay;
         GVariant *aay;
         GPtrArray *byte_arraies;
         result = g_dbus_proxy_call_sync (
@@ -41,7 +42,10 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         g_message("ResolveService result type: %s", g_variant_get_type_string (result));
         g_variant_get (result, "(iissssisqaayu)",  &interface, &protocol, &name, &stype, &domain, &host,
                 &aprotocol, &address, &port, &aay, &flags);
-//        g_message("aay type: %s", g_variant_get_type_string (aay));
+//        g_message("aay type: %s", g_variant_get_type_string (aay));n = g_variant_n_children (array);
+        guint n;
+        n = g_variant_n_children (aay);
+        printf("size of aay: %d", n);
         printf("Results of ResolveService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
                 interface, protocol, name, stype, domain, host, aprotocol, address,
                 port, flags);
