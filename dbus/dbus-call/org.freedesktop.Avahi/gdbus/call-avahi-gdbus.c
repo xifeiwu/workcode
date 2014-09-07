@@ -69,11 +69,26 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         printf ("ItemRemove: %d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
     }
 }
+static void
+proxy_avahi_service_browser_ready (GObject      *source,
+             GAsyncResult *result,
+             gpointer      user_data)
+{
+  GError *error;
+  error = NULL;
+  proxy_avahi_service_browser = g_dbus_proxy_new_for_bus_finish (result, &error);
+  g_assert_no_error (error);
+  gulong signal_handler_id;
+  GString *data = g_string_new (NULL);
+  signal_handler_id = g_signal_connect (proxy_avahi_service_browser,
+                                        "g-signal",
+                                        G_CALLBACK (avahi_service_browser_on_signal),
+                                        data);
+}
 static void start_avahi_service_browser(){
     GVariant *result;
     GError *error = NULL;
-    char *service_browser_path;
-    
+    char *service_browser_path;    
     result = g_dbus_proxy_call_sync (
                 proxy_avahi_service,
                 "ServiceBrowserNew",
@@ -89,7 +104,7 @@ static void start_avahi_service_browser(){
     printf("new service browser (%s) has started.\n", service_browser_path);
 //    g_message("result: %s, value: %s", g_variant_get_type_string (result), service_browser_path);
     
-    proxy_avahi_service_browser = g_dbus_proxy_new_for_bus_sync (
+    g_dbus_proxy_new_for_bus(
                 G_BUS_TYPE_SYSTEM,
                 G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
                 NULL,                                               /* GDBusInterfaceInfo */
@@ -97,15 +112,10 @@ static void start_avahi_service_browser(){
                 service_browser_path,                               /* object path */
                 "org.freedesktop.Avahi.ServiceBrowser",             /* interface */
                 NULL,                                               /* GCancellable */
+                proxy_avahi_service_browser_ready,
                 &error);
     g_assert_no_error (error);
 //sleep(1);
-    gulong signal_handler_id;
-    GString *data = g_string_new (NULL);
-    signal_handler_id = g_signal_connect (proxy_avahi_service_browser,
-                                          "g-signal",
-                                          G_CALLBACK (avahi_service_browser_on_signal),
-                                          data);
 }
 int main (int argc, char *argv[])
 {
