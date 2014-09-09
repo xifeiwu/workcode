@@ -1,7 +1,23 @@
 #include <gio/gio.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+void iterate_container_recursive(GVariant *container) {
+    g_print("container type: %s\n", g_variant_get_type_string(container));
+    GVariantIter iter;
+    GVariant *child;
+    g_variant_iter_init(&iter, container);
+    while ((child = g_variant_iter_next_value(&iter))) {
+        g_print("type '%s' , %s\n", g_variant_get_type_string(child), (g_variant_is_container(child)? "is container":"is not a container"));
+        if (g_variant_is_container(child)){
+            iterate_container_recursive(child);
+            //g_print("is a container\n");
+        }
+        //else{
+            //g_print("is not a container\n");            
+        //}
+        g_variant_unref(child);
+    }
+}
 GDBusProxy *proxy_avahi_service;
 GDBusProxy *proxy_avahi_service_browser;
 static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
@@ -27,8 +43,9 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         char *address;
         guint16 port = 0;
         //GVariant *aay;
-        GVariant *aay;
-        GPtrArray *byte_arraies;
+//        GPtrArray *byte_arraies;
+        GVariantIter aay_iter;
+        GVariant *aay ;//= g_variant_new("aay");
         result = g_dbus_proxy_call_sync (
                     proxy_avahi_service,
                     "ResolveService",
@@ -39,16 +56,40 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
                     &error);
         g_assert_no_error (error);
         g_assert (result != NULL);
-        g_message("ResolveService result type: %s", g_variant_get_type_string (result));
-        g_variant_get (result, "(iissssisqaayu)",  &interface, &protocol, &name, &stype, &domain, &host,
+        g_assert_cmpstr (g_variant_get_type_string (result), ==, "(iissssisqaayu)");
+//        g_message("ResolveService result type: %s", g_variant_get_type_string (result));
+        
+        g_variant_get (result, "(iissssisq@aayu)",  &interface, &protocol, &name, &stype, &domain, &host,
                 &aprotocol, &address, &port, &aay, &flags);
-//        g_message("aay type: %s", g_variant_get_type_string (aay));n = g_variant_n_children (array);
-        guint n;
-        n = g_variant_n_children (aay);
-        printf("size of aay: %d", n);
-        printf("Results of ResolveService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
+        g_printf("Results of ResolveService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
                 interface, protocol, name, stype, domain, host, aprotocol, address,
                 port, flags);
+
+        //iterate_container_recursive(aay);
+        GVariantIter *y_iter;
+        guchar y_i;
+        unsigned char *value;
+        GVariant *child;
+//        g_message("size of aay1: %d\n", g_variant_n_children (aay));
+        g_message("size of aay2: %d\n", g_variant_iter_init (&aay_iter, aay));
+        while ((child = g_variant_iter_next_value(&aay_iter))) {
+            g_print("type of child: %s\n", g_variant_get_type_string(child));
+            if (g_variant_is_of_type (child, G_VARIANT_TYPE_BYTESTRING)){g_printf("is a bytestring type");};
+            g_variant_get(child, "ay", &y_iter);
+            while (g_variant_iter_loop(y_iter, "y", &y_i)) {
+                g_print("value: %c\n", y_i);
+            }
+//            g_variant_get(child, "ay", &value);
+//            g_print("value: %s\n", value);
+            }
+        //iterate_container_recursive(result);
+//        while (g_variant_iter_next (&aay_iter, "ay", &key, &value)){
+//        GVariant *child;
+//        while ((child = g_variant_iter_next_value (aay_iter))){
+//            printf("type of child: %s ", g_variant_get_type_string(child));
+//        }
+
+        
 //        gchar **arr = g_variant_get_bytestring_array(aay, NULL);
         /*
         if (byte_arraies->len == 0) {
@@ -69,26 +110,52 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         printf ("ItemRemove: %d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
     }
 }
-static void
-proxy_avahi_service_browser_ready (GObject      *source,
-             GAsyncResult *result,
-             gpointer      user_data)
-{
-  GError *error;
-  error = NULL;
-  proxy_avahi_service_browser = g_dbus_proxy_new_for_bus_finish (result, &error);
-  g_assert_no_error (error);
-  gulong signal_handler_id;
-  GString *data = g_string_new (NULL);
-  signal_handler_id = g_signal_connect (proxy_avahi_service_browser,
-                                        "g-signal",
-                                        G_CALLBACK (avahi_service_browser_on_signal),
-                                        data);
-}
-static void start_avahi_service_browser(){
+static void start_avahi_service_browser(char *path){
     GVariant *result;
     GError *error = NULL;
-    char *service_browser_path;    
+//    printf("proxy_avahi_service1: %d\n", proxy_avahi_service_browser);
+    
+    proxy_avahi_service_browser = g_dbus_proxy_new_for_bus_sync (
+                G_BUS_TYPE_SYSTEM,
+                G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
+                NULL,                                               /* GDBusInterfaceInfo */
+                "org.freedesktop.Avahi",                            /* name */
+                path,                                               /* object path */
+                "org.freedesktop.Avahi.ServiceBrowser",             /* interface */
+                NULL,                                               /* GCancellable */
+                &error);
+    g_assert_no_error (error);
+//    printf("proxy_avahi_service2: %d\n", proxy_avahi_service_browser);
+//sleep(1);
+    gulong signal_handler_id;
+    GString *data = g_string_new (NULL);
+    signal_handler_id = g_signal_connect (proxy_avahi_service_browser,
+                                          "g-signal",
+                                          G_CALLBACK (avahi_service_browser_on_signal),
+                                          data);
+}
+int main (int argc, char *argv[])
+{
+    GMainLoop *mainloop;
+    g_type_init();
+    g_test_init (&argc, &argv, NULL);
+
+    /* all the tests rely on a shared main loop */
+    mainloop = g_main_loop_new (NULL, FALSE);
+    GError *error;
+    error = NULL;
+    proxy_avahi_service = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                           G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
+                                           NULL,                            /* GDBusInterfaceInfo */
+                                           "org.freedesktop.Avahi",         /* name */
+                                           "/",                             /* object path */
+                                           "org.freedesktop.Avahi.Server",  /* interface */
+                                           NULL, /* GCancellable */
+                                           &error);
+    g_assert_no_error (error);
+    
+    char *service_browser_path;
+    GVariant *result;
     result = g_dbus_proxy_call_sync (
                 proxy_avahi_service,
                 "ServiceBrowserNew",
@@ -101,43 +168,10 @@ static void start_avahi_service_browser(){
     g_assert (result != NULL);
     g_assert_cmpstr (g_variant_get_type_string (result), ==, "(o)");
     g_variant_get (result, "(o)", &service_browser_path);
-    printf("new service browser (%s) has started.\n", service_browser_path);
-//    g_message("result: %s, value: %s", g_variant_get_type_string (result), service_browser_path);
+    g_message("new service browser (%s) has started.\n", service_browser_path);
     
-    g_dbus_proxy_new_for_bus(
-                G_BUS_TYPE_SYSTEM,
-                G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
-                NULL,                                               /* GDBusInterfaceInfo */
-                "org.freedesktop.Avahi",                            /* name */
-                service_browser_path,                               /* object path */
-                "org.freedesktop.Avahi.ServiceBrowser",             /* interface */
-                NULL,                                               /* GCancellable */
-                proxy_avahi_service_browser_ready,
-                &error);
-    g_assert_no_error (error);
-//sleep(1);
-}
-int main (int argc, char *argv[])
-{
-    GMainLoop *mainloop;
-    g_type_init();
-    g_test_init (&argc, &argv, NULL);
-
-    /* all the tests rely on a shared main loop */
-    mainloop = g_main_loop_new (NULL, FALSE);
-
-    GError *error;
-    error = NULL;
-    proxy_avahi_service = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                           G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
-                                           NULL,                            /* GDBusInterfaceInfo */
-                                           "org.freedesktop.Avahi",         /* name */
-                                           "/",                             /* object path */
-                                           "org.freedesktop.Avahi.Server",  /* interface */
-                                           NULL, /* GCancellable */
-                                           &error);
-    g_assert_no_error (error);
-    start_avahi_service_browser();
+    start_avahi_service_browser(service_browser_path);
+    
     g_main_loop_run(mainloop);
     exit(0);
 }
