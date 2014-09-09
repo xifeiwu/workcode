@@ -1,6 +1,18 @@
-#include <gio/gio.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+#include "call-avahi-gdbus.h"
+
+void showTxtInfo(_TxtInfo txt){
+    guint i;
+    i=0;
+//    g_printf("aaaaaaaaaaaaaaaaaa function showTxtInfo, txt.length: %d\n", txt.length);
+//    g_printf("bbbbbbbbbbbbbbbbbb function showTxtInfo, txt.length: %d\n", txt.length);
+//    g_printf("cccccccccccccccccc function showTxtInfo, txt.length: %d\n", txt.length);
+    for(i = 0; i < txt.length; i++){
+        g_printf("%d: %s\n", i, txt.txt[i]);
+//        g_printf("adasfdsafds");
+    }
+}
+
 void iterate_container_recursive(GVariant *container) {
     g_print("container type: %s\n", g_variant_get_type_string(container));
     GVariantIter iter;
@@ -18,15 +30,13 @@ void iterate_container_recursive(GVariant *container) {
         g_variant_unref(child);
     }
 }
-GDBusProxy *proxy_avahi_service;
-GDBusProxy *proxy_avahi_service_browser;
 static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         const gchar *sender_name,
         const gchar *signal_name,
         GVariant    *parameters,
         gpointer     user_data)
 {
-    g_message("sender_name: %s, signal_name: %s, tpye: %s", sender_name, signal_name, g_variant_get_type_string(parameters));
+    g_printf("\nOn Signal Receive, sender_name: %s, signal_name: %s, tpye: %s\n", sender_name, signal_name, g_variant_get_type_string(parameters));
     int interface = 0;
     int protocol = 0;
     char *name = "";
@@ -44,8 +54,7 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         guint16 port = 0;
         //GVariant *aay;
 //        GPtrArray *byte_arraies;
-        GVariantIter aay_iter;
-        GVariant *aay ;//= g_variant_new("aay");
+        GVariant *aay;
         result = g_dbus_proxy_call_sync (
                     proxy_avahi_service,
                     "ResolveService",
@@ -61,33 +70,41 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
         
         g_variant_get (result, "(iissssisq@aayu)",  &interface, &protocol, &name, &stype, &domain, &host,
                 &aprotocol, &address, &port, &aay, &flags);
-        g_printf("Results of ResolveService:%d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
-                interface, protocol, name, stype, domain, host, aprotocol, address,
-                port, flags);
 
-        //iterate_container_recursive(aay);
-        GVariantIter *y_iter;
-        guchar y_i;
+        GVariantIter aay_iter;
+        GVariantIter ay_iter;
+        guint y_cnt = 0;
+        guint txt_cnt = 0;
+        guint ay_len = 0;
+        guchar y_value;
         unsigned char *value;
         GVariant *child;
+        _TxtInfo txt;
 //        g_message("size of aay1: %d\n", g_variant_n_children (aay));
-        g_message("size of aay2: %d\n", g_variant_iter_init (&aay_iter, aay));
+//        g_message("size of aay2: %d\n", g_variant_iter_init (&aay_iter, aay));
+        txt.length = g_variant_iter_init (&aay_iter, aay);
+        txt.txt = (guchar**)malloc(sizeof(guchar*) * txt.length);
+        
         while ((child = g_variant_iter_next_value(&aay_iter))) {
-            g_print("type of child: %s\n", g_variant_get_type_string(child));
-            if (g_variant_is_of_type (child, G_VARIANT_TYPE_BYTESTRING)){g_printf("is a bytestring type");};
-            g_variant_get(child, "ay", &y_iter);
-            while (g_variant_iter_loop(y_iter, "y", &y_i)) {
-                g_print("value: %c\n", y_i);
+//            g_print("type of child: %s\n", g_variant_get_type_string(child));
+//            if (g_variant_is_of_type (child, G_VARIANT_TYPE_BYTESTRING)){g_printf("is a bytestring type");};
+//            g_variant_get(child, "ay", &ay_iter);
+            ay_len = g_variant_iter_init (&ay_iter, child);
+            txt.txt[txt_cnt] = (guchar*)malloc(sizeof(guchar) * (ay_len + 1));
+//            g_print("value length: %d\n", ay_len);
+            y_cnt = 0;
+            while (g_variant_iter_loop(&ay_iter, "y", &y_value)) {
+//                g_print("value: %c\n", y_value);
+                txt.txt[txt_cnt][y_cnt++] = y_value;
             }
-//            g_variant_get(child, "ay", &value);
-//            g_print("value: %s\n", value);
-            }
-        //iterate_container_recursive(result);
-//        while (g_variant_iter_next (&aay_iter, "ay", &key, &value)){
-//        GVariant *child;
-//        while ((child = g_variant_iter_next_value (aay_iter))){
-//            printf("type of child: %s ", g_variant_get_type_string(child));
-//        }
+            txt.txt[txt_cnt][y_cnt] = '\0';
+            txt_cnt++;
+        }
+        
+        g_printf("Results of ResolveService: %d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
+                interface, protocol, name, stype, domain, host, aprotocol, address,
+                port, flags);
+        showTxtInfo(txt);
 
         
 //        gchar **arr = g_variant_get_bytestring_array(aay, NULL);
