@@ -7,7 +7,7 @@ util.inherits(Person, events.EventEmitter);
 
 var xiaoming = new Person("小明");
 var xiaowang = new Person("小王");
-var emitter = new events.EventEmitter();
+//var emitter = new events.EventEmitter();
 xiaoming.on('wantEat', function(thing){
     console.log('小明', '想吃', thing);
 });
