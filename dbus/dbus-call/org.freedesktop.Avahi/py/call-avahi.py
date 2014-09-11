@@ -8,11 +8,23 @@ from dbus.mainloop.glib import DBusGMainLoop
 TYPE = "_http._tcp"
 
 def service_resolved(*args):
-    print 'service resolved'
-    print 'name:', args[2]
-    print 'address:', args[7]
-    print 'port:', args[8]
-    print 'txt:', args[9]
+    result = args
+    print("\n== Device Info ==")
+    print('interface: %s' % (result[0]))
+    print('protocol: %s' % result[1])
+    print('name: %s' % result[2])
+    print('stype: %s' % result[3])
+    print('domain: %s' % result[4])
+    print('host: %s' % result[5])
+    print('aprotocol: %s' % result[6])
+    print('address: %s' % result[7])
+    print('port: %s' % result[8])
+    txtByteArray = result[9]
+    txtString = ''
+    for array in txtByteArray:
+        txtString += ( ''.join([chr(byte) for byte in array]) + '; ')    
+    print('txt: %s' % txtString)
+    print('flags: %s' % result[10])
 
 def print_error(*args):
     print 'error_handler'
@@ -26,13 +38,12 @@ def service_resolve_hostname(*args):
     print 'port:', args[3]
     print 'port:', args[4]
     print 'port:', args[5]
+
 def ItemAdd(interface, protocol, name, stype, domain, flags):
     print "Found service '%s' type '%s' domain '%s' " % (name, stype, domain)
-
     if flags & avahi.LOOKUP_RESULT_LOCAL:
             # local service, skip
             pass
-
     server.ResolveService(interface, protocol, name, stype, 
         domain, avahi.PROTO_UNSPEC, dbus.UInt32(0), 
         reply_handler=service_resolved, error_handler=print_error)
@@ -45,10 +56,6 @@ def ItemAdd(interface, protocol, name, stype, domain, flags):
 
 def ItemRemove(interface, protocol, name, stype, domain, flags):
     print "Remove service '%s' type '%s' domain '%s'" % (name, stype, domain)
-#    print "Addation: interface '%r' protocol '%r' flags '%r'" % (interface, protocol, flags)
-    server.ResolveService(interface, protocol, name, stype,
-        domain, avahi.PROTO_UNSPEC, dbus.UInt32(0),
-        reply_handler=service_resolved, error_handler=print_error)
 
 loop = DBusGMainLoop()
 
