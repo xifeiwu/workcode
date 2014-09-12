@@ -40,7 +40,7 @@ def service_resolve_hostname(*args):
     print 'port:', args[5]
 
 def ItemAdd(interface, protocol, name, stype, domain, flags):
-    print "Found service '%s' type '%s' domain '%s' " % (name, stype, domain)
+    print "ItemNew: %d, %d, %s, %s, %s, %d.\n" % (interface, protocol, name, stype, domain, flags)
     if flags & avahi.LOOKUP_RESULT_LOCAL:
             # local service, skip
             pass
@@ -57,12 +57,22 @@ def ItemAdd(interface, protocol, name, stype, domain, flags):
 def ItemRemove(interface, protocol, name, stype, domain, flags):
     print "Remove service '%s' type '%s' domain '%s'" % (name, stype, domain)
 
+def AllForNow():
+    print "that's all for now"
+
+def CacheExhausted():
+    print "cache exhausted"
+
+
+def Failure( error):
+    print "failure: %s" % error
+
 loop = DBusGMainLoop()
 
 bus = dbus.SystemBus(mainloop=loop)
 
-server = dbus.Interface( bus.get_object(avahi.DBUS_NAME, '/'),
-        'org.freedesktop.Avahi.Server')
+server = dbus.Interface( bus.get_object(avahi.DBUS_NAME, '/'), 'org.freedesktop.Avahi.Server')
+
 print "parameters in ServiceBrowserNew:%d, %d, %s, %s, %d" % (avahi.IF_UNSPEC, avahi.PROTO_UNSPEC, TYPE, 'local', dbus.UInt32(0))
 service_browser_path = server.ServiceBrowserNew(avahi.IF_UNSPEC,
             avahi.PROTO_UNSPEC, TYPE, 'local', dbus.UInt32(0))
@@ -78,5 +88,8 @@ print "avahi.PROTO_UNSPEC: %s" % (avahi.PROTO_UNSPEC)
 
 sbrowser.connect_to_signal("ItemNew", ItemAdd)
 sbrowser.connect_to_signal("ItemRemove", ItemRemove)
+sbrowser.connect_to_signal("AllForNow", AllForNow)
+sbrowser.connect_to_signal("CacheExhausted", CacheExhausted)
+sbrowser.connect_to_signal("Failure", Failure)
 
 gobject.MainLoop().run()
