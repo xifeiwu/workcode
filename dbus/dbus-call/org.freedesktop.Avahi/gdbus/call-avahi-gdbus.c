@@ -45,7 +45,7 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
     unsigned int flags = 0;
     if (g_strcmp0 (signal_name, "ItemNew") == 0){
         g_variant_get (parameters, "(iisssu)",  &interface, &protocol, &name, &stype, &domain, &flags);
-//        printf ("ItemNew: %d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
+        printf ("ItemNew: %d, %d, %s, %s, %s, %d.\n", interface, protocol, name, stype, domain, flags);
         GVariant *result;
         GError *error = NULL;
         char *host;
@@ -101,10 +101,10 @@ static void avahi_service_browser_on_signal(GDBusProxy  *proxy,
             txt_cnt++;
         }
         
-        g_printf("Results of ResolveService: %d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
-                interface, protocol, name, stype, domain, host, aprotocol, address,
-                port, flags);
-        showTxtInfo(txt);
+        // g_printf("Results of ResolveService: %d, %d, %s, %s, %s, %s, %d, %s, %d, %d.\n",
+        //         interface, protocol, name, stype, domain, host, aprotocol, address,
+        //         port, flags);
+        // showTxtInfo(txt);
 
         
 //        gchar **arr = g_variant_get_bytestring_array(aay, NULL);
@@ -151,6 +151,78 @@ static void start_avahi_service_browser(char *path){
                                           G_CALLBACK (avahi_service_browser_on_signal),
                                           data);
 }
+static void start_avahi_entry_group(char *path){
+    GVariant *result;
+    GError *error = NULL;
+//    printf("proxy_avahi_service1: %d\n", proxy_avahi_service_browser);
+    
+    proxy_avahi_entry_group = g_dbus_proxy_new_for_bus_sync (
+                G_BUS_TYPE_SYSTEM,
+                G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
+                NULL,                                               /* GDBusInterfaceInfo */
+                "org.freedesktop.Avahi",                            /* name */
+                path,                                               /* object path */
+                "org.freedesktop.Avahi.EntryGroup",             /* interface */
+                NULL,                                               /* GCancellable */
+                &error);
+    g_assert_no_error (error);
+    // <arg name="interface" type="i" direction="in"/>
+    // <arg name="protocol" type="i" direction="in"/>
+    // <arg name="flags" type="u" direction="in"/>
+    // <arg name="name" type="s" direction="in"/>
+    // <arg name="type" type="s" direction="in"/>
+    // <arg name="domain" type="s" direction="in"/>
+    // <arg name="host" type="s" direction="in"/>
+    // <arg name="port" type="q" direction="in"/>
+    // <arg name="txt" type="aay" direction="in"/>
+}
+
+static GVariant* encode_aay(guchar **txt_aay, int rows){
+    GVariantBuilder builder;
+    int i, j, length;
+    g_variant_builder_init (&builder, G_VARIANT_TYPE ("aay"));
+    for (i = 0; i < rows; i++)
+    {
+        g_variant_builder_open (&builder, G_VARIANT_TYPE("ay"));
+        length = strlen(txt_aay[i]);
+        // g_printf("length of rows%d: %d\n", i, length);
+        for(j = 0; j < length; j++){
+            g_variant_builder_add (&builder, "y", txt_aay[i][j]);
+        }
+        g_variant_builder_close(&builder);
+    }
+    return g_variant_builder_end (&builder);
+}
+
+static void avahi_entry_group_commit(){//char *name, guint16 port, guchar **txt_aay
+    char *name = "try";
+    guint16 port = 80;
+    guchar *one = "one";
+    guchar *two = "two";
+    guchar **txt_aay = (guchar**)malloc(sizeof(guchar*) * 2);
+    txt_aay[0] = one;
+    txt_aay[1] = two;
+    GVariant *result;    
+    GError *error = NULL;
+    result = g_dbus_proxy_call_sync (
+                proxy_avahi_entry_group,
+                "AddService",
+                g_variant_new ("(iiussssq@aay)", -1, -1,  0, name, "_http._tcp", "", "", port,  encode_aay(txt_aay, 2)),
+                G_DBUS_CALL_FLAGS_NONE,
+                 -1,
+                NULL,
+                &error);
+    g_assert_no_error (error);
+    result = g_dbus_proxy_call_sync (
+                proxy_avahi_entry_group,
+                "Commit",
+                NULL,
+                G_DBUS_CALL_FLAGS_NONE,
+                 -1,
+                NULL,
+                &error);
+    g_assert_no_error (error);
+}
 int main (int argc, char *argv[])
 {
     GMainLoop *mainloop;
@@ -171,8 +243,9 @@ int main (int argc, char *argv[])
                                            &error);
     g_assert_no_error (error);
     
-    char *service_browser_path;
     GVariant *result;
+
+    char *service_browser_path;
     result = g_dbus_proxy_call_sync (
                 proxy_avahi_service,
                 "ServiceBrowserNew",
@@ -185,10 +258,28 @@ int main (int argc, char *argv[])
     g_assert (result != NULL);
     g_assert_cmpstr (g_variant_get_type_string (result), ==, "(o)");
     g_variant_get (result, "(o)", &service_browser_path);
-    g_message("new service browser (%s) has started.\n", service_browser_path);
+    g_printf("new service browser (%s) has started.\n", service_browser_path);
     
     start_avahi_service_browser(service_browser_path);
     
+    char *entry_group_path;
+    result = g_dbus_proxy_call_sync (
+                proxy_avahi_service,
+                "EntryGroupNew",
+                NULL,
+                G_DBUS_CALL_FLAGS_NONE,
+                 -1,
+                NULL,
+                &error);
+    g_assert_no_error (error);
+    g_assert (result != NULL);
+    g_assert_cmpstr (g_variant_get_type_string (result), ==, "(o)");
+    g_variant_get (result, "(o)", &entry_group_path);
+    g_printf("new entry group (%s) has started.\n", entry_group_path);
+
+    start_avahi_entry_group(entry_group_path);
+    avahi_entry_group_commit();
+
     g_main_loop_run(mainloop);
     exit(0);
 }

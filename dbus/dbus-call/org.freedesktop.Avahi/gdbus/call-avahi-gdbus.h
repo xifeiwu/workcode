@@ -9,4 +9,4 @@ typedef struct {
 }_TxtInfo;
 void showTxfInfo(_TxtInfo);
 GDBusProxy *proxy_avahi_service;
-GDBusProxy *proxy_avahi_service_browser;
+GDBusProxy *proxy_avahi_service_browser, *proxy_avahi_entry_group;
