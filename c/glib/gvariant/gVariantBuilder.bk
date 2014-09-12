@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <gio/gio.h>
+GVariant* make_aay(){
+  GVariantBuilder builder;
+  int i, j;
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("(aay)"));
+  g_variant_builder_open (&builder, G_VARIANT_TYPE("aay"));
+  for (i = 0; i < 16; i++)
+    {
+      g_variant_builder_open (&builder, G_VARIANT_TYPE("ay"));
+      g_variant_builder_open (&builder, G_VARIANT_TYPE("y"));
+      guchar buf[4] = {'I','a','m', '\0'};
+      //sprintf (buf, "%d", i);
+      for(j = 0; j < 4; j++){
+          g_variant_builder_add (&builder, "y", buf[i]);
+      }
+      g_variant_builder_close(&builder);
+      g_variant_builder_close(&builder);
+    }
+  g_variant_builder_close(&builder);
+  return g_variant_builder_end (&builder);
+}
+GVariant *
+make_pointless_dictionary (void)
+{
+  GVariantBuilder builder;
+  int i;
+  g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
+  for (i = 0; i < 16; i++)
+    {
+      gchar buf[3];
+      sprintf (buf, "%d", i);
+      g_variant_builder_add (&builder, "{is}", i, buf);
+    }
+  return g_variant_builder_end (&builder);
+}
+
+int main(int argc, char *argv[])
+{
+     g_print("type '%s'\n", g_variant_get_type_string(make_pointless_dictionary()));
+     g_print("type '%s'\n", g_variant_get_type_string(make_aay()));
+}
