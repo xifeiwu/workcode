@@ -754,6 +754,7 @@ void method_AddService(char *path)
     // free message
     dbus_message_unref(msg);
 }
+
 void method_GetState(char *path){
     DBusMessage* msg;
     DBusMessageIter args;
@@ -770,14 +771,14 @@ void method_GetState(char *path){
     if (NULL == conn) { 
        exit(1);
      }
-    //char *path = malloc(sizeof(char) * strlen(mpath));
-    //strcpy(path, mpath);
-    //printf("*0mpath: %s / %s\n", path, mpath);
+    char *mpath = malloc(sizeof(char) * strlen(path));
+    strcpy(mpath, path);
+    printf("*0mpath: %s / %s\n", mpath, path);
     msg = dbus_message_new_method_call("org.freedesktop.Avahi",// target for the method call
                                         path, 							// object to call on
                                         "org.freedesktop.Avahi.EntryGroup",    // interface to call on
                                         "GetState");             // method nameResolveHostName
-    //printf("*1mpath: %s / %s\n", path, mpath);
+    printf("*1mpath: %s / %s\n", mpath, path);
     if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
         fprintf(stderr, "Out Of Memory!\n"); 
         exit(1);
@@ -806,24 +807,26 @@ void method_GetState(char *path){
      // free the pending message handle
      dbus_pending_call_unref(pending);
 
-     dbus_uint32_t m_state;
-     if (!dbus_message_iter_init(msg, &args)){
-         g_message("dbus_message_iter_init fail\n");
-     }
-     if(dbus_message_get_type(msg) == DBUS_MESSAGE_TYPE_ERROR){
-         char *result;
-         g_message("arg type: %d", dbus_message_iter_get_arg_type(&args));
-         dbus_message_iter_get_basic(&args, &result);
-         g_message("error:  %s", result);    	 
-     }else{
-         if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
-             g_message("Argument is not DBUS_TYPE_INT32!\n"); 
-         else{
-             dbus_message_iter_get_basic(&args, &m_state);
-             printf("m_state : %d\n", m_state);
-         }
-     }
+    printf("*3mpath: %s / %s\n", mpath, path);
+    dbus_uint32_t m_state;
+    if (!dbus_message_iter_init(msg, &args)){
+        g_message("dbus_message_iter_init fail\n");
+    }
+    if(dbus_message_get_type(msg) == DBUS_MESSAGE_TYPE_ERROR){
+        char *result;
+        g_message("arg type: %d", dbus_message_iter_get_arg_type(&args));
+        dbus_message_iter_get_basic(&args, &result);
+        g_message("error:  %s", result);    	 
+    }else{
+        if (DBUS_TYPE_INT32 != dbus_message_iter_get_arg_type(&args)) 
+            g_message("Argument is not DBUS_TYPE_INT32!\n"); 
+        else{
+            dbus_message_iter_get_basic(&args, &m_state);
+            printf("m_state : %d\n", m_state);
+        }
+    }
      dbus_message_unref(msg);
+    printf("*4mpath: %s / %s\n", mpath, path);
 }
 void method_Commit(char *path){
     DBusConnection* conn;
@@ -878,11 +881,13 @@ void method_Reset(char *path){
 }
 void main()
 {
-  	 //signal_ServiceBrowser_item(get_service_browser_path());
+    signal_ServiceBrowser_item(get_service_browser_path());
     //resolve_service();
+    
     char *entry_group_path = get_entry_group_path();
     char *mypath = malloc(sizeof(char) * strlen(entry_group_path));
     strcpy(mypath, entry_group_path);
+    printf("*mypath: %s / %s\n", mypath, entry_group_path);
 /*
     printf("*mypath: %s / %s\n", mypath, entry_group_path);
     method_AddService(entry_group_path);
@@ -890,8 +895,10 @@ void main()
     method_Commit(entry_group_path);
     printf("*mypath: %s / %s\n", mypath, entry_group_path);
 */
+/*
     method_GetState(mypath);
     printf("*mypath: %s / %s\n", mypath, entry_group_path);
+    */
 	//method_Commit(entry_group_path);
 
 	//printf("*entry_group_path: %s\n", entry_group_path);
