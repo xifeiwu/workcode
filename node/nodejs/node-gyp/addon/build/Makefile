@@ -311,13 +311,13 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,binding.target.mk)))),)
-  include binding.target.mk
+                 $(join ^,addon.target.mk)))),)
+  include addon.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /usr/share/node-gyp/gyp/gyp -fmake --ignore-environment "--toplevel-dir=." -I/home/cos/Public/ccode/html5/nodejs/node-gyp/build/config.gypi -I/usr/share/node-gyp/addon.gypi -I/usr/include/nodejs/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/usr/include/nodejs" "-Dmodule_root_dir=/home/cos/Public/ccode/html5/nodejs/node-gyp" binding.gyp
-Makefile: $(srcdir)/../../../../../../../usr/share/node-gyp/addon.gypi $(srcdir)/../../../../../../../usr/include/nodejs/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
+cmd_regen_makefile = cd $(srcdir); /usr/share/node-gyp/gyp/gyp -fmake --ignore-environment "--toplevel-dir=." -I/home/cos/Public/ccode/node/nodejs/node-gyp/addon/build/config.gypi -I/usr/share/node-gyp/addon.gypi -I/usr/include/nodejs/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/usr/include/nodejs" "-Dmodule_root_dir=/home/cos/Public/ccode/node/nodejs/node-gyp/addon" binding.gyp
+Makefile: $(srcdir)/../../../../../../../../usr/share/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../../../../../../../usr/include/nodejs/common.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
