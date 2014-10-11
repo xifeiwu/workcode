@@ -14,10 +14,12 @@ ADD_CFLAGS := -g -Wall
 # Combine user supplied, additional, and pkg-config flags
 CFLAGS  := $(PKG_CFLAGS) $(ADD_CFLAGS) $(CFLAGS)
 LDFLAGS := $(PKG_LDFLAGS) $(LDFLAGS)
-targets = strlen 
+targets = strlen realloc 
 .PHONY: all clean
 all: $(targets)
 strlen: strlen.c
+	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
+realloc: realloc.c
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 clean:
 	$(RM) $(targets)
