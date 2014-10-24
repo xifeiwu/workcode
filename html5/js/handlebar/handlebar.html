@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>each-基本循环使用方法 - by 杨元</title>
+  </head>
+  <body>
+    <h1>each-基本循环使用方法</h1>
+    <!--基础html框架-->
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>年龄</th>
+        </tr>
+      </thead>
+      <tbody id="tableList">
+        
+      </tbody>
+    </table>
+    
+    <!--插件引用-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/handlebars.js"></script>
+    
+    <!--Handlebars.js模版-->
+    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+    <!--id可以用来唯一确定一个模版,type是模版固定的写法-->
+    <script id="table-template" type="text/x-handlebars-template">
+      {{#each student}}
+        <tr>
+          <td>{{addOne @index}}</td>
+          <td>{{name}}</td>
+          <td>{{sex}}</td>
+          <td>{{age}}</td>
+        </tr> 
+      {{/each}}
+    </script>
+    
+    <!--进行数据处理、html构造-->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        //模拟的json对象
+        var data = {
+                    "student": [
+                        {
+                            "name": "张三",
+                            "sex": "0",
+                            "age": 18
+                        },
+                        {
+                            "name": "李四",
+                            "sex": "0",
+                            "age": 22
+                        },
+                        {
+                            "name": "妞妞",
+                            "sex": "1",
+                            "age": 18
+                        }
+                    ]
+                };
+        
+        //注册一个Handlebars模版，通过id找到某一个模版，获取模版的html框架
+        //$("#table-template").html()是jquery的语法，不懂的童鞋请恶补。。。
+        console.log("value of table-template:");        
+        console.log($("#table-template").html());        
+        var myTemplate = Handlebars.compile($("#table-template").html());
+        console.log("value of myTemplate:" + myTemplate);        
+        //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础table中。
+
+        //注册一个Handlebars Helper,用来将索引+1，因为默认是从0开始的
+        Handlebars.registerHelper("addOne",function(index,options){
+          return parseInt(index)+1;
+        });
+
+        $('#tableList').html(myTemplate(data));
+      });
+    </script>
+  </body>
+</html>
