@@ -43,10 +43,13 @@ class ZeroconfService:
 
 
 def test():
-    service = ZeroconfService(name="TestService", port=3000)
-    service.publish()
+    userA = ZeroconfService(name="Test-UserA", port=8080)
+    userA.publish()
+    userB = ZeroconfService(name="Test-UserB", port=7777)
+    userB.publish()
     raw_input("Press any key to unpublish the service ")
-    service.unpublish()
+    userA.unpublish()
+    userB.unpublish()
 
 
 if __name__ == "__main__":
