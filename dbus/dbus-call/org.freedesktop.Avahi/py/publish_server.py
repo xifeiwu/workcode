@@ -43,9 +43,9 @@ class ZeroconfService:
 
 
 def test():
-    userA = ZeroconfService(name="Test-UserA", port=8080)
+    userA = ZeroconfService(name="TestUserA", port=8080)
     userA.publish()
-    userB = ZeroconfService(name="Test-UserB", port=7777)
+    userB = ZeroconfService(name="TestUserB", port=7777)
     userB.publish()
     raw_input("Press any key to unpublish the service ")
     userA.unpublish()
