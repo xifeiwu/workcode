@@ -1,0 +1,1 @@
+echo $WD_RT_VERSION
