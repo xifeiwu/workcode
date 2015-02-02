@@ -73,21 +73,21 @@ var mClass = new Class();
 mClass.add = function(){};
 //showClassMethod(mClass);
 //this.callSuper();
-var extendClass = Class.extend({
+var ExtendClass = Class.extend({
   inita:function(){
-    console.log("in function inita of extendClass.");
+    console.log("in function inita of ExtendClass.");
   },
   initb:function(){
-    console.log("in function initb of extendClass.");
+    console.log("in function initb of ExtendClass.");
   }
-})
-var extendObj = new extendClass();
+});
+var extendObj = new ExtendClass();
 extendObj.inita();
 extendObj.initb();
 console.log("showClassMethod for extendObj");
 showClassMethod(extendObj);
-console.log("showClassMethod for extendClass");
-showClassMethod(extendClass);
+console.log("showClassMethod for ExtendClass");
+showClassMethod(ExtendClass);
 
 
 //The base Class for Observer classes
