@@ -1,17 +1,10 @@
 
 function Class() {}
-//Class.prototype.init = function(){
-//  console.log("in function init of Class.");
-//}
+
 //Use extend to realize inhrietion
 //
 Class.extend = function extend(props) {
   var prototype = new this();
-  //console.log("this: " + this);
-  //console.log("prototype:");
-  for(var key in this.prototype){
-    console.log(key);
-  }
   var _super = this.prototype;
 
   for(var name in props) {
@@ -60,45 +53,6 @@ Class.extend = function extend(props) {
 
     return instance;
   }
+
   return SubClass;
 }
-
-
-function showClassMethod(mClass){
-  for(var key in mClass){
-    console.log(key);
-  }
-}
-var mClass = new Class();
-mClass.add = function(){};
-//showClassMethod(mClass);
-//this.callSuper();
-var ExtendClass = Class.extend({
-  inita:function(){
-    console.log("in function inita of ExtendClass.");
-  },
-  initb:function(){
-    console.log("in function initb of ExtendClass.");
-  }
-});
-var extendObj = new ExtendClass();
-extendObj.inita();
-extendObj.initb();
-console.log("showClassMethod for extendObj");
-showClassMethod(extendObj);
-console.log("showClassMethod for ExtendClass");
-showClassMethod(ExtendClass);
-
-
-//The base Class for Observer classes
-//
-var Observer = Class.extend({
-  init: function(id_) {
-    this._id = id_;
-  },
-
-  getID: function() {return this._id;},
-
-  registObservers: function() {}
-});
-console.log(Observer);
