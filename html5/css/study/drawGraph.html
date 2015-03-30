@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>pop</title>
+  <style >  
+    body {
+    	background:#4D4948;
+    }    
+    .send {
+	    position:relative;
+	    width:150px;
+	    height:35px;
+	    background:#F8C301;
+	    border-radius:5px; /* 圆角 */
+	    margin:30px auto 0;
+    }    
+    .send .arrow {
+	    position:absolute;
+	    top:5px;
+	    right:-16px; /* 圆角的位置需要细心调试哦 */
+	    width:0;
+	    height:0;
+	    font-size:0;
+	    border:solid 8px;
+	    border-color:#4D4948 #4D4948 #4D4948 #F8C301;
+    }
+
+    #cssborder {
+    	background: silver;
+    	width: 50%;
+    	margin: 20px auto;
+    }
+    #square { 
+			width: 100px; 
+			height: 100px;
+			background: green; 
+		}
+		#circle { 
+			width: 100px; 
+			height: 100px; 
+			-moz-border-radius: 50px; 
+			-webkit-border-radius: 50px; 
+			border-radius: 50px;
+			background: green;
+		}
+		#oval { 
+			width: 200px; 
+			height: 100px; 
+			background: red; 
+			-moz-border-radius: 100px / 50px; 
+			-webkit-border-radius: 100px / 50px; 
+			border-radius: 100px / 50px;
+		}
+		#triangle-up { 
+			width: 0; 
+			height: 0; 
+			border-left: 50px solid transparent; 
+			border-right: 50px solid transparent; 
+			border-bottom: 100px solid red; 
+		}
+		#triangle-down { 
+			width: 0; 
+			height: 0; 
+			border-left: 50px solid transparent; 
+			border-right: 50px solid transparent; 
+			border-top: 100px solid red; 
+		}
+		#triangle-topleft { 
+			width: 0; 
+			height: 0; 
+			border-top: 100px solid red; 
+			border-right: 100px solid transparent; 
+		}
+		#parallelogram { 
+			width: 150px; 
+			height: 100px; 
+			margin-left:20px; 
+			-webkit-transform: skew(20deg); 
+			-moz-transform: skew(20deg); 
+			-o-transform: skew(20deg); 
+			background: red; 
+		} 
+		#trapezoid { 
+			border-bottom: 100px solid red; 
+			border-left: 50px solid transparent; 
+			border-right: 50px solid transparent; 
+			height: 0; 
+			width: 100px; 
+		} 
+		#star-six { 
+			width: 0; 
+			height: 0; 
+			border-left: 50px solid transparent; 
+			border-right: 50px solid transparent; 
+			border-bottom: 100px solid red; 
+			position: relative; 
+		} 
+		#star-six:after { 
+			width: 0; 
+			height: 0; 
+			border-left: 50px solid transparent; 
+			border-right: 50px solid transparent; 
+			border-top: 100px solid red; 
+			position: absolute; 
+			content: ""; 
+			top: 30px; 
+			left: -50px; 
+		}
+
+		#star-five { 
+		margin: 50px 0; 
+		position: relative; 
+		display: block; 
+		color: red; 
+		width: 0px; 
+		height: 0px; 
+		border-right: 100px solid transparent; 
+		border-bottom: 70px solid red; 
+		border-left: 100px solid transparent; 
+		-moz-transform: rotate(35deg); 
+		-webkit-transform: rotate(35deg); 
+		-ms-transform: rotate(35deg); 
+		-o-transform: rotate(35deg); 
+		} 
+		#star-five:before { 
+		border-bottom: 80px solid red; 
+		border-left: 30px solid transparent; 
+		border-right: 30px solid transparent; 
+		position: absolute; 
+		height: 0; 
+		width: 0; 
+		top: -45px; 
+		left: -65px; 
+		display: block; 
+		content: ''; 
+		-webkit-transform: rotate(-35deg); 
+		-moz-transform: rotate(-35deg); 
+		-ms-transform: rotate(-35deg); 
+		-o-transform: rotate(-35deg); 
+		} 
+		#star-five:after { 
+		position: absolute; 
+		display: block; 
+		color: red; 
+		top: 3px; 
+		left: -105px; 
+		width: 0px; 
+		height: 0px; 
+		border-right: 100px solid transparent; 
+		border-bottom: 70px solid red; 
+		border-left: 100px solid transparent; 
+		-webkit-transform: rotate(-70deg); 
+		-moz-transform: rotate(-70deg); 
+		-ms-transform: rotate(-70deg); 
+		-o-transform: rotate(-70deg); 
+		content: ''; 
+		} 
+  </style>
+  </head>
+
+	<body>
+    <div class="send">
+	    <div class="arrow">    	
+	    </div>
+    </div>
+    <div id="cssborder">
+	    <div id="square">
+	    </div>
+	    <div id="circle">
+	    </div>
+	    <div id="oval">
+	    </div>
+	    <div id="triangle-up">
+	    </div>
+	    <div id="triangle-down">
+	    </div>
+	    <div id="triangle-topleft">
+	    </div>
+	    <div id="parallelogram">
+	    </div>
+	    <div id="trapezoid">
+	    </div>
+	    <div id="star-six">
+	    </div>
+	    <div id="star-five">
+	    </div>
+	  </div>
+	</body>
+
+</html>
