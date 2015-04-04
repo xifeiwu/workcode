@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>picture</title>
+<style type="text/css">
+img {
+	display:block;
+}
+img.custom {
+	border-style: solid;
+	border-width: 20px;
+	border-color: red silver green yellow;
+	margin: auto 5px ;
+	opacity:0.5;
+}
+img.origin {
+	text-align:center;
+	margin:10px auto;
+	border: solid 1px red;
+	display:block;
+}
+div{
+	background-image:url(../pictures/eg_smile.gif);
+	width:640px;
+	height:360px;
+	border: solid 1px silver;
+	float:left;
+	margin: 4px;
+}
+#box1 {
+	background-repeat:repeat;
+}
+#box2 {
+	background-repeat:repeat-x;
+}
+#box3 {
+	background-repeat:repeat-y;
+}
+#box4 {
+	background-repeat:no-repeat;
+}
+</style>
+</head>
+
+<body>
+<img class="d"src="../pictures/eg_smile.gif" />
+<img class="d" src="../pictures/eg_smile.gif" />
+<div id="box1">完全平铺</div>
+<div id="box2">X轴平铺</div>
+<div id="box3">Y轴平铺</div>
+<div id="box4">不平铺</div>
+</body>
+</html>
