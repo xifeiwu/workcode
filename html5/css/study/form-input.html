@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>form-input<nput</title>
+<style type="text/css">
+form {
+border: solid 1px red;
+margin:5px;
+width: 45%;
+float:left;
+}
+</style>
+</head>
+
+<body>
+<form action="#" method="get" id="form1" name="form1">
+	<p><span>文本输入框：</span><input type="text" maxlength="20" value="请输入" readonly="readonly"/></p>
+	<p><input type="submit" value="提交"/></p>
+</form>
+<form action="#" method="post" id="form2" name="form2">
+	<p><span>文件上传：</span><input type="file" name=""/></p>
+	<p>客户留言：</p>
+	<textarea rows="15" cols="40"></textarea>
+	<p><input type="submit" value="提交"/></p>
+</form>
+<form method="get" name="form3">
+	<p>性别：
+		<label><input type="radio" name="sexyradio" value="Man" />男</label>
+		<label><input type="radio" name="sexyradio" value="Woman"/>女</label>
+		<label><input type="radio" name="sexyradio" value="Unknown" checked="checked"/>保密</label>
+	</p>
+	<p>爱好：
+		<label><input type="checkbox" name="sexyradio" value="足球" />足球</label>
+		<label><input type="checkbox" name="sexyradio" value="羽毛球"/>羽毛球</label>
+		<label><input type="checkbox" name="sexyradio" value="乒乓球" checked="checked"/>乒乓球</label>
+	</p>
+</form>
+<form>
+您来自哪个城市？
+<select nae="选择城市">
+	<optgroup label="山东省">
+		<option value="潍坊市">潍坊市</option>
+		<option value="青岛市" selected="selected">青岛市</option>
+	</optgroup>
+	<optgroup label="山西省">
+		<option value="太原市">太原市</option>
+		<option value="大同市">大同市</option>
+	</optgroup>
+</form>
+</body>
+</html>
