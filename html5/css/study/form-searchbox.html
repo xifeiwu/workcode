@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>搜索框</title>
+		<style type="text/css">
+			.search_box {
+				position: relative;
+				width:380px;
+			}
+			.search_box * {
+				margin:0;
+				padding:0;
+				list-style:none;
+				font:normal 12px "宋体", Verdana,Lucida, Arial, Helvetica, sans-serif;
+			}
+			.search_box h3, .search_box h4 {
+				display: none;
+			}
+			.search_box select {
+				float:left;
+				width: 60px;
+			}
+			.search_box input{
+				float:left;
+				width:196px;
+				height: 16px;
+				padding: 1px 2px;
+				margin: 0 5px;
+				border: solid #619ecf 1px;
+			}
+			.search_box button{
+				float:left;
+				width:59px;
+				height:20px;
+				text-indent: -9999px;
+				border: 0 none;
+				background: url(pic/btn_search.gif) no-repeat 0px 0px;
+			}
+			.search_tips {
+				position: absolute;
+				top: 19px;
+				left: 65px;
+				width: 190px;
+				padding: 5px 5px 0;
+				border: solid 1px #619ECF;
+				font-size: 12px;
+			}
+			.search_tips li{
+				float:left;
+				width: 100%;
+				height: 22px;
+				line-height: 22px;
+			}
+			.search_tips li a {
+				float: left;
+				text-decoration: none;
+				color: #333;
+			}
+			.search_tips li a:hover {
+				color: #f00;
+			}
+			.search_tips li span {
+				float: right;
+				color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="search_box">
+			<h3>搜索框</h3>
+			<div class="content">
+				<form method="post" action="">
+					<select>
+						<option value="1">网页</option>
+						<option value="2">图片</option>
+						<option value="3">新闻</option>
+						<option value="4">MP3</option>
+					</select>
+					<input type="text" value="css"/><button type="submit">搜索</button>
+					<div class="search_tips">
+						<h4>搜索提示</h4>
+						<ul>
+							<li>
+								<a href="#">css视频</a><span>共有589个项目</span>
+							</li>
+							<li>
+								<a href="#">css教程</a><span>共有58393个项目</span>
+							</li>
+							<li>
+								<a href="#">css+div</a><span>共有1589个项目</span>
+							</li>
+							<li>
+								<a href="#">css网页设计</a><span>共有5289个项目</span>
+							</li>
+							<li>
+								<a href="#">css样式</a><span>共有5089个项目</span>
+							</li>
+						</ul>
+					</div>
+				</form> 
+			</div>
+		</div>
+	</body>
+</html>
