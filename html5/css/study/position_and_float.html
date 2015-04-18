@@ -28,28 +28,39 @@
 			}
 		</script>
 		<style type="text/css">
-			#model div {
-				border: solid red 1px;
+			* {
+			    margin:0;
+			    padding:0;
 			}
+			#model{
+				width: 800px;
+				margin: 5px auto;
+			}
+			#header { background:#FF00FF; }
 			#main {
 				position: relative;
+				width: 100%;
+				background: url(pic/bg.gif) center repeat-y;
+				margin: 0px;
+				overflow: hidden;
 			}
 			#content {
 				margin-left: 25%;
-				margin-right: 25%;
+				margin-right: 20%;
 			}
 			#left {
-				position: absolute;
-				right: 0px;
-				top: 0px;
-				width: 25%;
-			}
-			#right {
 				position: absolute;
 				left: 0px;
 				top: 0px;
 				width: 25%;
 			}
+			#right {
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				width: 20%;
+			}
+			#footer { background:#FF99FF; }
 		</style>
 	</head>
 	<body>
