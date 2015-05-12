@@ -5,20 +5,53 @@
   <title>Sample document</title>
   <style >
 h1 {color: blue; text-align:center; border-bottom: 2px solid red; padding-bottom: 20px; margin-bottom: 20px;}
-.pimg {
-float: left;
-padding: 10px;
+.imgdiv *{
+	padding: 0px;
+}
+.imgdiv {
+	float: left;
+	position: relative;
+	width: 160px;
+	height: 160px;
+}
+.imgdiv .pimg{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 0;
+}
+.imgdiv .name{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	color: white;
+	width: 100%;
+	height: 2em;
+	text-align: center;
+	background-color: gray;
+	line-height: 2em;
+	opacity: 0;
+}
+.imgdiv:hover .name{
+	opacity: 1;
 }
 .layout {
 width: 60%;
 margin: 10px auto;
+}
+.multicol {
+	column-count: 3;
 }
   </style>
   </head>
   <body>
 <div class="layout">
 <h1>孙玉芳：红旗旗手倒在途中</h1>
-<div class="pimg"><img src="pictures/tulip_ballade_s.jpg"></p></div>
+	<div class="imgdiv">
+		<div class="name">玫瑰花</div>
+		<img class="pimg" src="pictures/tulip_ballade_s.jpg">
+	</div>
 <p>　　在20多篇纪念文章中，一封署名为“孙玉芳的妻子白敏珠”的感谢信，让孙的学生、中文2000公司经理胡才勇
 潸然泪下：</p>
 
