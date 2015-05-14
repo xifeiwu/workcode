@@ -4,9 +4,51 @@
 		<meta charset="utf-8">
 		<title></title>
 		<style type="text/css">
-			li{
+			ul{
 				list-style-type: asterisks;
+				list-style-type: square;
+				list-style-type: decimal;
 			}
+			ul li{
+				border: 1px red dotted;
+			}
+			ol{
+				list-style-type: armenian;
+				list-style-type: binary;
+				list-style-type: asterisks;
+				list-style-type: square;
+				list-style-type: upper-alpha;
+				list-style-type: upper-roman;
+				list-style-type: lower-roman;
+				list-style-type: decimal;
+			}
+			/*ol li{
+				list-style-type: none;
+				counter-increment: item;
+			}
+			ol li:before{
+				content: counter(item)". ";
+				color: red;
+			}*/
+			dl{
+				counter-reset: chapter subchapter;
+			}
+			dl dt{
+				counter-reset: subchapter;				
+			}
+			dl dt:before{
+				counter-increment: chapter;
+				content: counter(chapter)". ";
+				font-weight: bold;
+				color: red;
+			}
+			dl dd:before{
+				counter-increment: subchapter;
+				content: counter(chapter)"."counter(subchapter)". ";
+				color: blue;
+				font-weight: bold;
+			}
+			
 		</style>
 	</head>
 	<body>
@@ -49,9 +91,15 @@
 			<dd>
 				CSS是Cascading Style Sheets的缩写，中文翻译为层叠样式表。目前推荐遵循的是W3C于1998年5月制订的CSS 2版本，最新版本为CSS 3.0。
 			</dd>
+			<dd>
+				CSS是Cascading Style Sheets的缩写，中文翻译为层叠样式表。目前推荐遵循的是W3C于1998年5月制订的CSS 2版本，最新版本为CSS 3.0。
+			</dd>
 			<dt>DOM</dt>
 			<dd>
-				DOM是Document Object Model的缩写，中文翻译为文档对象模型。根据W3C DOM规范，DOM是一种与浏览器、平台、语言的接口，使得用户可以访问页面其他的标准组件。
+				DOM是Document Object Model的缩写，中文翻译为文档对象模型。
+			</dd>
+			<dd>
+				根据W3C DOM规范，DOM是一种与浏览器、平台、语言的接口，使得用户可以访问页面其他的标准组件。
 			</dd>
 			<dt>HTML</dt>
 			<dd>
