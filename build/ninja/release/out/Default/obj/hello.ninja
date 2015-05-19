@@ -1,0 +1,11 @@
+defines = 
+includes = 
+cflags = 
+cflags_c = 
+cflags_cc = 
+
+build obj/hello.hello.o: cc ../../../hello.c
+
+ldflags = 
+libs = 
+build hello: link obj/hello.hello.o
