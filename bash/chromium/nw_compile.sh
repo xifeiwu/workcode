@@ -1,4 +1,5 @@
 #!/bin/bash
+#get work directory
 if [ $# -lt 1 ]; then
     echo Working Directory Must Be Set By First Parameter.
     exit 1
@@ -16,6 +17,7 @@ cd $1
 WORKDIR=`pwd`
 echo Change To Directory ${WORKDIR}
 
+#get project nw and depot_tools from server
 if [ -d nw-gitlab ]; then
     echo Directory nw-gitlab Alreay Exist.
 else
@@ -42,7 +44,9 @@ else
 fi
 export PATH=${WORKDIR}/depot_tools:$PATH
 
+#get the latest code from gitlab
 cd ${WORKDIR}/nw-gitlab/src
+git pull origin runtime-dev
 #nw v8 blink node breakpad
 REPO_DIRS=(
 content/nw
@@ -58,6 +62,7 @@ do
     popd
 done
 
+#build nw project
 echo Install Build Dependent.
 sudo build/install-build-deps.sh 
 export GYP_GENERATORS='ninja'
