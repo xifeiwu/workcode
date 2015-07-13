@@ -1,0 +1,104 @@
+Gradle最常用的Plugin便是java Plugin。和其他Plugin一样，java Plugin并没有什么特别的地方，只是向Project中引入了多个Task和Property。当然，java Plugin也有
+比较与众不同的地方，其中之一便是在项目中引入了构建生命周期的概念，就像Maven一样。但是，和Maven不同的是，Gradle的项目构建生命周期并不是Gradle的内建机制，而是由Plugin
+引入的。
+
+
+请下载本系列文章的示例代码：git clone https://github.com/davenkin/gradle-learning.git
+
+
+java Plugin引入的主要Task
+执行“gradle build”，我们已经可以看到java Plugin所引入的主要Task：
+
+:compileJava
+:processResources
+:classes
+:jar
+:assemble
+:compileTestJava
+:processTestResources
+:testClasses
+:test
+:check
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 4.813 secs
+
+build也是java Plugin所引入的一个Task，它依赖于其他Task，其他Task又依赖于另外的Task，所以有了以上Task执行列表。以上Task执行列表基本上描述了java Plugin向项目中
+所引入的构建生命周期概念。
+
+除了定义众多的Task外，java Plugin还想Project中加入了一些额外的Property。比如，sourceCompatibility用于指定在编译Java源文件时所使用的Java版本，archivesBaseName用于
+指定打包成Jar文件时的文件名称。
+
+Java项目的目录结构
+在默认情况下，Gradle采用了与Maven相同的Java项目目录结构：
+
+  （插入图片）
+
+
+更多的Maven标准目录结构，请参考http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
+当然，跟Maven一样，以上只是默认的目录结构，我们可以通过配置来修改这些目录结构。
+
+配置已有source set
+Gradle在采用了Maven目录结构的同时，还融入了自己的一些概念，即source set。对于上图中的目录结构，Gradle实际上为我们创建了2个source set，一个名为main，一个名为test。
+请注意，这里的source set的名字main与上图目录结构中的main文件夹并无必然的联系，只是在默认情况下，Gradle为了source set概念到文件系统目录结构的映射方便，才采用了相同的名字。
+对于test， 也是如此。我们完全可以在build.gradle文件中重新配置这些source set所对应的目录结构，同时，我们还可以创建新的source set。
+
+从本质上讲，Gradle的每个source set都包含有一个名字，并且包含有一个名为java的Property和一个名为resources的Property，他们分别用于表示该source set所包含的Java源文件集合和资源文件集合。在实际应用时，我们
+可以将他们设置成任何目录值。比如，我们可以重新设置main的目录结构：
+
+sourceSets {
+    main {
+        java {
+            srcDir 'java-sources'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+此时所对应的项目目录结构如下：
+
+（插入图片）
+
+
+我们重新设置了main的目录结构，而对于test，我们保留了Gradle默认的目录结构。
+
+
+创建新的source set
+要创建一个新的source set也是非常简单的，比如，我们可以创建一个名为api的source set来存放程序中的接口类：
+
+sourceSets {
+    api
+}
+
+当然，以上配置也可以与main放在一起。在默认情况下，该api所对应的Java源文件目录被Gradle设置为${path-to-project}/src/api/java，而资源文件目录则被设置成了${path-to-project}/src/api/resources。
+我们也可以像上面的main一样重新对api的目录结构进行配置。
+
+Gradle会自动地为每一个新创建的source set创建相应的Task，创建规律为：对于名为mySourceSet的source set，Gradle将为其创建compile<mySourceSet>Java、process<mySourceSet>Resources和<mySourceSet>Classes这3个Task。
+对于这里api而言，Gradle会为其创建名为compileApiJava、processApiResource和apiClasses Task。我们可以在命令行中执行"gradle apiClasses"。
+
+你可能会注意到，对于main而言，Gradle并没有相应的compileMainJava，原因在于：由于main是Gradle默认创建的source set，并且又是及其重要的source set，Gradle便省略掉了其中的“Main”，而是直接使用了compileJava作为main的编译Task。
+对于test来说，我们看到，Gradle依然采用了compileTestJava。
+
+通常的情况是，我们自己创建的名为api的source set会被其他source set所依赖，比如main中的类需要实现api中的某个接口等。此时我们需要做两件事情。第一，我们需要在编译main之前对api进行编译，即编译main中Java源文件的Task应该依赖于api中的Task：
+
+classes.dependsOn apiClasses
+
+第二，在编译main时，我们需要将api编译生成的class文件放在main的classpath下。此时，我们可以对main和test做以下配置：
+
+
+sourceSets {
+    main {
+        compileClasspath = compileClasspath + files(api.output.
+                classesDir)
+    }
+    test {
+        runtimeClasspath = runtimeClasspath + files(api.output.
+                classesDir)
+    }
+}
+
+之所以需要对test的runtimeClasspath进行设置，是因为在运行测试时我们也需要加载api中的类。

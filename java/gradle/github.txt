@@ -1,0 +1,3 @@
+https://github.com/pkainulainen/gradle-examples/
+https://github.com/davenkin/gradle-learning
+https://github.com/spring-guides/gs-gradle-android.git

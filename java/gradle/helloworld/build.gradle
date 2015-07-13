@@ -1,0 +1,34 @@
+ext {
+     guestName='Bowen'
+}
+
+task helloext << {
+     println guestName
+     println "hello, $guestName"
+}
+
+repositories {
+    mavenCentral()
+}
+configurations {
+    myDependency
+}
+dependencies {
+    myDependency 'org.apache.commons:commons-lang3:3.0'
+}
+task showMyDependency << {
+    println configurations.myDependency.asPath
+}
+
+apply plugin: 'java'
+task showCompile << {
+    println configuration.compile.asPath
+}
+
+task taskA << {
+    println 'this is taskA from project 1'
+}
+task taskB << {
+    println 'this is taskB from project 1'
+}
+taskA.dependsOn taskB
