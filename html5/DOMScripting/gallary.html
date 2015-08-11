@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Gallary</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            background-color: #ccc;
+        }
+        .title {
+            color: #22C3AA;
+        }
+        canvas {
+            border: 1px dashed black;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var content=document.getElementById("text");
+            console.log(content);
+            console.log(content.setAttribute("title", "content"));
+            console.log(document.getElementsByTagName("*").length)
+        };
+    </script>
+</head>
+<body>
+    <ul id="text"></ul>
+</body>
+</html>

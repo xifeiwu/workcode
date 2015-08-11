@@ -1,6 +1,6 @@
 function returnobj(){
     obj = new Object();
-//    obj = null;
+    obj = null;
     return obj;
 }
 if(returnobj()){
