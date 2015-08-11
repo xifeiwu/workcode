@@ -13,10 +13,23 @@
 				margin-bottom: 80px;
 			}
 		</style>
+		<script type="application/javascript">
+			window.onload=function(){
+				var domtree=document.getElementById("domtree");
+				var node, nodeType;
+				for(var i=0; i<domtree.childNodes.length; i++){
+					node = domtree.childNodes[i]
+					nodeType = node.nodeType;
+					console.log(nodeType);
+					console.log(node);
+				}
+			}
+		</script> 
 	</head>
 	<body>
 		<div id="wrap">
 			<p>p对象中的内容</p>
 		</div>
+		<div id="domtree"><p id="nodep">This is <em>my</em> content.</p></div>
 	</body>
 </html>

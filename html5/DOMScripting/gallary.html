@@ -26,10 +26,10 @@
         	padding-right: 1em;
         	list-style: none;
         	font-size: 20px;
-        	color: black;
         }
         ul li a{        	
         	text-decoration: none;
+        	color: black;
         }
         .clear{
         	clear:both;
@@ -70,6 +70,14 @@
 					description.childNodes[0].nodeValue=title;
             		return false;
             	};
+            	allref[i].onkeypress=
+            	function(){
+            		console.log("onkeypress.");
+            	}
+            	allref[i].onkeydown=
+            	function(event){
+            		console.log(event);
+            	}
             }
           	console.log()
         };
