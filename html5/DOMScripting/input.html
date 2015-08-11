@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>DOM树操作</title>
+    <style type="text/css">
+	input
+	{
+	  display:block;
+	  margin-bottom:10px;
+	}
+	#block {
+	    margin-top: 10px;
+	}
+	#block input{	    
+	    float:left;
+	}
+    </style>
+    <script type="application/javascript">
+        function insertAfter(newElement, targetElement){
+            
+        }
+        window.onload = function(){
+            var block = document.getElementById("block");
+            var msgdom = document.getElementById("msg");
+            console.log(msgdom);
+            //there are no childNodes of msgdom.
+            for(var i=0; i<msgdom.childNodes.length; i++){
+                var child = msgdom.childNodes[i];
+                console.log(child);
+            }
+            var btndom = document.getElementById("btn");
+            btndom.onclick = function(){
+                var msg = msgdom.value;
+                console.log(msg);
+                var pe = document.createElement("p");
+                pe.appendChild(document.createTextNode(msg));
+                document.body.appendChild(pe);
+            };
+        }
+    </script>
+  </head>
+  <body>
+	<form action="">
+	  <fieldset>
+	    <input type="checkbox" name="checkbox1" />
+	    <input type="radio" name="radio1" />
+	    <input type="text" name="text1" value="text" />
+	    <input type="password" name="password1" value="password" />
+	    <input type="file" name="file1" />
+	    <input type="image" name="image1" src="images/cbd.jpg" alt="!" />
+	    <input type="submit" name="submit1" value="submit" />
+	    <input type="reset" name="reset1" value="reset" />
+	    <input type="button" name="button1" value="button" />
+	  </fieldset>
+	</form>
+	<div id="block">
+        <input id="msg" type="text" name="text1" value="text" />
+        <input id="btn" type="button" value="添加" />	    
+	</div>
+	<br>
+	<br>
+  </body>
+</html>
