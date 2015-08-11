@@ -6,26 +6,95 @@
     <title>Gallary</title>
     <style type="text/css">
         body {
-            text-align: center;
+        	font-family: "Arial", "Helvetica";
             background-color: #ccc;
         }
-        .title {
-            color: #22C3AA;
+        #content{
+        	width: 60%;
+        	margin: 0px auto;
+        }
+        #content h1{
+        	text-align: center;
+        }
+        #content ul{
+        	width: 100%
+        	margin: 0px auto;
+        	padding: 0px;
+        }
+        ul li{
+        	float:left;
+        	padding-right: 1em;
+        	list-style: none;
+        	font-size: 20px;
+        	color: black;
+        }
+        ul li a{        	
+        	text-decoration: none;
+        }
+        .clear{
+        	clear:both;
+        }
+        #placeholder {
+        	border: 1px red dashed;
+        	padding: 5px;
+        	margin: 5px auto;
+        	display: block;
+        	clear:both;
+        }
+        #description {
+        	color: red;
+        	font-weight: blod;
+        	text-align: center;
         }
         canvas {
             border: 1px dashed black;
         }
     </style>
+    <script type="text/javascript" src="src/gallary.js"></script>
     <script type="text/javascript">
         window.onload = function(){
-            var content=document.getElementById("text");
-            console.log(content);
-            console.log(content.setAttribute("title", "content"));
-            console.log(document.getElementsByTagName("*").length)
+			var placeholder = document.getElementById("placeholder");
+			var description = document.getElementById("description");
+            var gallary=document.getElementById("gallary");
+            gallary.setAttribute("title", "gallary")
+            console.log(gallary);
+            var allref = gallary.getElementsByTagName("a");
+            for(var i=0; i<allref.length; i++){
+            	allref[i].onclick=
+            	function(){
+            		var href = this.getAttribute("href");
+            		var title = this.getAttribute("title");
+              		console.log(href);
+              		console.log(title);
+					placeholder.setAttribute("src", href);
+					description.childNodes[0].nodeValue=title;
+            		return false;
+            	};
+            }
+          	console.log()
         };
     </script>
 </head>
 <body>
-    <ul id="text"></ul>
+	<div id="content">
+		<h1>Snapshots</h1>
+	    <ul id="gallary">
+	    	<li>
+	    		<a href="images/cbd.jpg" title="cbd">cbd</a>
+	    	</li>
+	    	<li>
+	    		<a href="images/muwu.jpg" title="muwu">muwu</a>
+	    	</li>
+	    	<li>
+	    		<a href="images/shuijiao.jpg" title="shuijiao">shuijiao</a>
+	    	</li>
+	    	<li>
+	    		<a href="images/yuantiao.jpg" title="yuantiao">yuantiao</a>
+	    	</li>
+	    	<li class="clear"></li>
+	    </ul>
+	    <img id="placeholder" alt="image gallary"/>
+	    <p id="description">Choose A Image.</p>
+    </div>
 </body>
 </html>
