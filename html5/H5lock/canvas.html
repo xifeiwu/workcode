@@ -17,16 +17,23 @@
         }
     </style>
     <script type="text/javascript">
-        window.onload = function(){
-            var content=document.getElementById("text");
-            console.log(content);
-            console.log(content.setAttribute("title", "content"));
-            console.log(document.getElementsByTagName("*").length)
-        };
+    function draw(){
+    	var canvas = document.getElementById("draw_area");
+    	var context = canvas.getContext("2d");
+    	context.moveTo(10,10);
+    	context.lineTo(400, 40);
+    	context.stroke();
+    }
+    window.onload = function(){
+        var content=document.getElementById("text");
+        draw();
+        console.log(content);
+        console.log(content.setAttribute("title", "content"));
+    };
     </script>
 </head>
 <body>
-    <canvas id="draw" width="500" height="300"></canvas>
+    <canvas id="draw_area" width="500" height="300"></canvas>
     <ul id="text"></ul>
 </body>
 </html>
