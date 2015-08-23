@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Inherit of JavaScript</title>
+		<script type="text/javascript">
+			function inherit(p){
+				if(p == null) throw TypeError();
+				if(Object.create)
+					return Object.create(p);
+				var t = typeof p;
+				if ( t !== "object" && t !== "function")
+					throw TypeError();
+				function f(){};
+				f.prototype = p;
+				return new f();
+			}
+			function enmuProperty(o){
+				console.log(o);
+				for(p in o){
+					//if(o.hasOwnProperty(p))
+					console.log(p);
+				}
+			}
+			var o = {};
+			o.x = 1;
+			var p = inherit(o);
+			p.y = 2;
+			var q = inherit(p);
+			q.z = 3;
+			var s = q.toString();
+			var sum = q.x + q.y;
+			console.log("s: " + enmuProperty(s));
+			console.log("sum: " + sum);
+			console.log("q: " + enmuProperty(q));
+		</script>
+
+	</head>
+	<body>
+	<p>test</p>
+	</body>
+</html>
