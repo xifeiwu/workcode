@@ -1,0 +1,182 @@
+<html>
+<head>	<title>Chapter 5 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 5 Solutions to Programming Exercises </span><br>
+ 
+<p>
+There are two main ideas in this chapter.  The first idea is that
+disk files and devices are the same.  The second idea is that disk files and
+and devices are different.  Disk files and devices support the same
+set of operations, but the connections to these objects have
+different sorts of attributes.
+</p>
+
+<p>
+Those ideas, once clear, do not require a lot of practice.  The
+actual attributes, what they mean, and how to use them do make more
+sense with some programming practice.
+</p>
+
+<p>
+This chapter also introduces the idea of handling the problems of
+working in a multitasking environment.  In particular, the chapter
+introduces the idea of race conditions and critical sections.
+The O_APPEND attribute of disk file connections is the first example 
+of an operation that solves the problem of managing multiple access 
+to a resource.  The exercises here about using links as locks 
+offer practice with those ideas and introduce students to the 
+only locking mechanism that works on every version of Unix.  
+I still use it.
+</p>
+<dl>
+<dt>Solution 5.22
+<dd>
+	<p>
+	An enhanced version of write0.c is:
+	<a href='sol05.22.c'><tt>sol05.22.c</tt></a>.
+	This solution shows how to use the standard getutent() function 
+	instead of our own utmplib functions.  This solution also shows
+	how to get information about the current user session 
+	such as hostname, username, and terminal name.
+	</p>
+	</dd>
+<dt>Solution 5.23
+<dd>
+	<p>
+	A version of <tt>mesg</tt> is:
+	<a href='sol05.23.c'><tt>sol05.23.c</tt></a>.
+	Students doing this project will discover that <tt>write</tt>
+	runs with set group id tty.  Discussing why that is done
+	can be a useful review of the idea and purpose of the
+	set user and set group id bits.  Also, notice that even
+	with mesg off, a user can write to oneself.
+	</p>
+	</dd>
+<dt>Solution 5.24
+<dd>
+	<p><b>(a)</b>
+	The link("old","new") will fail if "new" exists and will 
+	succeed if it can create "new".  Therefore, if several processes
+	try to create a link called "new" at once, if one succeeds,
+	the other ones will fail.  In that manner, the link system
+	can be used to pick one process out of many.  The existence
+	of that link can be used as lock.
+	</p>
+	<p><b>(b)</b>, <b>(c)</b>
+	A program that uses the link system call for locking is:
+	<a href='sol05.24bc.c'><tt>sol05.24bc.c</tt></a>.
+	This program appends a line of data to a file.  
+	The solution locks the file, waits 10 seconds, then
+	appends a line of data to the file.  The delay is included
+	so users can see that attempts to run multiple instances of
+	the program produce the correct blocking behavior.
+	</p>
+	<p><b>(d)</b>
+	The method used in parts (b) and (c) assumes a file exists
+	to which a link can be made.  If there is no file, the program
+	has to create a dummy file simply for the purpose of having
+	something to link to.  For example, the program can create a 
+	file called "locknode" then call
+	<pre>link("locknode", "locknode.LCK")</pre>
+	Multiple processes can create "locknode" but only one will
+	be able to make the link.  
+	</p>
+	<p>
+	When a process can make the link, that process may now create
+	the actual file.  When that succeeds, the process can remove
+	the link.
+	</p>
+	<p><b>(e)</b>
+	Yes.  vipw creates a dummy file then tries to link that file to
+	/etc/ptmp .  If the link succeeds, the process has a lock for the
+	passwd file.  The manual has some of the details, the source and
+	some Web sites have the rest.
+	</p>
+	</dd>
+<dt>Solution 5.25
+<dd>
+	<p>
+	A version of lock_passwd that claims stale locks is
+	<a href='sol05.25.c'><tt>sol05.25.c</tt></a>.
+	This solution uses a lock on the lockfile and has to
+	touch the file before releasing the lock.
+	</p>
+	<p>
+	This problem asks students to think about race conditions
+	and resource locking carefully.  The solution sounds sensible
+	but cannot be coded without introducing a second lock.  The
+	use of that second lock is not trivial; the problem requires
+	thinking about the extent of a critical section of code.
+	</p>
+	<p>
+	This problem also raises the question of how a program that
+	holds a lock can keep the lock `warm.'  Later chapters discuss
+	techniques for scheduling periodic actions, and the chapter on
+	the license server presents a method for recovering abandoned
+	resources.  Here, this problem can introduce ideas for future
+	study.
+	</p>
+	<p>
+	The usual solution is for the locking program to write its
+	process ID into the file or record it somewhere.  Other
+	processes can use kill(0,pid) to see if the lock holder
+	is still running.  The text has not mentioned PIDs or kill
+	at this point, so this is a way to use file operations
+	rather than process operations.
+	</p>
+	</dd>
+<dt>Solution 5.26
+<dd>
+	<p>
+	A solution to this problem is a slightly modified version of 
+	the cp1.c program from Chapter 2.  This program is
+	<a href='sol05.26.c'><tt>sol05.26.c</tt></a>.
+	It takes a third argument that tells it to turn O_SYNC on or
+	off.  The program accepts a fourth argument that specifies the
+	buffersize.  You need to test this on your system to see 
+	what difference buffering makes.  On my system with a 2meg file
+	and a 16byte buffer, the difference in execution time 
+	between sync and nosync was large.
+	</p>
+	</dd>
+<dt>Solution 5.27
+<dd>
+	<p>The code is:
+	<pre>
+	curflags = fcntl(fd, F_GETFL);
+	if ( curflags == -1 )
+		perror("getflags");
+	else{
+		curflags &= ~O_SYNC;
+		if ( fcntl(fd, F_SETFL, curflags) == -1 )
+			perror("setflags");
+	}
+	</pre>
+	Note that on some versions of Linux, you cannot change the
+	status of O_SYNC with fcntl().  You must do it when you
+	open the file.  Other versions of Unix allow you to turn
+	buffering on and off even after the file is open.
+	</p>
+</dd>
+<dt>Solution 5.28
+<dd>
+	<p>
+	A program that toggles the OLCUC bit in the terminal
+	driver is
+	<a href='sol05.28.c'><tt>sol05.28.c</tt></a>.
+	</p>
+	<p>
+	</p>
+</dd>
+<dt>Solution 5.29
+<dd>
+	<p>
+	A version of more0.c that knows about the number of lines on the
+	terminal is
+	<a href='sol05.29.c'><tt>sol05.29.c</tt></a>.
+	</p>
+	<p>
+	This program shows how to use <tt>ioctl</tt> to read the number of
+	rows from the driver.  
+	</p>
+</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

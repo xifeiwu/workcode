@@ -1,0 +1,136 @@
+<html>
+<head>	<title>Chapter 4 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 4 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The main ideas in Chapter 4 are the directory tree, and the structure
+of a Unix filesystem.  This chapter has more conceptual material than
+programming skills and facts.  Therefore the exercises ask for some
+programming but put more weight on looking into the ideas and structure
+of the file system.  The most demanding problems are exercises 18 and 19.
+These ask the student to investigate and think about the structure of
+the file system and methods for reading and operating the system. 
+This chapter falls under the "Understanding Unix" part of the text.
+</p>
+<dl>
+<dt>Solution 4.14
+<dd>
+	<p>
+	A single Unix command line that constructs the demo directory
+	tree is:
+	<pre>mkdir -p demodir/a demodir/c/d1 demodir/c/d2</pre>
+	</p>
+	</dd>
+<dt>Solution 4.15
+<dd>
+	<p>
+	A version of mkdir that supports the -p option is:
+	<a href='sol04.15.c'><tt>sol04.15.c</tt></a>.
+	This program allows multiple names on the command line.
+	</p>
+	</dd>
+<dt>Solution 4.16
+<dd>
+	<p>
+	This version of mv accepts a directory name as the 
+	second argument.  In that case the source item is
+	moved into that directory.  This code is similar to
+	the solution to Exercise 3.13.
+	<a href='sol04.16.c'><tt>sol04.16.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 4.17
+<dd>
+	<p>
+	A slightly more robust version of rename coded with 
+	link and unlink is: 
+	<a href='sol04.17.c'><tt>sol04.17.c</tt></a>.
+	This problem is a short exercise is understanding the
+	sequence of links and unlinks to move a file from
+	one place to another.
+	</p>
+	</dd>
+<dt>Solution 4.18
+<dd>
+	<p>
+	This exercise is mostly a research exercise, and only
+	a small part of it is a programming exercise.
+	This exercise is not easy.  The text presents the
+	basic model of the Unix file system and says that the
+	actual implementation is more complicated.  One purpose
+	of this exercise is for students learn how much more
+	complicated it is.
+	</p>
+
+<p>
+	The first part of doing this exercise is to use the standard
+	tools for Unix research - reading the manual, reading the
+	header files, searching the Web and the source, and thinking
+	about library functions that provide wrappers to data
+	structures on the disk.  In addition to reference material,
+	the Web includes programs (the e2fsprogs collection, for
+	instance) one can use to examine a Unix file system.
+	Using and then reading the source to those programs is part
+	of this research.
+	</p>
+	<p>
+	GNU/Linux includes lots of information.
+	Manual pages for mkfs, fsck, dumpe2fs, debugfs show some
+	aspects of using and understanding file systems.  Some
+	header files can be found in /usr/include/ext2fs .  
+	Source code that shows the complexity of the internal operations
+	appears in /usr/src/linux/fs .  Students can see some of the
+	types of file systems and begin to understand how much 
+	variation in internals can be abstracted under the general
+	model the text presents.
+	</p>
+	<p>
+	After reading the documents, trying out some tools, and
+	reading source code, one is ready to write one's own fs
+	tool.  In the chapter on the utmp file, we saw two approaches to
+	working with the utmp data.  In the first approach, we read
+	structs from the file directly from the disk.  In the second
+	approach, we devised the utmplib.c wrapper that hid the details
+	of disk layout and allowed us to use library functions to
+	obtain data.
+	</p>
+	<p>
+	Similarly, the ext2 file system has a wrapper library called
+	libext2fs that presents a clean, simple interface to the
+	structure of the ext2 file system.
+	</p>
+	<p>
+	A sample program that uses libext2fs is
+	<a href='sol04.18.dir/sol04.18.c'><tt>sol04.18.c</tt></a> .
+	This short program reads and prints information about
+	the superblock on a device.  The program uses the library,
+	and the library keeps track of all the internal details.
+	On GNU/Linux, you need to install the e2fsprogs-devel package
+	to get the libraries.
+	</p>
+	</dd>
+<dt>Solution 4.19
+<dd>
+	<p>
+	There is no correct answer to this problem.  This exercise
+	complements the research project of 4.18 with a design
+	project.  In this case, the research into fsck follows the
+	student work on thinking through the logic of creating a
+	new file.  This problem can provide the basis for a discussion
+	section.  After students work through the logic at home, they
+	can be asked in a discussion group to present and explain their
+	logic.  Other students who have worked the problem are sure
+	to have questions, suggestions, and thoughtful objections.
+	</p>
+</dd>
+<dt>Solution 4.20
+<dd>
+	<p>
+	<a href='sol04.20.c'><tt>sol04.20.c</tt></a> is a
+	version of ls -l that prints the inode number in the
+	style of ls -li.
+	</p>
+	<p>
+	</p>
+</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

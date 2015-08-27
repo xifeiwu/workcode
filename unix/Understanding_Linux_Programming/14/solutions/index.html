@@ -1,0 +1,281 @@
+<html>
+<head>	<title>Chapter 14 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 14 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 14 explains threads.  The two main topics of the
+chapter are the technical details of programming with POSIX
+threads and the general question of cooperation and sharing
+resources safely.
+</p>
+
+<p>
+Most of the exercises involve extensions to the examples
+in the text.  Adding to existing code provides a chance
+to think about what each part does, what more is needed,
+and how the changes affect how variables are shared.
+</p>
+
+<p>
+The problems and solutions demonstrated in this chapter
+apply in many cases to processes.  Shared memory and semaphores
+in Chapter 15, for example, present the same questions and
+similar solutions.
+</p>
+<dl>
+<dt>Solution 14.4
+<dd>
+	<p>
+	A revised version of hello_multi.c is
+	<a href='sol14.4.c'><tt>sol14.4.c</tt></a>.
+	In this program the "hello" thread waits for the "world" thread.  
+	The only reason that was done was to avoid using global variables 
+	or having to pass references.  The original thread could have 
+	waited for the "world" thread if it had access to the variable.
+	</p>
+	</dd>
+<dt>Solution 14.5
+<dd>
+	<p>
+	A revised version of twordcount1.c is
+	<a href='sol14.5.c'><tt>sol14.5.c</tt></a>.
+	This version is not any faster.  In the original version, 
+	the original thread blocked until the worker threads finished, 
+	so it used no time.  This version saves the time of creating 
+	the extra thread, but that is minor.  This design is not
+	better than the original one; the other one was clearer.
+	</p>
+	</dd>
+<dt>Solution 14.6
+<dd>
+	<p>
+	A version of twordcount1.c that exits if it cannot open a file is
+	<a href='sol14.6.c'><tt>sol14.6.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 14.7
+<dd>
+	<p>
+	Versions of twordcount2.c and twordcount3.c that
+	accept an arbitrary number of files are
+	<a href='sol14.7a.c'><tt>sol14.7a.c</tt></a>
+	and <a href='sol14.7b.c'><tt>sol14.7b.c</tt></a>
+	respectively.
+	</p>
+
+<p>
+	Extending twordcount3.c is slightly more complicated
+	because each thread has to have its own argset structure.
+	</p>
+
+<p>
+	The extension of twordcount3.c runs faster because the
+	separate threads, and there may be many of them, do
+	not need to contend for the mutex.
+	</p>
+	</dd>
+<dt>Solution 14.8
+<dd>
+	<p><b>(a)</b>
+	A multi-process version of wordcount is
+	<a href='sol14.8a.c'><tt>sol14.8a.c</tt></a>.
+	This program uses popen() to run "wc -w" for
+	each file in a separate process and to create
+	a pipe to each of those processes.
+	</p>
+	<p><b>(b)</b>
+	A single process, single threaded version of wordcount is
+	<a href='sol14.8b.c'><tt>sol14.8b.c</tt></a>.
+	This program could have just built a new argument list
+	and used execvp to run "wc" "-l" av[1] .. .  I did that
+	and it ran faster than the version presented here.  
+	</p>
+	<p><b>(c)</b>
+	Ease of design and ease of coding depends on the programmer.
+	Posix threads is generally portable to all versions of Unix,
+	and popen is absolutely portable to all versions of Unix.
+	</p>
+	</dd>
+<dt>Solution 14.9
+<dd>
+	<p>
+	A version of twordcount4.c that handles more than two
+	files is
+	<a href='sol14.9.c'><tt>sol14.9.c</tt></a>.
+	This is an important exercise.  Notice how the solution
+	uses two condition variables and one lock.  The two-file
+	version in the text only needs only one condition variable,
+	but that method does not work with three or more
+	threads producing data to be passed through a single
+	shared variable to a consumer thread.  The consumer has
+	to block until the variable has data to read, and the
+	producers have to block until the variable is empty.
+	</p>
+	</dd>
+<dt>Solution 14.10
+<dd>
+	<p>
+	A version of twordcount4.c that has no global variables is
+	<a href='sol14.10.c'><tt>sol14.10.c</tt></a>.
+	The solution is to pass pointers to local variables in 
+	main.  Because a thread can only receive one argument,
+	those pointers have to be passed as members in a struct.
+	</p>
+	</dd>
+<dt>Solution 14.11
+<dd>
+	<p>
+	A version of twebserv.c that uses a mutex to protect
+	the server stats variables is
+	<a href='sol14.11.c'><tt>sol14.11.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 14.12
+<dd>
+	<p>
+	A version of tbounce1d.c that eliminates global variables
+	by storing all state variables in a struct is
+	<a href='sol14.12.c'><tt>sol14.12.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 14.13
+<dd>
+	<p>
+	The biggest problem happens at the edges of the screen.
+	There, the animation thread bounces the image.  The
+	thread checks the position and direction of motion of
+	the image.  If the image is at the left margin and is
+	moving left, the direction is reversed.  Similarly, if
+	the image is at the right margin and is moving to the
+	right, the direction is reversed.  
+	</p>
+
+<p>
+	Between the time the thread 'bounces' the image and the
+	time the image is moved, using "col = col + dir", the
+	value of dir might have been flipped by the user.
+	</p>
+
+<p>
+	If the user does flip the direction at that instant, the
+	image will drive through the left or right edge of the
+	screen.  There are two ways to prevent this over-run.
+	One way is to compute the new position and then check to
+	see if the image ran off the edge.  The code for 14.13 uses
+	that method.  The other method is to lock the direction
+	variable during the interval from revising the value of dir
+	to using the value of dir.
+	</p>
+	</dd>
+<dt>Solution 14.14
+<dd>
+	<p>
+	A version of tanimate.c that includes separate speed controls
+	for all moving items is
+	<a href='sol14.14.c'><tt>sol14.14.c</tt></a>.
+	The changes are limited to adding two more cases to the
+	keyboard input handling section.  Each object is driven
+	by the values in its property set.  The new control keys
+	simply change those control values; the animated object
+	behave according to those settings.
+	</p>
+	</dd>
+<dt>Solution 14.15
+<dd>
+	<p>
+	A version of tanimate.c in which some of the strings bounce
+	vertically while some bounce horizontally is
+	<a href='sol14.15.c'><tt>sol14.15.c</tt></a>.
+	This program does not include new ideas about threads, but
+	produces amusing results.  The complicated question, not
+	addressed in the solution provided, is collisions.  What
+	can the program do when two messages move into the same
+	space on the screen?  It can be a valuable discussion project
+	to start with the provided solution and explore the problems
+	involved in identifying and doing something with collisions.
+	How much locking do you need to do?  What do you need to lock?
+	</p>
+	</dd>
+<dt>Solution 14.16
+<dd>
+	<p>
+	A version of tanimate that uses one thread for 
+	screen control is
+	<a href='sol14.16.c'><tt>sol14.16.c</tt></a>.
+	</p>
+
+<p>
+	This solution is an extension of the vote counting
+	mailbox problem with a completely different solution.
+	Each animation thread sends a message to the screen
+	drawing thread.  The screen drawing thread gets
+	the messages one by one and updates the screen.
+	</p>
+
+<p>
+	The mailbox requires a condition variable to notify
+	the reader and a condition variable to notify the
+	writers.  It also needs a lock to prevent from the
+	mailbox from getting written to by two threads at
+	once.
+	</p>
+
+<p>
+	This mailbox idea seems nice enough, but Unix already
+	has several kernel services for getting messages from
+	multiple sources to a single destination: pipes, sockets,
+	FIFOs, and message queues.  It seems odd to reinvent one
+	of those queues in user space.
+	</p>
+
+<p>
+	Therefore, this program creates a pipe, and the pipe
+	carries requests from animation threads to display
+	thread.  The animation threads can drop their requests
+	into the writing end of the pipe, and the curses thread
+	takes them out of the reading end.
+	</p>
+	</dd>
+<dt>Solution 14.17
+<dd>
+	<p>
+	This exercise is based on ideas in the threaded web
+	server in this chapter and the finger server problem
+	(11.17) in Chapter 11.  Those two programs provide
+	most of the material you need.
+	</p>
+	</dd>
+<dt>Solution 14.18
+<dd>
+	<p>
+	A solution for 14.18 consists of two programs: a curses server and
+	a curses client.  The server is
+	<a href='sol14.18s.c'><tt>sol14.18s.c</tt></a>.
+	This program clears the terminal screen and accepts screen requests
+	at a datagram socket.  The requests are to CLEAR the screen, to
+	draw text on the screen, to QUIT, and a request for the number of
+	lines and columns on the screen.
+	</p>
+
+<p>
+	The client consists of two files:
+	<a href='sol14.18c.c'><tt>sol14.18c.c</tt></a> and
+	<a href='sol14.18disp.c'><tt>sol14.18disp.c</tt></a>
+	The first file is the tanimate.c program with the
+	calls to curses replaced with calls to the display functions.
+	The display functions, defined in the second file, use datagrams
+	to talk to the server.
+	</p>
+
+<p>
+	You can run the server in one terminal window and the client in
+	another.  First, in one terminal window, type:
+	<pre>./sol14.18s 2828 2>serverlog </pre>
+	and in a second terminal window, type:
+	<pre>./sol14.18c this is a test of the curses server</pre>
+	The client reads keyboard input and the server controls the
+	screen.  That may be confusing.  You can change the server to
+	collect input and send it to the client.  You will need to
+	change the protocol and the two programs.
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

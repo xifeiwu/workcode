@@ -1,0 +1,89 @@
+<html>
+<head>	<title>Chapter 2 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 2 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The main ideas of Chapter 2 are file input/output operations,
+buffering, and using the manual.  The programming exercises
+provide practice opening, reading, writing, and processing
+data in files.
+</p>
+<dl>
+<dt>Solution 2.10
+<dd>
+	<p>
+	This exercise asks for two programs.  A solution
+	to the first part is: <a href='sol02.10a.c'><tt>sol02.10a.c</tt></a>.
+	</p>
+
+<p>
+	The whoami command prints the name associated with the current user id.
+	The who am i command prints the name associated with the 
+	current terminal.
+	A solution to whoami is: <a href='sol02.10b.c'><tt>sol02.10b.c</tt></a> .
+	</p>
+	</dd>
+<dt>Solution 2.11
+<dd>
+	<p>
+	Several versions of cp report 
+	<pre>cp: `file1' and `file1' are the same file</pre>
+	when asked to copy a file onto itself.  A modified version
+	is: <a href='sol02.11.c'><tt>sol02.11.c</tt></a>.
+	Note that a much better way to do this is to check the inodes
+	to see if the two files actually are the same file.  Inodes
+	are described in a later chapter.
+	</p>
+	</dd>
+<dt>Solution 2.12
+<dd>
+	<p>
+	A modified version of utmplib.c is:
+	<a href='sol02.12.c'><tt>sol02.12.c</tt></a>.
+	This change to utmplib.c affects who3.c in a simple way: The
+	two lines that check to see if the record represents a login
+	session are no longer needed.  Is this change a good thing?
+	No.  utmplib.c is has lost some generality, and who3.c is not
+	significantly simpler.
+	</p>
+	</dd>
+<dt>Solution 2.13
+<dd>
+	<p><b>(a)</b>
+	Mixing calls to lseek with calls to functions in utmplib.c 
+	would ruin the action of utmp_next().  When the utmplib.c buffer
+	is empty, utmp_next() uses read to get the next set of
+	utmp records, assuming the current position in the file is
+	still after the last batch of records read.  If the calling
+	program had moved the current position with lseek, the next
+	batch of records would be the ones following the previous
+	ones.
+	</p>
+	<p><b>(b)</b>
+	A modified version of utmplib.c is 
+	<a href='sol02.13b.c'><tt>sol02.13b.c</tt></a>.
+	This version contains two new functions, one to seek to a new
+	position in a utmp file, and one to write a record to the file.
+	</p>
+	<p><b>(c)</b>
+	A modified version of logout_tty is
+	<a href='sol02.13c.c'><tt>sol02.13c.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 2.14
+<dd>
+	<p>
+	The complete set of fields in a utmp struct varies from
+	one version of Unix to another.  The solution here is
+	based on the struct used on a Linux 2.2.14 system.
+	<a href='sol02.14.c'><tt>sol02.14.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 2.15
+<dd>
+	<p>
+	A version of cp1.c that supports the -i option is:
+	<a href='sol02.15.c'><tt>sol02.15.c</tt></a>.
+	</p>
+</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

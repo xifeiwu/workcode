@@ -1,0 +1,225 @@
+<html>
+<head>	<title>Chapter 13 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 13 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 13 continues the treatment of network programming.
+This chapter presents variations on sockets and protocols.
+The two variations on sockets are datagram sockets
+and sockets with Unix addresses.  The variation on protocols
+is an example of a client/server protocol that stores data
+about other processes.  The idea of a counting semaphore 
+is introduced by example.
+</p>
+
+<p>
+The first client/server examples were the time server and
+the finger server.  The protocol for those is simple.  Students
+could work on becoming comfortable with interprocess communication
+and the ideas of socket connections.  Chapter 12 introduced HTTP
+to show how one protocol could invoke various types of operations.
+It also reviewed ideas from earlier chapters.
+</p>
+
+<p>
+By this chapter, students should now be comfortable with the
+ideas and skills involved in building systems in which processes
+speak to each other.  The two ideas: communication methods and
+protocols are developed to more complex level.  Therefore these
+exercises provide practice at thinking about and using the ideas
+of client/server Internet based program design.
+<dl>
+<dt>Solution 13.11
+<dd>
+	<p>
+	A revised version of dgrecv.c is
+	<a href='sol13.11.c'><tt>sol13.11.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 13.12
+<dd>
+	<p>
+	A version of dgsend.c that works with dgrecv2.c is
+	<a href='sol13.12.c'><tt>sol13.12.c</tt></a>.
+	This program sends a message to a server and then
+	waits for an acknowledgement message back.  The
+	reply contains the length of the message.  The
+	client can use that to make sure the entire message
+	arrived.  
+	</p>
+
+<p>
+	This program needs more work.  If the server does not
+	reply, the client waits forever.  One solution is for
+	the client to set an alarm and break out of the 
+	recvfrom upon receipt of the signal.
+	</p>
+	</dd>
+<dt>Solution 13.13
+<dd>
+	<p>
+	A version of lserv_funcs1.c that prints the state of
+	the ticket table when sent SIGHUP is
+	<a href='sol13.13.c'><tt>sol13.13.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 13.14
+<dd>
+	<p>
+	A version of the server that only reclaims tickets when
+	a client is denied a ticket consists of the two files:
+	<a href='sol13.14a.c'><tt>sol13.14a.c</tt></a> (main) and
+	<a href='sol13.14b.c'><tt>sol13.14b.c</tt></a> (functions).
+	</p>
+
+<p>
+	If the server only reclaims tickets on a fixed schedule,
+	it uses more CPU time overall, but provides quicker
+	response time to clients, and may deny a client a
+	ticket even if there are reclaimable ones in the table.
+	If the server only reclaims tickets when a client is
+	denied a ticket, the server will use less CPU time
+	overall, may cause a delay when a client requests a
+	ticket, but will never deny a client when it could
+	have been granted a ticket.
+	</p>
+	</dd>
+<dt>Solution 13.15
+<dd>
+	<p>
+	A version of lclnt2 that asks for a new ticket if its
+	current ticket is not valid is
+	<a href='sol13.15.c'><tt>sol13.15.c</tt></a>.
+	Another extension would be for the program to sleep for
+	a short while and try again.  The program could ask if
+	it should continue to wait for a ticket to become available
+	or just wrap up and try again later.
+	</p>
+
+<p>
+	An interesting extension of this problem would be to
+	replace the sleep with a request for a signal.  Say the
+	client asks for a ticket but is told there are none.  The
+	client could send its pid to the server and ask to be
+	sent a signal when a ticket becomes available.  The client
+	could then pause until the server sends a signal.  The
+	client would present its pid and ask for its ticket.
+	</p>
+	</dd>
+<dt>Solution 13.16
+<dd>
+	<p>
+	This problem is a mini-project.  The student has a lot
+	of flexibility in adding license server features to
+	the other programs.  There is no obvious correct style
+	of solution.
+	</p>
+	</dd>
+<dt>Solution 13.17
+<dd>
+	<p>
+	A version of lserv_funcs2.c that stores the IP number of
+	the client in the ticket is
+	<a href='sol13.17.c'><tt>sol13.17.c</tt></a>.
+	The main function for the server requires no changes,
+	and the client requires no changes.  For them, a ticket
+	is a magic cookie.
+	</p>
+	</dd>
+<dt>Solution 13.18
+<dd>
+	<p>
+	This is a larger project.  No solution is provided.
+	</p>
+	</dd>
+<dt>Solution 13.19
+<dd>
+	<p>
+	This solution adds the name of the user submitting the
+	message to the message.  This is different from the
+	problem of adding the IP address of the caller to 
+	network records because the user id is not part of
+	the connection information.  Therefore, the client has
+	to determine the user and add that name to the data.
+	A solution is
+	<a href='sol13.19.c'><tt>sol13.19.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 13.20
+<dd>
+	<p>
+	A program that uses, by means of #ifdefs', 
+	read(), recv(), or recvfrom() to get a message from
+	a datagram socket is
+	<a href='sol13.20.c'><tt>sol13.20.c</tt></a>.
+	The basic differences is that recv and recvfrom receive
+	messages at a socket, and read receives messages at
+	any input object.  The read system call uses the type
+	of the thing referred to by the file descriptor to
+	determine how to receive the message.  The advantage of
+	recvfrom is it records the address of the sending socket.
+	recv does not provide the address of the sending socket.
+	</p>
+	</dd>
+<dt>Solution 13.21
+	<dd>
+	<p>
+	Making Unix domain sockets is not much different from making
+	Internet sockets, just the address is different.  The difficult
+	part is setting up the system so the server can reply to the
+	requests from the clients.  If a client creates a Unix domain
+	socket without assigning it a name, the socket has no name, and
+	thus it has no address.  When the server calls recvfrom, the
+	pathname of the address is an empty string.  
+	</p>
+
+<p>
+	Therefore, the clients have to create names and bind them to
+	their sockets.  The names can be anything, but one way to
+	prevent collisions is to include the process id of the 
+	client in the name.  Having done that, the rest of the
+	communication works just as it did with sockets named by
+	port numbers.
+	</p>
+	</dd>
+<dt>Solution 13.22
+<dd>
+	<p>
+	A server for the card dealer is
+	<a href='sol13.22s.c'><tt>sol13.22s.c</tt></a>, and a 
+	client for the dealer is
+	<a href='sol13.22c.c'><tt>sol13.22c.c</tt></a>.
+	The server accepts a port number as an argument and an optional
+	argument specifying the number of decks it holds.  The server
+	simply deals cards until it runs out of cards.
+	</p>
+
+<p>
+	The client places a "GET" request to obtain a number of cards.
+	The server returns a string consisting of space-separated
+	card identifiers.  Each card identifier is a two-character
+	string of the form VS where V is the value and S is the suit.
+	</p>
+
+<p>
+	The protocol needs to be expanded to allow for returning cards,
+	setting up a new deck, asking the server for the number of
+	cards left in the stack, or other operations.  Which operations
+	you add depend on the application.  
+	</p>
+
+<p>
+	Requests are handled sequentially, so the server does
+	not have to worry about race conditions and locks.
+	</p>
+
+<p>
+	If the server has fewer cards than the client asks for, the
+	server dispenses what it has.  This might not be the correct
+	response for some applications.  By changing the protocol
+	so the server does not give out any cards if it cannot
+	satisfy the entire request, the card server can be used as
+	a way to explain semaphores.
+	</p>
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

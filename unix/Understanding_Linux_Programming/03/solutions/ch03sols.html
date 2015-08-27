@@ -1,0 +1,147 @@
+<html>
+<head>	<title>Chapter 3 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 3 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The main ideas of Chapter 3 are directories and file attributes
+and the main skills include how to read a directory and how to
+read, understand, and modify file attributes.  The programming
+exercises for this chapter provide practice with these skills and
+provide an introduction to the ideas and facts behind file
+attributes.
+</p>
+<dl>
+<dt>Solution 3.10
+<dd>
+	<p>
+	A version of ls1 that prints the list in multiple columns
+	is: <a href='sol03.10.c'><tt>sol03.10.c</tt></a>.
+	This version fixes the number of columns at 80.  In a later
+	chapter we see how to ask the system for the width of the
+	terminal display.
+	</p>
+	</dd>
+<dt>Solution 3.11
+<dd>
+	<p>
+	A corrected version of ls2.c 
+	is: <a href='sol03.11.c'><tt>sol03.11.c</tt></a>.
+	This program combines the directory name with the filename
+	as an argument to stat so stat can find the file.
+	The listing only shows the filename, though.
+	</p>
+	</dd>
+<dt>Solution 3.12
+<dd>
+	<p>
+	A modified version of ls2.c that represents the status of
+	the SUID, SGID, and sticky bits correctly is:
+	<a href='sol03.12.c'><tt>sol03.12.c</tt></a>.
+	This version also includes the bugfix in problem 3.11.
+	</p>
+	</dd>
+<dt>Solution 3.13
+<dd>
+	<p>
+	A modified version of cp1.c is:
+	<a href='sol03.13.c'><tt>sol03.13.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 3.14
+<dd>
+	<p>
+	<a href='sol03.14.c'><tt>sol03.14.c</tt></a> is a
+	revised version of cp1.c that can copy an entire directory
+	file by file to a second directory.  It also supports some
+	of the features required by earlier exercises.
+	</p>
+	</dd>
+<dt>Solution 3.15
+<dd>
+	<p>
+	<a href='sol03.15.c'><tt>sol03.15.c</tt></a> is a
+	a version of ls1.c that sorts the list of items.
+	It supports the -r option to sort in descending order.
+	This version presents the list in a single column, but
+	the code to display multiple columns is included.
+	</p>
+</dd>
+<dt>Solution 3.16
+<dd>
+	<p>
+	<pre>
+	+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+	| 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 |
+	+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+	</pre>
+	</p>
+</dd>
+<dt>Solution 3.17
+<dd>
+	<p>
+	<a href='sol03.17.c'><tt>sol03.17.c</tt></a> is a
+	solution to the question.  This solution does not give
+	the user 20 seconds.  Instead it runs a shell so the user
+	can set the mode without having to open a second terminal window.
+	</p>
+	<p>
+	The result is that the file is still readable via the file 
+	descriptor.  Read permission, therefore, really means the
+	permission to open a file for reading.  Once a file is open,
+	the permission bits are not checked.
+	</p>
+</dd>
+<dt>Solution 3.18
+<dd>
+	<p>
+	<a href='sol03.18.c'><tt>sol03.18.c</tt></a> is a version
+	of ls2.c that supports the -R option.  This program also
+	supports the suid, sgid, and sticky bit handling from solution
+	3.12.  
+	</p>
+</dd>
+<dt>Solution 3.19
+<dd>
+	<p>
+	<a href='sol03.19.c'><tt>sol03.19.c</tt></a> is a version
+	of ls2.c that supports the -u option.  This program also
+	supports the suid, sgid, and sticky bit handling from solution
+	3.12.  The only real change was to use the <tt>st_atime</tt>
+	member from the stat struct instead of the <tt>st_mtime</tt>
+	member.
+	</p>
+</dd>
+<dt>Solution 3.20
+<dd>
+	<p>
+	<a href='sol03.20.c'><tt>sol03.20.c</tt></a> is a version
+	of chown.  This program shows how to use getpwnam() to
+	convert a username to a user id number.  It also shows how
+	to use the chown() system call.
+	</p>
+</dd>
+<dt>Solution 3.21
+<dd>
+	<p>
+	<a href='sol03.21.c'><tt>sol03.21.c</tt></a> is a version
+	of cp that does two things: (1) It resets the access and
+	modification times of the original file, and (2) It sets
+	the access and modification time of the copy to those of
+	the original.  Suitable for doing backup copies.
+	</p>
+</dd>
+<dt>Solution 3.22
+<dd>
+	<p>
+	<a href='sol03.22.c'><tt>sol03.22.c</tt></a> is a version
+	of who2.c (from Chapter 2) that prints the time when the
+	terminal line was last modified instead of the time the
+	user logged in.  The solution also prints the number of
+	seconds since the last modification.  You can use this
+	program to see which users have been idle for a while.
+	This program demonstrates the use of setutent() and getutent().
+	These functions provide a simple interface to the utmp
+	database.  The manual has all the details.
+	</p>
+</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

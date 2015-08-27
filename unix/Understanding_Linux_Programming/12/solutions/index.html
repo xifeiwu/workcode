@@ -1,0 +1,113 @@
+<html>
+<head>	<title>Chapter 12 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 12 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 12 serves two main purposes.  One purpose is to demonstrate
+and explain a larger client/server program, including a more complex
+protocol and the programming details to support that protocol.  The
+second purpose of Chapter 12 is to consolidate many of the ideas
+about Unix programming.  A web server combines the ideas and
+techniques about directories, files, processes, sockets, the environment,
+and shells.  A web server is a wonderful example of one program that
+uses almost every service of the operating system.
+</p>
+
+<p>
+The best exercise for this chapter is to write a web server and
+think through design decisions.  Most of the programming exercises
+involve adding a feature or two to the web server presented in the
+text.  Incremental addition of features is a good way to learn about
+an existing program, but is not the best way to think about design
+questions.  On the other hand, by looking at each component, adding
+a few new functions and seeing which parts of the design allow
+growth and which do not, one gains experience and skills one can
+use to plan a broader, more flexible web server.
+</p>
+<dl>
+<dt>Solution 12.3
+<dd>
+	<p>
+	The revised generic server is
+	<a href='sol12.3.c'><tt>sol12.3.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 12.4
+<dd>
+	<p>
+	A version of webserv that logs all requests and the
+	status of their replies is
+	<a href='sol12.4.c'><tt>sol12.4.c</tt></a>.
+	This program accepts the name of the logfile on the command line
+	(with the -l filename option) and uses O_APPEND so
+	it can write to the log safely.  The program uses the fact
+	that accept() records the address of the client.
+	</p>
+	</dd>
+<dt>Solution 12.5
+<dd>
+	<p>
+	A version of webserv that puts some typical CGI
+	variables into the environment before calling
+	exec is
+	<a href='sol12.5.c'><tt>sol12.5.c</tt></a>.
+	Three kinds of variables are demonstrated in this solution: 
+	      variables about the server,
+	      variables sent as part of the http header,
+	  and variables about the client.
+	</p>
+	</dd>
+<dt>Solution 12.6
+<dd>
+	<p>
+	A version of webserv that executes files that appear
+	in or below a directory called cgi-bin is
+	<a href='sol12.6.c'><tt>sol12.6.c</tt></a>.
+	The changes were minor.  Using strstr() to search
+	for the string "/cgi-bin/" in the URI was the only
+	real addition.
+	</p>
+	</dd>
+<dt>Solution 12.7
+<dd>
+	<p>
+	A version of webserv that returns some of the HTTP
+	header fields is
+	<a href='sol12.7.c'><tt>sol12.7.c</tt></a>.
+	This program sends back the name of the server and the
+	current time. When sending back a file, the server
+	sends the last modified time and the number of bytes
+	in the file.  
+	</p>
+	</dd>
+<dt>Solution 12.8
+<dd>
+	<p>
+	A version of sol12.7.c that supports the HEAD request is 
+	<a href='sol12.8.c'><tt>sol12.8.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 12.9
+<dd>
+	<p>
+	Adding the POST command is a larger project.  
+	Doing this project requires reading the RFC to learn
+	the details of what POST does.  That alone, is not
+	trivial.  For the POST method, a stream of data is
+	part of the request.  That stream arrives through
+	the same socket as the request line and the headers.
+	How can the server read the request, the headers,
+	and then make the rest of the data stream into
+	standard input to the program invoked?
+	</p>
+
+<p>
+	The POST method is input redirection applied in
+	a network setting.  Does the server need to create
+	a pipe and feed data to the process via the pipe,
+	or can the server redirect input and get out of
+	the way?  How does the existing design of webserv
+	affect the answer to this question?
+	</p>
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

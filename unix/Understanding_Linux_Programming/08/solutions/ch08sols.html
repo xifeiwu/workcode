@@ -1,0 +1,143 @@
+<html>
+<head>	<title>Chapter 8 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 8 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The main ideas of chapter 8 are fork, exec, and wait.  The programming
+exercises are short problems that focus on creating new processes, 
+running new programs, and waiting for the children to exit.
+</p>
+
+<p>
+</p>
+<dl>
+<dt>Solution 8.1
+<dd>
+	<p>
+	A program can record the result from 
+	getpid() before calling fork().  After
+	calling fork() the program can call getpid() again.  If the
+	current PID is the same as the value before fork(), the
+	process is the parent, and if the PID after fork() is not
+	the same as before, the process is the child.
+	</p>
+	</dd>
+<dt>Solution 8.3
+<dd>
+	<p>
+	One could accumulate the arguments in a linked list or other
+	expandable list structure during parsing.  Once the number of
+	arguments is known, an array could be allocated with enough space to
+	hold that many pointers.  Many versions of Unix impose a maximum
+	storage space of ARG_MAX, defined in <limits.h> on the combination
+	of argument list, strings, and the environment variables.  One
+	could create an array large enough to fill that total capacity.
+	Some systems have large values for ARG_MAX, so creating an
+	array that large can consume a lot of space.
+	</p>
+	</dd>
+<dt>Solution 8.7
+<dd>
+	<p>
+	The child should not return.  If it did, the new process would
+	now be running a second copy of the original program.
+	The purpose of the child process was to run a new program; the
+	calling program is already running.  
+	</p>
+	</dd>
+<dt>Solution 8.8
+<dd>
+	<p>
+	A small extension of waitdemo1.c to create and wait for
+	two child processes is
+	<a href='sol08.8a.c'><tt>sol08.8a.c</tt></a>.
+	Watching the order of output messages from this program 
+	helps clarify the fact that the processes are running in
+	parallel and writing to the same output stream.
+	</p>
+
+<p>
+	A larger extension of waitdemo1.c that creates and waits
+	for a number of processes specified on the command line
+	is
+	<a href='sol08.8b.c'><tt>sol08.8b.c</tt></a>.
+	This program raises an interesting question about
+	computing random numbers with rand().  If the random
+	delay is computed in the child, every child gets the
+	same random number.  The reason is that the rand()
+	function generates random numbers be applying a mathematical
+	operation to the last random number it generated.  If the
+	parent asks for the random number, then the copy of that
+	last number is in the parent, available to be used the
+	next time.  If the child computes the random number, the
+	copy of that new number is stored in the child, and the
+	parent's copy is unaffected.
+	</p>
+	</dd>
+<dt>Solution 8.9
+<dd>
+	<p>
+	A program that uses SIGCHLD to notify the parent that
+	a child has exited is
+	<a href='sol08.9.c'><tt>sol08.9.c</tt></a>.
+	This solution shows how a program can perform other tasks while
+	a child process runs.  A parent does not have to stop
+	activity to wait for a child.
+	</p>
+	</dd>
+<dt>Solution 8.10
+<dd>
+	<p>
+	Another program that uses SIGCHLD to notify the parent
+	when a child exits is
+	<a href='sol08.10.c'><tt>sol08.10.c</tt></a>.
+	This program creates several children that all exit at
+	the same time.  As they all exit, the parent receives
+	a lot of SIGCHLDs at once.  When the parent is handling
+	one SIGCHLD, other SIGCHLDs are blocked but not queued.
+	Therefore, it is likely that some of the signals will
+	be lost.  See the discussion in Chapter 7 on how Unix
+	handles multiple instances of a signal.  
+	</p>
+
+<p>
+	A solution is to use waitpid() instead of wait.  
+	A detailed explanation of using waitpid() is
+	presented in Chapter 12.
+	</p>
+
+<p>
+	Some versions of Unix support queued signals.  Check your
+	system to see how it responds.
+	</p>
+	</dd>
+<dt>Solution 8.11
+<dd>
+	<p>
+	This enhanced version of psh2.c allows the user
+	to exit from the shell by typing exit or by
+	sending EOF:
+	<a href='sol08.11.c'><tt>sol08.11.c</tt></a>.
+	</p>
+
+<p>
+	The changes were added in the main input loop.
+	</p>
+	</dd>
+<dt>Solution 8.12
+<dd>
+	<p>
+	Regular Unix shells respond to SIGINT by canceling
+	all collected command line input and printing a new prompt.
+	Bash ignores SIGQUIT.  A version of psh2.c that supports
+	these two features is 
+	<a href='sol08.12.c'><tt>sol08.12.c</tt></a>.
+	This program requires understanding SA_RESTART for sigaction.
+	Systems that do not default to autorestart on system calls will
+	clear the input and return from fgets() with an error automatically.
+	On the other hand, systems that restart systems calls after
+	handling signals will not behave the way the shell does.
+	To change this behavior, the program calls sigaction() and turns
+	off the bit for SA_RESTART.
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

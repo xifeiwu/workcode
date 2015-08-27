@@ -1,0 +1,219 @@
+<html>
+<head>	<title>Chapter 15 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 15 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The purpose of Chapter 15 is to present a broad view of
+interprocess communication.  Earlier chapters concentrated
+on particular techniques, ideas, and applications.  The
+web server showed how stream sockets could be used with
+a complex protocol, the chapter on I/O redirection and pipes
+looked at the details of attaching file descriptors to
+particular sources.  After reading several chapters like
+that, one might feel the topic is a bunch of unrelated
+special tools and tricks.  The purpose of this chapter
+is bring some order to the variety of interprocess
+communication techniques and to help the reader learn
+how to decide on the right method for an application.
+</p>
+
+<p>
+An important part of IPC is cooperation and coordination.
+How do file locks, semaphores, and techniques for
+serializing access and data work?  Why do we need them?
+</p>
+
+<p>
+Some of the programming exercises involve creating
+programs that combine various techniques in ways that
+differ from the combinations in the text.  Working
+with and creating new combinations helps one understand
+what each part means and how it works.
+</p>
+<dl>
+<dt>Solution 15.6
+<dd>
+	<p>
+	A version of selectdemo.c recoded using poll()
+	instead of select() is
+	<a href='sol15.6.c'><tt>sol15.6.c</tt></a>.
+	The program does the same thing the select-based
+	version did.  This exercise allows the reader
+	to learn about and compare the two techniques.
+	</p>
+	</dd>
+<dt>Solution 15.7
+<dd>
+	<p>
+	This problem asks for two of the four combinations
+	in the datagram/stream, Internet/Unix socket
+	space.
+	</p>
+	<p><b>(a)</b>
+	A client/server pair using datagram sockets in
+	the AF_INET are 
+	<a href='sol15.7aclnt.c'><tt>sol15.7aclnt.c</tt></a> 
+	and
+	<a href='sol15.7aserv.c'><tt>sol15.7aserv.c</tt></a>.
+	</p>
+	<p><b>(b)</b>
+	A client/server pair using stream socket in
+	the AF_UNIX are 
+	<a href='sol15.7bclnt.c'><tt>sol15.7bclnt.c</tt></a> 
+	and
+	<a href='sol15.7bserv.c'><tt>sol15.7bserv.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 15.8
+<dd>
+	<p>
+	A C version of the FIFO-base server is
+	<a href='sol15.8serv.c'><tt>sol15.8serv.c</tt></a>,
+	and a C version of the FIFO-based client is
+	<a href='sol15.8clnt.c'><tt>sol15.8clnt.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 15.9
+<dd>
+	<p><b>(a)</b>
+	You cannot run two versions of shm_ts2.c at once
+	because the call to semget() uses the O_EXCL flag
+	to prevent another process from creating the
+	semaphore set once one exists.  I tried it.
+	</p>
+	<p><b>(b)</b>
+	On the other hand, if the O_EXCL flag were not set,
+	a second, third or more server could be started up,
+	and all would be programmed to write data to the
+	memory segment.  The problem with the design in the
+	original version is that the server does not check
+	to see if other servers are writing to the segment.
+	</p>
+
+<p>
+	The servers want exclusive access to the memory
+	segment.  Therefore, they need a mutex object.
+	A semaphore can be used to create a mutex; when 
+	the value is 1, the mutex is unlocked and when
+	the value is 0, the mutex is locked.
+	A server locks the mutex, the server has to
+	tell readers to wait.  We keep the semaphore
+	for the number of writers in addition to the
+	number of readers and the mutex semaphore.
+	</p>
+
+<p>
+	A solution to the many-server version is 
+	<a href='sol15.9serv.c'><tt>sol15.9serv.c</tt></a>,
+	and the matching client is
+	<a href='sol15.9clnt.c'><tt>sol15.9clnt.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 15.10
+<dd>
+	<p>
+	This solution shows how to use semaphores 
+	to implement read and write locks on a file.  
+	This solution is the answer to exercise 15.9
+	with the shared memory segment replaced by
+	a shared disk file.  
+	</p> <p>
+	The server is
+	<a href='sol15.10serv.c'><tt>sol15.10serv.c</tt></a>,
+	and the matching client is
+	<a href='sol15.10clnt.c'><tt>sol15.10clnt.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 15.11
+<dd>
+	<p>
+	This solution shows how to use file locks
+	to implement read and write locks on a shared
+	memory segment.
+	This solution is the answer to exercise 15.9
+	with the semaphores replaced by read and write
+	locks on a disk file.  The file locking code
+	came from file_tc.c and file_ts.c.
+	</p> <p>
+	The server is
+	<a href='sol15.11serv.c'><tt>sol15.11serv.c</tt></a>,
+	and the matching client is
+	<a href='sol15.11clnt.c'><tt>sol15.11clnt.c</tt></a>.
+	</p>
+	</p>
+	</dd>
+<dt>Solution 15.12
+<dd>
+	<p>
+	The analogy for this problem is an all-night
+	supermarket and a person who wants to mop the
+	floor.  If the floor mopper waits until the
+	store is empty, he may never get to mop the
+	floor.  He needs to put up a sign that says
+	no new shoppers may enter the store, but he
+	allows current shoppers to continue until they
+	finish.  Once the store is empty, he can mop
+	the floor then take down the sign.
+	</p>
+
+<p>
+	Other people may also want exclusive use of
+	the store.  An electrician may want to turn
+	off all the lighting to install some new wires.
+	That person also wants to put a `no new shoppers'
+	sign up.
+	</p>
+
+<p>
+	These real-world items translate into three
+	semaphores:
+	</p>
+	<ol>
+	<li>A counter that represents the number of shoppers in the store</li>
+	<li>A sign that says "no new shoppers"</li>
+	<li>A mutex so that only one worker can install the sign at a time</li>
+	</ol>
+	<p>
+	Therefore, when a server wants exclusive access of the
+	storage resource, the server must wait through two action sets:
+	<ul type='a'>
+		<li>waits to decrement the mutex</li>
+		<li>increments 'no new shoppers' semaphore</li>
+	</ul>
+	and
+	<ul type='a'>
+		<li>waits until number of shoppers = 0</li>
+	</ul>
+	When the server is done, it must perform this action set:
+	<ul type='a'>
+		<li>decrement the 'no new shoppers' semaphore</li>
+		<li>increment the mutex</li>
+	</ul>
+	<p>
+	Clients, on the other hand must do these action sets
+	Before using the resource, the client must
+	<ul type='a'>
+		<li>wait for 'no new shoppers' semaphore to = 0</li>
+		<li>increment the number of shoppers</li>
+	</ul>
+	And when the client is done, the client has to
+	<ul type='a'>
+		<li>decrement the number of shoppers</li>
+	</ul>
+	<p>
+	Thus, the program has to define three semaphores and initialize
+	the num_readers = 0, the mutex = 1, and the no_new_readers = 0.
+	Details of coding are left to the reader.
+	</p>
+	</dd>
+	</dd>
+<dt>Solution 15.13
+<dd>
+	<p>
+	A version of cp that puts a write lock on the output file.
+	If the output file is a device, that lock ensures exclusive
+	access.  The program is
+	<a href='sol15.13.c'><tt>sol15.13.c</tt></a>.
+	</p>
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

@@ -1,0 +1,262 @@
+<html>
+<head>	<title>Chapter 11 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 11 Solutions to Programming Exercises </span><br>
+ 
+<p>
+The main idea for Chapter 11 is client/server programming using
+pipes and sockets.  Some exercises provide more practice
+with pipes and fork and dup and wait.  Some provide
+practice with sockets, network addresses, and creating
+and managing connections between processes.  The purpose of this
+chapter is to make the basic ideas of client/server programming
+clear and to drive home how similar many applications are.  These
+exercises lay the groundwork for abstracting the steps and ideas
+in Chapter 12.
+</p>
+
+<p>
+</p>
+<dl>
+<dt>Solution 11.6
+<dd>
+	<p>
+	A revised version of tinybc.c that supports the -c
+	option is
+	<a href='sol11.6.c'><tt>sol11.6.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 11.7
+<dd>
+	<p>
+	A version of smsh1.c (from Chapter 9) that supports the
+	-c option is
+	<a href='sol11.7.c'><tt>sol11.7.c</tt></a>.
+	The addition to your own shell may be different.
+	</p>
+	</dd>
+<dt>Solution 11.8
+<dd>
+	<p>
+	A version of pclose() is 
+	<a href='sol11.8.c'><tt>sol11.8.c</tt></a>.
+	pclose() has to call fclose() to release the memory
+	set aside for buffers and to close the file descriptor.
+	In this case, the file descriptor leads to a pipe,
+	so calling fclose() will shut the parent's end of the
+	pipe.  The other thing pclose() has to do is to
+	wait() for the child and obtain its exit status.
+	</p>
+	<p>
+	The simple, naive way to write pclose() is to call
+	wait().  If another child exits between the call
+	to popen() and pclose(), and that other process is
+	not waited for, the call to pclose() will catch it.
+	The purpose of pclose() is to wrap up all the resources
+	used by the child and the connection.
+	</p>
+
+<p>
+	A better solution, therefore, is for popen() to 
+	record the pid of the child so that pclose() knows
+	which pid to wait for.  The code in this solution
+	keeps an array of pids, indexed by file descriptors.
+	popen() records the pid in the array and pclose()
+	reads the pid from that array. 
+	</p>  
+	</dd>
+<dt>Solution 11.9
+<dd>
+	<p>
+	A version of timeserv.c that prints the IP number and
+	hostname of the caller is
+	<a href='sol11.9.c'><tt>sol11.9.c</tt></a>.
+	This program shows how to use <tt>inet_ntoa()</tt>
+	and <tt>gethostbyaddr()</tt>.
+	</p>
+	</dd>
+<dt>Solution 11.10
+<dd>
+	<p>
+	A program that runs sort as a subroutine is
+	<a href='sol11.10.c'><tt>sol11.10.c</tt></a>.
+	This program is similar to tinybc, but it has to write all the data
+	and then close the pipe before reading any data back.  The assignment
+	says the program should read all the data into an array, then write
+	the array into sort, then read from sort back into the array, then
+	print the array.  That design seems to waste memory; the data could
+	just be streamed into sort and then streams back from sort to standard
+	output  The value of this design is that the logic could be 
+	used to process data internally as part of a larger program.
+	</p>
+	</dd>
+<dt>Solution 11.11
+<dd>
+	<p>
+	A version of tinybc.c using a single socketpair is
+	<a href='sol11.11.c'><tt>sol11.11.c</tt></a>.
+	This program is much simpler than the two-pipe version.
+	The important new idea here is that each end of the connection
+	uses a different end of the socketpair.  One process uses
+	pipe[0] for reading and writing, and the other process
+	uses pipe[1] for reading and writing.
+	</p>
+	</dd>
+<dt>Solution 11.12
+<dd>
+	<p>
+	A version of the timeserver that only tells the time to
+	callers from IP numbers listed in a file of authorized
+	hosts is
+	<a href='sol11.12.c'><tt>sol11.12.c</tt></a>.
+	This solution is an extension of the ideas in exercise
+	11.9.
+	</p>
+	</dd>
+<dt>Solution 11.13
+<dd>
+	<p><b>(a)</b>
+	There are many solutions to this problem.  I do not believe
+	I can say with certainty exactly which screening algorithms
+	are secure, and I do not want to devise one that will turn
+	out to be a security hole.  The purpose of this exercise is
+	to show how tricky this problem can be.  The safest method
+	is not to try to screen out patterns but instead to run the
+	command directly.  That way, you can focus on preventing
+	buffer overflows and illegal directory paths.
+	</p>
+	<p><b>(b)</b>
+	A version of rlsd.c that runs ls directly is
+	<a href='sol11.13.c'><tt>sol11.13.c</tt></a>.
+	This program uses fork, exec, dup2, and wait to pass a string
+	as an argument to ls.  There is no shell to interpret special
+	characters.  The program calls wait to prevent the child from
+	becoming a zombie.  There are other ways to prevent a child from
+	becoming a zombie, so you do not need to call wait if you use
+	one of the other techniques.
+	</p>
+	</dd>
+<dt>Solution 11.14
+<dd>
+	<p>
+	A simple user information server is
+	<a href='sol11.14.c'><tt>sol11.14.c</tt></a>.
+	This program accepts a single line of input from the client
+	then searches the getpwent database for any entries that
+	contain the specified string in the pw_name or pw_gecos
+	fields.
+	</p>
+
+<p>
+	This exercise provides more practice with basic server design,
+	a chance to learn about/review getpwent, and a chance to decide
+	whether the server should use fork to handle multiple connections
+	or just handle them in sequence.  The solution provided here is
+	simple, it does not use fork.  
+	</p>
+	</dd>
+<dt>Solution 11.15
+<dd>
+	<p>
+	See the solution to 11.16.  It is a more general version of 11.15.
+	</p>
+	</dd>
+<dt>Solution 11.16
+<dd>
+	<p>
+	A caching proxy time server is
+	<a href='sol11.16.c'><tt>sol11.16.c</tt></a>.
+	This program demonstrates two important ideas: a proxy and 
+	caching.  This one program includes the code from timeserv.c
+	and timeclnt.c.  As a server, it receives requests at port 13000.
+	It gets the actual time by being a client and sending a request
+	to a time server on another machine.  That's the proxy part.
+	</p>
+
+<p>
+	It then stores the time it gets in a buffer.  If another request
+	comes in soon, the server does not have to go back to the real
+	time server; it can use the time is has in its cache.  On the
+	other hand, if it has been a few seconds since the last request,
+	the time in the cache is old news.
+	</p>
+
+<p>
+	Disk caching was discussed in Chapter 2.  How does this sort of
+	caching compare to caching in Chapter 2?
+	</p>
+	</dd>
+<dt>Solution 11.17
+<dd>
+	<p>
+	A cache for user info requests makes sense because the database
+	of users does not change often (the way the time does), and also
+	because searching for user information by looking through the
+	passwd file requires file access, which can take time.  If a 
+	server gets a lot of requests for user information, it can
+	eliminate the need to search the disk file and speed access 
+	by keeping the data in a hash table, tree, or sorted list.
+	</p>
+
+<p>
+	A finger server that reads the entire passwd database into an array
+	of structs is
+	<a href='sol11.17.c'><tt>sol11.17.c</tt></a>.
+	The data stored in memory is good until the user database is
+	changed.  Users are not usually added or changed on a fixed
+	schedule, so it does not make sense to set a timeout period.
+	</p>
+
+<p>
+	A better system is to have some method for forcing the server
+	to reload its table.  A simple method is to kill the server and
+	start it again.  The newly started server will read the current
+	table into memory.  Another system is to program the server
+	to reload the table when it receives a particular signal.  For
+	example, one could add a handler for SIGUSR1 that would clear
+	the old table and reload the table.  Several standard Unix
+	servers use this technique.
+	</p>
+
+<p>
+       	If you use the technique of having a signal handler invoke a reload
+	function, you have to be careful of race conditions.  Consider
+	what would happen if a signal arrives when if the server 
+	is in the middle of searching the table.  Control jumps to
+	the signal handler, the table is rebuilt, but the lookup function
+	still holds a pointer to some item in the table.  That pointer may
+	point to deallocated space.
+	</p>
+
+<p>
+	The table, therefore, is an object that must be protected from
+	being changed by one function while another function is using it.
+	Ignoring or blocking signals are bad ideas for two reasons.  The question
+	of how to share resources has come up a few times.  In later chapters we
+	shall see some techniques for avoiding interference.
+	</p>
+	</dd>
+<dt>Solution 11.18
+<dd>
+	<p><b>server</b>
+	A sequential number server is
+	<a href='sol11.18s.c'><tt>sol11.18s.c</tt></a>.
+	This program is just like the time server except it issues
+	a number not a time.  The output is a string, not an integer.
+	</p>
+
+<p><b>client</b>
+	A sequential number client is
+	<a href='sol11.18c.c'><tt>sol11.18c.c</tt></a>.
+	This program is exactly the same code as the time client.
+	</p>
+	</dd>
+<dt>Solution 11.19
+<dd>
+	<p><b>server</b>
+	A program that uses popen to run "ps ax" as a server is
+	<a href='sol11.19.c'><tt>sol11.19.c</tt></a>.
+	This program finds the name it is running under by
+	searching through the output of the ps command.
+	</p>
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

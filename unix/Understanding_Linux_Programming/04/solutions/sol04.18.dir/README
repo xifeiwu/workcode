@@ -1,0 +1,4 @@
+This directory contains some of what is needed to
+make a program that reads the superblock of a Linux
+ext2 filesytem.  You need to install the package
+called e2fsprogs-devel for the libraries.

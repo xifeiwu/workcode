@@ -1,0 +1,97 @@
+<html>
+<head>	<title>Chapter 10 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 10 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 10 is about I/O redirection.  There are two main ideas and
+several techniques.  The two main ideas are (a) three standard streams
+for all Unix tools, and (b) pipes.  The techniques are ways to get
+those streams and pipes hooked up the way the application needs.
+</p>
+
+<p>
+The purpose of the programming exercises is to practice the techniques
+and reinforce and internalize the ideas.  Many of these exercises
+provide review of fork, exec, and wait.  
+</p>
+<dl>
+<dt>Solution 10.10
+<dd>
+	<p>
+	The four enhancements to the watch.sh script are
+	<a href='sol10.10a.sh'><tt>sol10.10a.sh</tt></a>,
+	<a href='sol10.10b.sh'><tt>sol10.10b.sh</tt></a>,
+	<a href='sol10.10c.sh'><tt>sol10.10c.sh</tt></a>,
+	and
+	<a href='sol10.10d.sh'><tt>sol10.10d.sh</tt></a>.
+	Some reasons using <tt>curr</tt> and <tt>prev</tt>
+	are problems are </p>
+	<ul>
+		<li>You may not have write permission for the
+		directory in which you run the program,</li>
+		<li>You may have other files called prev and curr
+		in the current directory, and this script would
+		clobber them,</li>
+		<li>Another user may be running this script
+		in the same directory you use, and your
+		files would step on each other,</li>
+	</ul>
+	</p>
+	</dd>
+<dt>Solution 10.11
+<dd>
+	<p>
+	A version of whotofile that appends the output of who
+	by using output redirection is
+	<a href='sol10.11.c'><tt>sol10.11.c</tt></a>.
+	Notice this version sets the <tt>O_APPEND</tt> mode for the
+	file instead of using <tt>lseek</tt> and writing there.
+	</p>
+	</dd>
+<dt>Solution 10.12
+<dd>
+	<p>
+	A program that uses close, open, fork, and exec to redirect
+	the input of sort to a file is
+	<a href='sol10.12.c'><tt>sol10.12.c</tt></a>.
+	This program is pretty much a mirror of the whotofile.c
+	sample in the text.
+	</p>
+	</dd>
+<dt>Solution 10.13
+<dd>
+	<p>
+	See the solution to 10.14; that one is a more general version
+	of 10.13.
+	</p>
+	</dd>
+<dt>Solution 10.14
+<dd>
+	<p>
+	A program that makes a pipeline from an arbitrary number
+	of single-word commands is
+	<a href='sol10.14.c'><tt>sol10.14.c</tt></a>.
+	The solution is recursive .
+	</p>
+	</dd>
+<dt>Solution 10.15
+<dd>
+	<p>
+	A "progtee" program that sends stdin to stdout 
+	and also into a command is
+	<a href='sol10.15.c'><tt>sol10.15.c</tt></a>.
+	The program is a good exercise in fork, exec, and pipe.  It
+	also introduces the "tee" program, and in doing so, 
+	reviews the ideas of writing to a file and writing to a process.
+	</p>
+	</dd>
+<dt>Solution 10.16
+<dd>
+	<p>
+	A short program that shows how to determine if a file
+	descriptor leads to a regular file (as opposed to a pipe,
+	a device file, fifo, socket, etc) is
+	<a href='sol10.16.c'><tt>sol10.16.c</tt></a>.
+	</p>
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

@@ -1,0 +1,171 @@
+<html>
+<head>	<title>Chapter 9 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 9 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 9 is about the Unix shell.  The two main ideas are that the
+shell runs programs and that the shell is a programming language.
+There are two ways to learn how a shell works.  One way is to
+start with an existing shell and add new features to different parts
+of it.  By doing so, one learns the logic and ideas of running
+programs and interpreting scripts.
+Another way to learn about Unix shells is to write one from scratch
+or to redo entire sections of an existing shell.  
+</p>
+
+<p>
+Many of the programming exercises in Chapter 9 fall into the first group.
+The solutions to those are included.  The other approach, writing new
+versions of sections and adding new functions is a larger project.  That
+larger project could involve redoing the if..then logic to support nested
+conditions and would involve adding variable substitution.
+</p>
+
+<p>
+</p>
+<dl>
+<dt>Solution 9.4
+<dd>
+	<p>
+	A version of splitline.c that supports multiple commands on a line
+	is <a href='sol09.4.c'><tt>sol09.4.c</tt></a>.
+	This file can be linked with:
+	<pre>cc smsh1.c sol09.4.c execute.c -o sol4</pre>
+	to produce a shell splits lines at semicolons.
+	</p>
+	</dd>
+<dt>Solution 9.5
+<dd>
+	<p>
+	A version of builtin.c that supports the exit command and
+	also the cd command is
+	<a href='sol09.5.c'><tt>sol09.5.c</tt></a>.
+	This file can be linked with 
+	<pre> cc smsh2.c splitline.c execute.c process2.c controlflow.c sol09.5.c varlib.c -o sol5</pre>
+	to produce a shell that accepts exit and cd.  The cd command
+	is part of the answer to problem 9.11.  By replacing splitline.c with
+	sol09.4.c, you can produce a shell that also supports multiple commands on
+	a line.
+	</p>
+	</dd>
+<dt>Solution 9.6
+<dd>
+	<p>
+	A version of controlflow.c that supports the else part of the
+	if..then control structure is
+	<a href='sol09.6.c'><tt>sol09.6.c</tt></a>.
+	This file can be linked with
+	<pre> cc smsh2.c splitline.c execute.c process2.c sol09.6.c builtin.c varlib.c -o sol6</pre>
+	to produce a shell that allows else in if structures.  If you replace
+	splitline.c with sol09.4.c, you can add multiple commands on one line,
+	and if you replace builtin.c with sol09.5.c, you can add cd and exit.
+	Pretty modular design, eh?
+	</p>
+	</dd>
+<dt>Solution 9.7
+<dd>
+	<p>
+	A version of controlflow.c that supports the else part of the
+	if..then control structure by using one state variable rather than
+	two is
+	<a href='sol09.7.c'><tt>sol09.7.c</tt></a>.
+	This file can be linked with
+	<pre> cc smsh2.c splitline.c execute.c process2.c sol09.7.c builtin.c varlib.c -o sol7</pre>
+	to produce a shell that allows else in if structures with a different
+	implementation than the one in solution 6.  Again, if you replace
+	splitline.c with sol09.4.c, you can add multiple commands on one line,
+	and if you replace builtin.c with sol09.5.c, you can add cd and exit.
+	</p>
+	</dd>
+<dt>Solution 9.8
+<dd>
+	<p>
+	Adding background processing requires minor changes to four files.
+	The replacement to smsh2.c is 
+	<a href='sol09.8a.c'><tt>sol09.8a.c</tt></a>,
+	the replacement to splitline.c is 
+	<a href='sol09.8b.c'><tt>sol09.8b.c</tt></a>,
+	the replacement to execute.c is 
+	<a href='sol09.8c.c'><tt>sol09.8c.c</tt></a>, 
+	the replacement to process2.c is 
+	<a href='sol09.8d.c'><tt>sol09.8d.c</tt></a>, and
+	the replacement to smsh.h is 
+	<a href='sol09.8.h'><tt>sol09.8.h</tt></a>.
+	</p>
+
+<p>
+	Therefore, linking:
+	<pre>cc sol09.8a.c sol09.8b.c sol09.8c.c sol09.8d.c controlflow.c builtin.c varlib.c -o sol8</pre>
+	will produce a shell that supports use of the "&amp;" symbol to run a command in the
+	background.  The splitline replacement also includes the feature to launch several
+	commands on one line.  Therefore
+	<pre>cmd1 & cmd2 & cmd3 ; cmd4 ; cmd5</pre>
+	will work as expected.  As before, you can replace controlflow.c with sol09.6.c or
+	sol09.7.c for else support, and you can replace builtin.c with sol09.5.c for exit
+	and cd.
+	</p>
+	</dd>
+<dt>Solution 9.9
+<dd>
+	<p>
+	Problem 9.9 is a larger project.  Solutions to larger projects
+	are not provided here.
+	</p>
+	</dd>
+<dt>Solution 9.10
+<dd>
+	<p>
+	Problem 9.10 is a larger project.  Solutions to larger projects
+	are not provided here.
+	</p>
+	</dd>
+<dt>Solution 9.11
+<dd>
+	<p>
+	The solution to problem 9.11 is included in the solution to problem 9.5 in the
+	file:
+	<a href='sol09.5.c'><tt>sol09.5.c</tt></a>.
+	</p>
+	</dd>
+<dt>Solution 9.12
+<dd>
+	<p><b>(a)</b>
+	Adding <tt>$$</tt> is a small change.  After initializing the table of variables,
+	execute this code:
+	<pre>
+	char pidstr[20];
+	sprintf(pidstsr,"%d",getpid());
+	VLstore("$",pidstr);
+	</pre>
+	</p>
+
+<p><b>(b)</b>
+	Adding <tt>$?</tt> is also a small change.  In the execute function,
+	after returning from wait, store the exit status of the child in the
+	variable called $?.  A good start is:
+	<pre>
+	char childstatstr[20];
+	sprintf(childstatstr,"%d",childstatus&gt;&gt;8);
+	VLstore("?",childstatstr);
+	</pre>
+	This code will not work for children that are terminated by signals.
+	For those, you need to use:
+	<pre>sprintf(childstatstr,"%d", 128+(childstatus&amp;0x7F));</pre>
+	</p>
+	</dd>
+<dt>Solution 9.13
+<dd>
+	<p>
+	A version of splitline.c that handles quoted arguments is
+	<a href='sol09.13.c'><tt>sol09.13.c</tt></a>.
+	This file can be linked with
+	<pre>cc sol09.8a.c sol09.13.c sol09.8c.c sol09.8d.c sol09.7.c sol09.5.c varlib.c -o sol13</pre>
+	to produce a shell with all the features in the solutions presented here.
+	</p>
+
+<p>
+	Note that this version does not allow you to quote quotes.  That is, there is no way to
+	put <b>"</b> in a string.  To add that feature you need to add backslash quoting and/or
+	single quotes to quote double quotes.  That increases the complexity of the code.
+	</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>

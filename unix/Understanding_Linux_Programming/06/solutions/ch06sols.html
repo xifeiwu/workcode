@@ -1,0 +1,159 @@
+<html>
+<head>	<title>Chapter 6 Solutions to Programming Exercises </title>	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">	<link rel="Stylesheet" type="text/css" title="phStyle" href="../../../html/css/style.css">	<link rel="icon" href="../../../phicon.ico" type="image/bmp"></head><body bgcolor="#ffffff"><div align="center"><table width="80%" border="0" cellspacing="0" cellpadding="0">	<tr>	<td valign=top>	<span class="header">Chapter 6 Solutions to Programming Exercises </span><br>
+ 
+<p>
+Chapter 6 discusses programming for devices and introduces
+signals.  The general question is how a program responds to external
+events.  The two types of events covered in the chapter are keystrokes
+and signals.  Using the terminal driver, a program can respond to
+keystrokes in certain ways, and using the signal() system call, a program
+can respond to signals in certain ways.
+</p>
+
+<p>
+The exercises in this chapter provide practice with settings of
+the terminal driver and methods of handling signals.  Writing and
+testing these programs clarifies the meaning of various terminal
+settings and provides direct experience of what a signal handler does.
+</p>
+<dl>
+<dt>Solution 6.3
+<dd>
+	<p>
+	A version of play_again3.c that implements timeout on input
+	by using VTIME in the driver is:
+	<a href='sol06.3.c'><tt>sol06.3.c</tt></a>.
+	Except for using the timeout feature in select, this method
+	is the cleanest, simplest solution.
+	</p>
+	</dd>
+<dt>Solution 6.4
+<dd>
+	<p><b>(a)</b>
+	A version of play_again3.c that uses the signal() function
+	to ignore signals is
+	<a href='sol06.4a.c'><tt>sol06.4a.c</tt></a>.
+	Note: another solution to this exercise is to turn off ISIG
+	in the terminal driver.
+	</p>
+	<p><b>(b)</b>
+	A version of play_again3.c that allows SIGINT and SIGQUIT
+	but installs a handler to restore the driver is
+	<a href='sol06.4b.c'><tt>sol06.4b.c</tt></a>.
+	This program is pretty much the same as play_again4.c in the
+	text.  The exercise is here just as for comparison with the
+	method in part (a).
+	</p>
+	</dd>
+<dt>Solution 6.5
+<dd>
+	<p>
+	A version of rotate.c that controls the terminal driver
+	itself and ignores signals is
+	<a href='sol06.5.c'><tt>sol06.5.c</tt></a>.
+	This applies the techniques and code from problems 6.4.
+	</p>
+	</dd>
+<dt>Solution 6.6
+<dd>
+	<p>
+	A version of rotate.c that supports line editing is
+	<a href='sol06.6.c'><tt>sol06.6.c</tt></a>.
+	Writing this program is good preparation for reading
+	the source to the editing part of the terminal driver.
+	The system V terminal driver was notorious for allowing
+	the user to backspace off the left margin, consuming the
+	shell prompt and data on the previous line.
+	</p>
+	Note: This program handles tab characters the best it
+	      can given that it does not keep track of which
+	      characters the user has typed.  The tab key will
+	      advance the cursor to the next tab column (traditionally
+	      8 chars apart).  Pressing the erase key still causes
+	      the cursor to back up one char, but the program knows
+	      where on the screen it is.
+	<p>
+	</p>
+	</dd>
+<dt>Solution 6.7
+<dd>
+	<p>
+	An version of sigdemo1.c that counts the number of
+	SIGINTs received is
+	<a href='sol06.7.c'><tt>sol06.7.c</tt></a>.
+	This program provides more practice getting used to
+	coding for signal handlers and introduces the question
+	of passing data to a handler using a global variable.
+	</p>
+	</dd>
+<dt>Solution 6.8
+<dd>
+	<p>
+	A version of sigdemo1.c with a SIGINT handler that asks
+	the user if the program should exit is
+	<a href='sol06.8.c'><tt>sol06.8.c</tt></a>.
+	An interesting thing to test is how the program behaves
+	if you press Ctrl-C when the program is waiting for the
+	yes/no answer.  Experiment with the program to see exactly
+	how the Ctrl-C is handled.
+	</p>
+</dd>
+<dt>Solution 6.9
+<dd>
+	<p>
+	A version of sigdemo2.c that turns off ISIG in the terminal driver
+	is
+	<a href='sol06.9.c'><tt>sol06.9.c</tt></a>.
+	This program cannot be stopped from the keyboard.  The usual
+	control characters that generate signals are passed along as
+	regular characters.  The only way to stop this process is to
+	open another xterm or login from another machine and kill the
+	process running the program.  That skill is extremely useful.
+	</p>
+</dd>
+<dt>Solution 6.10
+<dd>
+	<p>
+	A program that uses a signal handler to generate a status
+	report is
+	<a href='sol06.10.c'><tt>sol06.10.c</tt></a>.
+	This program computes prime numbers and keeps track of how
+	many prime numbers it has found and the largest prime number it
+	has found.  By sending the program SIGINT, the user can invoke
+	a function that prints out the status of the search.
+	</p>
+	<p>
+	Using signal handlers to invoke internal functions is a
+	powerful tool in designing programs.  The signal handler
+	can be used to dump internal data for diagnostic purposes
+	and also for tracking purposes.
+	</p>
+</dd>
+<dt>Solution 6.11
+<dd>
+	<p>
+	A version of more0.c that runs in non-canonical, noecho mode,
+	handles signals, and knows about the number of lines on the
+	terminal is
+	<a href='sol06.11.c'><tt>sol06.11.c</tt></a>.
+	This program shows how much progress we have made since
+	Chapter 1.  Since we already know about stat, we could even
+	add to the prompt the percentage of the file viewed.
+	</p>
+</dd>
+<dt>Solution 6.12
+<dd>
+	<p>
+	A program that waits for keystrokes and also responds to
+	window size change signals is
+	<a href='sol06.12.c'><tt>sol06.12.c</tt></a>.
+	This program appears to be a visual toy, but is in fact
+	an introduction to the ideas and skills presented in
+	the chapter on writing a video game.  Those ideas and
+	skills are important to for understanding event-driven
+	programming, operating system internals, and multi-threaded
+	programming.
+	</p>
+</dd>
+</dl>
+</td></tr></table></div><br clear="all"><table border=0 align=right>	<tr>	<td class="footer">	&copy; 2003 <a href="http://www.prenhall.com" target="new">Pearson Education, Inc.</a><br>	<a href="../../../html/notice/legal.html" target="main">Legal Notice</a><br>			<a href="../../../html/notice/privacy.html" target="main">Privacy Statement</a><br>			<a href="../../../html/tech_support.html" target="main">Technical Support Info</a>	</td></tr></table><BR CLEAR="all"></body></html>
