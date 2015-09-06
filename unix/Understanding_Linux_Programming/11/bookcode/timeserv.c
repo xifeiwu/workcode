@@ -40,10 +40,14 @@ int main(int ac, char *av[])
 
 	gethostname( hostname, HOSTLEN );       /* where am I ?         */
 	hp = gethostbyname( hostname );         /* get info about host  */
+    printf("hostent->h_addr: %s\n", (char*)hp->h_addr);
 	                                        /* fill in host part    */
 	bcopy( (void *)hp->h_addr, (void *)&saddr.sin_addr, hp->h_length);
 	saddr.sin_port = htons(PORTNUM);        /* fill in socket port  */
 	saddr.sin_family = AF_INET ;            /* fill in addr family  */
+    printf("\nInfo about sockaddr\n");
+    printf("sockaddr.sin_addr.s_addr: %d\n", saddr.sin_addr.s_addr);
+    printf("sockaddr.sin_port: %d\n", saddr.sin_port);
 
 	if ( bind(sock_id, (struct sockaddr *)&saddr, sizeof(saddr)) != 0 )
 	       oops( "bind" );
