@@ -40,13 +40,54 @@ body {
 	font: 62.5% Verdana, Arial, Helvetica, sans-serif;
 	padding: 20px;
 }
-
-
-
+.home {	
+	margin-bottom: 30px;
+}
+.home .circle{
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 5px;
+}
+.home img {
+	margin-left: 15px;
+	display: inline;
+}
+.mainNav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	/*width: 175px;*/
+}
+.mainNav li {
+	float: left;width: 15em;
+}
+.mainNav a{
+	color: #000;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	text-decoration: none;
+	border: 1px dashed #999;
+	padding: 7px 5px 7px 30px;
+	display: block;
+	background-color: #E7E7E7;
+	background-image: url(images/nav.png);
+	background-repeat: no-repeat;
+	background-position: 0px 2px;
+}
+.mainNav a:hover{
+	font-weight: bold;
+	background-color: #B2F511;
+	background-position: 3px 50%;
+}
 </style>
 </head>
 <body>
-  <ul>
+  <div class="home">
+  	<div class="circle"></div>
+  	<img src="images/home.png">  	
+  </div>
+  <ul class="mainNav">
     <li><a href="/index.html">Home</a></li>
     <li><a href="/features/">Features</a></li>
     <li><a href="/experts/">Experts</a></li>
