@@ -76,3 +76,6 @@ figcaption {
   border: 1px dashed #666;
   padding: 5px;
 }
+p {
+	text-indent: 2em;
+}

@@ -54,10 +54,10 @@ table {
 	font: bold 12px Tahoma, Geneva, sans-serif;
 	color: #65747E;
 	padding: 5px;
-  margin: 0 15px;
+  	margin: 2px 15px;
 	border: 1px dotted #98AFBE;
-  border-left: none;
-  border-right: none;
+  	border-left: none;
+  	border-right: none;
 }
 
 
