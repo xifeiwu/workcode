@@ -1,3 +1,6 @@
+function alert(args) {
+  console.log(args);
+}
 msg="Hello, world"
 console.log(msg.toUpperCase());
 console.log(msg.split(','));
@@ -42,4 +45,21 @@ function sort(){
     });
     console.log(a); 
 }
-sort();
+//sort();
+
+function dscope() {
+  for(var i = 0; i < 10; i++) {
+    console.log("I am in function scope");
+  }
+  console.log("value of i " + i);
+  sum = arguments[0] + arguments[1];
+}
+//dscope(1, 5);
+//console.log("value of sum: " + sum);
+
+function setName(obj) {
+  obj.name = "Nicholas";
+}
+var person = new Object();
+setName(person);
+alert(person.name);
