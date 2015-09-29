@@ -19,12 +19,24 @@ cb = function(){
     }
 }
 
+/**
 cb.call(obj, "hello", "world", ["hello", "world"]);
 hr();
 cb.apply(obj, ["hello", "world", ["hello", "world"]]);
 hr();
 var newcb = cb.bind(obj, "hello", "world", ["hello", "world"]);
 newcb();
+*/
+function add (a, b) {
+  console.log("a: " + a);
+  console.log("b: " + b);
+  return a + b;
+};
+//var todo = add.bind(null, 4);
+var todo = function () {
+  return add.apply(null, [4].concat(Array.prototype.slice.call(arguments)));
+};
+console.log(todo(7));
 
 //var logHello = console.log.bind(null, "Hello");
 //logHello("Mark");
