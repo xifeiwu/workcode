@@ -12,7 +12,18 @@
           console.log("Hi " + this.person);
         }
       };
-      window.addEventListener("DOMContentLoaded", obj.hi);
+      window.addEventListener("DOMContentLoaded", obj.hi.bind(window));
+      window.addEventListener("DOMContentLoaded", obj.hi.bind(obj));
+
+      var obj = {
+        person: "Nick",
+        wait: function () {
+          var someButton = document.createElement("button");
+          someButton.onclick = console.log.bind(console, this.person + " clicked!");
+          someButton.click();
+        },
+      };
+      obj.wait()
     </script>
   </head>
   <body>
