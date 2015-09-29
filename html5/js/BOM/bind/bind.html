@@ -5,6 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>HTML Model</title>
     <script>
+      var person = "Bill";
+      var obj = {
+        person: "Nick",
+        hi: function () {
+          console.log("Hi " + this.person);
+        }
+      };
+      window.addEventListener("DOMContentLoaded", obj.hi);
     </script>
   </head>
   <body>
