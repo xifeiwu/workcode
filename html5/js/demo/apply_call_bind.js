@@ -18,9 +18,13 @@ cb = function(){
         console.log(key + ": " + arguments[key]);
     }
 }
+
 cb.call(obj, "hello", "world", ["hello", "world"]);
 hr();
 cb.apply(obj, ["hello", "world", ["hello", "world"]]);
 hr();
 var newcb = cb.bind(obj, "hello", "world", ["hello", "world"]);
 newcb();
+
+//var logHello = console.log.bind(null, "Hello");
+//logHello("Mark");
