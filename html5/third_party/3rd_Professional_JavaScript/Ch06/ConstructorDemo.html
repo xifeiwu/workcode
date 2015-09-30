@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Constructor Demo</title>
+		<script>
+			function Person(name , age){
+				this.name = name;
+				this.age = age;
+			}
+			Person.prototype.sayHi = function() {
+				console.log("Hi, I'm " + this.name);
+			}
+			Person.prototype.name = "Anonymous";
+			person1 = new Person("Jim", 35);
+			person2 = new Person("Kit", 26);
+			for(var key in person1) {
+				console.log(key + "\t" + typeof(person1[key]));
+			}
+//			person1.sayHi();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
