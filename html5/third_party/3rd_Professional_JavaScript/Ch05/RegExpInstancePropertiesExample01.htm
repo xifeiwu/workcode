@@ -19,6 +19,15 @@
         alert(pattern2.lastIndex);  //0
         alert(pattern2.source);     //"\[bc\]at"
 
+		var re = null;
+		for(var i = 0; i < 10; i++) {
+			re = /cat/g;
+			console.log(re.test("catastrophe"));
+		}
+		for(var i = 0; i < 10; i++) {
+			re = new RegExp("cat", "g");
+			console.log(re.test("catastrophe"));
+		}
     </script>
 </head>
 <body>
