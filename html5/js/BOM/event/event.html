@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+      console.log("in the inner javascript.");
+      function getClick(event){
+        console.log(this.id);
+        console.log(this.value);
+        console.log(this.type);
+        console.log(event.target);
+      }
+      function allEvents(event){
+        switch(event.type){
+          case "keydown":
+          case "keypress":
+          case "keyup":
+            console.log(event.type + ": " + event.keyCode + " - " + event.key + "(" + event.charCode + ")");
+            break;
+          default:
+            console.log(event.type + "(" + event.button + "): " + event.clientX + " * " + event.clientY);
+            break;
+        }
+      }
+      function bindEvents(ele) {
+        ele.addEventListener("click", allEvents, false);
+        ele.addEventListener("dbclick", allEvents, false);
+        ele.addEventListener("mousedown", allEvents, false);
+        ele.addEventListener("mouseenter", allEvents, false);
+        ele.addEventListener("mouseleave", allEvents, false);
+        ele.addEventListener("mousemove", allEvents, false);
+        ele.addEventListener("mouseout", allEvents, false);
+        ele.addEventListener("mouseover", allEvents, false);
+        ele.addEventListener("mouseup", allEvents, false);
+        ele.addEventListener("focus", allEvents, false);
+        ele.addEventListener("focusin", allEvents, false);
+        ele.addEventListener("focusout", allEvents, false);
+        ele.addEventListener("keydown", allEvents, false);
+        ele.addEventListener("keypress", allEvents, false);
+        ele.addEventListener("keyup", allEvents, false);
+      }
+      window.onload = function() {
+        var myDiv = document.getElementById("myDiv");
+        var myBtn = document.getElementById("myBtn");
+        // btn.onclick = getClick;
+        myBtn.addEventListener("click", getClick, false);
+        bindEvents(window);//document.body
+
+        // window.addEventListener("click", getClick, false);
+      }
+    </script>
+  </head>
+  <body>
+    <br>
+    <br>
+    <br>
+    <div id="myDiv">
+      <input id="myBtn" type="button" value="Click me" onclick="alert(event.type)" />
+      <input id="myInput" type="input" value="Click me" />
+    </div>
+  </body>
+</html>
