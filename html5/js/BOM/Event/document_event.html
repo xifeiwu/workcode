@@ -2,11 +2,12 @@
     "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>HTML Model</title>
     <script>
-      console.log(document.readyState);
+      console.log("In inner Script tag: " + document.readyState);
       window.onload = function() {
-        console.log(document.readyState);
+        console.log("In function window.onload: " + document.readyState);
       }
     </script>
   </head>
@@ -16,7 +17,7 @@
 <br>
 <br>
     <script>
-      console.log(document.readyState);
+      console.log("In body of html: " + document.readyState);
     </script>
 
   </body>
