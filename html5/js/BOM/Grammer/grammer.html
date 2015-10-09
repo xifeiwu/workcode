@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+      function loadjs(file, callback) {
+        if(!file) {
+          console.log("need to specify a javascript name.");
+          return;
+        }
+        var script = document.createElement("script");
+        script.src = file;
+        script.type = "text/javascript";
+        script.addEventListener('load', callback);
+        document.head.appendChild(script);
+      }
+      window.onload = function() {
+        document.title = "js test";
+        loadjs("grammer.js", function(){console.log("load success.");});
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
