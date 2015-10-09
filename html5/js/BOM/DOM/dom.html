@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+      function handle_div() {
+        myDiv = document.getElementById("myDiv");
+        myDiv.id = "myDivID";
+        myDiv.title = "myDivTitle";
+        myDiv.lang = "myDivLanguage";
+        myDiv.me = "myDivMe";
+      }
+      function clone_node() {
+        myCloneNode = document.getElementById("cloneNode");
+        myul = myCloneNode.getElementsByTagName("ul")[0];
+        for(var i = 0; i < myul.childNodes.length; i++) {
+          var child = myul.childNodes[i];
+//          console.log(i + ": " + child.nodeType + " - " + child.nodeName + " - " + child.nodeValue); 
+        }
+        myCloneNode.appendChild(myul.cloneNode(true));
+      }
+      function handle_comment() {
+        myComment = document.getElementById("myComment");
+        var comment = document.createComment("This is comment add by js.");
+        myComment.appendChild(comment);
+      }
+      window.onload = function() {
+        document.title = "DOM Study.";
+        handle_div();
+        clone_node();
+        handle_comment();
+      }
+    </script>
+  </head>
+  <body>
+    <br>
+    <br>
+    <br>
+    <div id="blankDiv">
+    </div>
+    <div id="myDiv" special_attr="special attr">before P
+      <p>This is a tag P.</p>
+      <!--This is a commen in html.-->
+    </div>
+    <div id="cloneNode">
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+      </ul>
+    </div>
+    <div id="myComment"></div>
+  </body>
+</html>
