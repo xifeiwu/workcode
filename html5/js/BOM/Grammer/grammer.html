@@ -13,8 +13,8 @@
         var script, scripts;
         scripts = document.head.getElementsByTagName("script");
         for(var i = 0; i < scripts.length; i++) {
-          if (scripts[i].src == file) {
-            document.head.removeElement(scripts[i]);
+        if(scripts[i].src && (scripts[i].src.match(/\/([a-zA-Z0-9_]*\.js)$/)[1] == file)) {
+            document.head.removeChild(scripts[i]);
           }
         }
         var script = document.createElement("script");

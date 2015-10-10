@@ -42,4 +42,13 @@ function global_match() {
   console.log(matches[0]);
   console.log(pattern.lastIndex);
 }
-global_match();
+//global_match();
+
+function get_catch_pattern() {
+  var text = "file:///home/cos/Documents/Acadine/workcode/html5/js/BOM/Grammer/grammer.js";
+  var matches = text.match(/\/([a-zA-Z]*\.js)$/);
+  console.log(matches.index);
+  console.log(matches[0]);
+  console.log(matches[1]);
+}
+//get_catch_pattern();
