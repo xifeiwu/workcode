@@ -10,6 +10,13 @@
           console.log("need to specify a javascript name.");
           return;
         }
+        var script, scripts;
+        scripts = document.head.getElementsByTagName("script");
+        for(var i = 0; i < scripts.length; i++) {
+          if (scripts[i].src == file) {
+            document.head.removeElement(scripts[i]);
+          }
+        }
         var script = document.createElement("script");
         script.src = file;
         script.type = "text/javascript";
@@ -17,8 +24,12 @@
         document.head.appendChild(script);
       }
       window.onload = function() {
-        document.title = "js test";
-        loadjs("grammer.js", function(){console.log("load success.");});
+        document.title = "javascript grammer study";
+        loadjs("grammer.js", function(){console.log("load grammer.js success.");});
+      }
+      function grammer(file) {
+        document.title = file;
+        loadjs(file, function(){console.log("load " + file +" success.");});
       }
     </script>
   </head>
