@@ -15,7 +15,7 @@
         
         for(var i = 0; i < scripts.length; i++) {
           //if(scripts[i].src && (scripts[i].src.match(/\/([a-zA-Z0-9_]*\.js)$/)[1] == file)) {
-          if(scripts[i].name && scripts[i].src == file){
+          if(scripts[i].name && scripts[i].name == file){
             document.head.removeChild(scripts[i]);
           }
         }
