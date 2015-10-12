@@ -12,20 +12,28 @@
         }
         var script, scripts;
         scripts = document.head.getElementsByTagName("script");
+        
         for(var i = 0; i < scripts.length; i++) {
-        if(scripts[i].src && (scripts[i].src.match(/\/([a-zA-Z0-9_]*\.js)$/)[1] == file)) {
+          //if(scripts[i].src && (scripts[i].src.match(/\/([a-zA-Z0-9_]*\.js)$/)[1] == file)) {
+          if(scripts[i].name && scripts[i].src == file){
             document.head.removeChild(scripts[i]);
           }
         }
         var script = document.createElement("script");
         script.src = file;
         script.type = "text/javascript";
+        script.name = file;
         script.addEventListener('load', callback);
         document.head.appendChild(script);
+        return script;
       }
       window.onload = function() {
         document.title = "javascript grammer study";
-        loadjs("grammer.js", function(){console.log("load grammer.js success.");});
+        var grammer = loadjs("grammer.js", function(){
+          var grammer = document.head.getElementsByTagName("script")[1];
+          console.log("load grammer.js success:");
+          console.log(grammer);
+        });
       }
       function grammer(file) {
         document.title = file;
