@@ -11,13 +11,124 @@
           var testObj = new TestObj("test");
           testObj.showName();
         });
-        LazyLoader.load(["lazy_loader/test.html"], function(){
+        initialPanelId = "about";
+        var initialPanel = document.getElementById(initialPanelId);
+        LazyLoader.load([initialPanel], function(){
           console.log("load html success.");
         });
       }
     </script>
   </head>
   <body>
+
+    <section nav-scope="" nav-loop="" nav-ignore="" tabindex="0" role="region" id="about"><!--
+      <gaia-header data-href="#root">
+        <h1 data-l10n-id="deviceInfo-header"></h1>
+      </gaia-header>
+
+      <div>
+        <ul>
+          <li class="deviceinfo-phone-num" tabindex="0">
+            <span data-l10n-id="deviceInfo-MSISDN"></span>
+            <small class="deviceInfo-msisdns multiline"></small>
+          </li>
+          <li tabindex="0">
+            <span id="model-name" data-l10n-id="model-name"></span>
+            <small data-name="deviceinfo.product_model"></small>
+          </li>
+          <li tabindex="0">
+            <span id="os-version" data-l10n-id="software"></span>
+            <small data-name="deviceinfo.software"></small>
+          </li>
+          <li tabindex="0">
+            <span data-l10n-id="last-updated"></span>
+            <small class="last-update-date"></small>
+          </li>
+          <li>
+            <a class="menu-item" href="#about-moreInfo">
+              <span data-l10n-id="more-info"></span>
+            </a>
+          </li>
+        </ul>
+
+        <header>
+          <h2 data-l10n-id="softwareUpdates"></h2>
+        </header>
+        <ul>
+          <li class="pack-select" tabindex="0">
+            <p data-l10n-id="check-for-updates"></p>
+            <span class="button icon icon-dialog" nav-scope="" nav-ignore="">
+              <select name="app.update.interval">
+                <option value="86400" data-l10n-id="check-update-daily" selected=""></option>
+                <option value="604800" data-l10n-id="check-update-weekly"></option>
+                <option value="2592000" data-l10n-id="check-update-monthly"></option>
+              </select>
+            </span>
+          </li>
+          <li>
+            <gaia-button class="check-update-now" data-l10n-id="check-update-now"></gaia-button>
+          </li>
+          <li class="update-status description update-status" tabindex="0">
+            <p>
+              <span class="general-information" data-l10n-id="checking-for-update"></span>
+              <span class="system-update-status"></span>
+            </p>
+          </li>
+        </ul>
+
+        <header>
+          <h2 data-l10n-id="aboutBrowserOS"></h2>
+        </header>
+        <ul>
+          <li class="description" tabindex="0">
+            <p data-l10n-id="browser-os-desc"></p>
+          </li>
+          <li>
+            <a class="menu-item" href="#about-yourRights">
+              <span data-l10n-id="your-rights"></span>
+            </a>
+          </li>
+          <li>
+            <a class="menu-item" href="#about-yourPrivacy">
+              <span data-l10n-id="your-privacy"></span>
+            </a>
+          </li>
+          <li>
+            <a class="menu-item" href="#about-legal">
+              <span data-l10n-id="about-legal-info"></span>
+            </a>
+          </li>
+          <li>
+            <a class="menu-item" href="https://www.mozilla.org/credits/">
+              <span data-l10n-id="about-credit-info"></span>
+            </a>
+          </li>
+        </ul>
+        <header>
+          <h2 data-l10n-id="reset-head"></h2>
+        </header>
+        <ul>
+          <li>
+            <gaia-button class="reset-phone" data-l10n-id="reset-device"></gaia-button>
+          </li>
+        </ul>
+      </div>
+
+      <form role="dialog" data-type="confirm" class="reset-phone-dialog" hidden="">
+        <section>
+          <h1 data-l10n-id="reset-warning-title"></h1>
+          <p data-l10n-id="reset-warning-body"></p>
+        </section>
+        <menu>
+          <gaia-button data-l10n-id="cancel" class="cancel-reset-phone"></gaia-button>
+          <gaia-button data-l10n-id="reset" class="confirm-reset-phone danger"></gaia-button>
+        </menu>
+      </form>
+
+      <panel data-path="panels/about/panel"></panel>
+
+    -->
+  </section>
     <br>
     <br>
     <br>
