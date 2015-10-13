@@ -7,20 +7,23 @@
     <script>
       console.log("in the inner javascript.");
       function getClick(event){
-        console.log(this.id);
-        console.log(this.value);
-        console.log(this.type);
-        console.log(event.target);
+        // console.log(this.id);
+        // console.log(this.value);
+        // console.log(this.type);
+        // console.log(event.target);
+        console.log(event.target.tagName);
       }
       function allEvents(event){
         switch(event.type){
           case "keydown":
           case "keypress":
           case "keyup":
-            console.log(event.type + ": " + event.keyCode + " - " + event.key + "(" + event.charCode + ")");
+            console.log(event.target.tagName + "#" + event.type + ": " + event.keyCode + " - " + event.key + "(" + event.charCode + ")");
+            // console.log("target: " + event.target);
             break;
           default:
-            console.log(event.type + "(" + event.button + "): " + event.clientX + " * " + event.clientY);
+            console.log(event.target.tagName + "#" + event.type + "(" + event.button + "): " + event.clientX + " * " + event.clientY);
+            // console.log("target: " + event.target);
             break;
         }
       }
@@ -30,7 +33,7 @@
         ele.addEventListener("mousedown", allEvents, false);
         ele.addEventListener("mouseenter", allEvents, false);
         ele.addEventListener("mouseleave", allEvents, false);
-        ele.addEventListener("mousemove", allEvents, false);
+//        ele.addEventListener("mousemove", allEvents, false);
         ele.addEventListener("mouseout", allEvents, false);
         ele.addEventListener("mouseover", allEvents, false);
         ele.addEventListener("mouseup", allEvents, false);
@@ -40,6 +43,8 @@
         ele.addEventListener("keydown", allEvents, false);
         ele.addEventListener("keypress", allEvents, false);
         ele.addEventListener("keyup", allEvents, false);
+        ele.addEventListener("scroll", allEvents, false);
+        ele.addEventListener("resize", allEvents, false);
       }
       window.onload = function() {
         var myDiv = document.getElementById("myDiv");
@@ -51,13 +56,18 @@
         // window.addEventListener("click", getClick, false);
       }
     </script>
+    <style>
+      #myDiv {
+        border: solid 1px red;
+      }
+    </style>
   </head>
   <body>
     <br>
     <br>
     <br>
     <div id="myDiv">
-      <input id="myBtn" type="button" value="Click me" onclick="alert(event.type)" />
+      <input id="myBtn" type="button" value="Click me"/>
       <input id="myInput" type="input" value="Click me" />
     </div>
   </body>
