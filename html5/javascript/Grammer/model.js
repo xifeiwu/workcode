@@ -1,3 +1,3 @@
 (function(exports) {
 
-})(window)
+})(window);
