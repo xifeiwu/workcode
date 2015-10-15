@@ -17,9 +17,9 @@
       Panel.createdCallback = function() {
         console.log("In createCallback.");
         var tmpl = document.querySelector('template');
-        // var root = this.createShadowRoot();
+        var root = this.createShadowRoot();
         // root.innerHTML = "In Shadow Root.";
-        // root.appendChild(document.importNode(tmpl.content, true));
+        root.appendChild(document.importNode(tmpl.content, true));
       };
       // Called when a custom element is inserted into the DOM.
       Panel.attachedCallback = function() {
