@@ -323,15 +323,16 @@ template =
     '::content': /(?:\:\:content)/g
   };
   //false
-  var hasShadowCSS = (function() {
-    var div = document.createElement('div');
-    try {
-      div.querySelector(':host');
-      return true;
-    } catch(e) {
-      return false;
-    }
-  })();
+//  var hasShadowCSS = (function() {
+//    var div = document.createElement('div');
+//    try {
+//      div.querySelector(':host');
+//      return true;
+//    } catch(e) {
+//      return false;
+//    }
+//  })();
+hasShadowCSS = false;
 
   function processCss(template, name) {
     var globalCss = '';
@@ -362,8 +363,8 @@ template =
     };
   }
 
-  var value = processCss(template, "gaia-header");
+  var result = processCss(template, "gaia-header");
   exports.template = template;
-  exports.value = value;
+  exports.result = result;
 
 })(window);
