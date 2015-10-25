@@ -1,14 +1,19 @@
 <html>
   <head></head>
   <body>
-    <p id="hostElement"></p>
+    <p id="hostElement">shadow host</p>
     <script>
-      // Create shadow DOM
-      var shadow = document.querySelector('#hostElement').createShadowRoot();
-      // Add some text to shadow DOM
-      shadow.innerHTML = '<p>Here is some new text</p>';
+    	// Get shadow host
+      var hostElement = document.querySelector('#hostElement');
+      // Get shadow root
+      var shadow = hostElement.createShadowRoot();
+      // Add some text to shadow root
+      shadow.innerHTML = '<p>shadow root<content></content></p>';
       // Add some CSS to make the text red
       shadow.innerHTML += '<style>p { color: red };</style>';
+      // Add some text to shadow host
+      hostElement.innerHTML = "update shadow host";
     </script>
   </body>
 </html>
+
