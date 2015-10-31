@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			a:focus, a:active {
+			  color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<a id="myAnchor" href="http://www.w3schools.com">Visit W3Schools.com</a>
+		<p>Click the buttons to give focus and/or remove focus from the link above.</p>
+		<input type="button" onclick="getfocus()" value="Get focus">
+		<input type="button" onclick="losefocus()" value="Lose focus">
+		<script>
+		var anchor = document.getElementById("myAnchor");
+		function getfocus() {
+		  anchor.focus();
+		}
+		function losefocus() {
+		  anchor.blur();
+		}
+		</script>
+	</body>
+</html>
