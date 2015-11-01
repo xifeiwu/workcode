@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+      function test_custom_event() {
+        var evt = document.createEvent('Event');
+        evt.initEvent('customEvent', true, true);
+        var obj = document.getElementById('testBox');
+        obj.addEventListener('customEvent', function() {
+          console.log("custom event is inspired.");
+        });
+        // can be called via dispatchEvent.
+        obj.dispatchEvent(evt);
+      }
+      function test_handle_event() {
+        var testBox = document.getElementById('testBox');
+        var obj = {
+          name: 'foo',
+          handleEvent: function() {
+             alert('click name='+ this.name);
+          }
+        };
+        function click_cb() {
+          console.log("in function click_cb");
+        }
+        document.body.addEventListener('click', obj, false);
+        document.body.addEventListener('click', click_cb, false);
+        // testBox.addEventListener('click', click_cb, false);
+      }
+      window.onload = function() {
+        test_handle_event();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="testBox">This is a Test Box.</div>
+  </body>
+</html>
