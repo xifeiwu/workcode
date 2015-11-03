@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+    window.onload = function() {
+      // if the parameter true is not set, 
+      // the ul and li event will not trigger window focus.
+      // window.addEventListener("focus", function(e) {
+      //   console.log("focus window: " + e.target);
+      // }, true);
+
+      // var ul = document.getElementsByTagName("ul")[0];
+      // ul.addEventListener("focus", function(e) {
+      //   console.log("focus ul: " + e.target);
+      // });
+
+      // var lis = document.getElementsByTagName("li");
+      // for(var index = 0; index < lis.length; index++) {
+      //   lis[index].addEventListener("focus", function(e) {
+      //     console.log("focus li: " + e.target);
+      //   });
+      // }
+
+      // HTMLElement does not have method on.
+      // item1 = document.getElementById("fire_on");
+      // item1.on("focus", function() {
+      //   console.log("focus on item1");
+      // });
+
+      // Demo for Array.prototype.slice
+      var li_nodeList = document.getElementsByTagName("li");
+      var li_arr = Array.prototype.slice.call(lis);
+      for(var index in li_arr) {
+        console.log(li_arr[index]);
+      }
+      for(var index in li_nodeList) {
+        console.log(li_nodeList[index]);
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <ul>
+    <li tabindex=0 id="fire_on">Item1</li>
+    <li tabindex=0>Item2</li>
+    <li tabindex=0>Item3</li>
+    <li>Item4</li>
+    </ul>
+  </body>
+</html>
