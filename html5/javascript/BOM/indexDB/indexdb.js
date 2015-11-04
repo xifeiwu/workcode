@@ -160,6 +160,7 @@
 
     $('#add-button').click(function(evt) {
       console.debug("add ...");
+      console.log("add ...");
       var title = $('#pub-title').val();
       var year = $('#pub-year').val();
       var biblioid = $('#pub-biblioid').val();
