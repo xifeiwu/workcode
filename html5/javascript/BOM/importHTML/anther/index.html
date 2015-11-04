@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML Model</title>
+    <script>
+      window.onload = function() {
+        // Thanks to http://www.html5rocks.com/en/tutorials/webcomponents/imports/
+        var link = document.querySelector('link[rel="import"]');
+        // Clone the <template> in the import.
+        var template = link.import.querySelector('template');
+        var clone = document.importNode(template.content, true);
+        
+        document.querySelector('#getting-started-info').appendChild(clone);
+        
+        function handleLoad(e) {
+          console.log('Loaded import: ' + e.target.href);
+        }
+        function handleError(e) {
+          console.log('Error loading import: ' + e.target.href);
+        }
+      }
+    </script>
+    <link rel="import" href="import.html" onload="handleLoad(event)" onerror="handleError(event)">
+  </head>
+  <body>
+    <br>
+    <br>
+    <br>
+  </body>
+</html>
