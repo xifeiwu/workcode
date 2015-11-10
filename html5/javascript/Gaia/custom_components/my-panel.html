@@ -38,9 +38,9 @@
       });
 
       window.onload = function() {
-        // var myPanel = new MyPanel();
-        // myPanel.id = "mypanel";
-        // document.body.appendChild(myPanel);
+        window.panelLater = new MyPanel();
+        panelLater.id = "panelLater";
+        document.body.appendChild(panelLater);
       }
 
     </script>
@@ -51,7 +51,7 @@
     </style>
   </head>
   <body>
-    <my-panel>
+    <my-panel id="panelFormer">
       <h2>Introduction</h2>
       <h1>My custom panel</h1>
       <p>This is the content of the panel, we can add anything we need!</p>
@@ -66,6 +66,7 @@
         .panel-header{
           padding: 10px 20px;
           background-color: #1d2939;
+          min-height: 1.5em;
         }
         .panel-header h1{
           margin:0;
@@ -97,7 +98,7 @@
       <div id="panel">
         <div class="panel-header">
           <div class="panel-buttons">
-            <span class="toggle">^</span>
+            <span class="toggle">^ScrollHere</span>
           </div>
           <h1><content select="h1"></content></h1>
         </div>
