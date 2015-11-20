@@ -3,19 +3,28 @@
 <html>
   <head>
     <title>Input TAG</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+    function selectText() {
+      console.log('in function selectText');
+      var input = document.querySelector('input[name="text-input"]');
+      input.setSelectionRange(2,4);
+    }
+    </script>
     <style type="text/css">
-	input
-	{
-	  display:block;
-	  margin-bottom:10px;
-	}
+	  input
+  	{
+  	  display:block;
+  	  margin-bottom:10px;
+  	}
     </style>
   
   </head>
   <body>
-<input type="email" x-moz-errormessage="Please specify a valid email address.">
+<input type="email"  onclick="selectText()" x-moz-errormessage="Please specify a valid email address.">
 <br>
-<input type="text" name="text-input" value="Type here">
+<input type="text" name="text-input" onfocus="selectText()" value="Type here">
+<br>
 <br>
 <input type="button" name="button-input" value="Type here">
 <br>
