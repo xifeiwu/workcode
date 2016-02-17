@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Styling ordered list numbers demo page | Lab | 456 Berea Street</title>
+  <style media="screen,print">
+  #body {
+    width:70em;
+    max-width:100%;
+    margin:0 auto;
+  }
+
+  ol {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+  }
+  ol > li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #666;
+    background:#f6f6f6;
+  }
+  ol > li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it */
+    margin-right:8px;
+    padding:4px;
+    border-top:2px solid #666;
+    color:#fff;
+    background:#666;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+  }
+  li ol,
+  li ul {margin-top:6px;}
+  ol ol li:last-child {margin-bottom:0;}
+  </style>
+  <!--[if lt IE 8]>
+  <style>
+    ol {margin-left:40px;}
+    ol li {
+      margin-left:0;
+      list-style:decimal;
+    }
+    ol ul li {list-style:disc;}
+  </style>
+  <![endif]-->
+</head>
+<body>
+  <div id="body">
+    <h1>Styling ordered list numbers demo page</h1>
+    <p>This is a demo document related to the article <a href="http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/">Styling ordered list numbers</a>. Please see the article for context and information.</p>
+    <ol>
+      <li>List item one</li>
+      <li>The second item on the list</li>
+      <li>Number three is a bit longer, with some lorem ipsum for good measure. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+      <li>And here is number four.</li>
+      <li>List item five.</li>
+      <li>The sixth item on the list
+        <ol>
+          <li>A nested ordered list</li>
+          <li>A nested list</li>
+          <li>A nested list</li>
+        </ol>
+      </li>
+      <li>Number seven is a bit longer, with some lorem ipsum for good measure. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+      <li>And here is number 8.
+        <ul>
+          <li>A nested unordered list</li>
+          <li>A nested list</li>
+          <li>A nested list</li>
+        </ul>
+      </li>
+      <li>List item 9.</li>
+      <li>The tenth and last item on the list</li>
+    </ol>
+    <div id="labfooter">
+  <p>Lab Index | 456 Berea Street Home | Copyright &#169; 2003-2016 Roger Johansson</p>
+</div>
+  </div>
+</body>
+</html>
