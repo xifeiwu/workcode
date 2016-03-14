@@ -5,6 +5,14 @@
   <title>Sample document</title>
   <style >
 .center {text-align: center}
+.area {
+  position: absolute;
+  left: 200px;
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  overflow: scroll;
+}
   </style>
   </head>
   <body>
@@ -21,5 +29,8 @@ This <span style="text-shadow: 1px 1px 1px red">paragraph</span> will also be ce
 <span style="position:relative;">
 This paragraph<span style="position:absolute; top:3px; left: 3px; z-index:-1; color:#888">This paragraph</span> will also be center-aligned.
 </span>
+<div class='area'>
+  This is the content in area.This is the content in area.This is the content in area.This is the content in area.This is the content in area.This is the content in area.This is the content in area.This is the content in area.
+</div>
   </body>
 </html>
