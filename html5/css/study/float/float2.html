@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+  <style >
+  /* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.2;
+}
+ol { 
+	padding-left: 1.4em;
+	list-style: decimal;
+}
+ul {
+	padding-left: 1.4em;
+	list-style: square;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} 
+/* end reset browser styles */
+
+h1 {
+	color: blue; 
+	text-align:center; 
+	border-bottom: 2px solid red; 
+	padding-bottom: 20px; 
+	margin-bottom: 20px;
+	}
+
+.imgdiv *{
+	padding: 0px;
+}
+.imgdiv {
+	position: relative;
+	width: 160px;
+	height: 160px;
+	margin: 5px;
+}
+.imgdiv .pimg{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 0;
+}
+.imgdiv .name{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	color: white;
+	width: 100%;
+	height: 2em;
+	text-align: center;
+	background-color: gray;
+	line-height: 2em;
+	opacity: 0;
+}
+.imgdiv:hover .name{
+	opacity: 1;
+}
+
+.textformt {
+	text-decoration: line-through;
+	letter-spacing: 2px;
+	text-shadow: 2px 2px 3px #0000FF;
+	line-height: 200%;
+}
+p{
+	text-indent: 2em;
+}
+p:first-letter{
+	font-weight: bold;
+	font-style: italic;
+	font-size: 1.5em;
+	font-family: arial;
+}
+p:after{
+	content: "end";
+	color: red;
+}
+.leftcontainer {
+	border: 1px red solid;
+}
+.leftcontainer:after {
+	content: "";
+	display: table;
+	clear: both;
+/*	float: left;
+	width: 40%;*/
+}
+.left {
+	width: 40%;
+	float: left;
+	border-top: 20px green solid;
+}
+.right {
+	width: 40%;
+	float: right;
+}
+.main {
+	/*clear: left*/
+}
+.footer {
+	color: white;
+	background: #666;
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	padding: 20px;
+}
+.footer:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+  </style>
+  </head>
+  <body>
+<h1>孙玉芳：红旗旗手倒在途中</h1>
+	<div class="imgdiv">
+		<div class="name">玫瑰花</div>
+		<img class="pimg" src="./tulip_ballade_s.jpg">
+	</div>
+	<!-- <div class="leftcontainer"> -->
+		<div class="left">
+			<p>在20多篇纪念文章中，一封署名为“孙玉芳的妻子白敏珠”的感谢信，让孙的学生、中文2000公司经理胡才勇
+			潸然泪下：</p>
+			<p>孙玉芳患病以来，得到很多同志的关心。<span class="textformt">2005年1月13日</span>，孙玉芳的呼吸骤然停止。借此机会向所有的友
+			人表示感谢，对他以前工作中得罪的同志，希望得到谅解。</p>
+			<p>“孙老师为人耿直、处事严谨，自然会得罪人。”跟随了孙玉芳10多年的胡才勇，最了解自己老师的脾气。</p>
+			<p>也许，正是这个较真的性格，使得孙玉芳成为中国计算机软件业一个无法避开不谈的人物。在世界，惟一能够与微软
+			相抗衡的，不是某家公司，而是Linux所代表的开放源代码。1999年孙玉芳推出红旗Linux，国内外软件业为之
+			震动。5年后，他所缔造的中科红旗在全球六大Linux厂商中排名前三。</p>
+			<p>“惜粮如金”的孙董事长</p>
+			<p>无论在中科院软件所，还是中科红星，孙玉芳是出了名的“惜粮如金”。在海外攻读博士的马骁骐，这样描述他的老
+			师：常年穿着旧夹克衫，只要是盛在碗里的就全部吃掉，实在吃不掉的就带走，从不浪费。</p>
+			<p>孙玉芳，这位物质生活朴素到极致的副所长、董事长，1947年2月，出生于江苏省张家港一个农民家庭，在兄妹
+			六人中排行老四。在他11岁的时候，家里仅有的两间草房被拆去修望虞河。</p>
+			<p>生在解放前、长在红旗下，又经历过自然灾害、“文革”，特殊的经历让这位 “老一代”知识分子，在生前接受记
+			者采访时，一直强调他的工作是“科技报国”一部分，同时，多次引用上世纪五六十年代的事例来说明问题。</p>
+			<p>在同事、学生的印象里，除了工作还是工作的孙玉芳，严肃的表情下也有“不厚道”的时候。1992年在一次国际
+			技术会议后的卡拉OK活动中，他带头对着日方人士高唱《大刀进行曲》。</p>
+		</div>
+	<!-- </div> -->
+	<div class="right">
+		<p>与微软抗争的日子</p>
+		<p>57岁的孙玉芳，人生中有35年与中国软件业联系在一起。</p>
+		<p>1970年从北京大学数学力学系毕业后，孙玉芳就参与了中国第一批计算机设计和制造。8年后，他进入中科院研
+		究生院，在国内率先引进、推广和开发UNIX系统。</p>
+		<p>自主研发操作系统，是孙玉芳的坚持。年过半百的他，向记者讲述耿耿于怀了四五年的一件事：微软曾请麦肯锡公司
+		做咨询，结论是操作系统等关键软件中国不要做，做下游的应用就行了。</p>
+		<p>1999年5月8日，中国驻南斯拉夫大使馆被“误炸”，极大刺激了中国软件专家和相关领导，长期积累的危机感
+		促成了“必须具备自己的CPU和操作系统”的战略决策。</p>
+		<p>干了20多年的软件开发研究之后，孙的命运出现了“拐点”，实现了从一个学者到商人的转变。</p>
+		<p>三个月之后，孙玉芳主持发布了“红旗Linux”。作为自由软件的Linux被普遍认为是微软Windows
+		的“替代型产品”。</p>
+		<p>接着，次年6月，扶持软件业发展的“18号文件”颁布，中科院软件所和上海联创“六四开”共同出资成立了“中
+		科红旗”，孙玉芳出任董事长兼首席科学家，主打产品就是“红旗Linux”，其多国语言、大字符集处理等特色就是他的
+		研究成果。同时，他找来得意门生，成立了主打桌面办公软件的中文2000公司。</p>
+		<p>教书先生带了群“学生兵”，就这样跟微软干上了。</p>
+		<p>在微软庞大的身影笼盖下，孙玉芳前后连横多家部委成立Linux联盟、主持Linux高峰论坛，其间还上书国
+		务院，提请政府部门注意采用微软Office软件可能给政府带来的财政压力和安全隐患，即使为此背负对手强加的骂名亦
+		在所不惜。</p>
+	</div>
+	<div class="main">
+		<p>2001年北京政府办公软件招标会，孙玉芳带领并不成熟的中国软件企业，针对全球软件霸主实施了一次成功的“
+		狙击战”。在那场招标中，微软产品全面出局，最后桌面操作系统、办公套件都选择了以中科红旗为主的国内厂商。</p>
+		<p>但孙玉芳的“野心”并不止于政府招标会。从高端、商用到桌面、嵌入式产品，他希望打造一个国产操作系统的“天
+		下”。</p>
+		<p>然而国外的Linux开发者对中国同行颇有微词，说他们不肯开放源代码、背离了自由软件的宗旨；中国Linux
+		产业内部也不算风平浪静。红旗Linux桌面操作系统的市场占有率名列全球第一，有人质疑红旗得到太多政府采购的好处
+		；国内著名的Linux联盟“共创开源”本来跟“学院派”甚有渊源，但后来自己成立了一个公司，搞得大家不愿把源代码
+		提供出来……诸多事宜，孙都要一一应对。</p>
+		<p>出师未捷身先死</p>
+		<p>就在此时，“身体是革命的本钱，不用白不用”的孙玉芳，却在2003年年底因严重的糖尿病及并发症，不得不住
+		进医院。</p>
+		<p>有人说孙玉芳是累出的毛病。在教学、管理工作之余，孙玉芳先后写了22本科技著作，122册编译著作。</p>
+		<p>“就在2003年，他的身体垮了下来。”胡才勇说，根据董事会规定：三年之内有回报。但是，由于特殊的背景，
+		当时外经委对其融资、上市有限制，2001年中科红旗亏了1000多万，2002年大概亏四五百万，2003年由于正
+		版化采购未展开，更是最困难的时期。</p>
+		<p>“当时我的压力很大，忐忑不安地去向他汇报工作。没想到他打断了我的话，破天荒地当面表扬我，说我在如此艰苦
+		的环境下能带领公司继续往前走，已经很不错了。他帮我把包袱卸下，卸下的包袱都扛到了他自己的肩膀上。”胡才勇说</p>
+		<p>那场大病初愈后，孙玉芳每天上半天班，直到2005年1月9日凌晨突发脑溢血，送到北医三院后，经抢救心跳恢
+		复正常。</p>
+		<p>1月10日上午，孙的身体状况有所好转，亲友和学生中有人当场喜极而泣；11日病情稳定，而和他几乎同时进医
+		院的其他三个“脑干溢血”患者都已走了；12日下午，孙的血压开始下降，晚上9点左右他的亲友、软件所领导和同事们都
+		到场。晚上12点，最后一次把孙玉芳血压稳住，最后关头他的顽强和不服输一如往日。正当大家以为他还能坚持的时候，他
+		终于还是走了。</p>
+	</div>
+	<div class="footer">
+		This is the footer of page.
+	</div>
+  </body>
+</html>
