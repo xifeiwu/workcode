@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Linear gradient</title>
+  <style >
+div.linear-gradient {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.style1 {
+  background-image: linear-gradient(45deg, rgb(0,0,0), rgb(204,204,204), rgb(0,0,0)); 
+}
+.style2 {
+  background-image: linear-gradient(left, #900, #FC0 10%, #FC0 90%, #900);
+}
+  </style>
+  </head>
+  <body>
+<div class="linear-gradient style1">
+linear-gradient(45deg, rgb(0,0,0), rgb(204,204,204), rgb(0,0,0));
+</div>
+<div class="linear-gradient style2">
+background-image: linear-gradient(left, #900, #FC0 10%, #FC0 90%, #900);
+</div>
+  </body>
+</html>
