@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>menu</title>
+<style type="text/css">
+ul {
+  border: 1px solid red;
+}
+.vertical {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+.vertical a{
+  display: block;
+  border: 1px dotted #666;
+  border-left: 5px solid #666;
+  height: 1.25em;
+  line-height: 1.25em;
+  width: 8rem;
+}
+ul.horizon {
+  margin-left: 0px;
+  padding-left: 0px;
+  list-style: none;
+  border-bottom: 1px dashed #000;
+  text-align: center;
+}
+ul.horizon li{
+  display: inline;
+  margin-right: -5px;
+}
+ul.horizon a {
+  display: inline-block;
+  border: 1px dashed #000;
+  border-bottom: none;
+  padding: 5px 15px 5px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+ul.float {
+  list-style: none;
+  border-bottom: 1px dashed #000;
+}
+ul.float:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+ul.float li {
+  float: left;
+}
+ul.float li a {
+  display: block;
+  border: 1px dashed #000;
+  border-bottom: none;
+  padding: 5px 15px 5px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+</style>
+</head>
+<body>
+  <ul class="vertical">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">介绍</a></li>
+    <li><a href="#">产品</a></li>
+    <li><a href="#">地图</a></li>
+    <li><a href="http://www.baidu.com" class="top_link sponsor">联系我们</a></li>
+  </ul>
+  <ul class="horizon">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">介绍</a></li>
+    <li><a href="#">产品</a></li>
+    <li><a href="#">地图</a></li>
+    <li><a href="http://www.baidu.com" class="top_link sponsor">联系我们</a></li>
+  </ul>
+  <ul class="float">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">介绍</a></li>
+    <li><a href="#">产品</a></li>
+    <li><a href="#">地图</a></li>
+    <li><a href="http://www.baidu.com" class="top_link sponsor">联系我们</a></li>
+  </ul>
+  <div class="button_area">
+    <div class="row">
+      <a href="http://www.baidu.com" class="button button1">button1</a>
+    </div>
+    <div class="row">
+      <a href="http://www.baidu.com" class="button button2">button2</a>
+    </div>
+    <div class="row">
+      <a href="http://www.baidu.com" class="button button3">button3</a>
+    </div>
+  </div>
+</body>
+</html>
