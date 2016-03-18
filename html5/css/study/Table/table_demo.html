@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Model</title>
+  <style >
+table.demo1 {
+  text-align: left;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+table.demo1 td {
+  /*border: 1px solid yellow;*/
+}
+table.demo1 tr:nth-of-type(odd) { background-color: red; }
+table.demo1 tr:nth-of-type(even) { background-color: blue; }
+table th {
+  font-weight: bold;
+  color: red;
+}
+  </style>
+  </head>
+  <body>
+    <table class="demo1">
+      <caption align="top">
+          Table 1: CosmoFarmer.com's Indoor Mower Roundup
+      </caption>
+      <colgroup>
+        <col class="brand" />
+        <col class="price" /
+        <col class="power" />
+      </colgroup>
+      <thead> 
+        <tr>
+          <th scope="col">Brand</th>
+          <th scope="col">Price</th>
+          <th scope="col">Power Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chinook Push-o-matic Indoor Mower</td>
+          <td>$247.00</td>
+          <td>Mechanical</td>
+        </tr>
+        <tr>
+          <td>Sampson Deluxe Apartment Mower</td>
+          <td>$370.00</td>
+          <td>Mechanical</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table summary="The number of employees and the foundation year of some imaginary companies.">
+      <caption>Table 1: Company data</caption>
+      <tr>
+        <th abbr="Company">Company Name</th>
+        <th abbr="Employees">Number of Employees</th>
+        <th abbr="Founded">Foundation Year</th>
+      </tr>
+      <tr>
+        <td>ACME Inc</td>
+        <td>1000</td>
+        <td>1947</td>
+      </tr>
+      <tr>
+        <td>XYZ Corp</td>
+        <td>2000</td>
+        <td>1973</td>
+      </tr>
+    </table>
+
+    <table summary="The number of employees and the foundation year of some imaginary companies.">
+      <caption>Table 1: Company data</caption>
+      <tr>
+        <td></td>
+        <th scope="col">Employees</th>
+        <th scope="col">Founded</th>
+      </tr>
+      <tr>
+        <th scope="row">ACME Inc</th>
+        <td>1000</td>
+        <td>1947</td>
+      </tr>
+      <tr>
+        <th scope="row">XYZ Corp</th>
+        <td>2000</td>
+        <td>1973</td>
+      </tr>
+    </table>
+
+    <table class="extbl" summary="The number of employees and the foundation year of some imaginary companies." border="solid red">
+      <caption>Table 1: Company data</caption>
+      <tr>
+        <td rowspan="2"></td>
+        <th id="employees" colspan="2">Employees</th>
+        <th id="founded" rowspan="2">Founded</th>
+      </tr>
+      <tr>
+        <th id="men">Men</th>
+        <th id="women">Women</th>
+      </tr>
+      <tr>
+        <th id="acme">ACME Inc</th>
+        <td headers="acme employees men">700</td>
+        <td headers="acme employees women">300</td>
+        <td headers="acme founded">1947</td>
+      </tr>
+      <tr>
+        <th id="xyz">XYZ Corp</th>
+        <td headers="xyz employees men">1200</td>
+        <td headers="xyz employees women">800</td>
+        <td headers="xyz founded">1973</td>
+      </tr>
+    </table>
+  </body>
+</html>
