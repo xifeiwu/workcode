@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript">
+  function formReset() {
+    document.getElementById("myForm").reset()
+  }
+  window.onload = function() {
+    var name = document.getElementById('name');
+    name.addEventListener('change', function() {
+      console.log(name.value);
+    });
+    name.addEventListener('keyup', function() {
+      console.log(this.value);
+    });
+  }
+</script>
+<style type="text/css">
+input:required + label::after { content: "*"; }
+input:optional { border-color: silver; }
+input:invalid + label::after { content: ' ⨉'; }
+input:valid + label::after { content: ' ✓'; }
+input[type='number']:out-of-range { border-color: red; }
+textarea:read-only { user-select: none; }
+textarea:read-write { user-select: text; }
+</style>
+</head>
+
+  <form id="myForm">
+    Name: <input type="text" size="30" id="name"><br />
+    Age: <input type="number" size="30" max="10" min="1" value="11"><br/>
+    Password: <input type='text' size="30" required><label></label> <br>
+    Email: <input type="email"><label></label><br>
+    <textarea readonly>Lorem ipsum</textarea>
+    <textarea readwrite>Lorem ipsum</textarea>
+    <input type="button" onclick="formReset()" value="Reset">
+    <input type="submit">
+  </form>
+
+  <input type="submit">
+</body>
+
+</html>
