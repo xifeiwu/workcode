@@ -4,35 +4,80 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <title>menu</title>
 <style type="text/css">
+
 .menu {
-	padding:0 0 0 32px;
-	margin; 0;
-	list-style:none;
+	list-style: none;
 	font-family: Arial, Helvetica, sans-serif;
-	margin-top:50px;
 }
-.menu li.top {
-	display:block;
+.menu a {
+	text-decoration: none;
 	float:left;
-	position:relative;
+	display: block;
+	padding: 0 30px;
 }
-.menu li a.top_link span{
-	float:left;
-	font-weight:bold;
-	padding:0 24px;
+
+a.sponsor { font-family: Arial, sans-serif; }
+a.sponsor:link { color: #F00; }
+a.sponsor:visited { color: #0F0; }
+a.sponsor:hover { color: #00F; }
+a.sponsor:active {color: #FFF; }
+
+.button_area {
+	padding: 10px;
+	border: 1px solid gray;
+	border-bottom: 0px;
+	clear: both;
 }
-.menu li a.top_link:hover{
-	color:red;
+div.row {
+	border: 1px solid white;
+}
+.button {
+	text-decoration: none;
+	padding: 5px;
+	display: block;
+	width: 200px;
+	margin: 5px auto;
+}
+.button1 {
+	color: #000;
+	border: solid 1px #333;
+	background-color: #fff;
+	border-radius: 12px;
+}
+.button2 {
+	background: #B1B1B1;
+  color: #FFF;
+  font-weight: bold;
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: #DFDFDF;
+  border-right-color: #666;
+  border-bottom-color: #333;
+  border-left-color: #858585;
+}
+.button3 {
+	box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4), 0 1px 3px;
 }
 </style>
 </head>
 <ul class="menu">
-	<li class="top"><a href="#" class="top_link"><span>首页</span></li>
-	<li class="top"><a href="#" class="top_link"><span>介绍</span></li>
-	<li class="top"><a href="#" class="top_link"><span>产品</span></li>
-	<li class="top"><a href="#" class="top_link"><span>联系我们</span></li>
-	<li class="top"><a href="#" class="top_link"><span>地图</span></li>
+	<li class="top"><a href="#" class="top_link">首页</a></li>
+	<li class="top"><a href="#" class="top_link">介绍</a></li>
+	<li class="top"><a href="#" class="top_link">产品</a></li>
+	<li class="top"><a href="#" class="top_link">地图</a></li>
+	<li class="top"><a href="http://www.baidu.com" class="top_link sponsor">联系我们</a></li>
 </ul>
+<div class="button_area">
+	<div class="row">
+		<a href="http://www.baidu.com" class="button button1">button1</a>
+	</div>
+	<div class="row">
+		<a href="http://www.baidu.com" class="button button2">button2</a>
+	</div>
+	<div class="row">
+		<a href="http://www.baidu.com" class="button button3">button3</a>
+	</div>
+</div>
 <body>
 </body>
 </html>
