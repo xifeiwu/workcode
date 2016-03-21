@@ -1,0 +1,82 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+  table.demo3 {
+    border-collapse: collapse;
+  }
+  table.demo3 tr {
+    height: 3rem;
+  }
+  table.demo3 th {
+    border: 1px solid black;
+  }
+  table.demo3 td {
+    border: 1px solid gray;
+  }
+
+table.demo4 {
+  border: 1px solid black;
+  width: 500px;
+  border-collapse: collapse;
+}
+table.demo4 #product {
+  color: green;
+  width: 100px;
+  text-align: right;
+}
+table.demo4 tr {
+  height: 3rem;
+}
+table.demo4 th {
+  border:1px solid #429fff;    /* 行、列名称边框 */
+  background-color: red;
+}
+table.demo4 td {
+  border: 1px solid black;
+}
+  </style>
+</head>
+<body>
+
+<table class="demo3"><!-- 
+<colgroup span="3" valign="top"></colgroup>
+<colgroup span="2" valign="bottom"></colgroup> -->
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+<tr>
+<td>1垂直居上</td>
+<td>2垂直居上</td>
+<td>3垂直居上</td>
+<td>4垂直居下</td>
+<td>5垂直居下</td>
+</tr>
+</table>
+
+  <table class="demo4">
+    <caption>
+      Table 1: Current Inventory
+    </caption>
+    <colgroup span="3">
+      <col id="product">
+      <col id="price">
+      <col id="rating">
+    </colgroup>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Rating</th>
+    </tr>
+    <tr>
+      <td>rice</td>
+      <td>5.0$</td>
+      <td>*****</td>
+    </tr>
+  </table>
+</body>
+</html>

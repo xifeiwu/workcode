@@ -3,20 +3,76 @@
   <head>
   <meta charset="UTF-8">
   <title>Model</title>
-  <style >
-table.demo1 {
-  text-align: left;
-  border: 1px solid black;
+  <style>
+  table { 
+    margin-top: 25px;
+    border: green dotted 1px;
+  }
+  table.demo1 {
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+  table.demo1 td {
+    /*border: 1px solid yellow;*/
+  }
+  table.demo1 tr:nth-of-type(odd) { background-color: red; }
+  table.demo1 tr:nth-of-type(even) { background-color: blue; }
+  table th {
+    font-weight: bold;
+    color: red;
+  }
+  table.demo2 {
+    border: #429fff solid 1px;
+    border-collapse: collapse;
+  }
+  table.demo2 th{
+    border:1px solid #429fff;    /* 行、列名称边框 */
+    background-color:#d2e8ff;
+    font-weight:bold;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:10px;
+    padding-right:10px;
+    text-align:center;
+  }
+table.demo2 td{
+  border:1px solid #429fff;    /* 单元格边框 */
+  text-align:right;
+  padding:4px;
   border-radius: 5px;
 }
-table.demo1 td {
-  /*border: 1px solid yellow;*/
+table.demo2 tr {
+  height: 50px;
 }
-table.demo1 tr:nth-of-type(odd) { background-color: red; }
-table.demo1 tr:nth-of-type(even) { background-color: blue; }
-table th {
-  font-weight: bold;
-  color: red;
+table.demo2 tr.row3 {
+  height: 80px;
+  vertical-align: bottom;
+}
+table.deom2 th {
+  text-align: left;
+}
+table.demo2 tr:hover {
+  background-color: green;
+}
+
+table.demo3 tr {
+  height: 3rem;
+}
+
+table.demo4 {
+  border: 1px solid black;
+  width: 500px;
+}
+table.demo4 #product {
+  /*border: 1px solid black;*/
+  /*width: 50px;*/
+}
+table.demo4 tr {
+  height: 3rem;
+}
+table.demo4 td {
+  border: 1px solid black;
 }
   </style>
   </head>
@@ -27,7 +83,7 @@ table th {
       </caption>
       <colgroup>
         <col class="brand" />
-        <col class="price" /
+        <col class="price" />
         <col class="power" />
       </colgroup>
       <thead> 
@@ -51,26 +107,66 @@ table th {
       </tbody>
     </table>
 
-    <table summary="The number of employees and the foundation year of some imaginary companies.">
-      <caption>Table 1: Company data</caption>
-      <tr>
-        <th abbr="Company">Company Name</th>
-        <th abbr="Employees">Number of Employees</th>
-        <th abbr="Founded">Foundation Year</th>
+
+    <table class="demo2" summary="The number of employees and the foundation year of some imaginary companies.">
+      <caption>Table 1: Company data(demo2)</caption>
+      <tr class="row1">
+        <th rowspan="2"></th>
+        <th id="employees" colspan="2">Employees</th>
+        <th id="founded" rowspan="2">Founded</th>
       </tr>
-      <tr>
-        <td>ACME Inc</td>
-        <td>1000</td>
-        <td>1947</td>
+      <tr class="row2">
+        <th id="men">Men</th>
+        <th id="women">Women</th>
       </tr>
-      <tr>
-        <td>XYZ Corp</td>
-        <td>2000</td>
-        <td>1973</td>
+      <tr class="row3">
+        <th id="acme">ACME Inc</th>
+        <td headers="acme employees men">700</td>
+        <td headers="acme employees women">300</td>
+        <td headers="acme founded">1947</td>
+      </tr>
+      <tr class="row4">
+        <th id="xyz">XYZ Corp</th>
+        <td headers="xyz employees men">1200</td>
+        <td headers="xyz employees women">800</td>
+        <td headers="xyz founded">1973</td>
       </tr>
     </table>
 
-    <table summary="The number of employees and the foundation year of some imaginary companies.">
+<table class="demo3" border="1">
+<colgroup span="3" valign="top"></colgroup>
+<colgroup span="2" valign="bottom"></colgroup>
+<tr>
+<td>1垂直居上</td>
+<td>2垂直居上</td>
+<td>3垂直居上</td>
+<td>4垂直居下</td>
+<td>5垂直居下</td>
+</tr>
+</table>
+
+  <table class="demo4" width="100%">
+    <caption>
+      Table 1: Current Inventory
+    </caption>
+    <colgroup>
+      <col id="product">
+      <col id="price">
+      <col id="rating">
+    </colgroup>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Rating</th>
+    </tr>
+    <tr>
+      <td>rice</td>
+      <td>5.0$</td>
+      <td>*****</td>
+    </tr>
+  </table>
+
+    <table class="demo5" summary="The number of employees and the foundation year of some imaginary companies.">
       <caption>Table 1: Company data</caption>
       <tr>
         <td></td>
@@ -86,31 +182,6 @@ table th {
         <th scope="row">XYZ Corp</th>
         <td>2000</td>
         <td>1973</td>
-      </tr>
-    </table>
-
-    <table class="extbl" summary="The number of employees and the foundation year of some imaginary companies." border="solid red">
-      <caption>Table 1: Company data</caption>
-      <tr>
-        <td rowspan="2"></td>
-        <th id="employees" colspan="2">Employees</th>
-        <th id="founded" rowspan="2">Founded</th>
-      </tr>
-      <tr>
-        <th id="men">Men</th>
-        <th id="women">Women</th>
-      </tr>
-      <tr>
-        <th id="acme">ACME Inc</th>
-        <td headers="acme employees men">700</td>
-        <td headers="acme employees women">300</td>
-        <td headers="acme founded">1947</td>
-      </tr>
-      <tr>
-        <th id="xyz">XYZ Corp</th>
-        <td headers="xyz employees men">1200</td>
-        <td headers="xyz employees women">800</td>
-        <td headers="xyz founded">1973</td>
       </tr>
     </table>
   </body>

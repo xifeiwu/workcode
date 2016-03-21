@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+  <style>
+h1 {
+  text-align: center;
+}
+div.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+div.active {
+  background-color: red;
+}
+div.inactive {
+  background-color: green;
+}
+.navButton {
+color: black;
+background-color: #FF6603;
+border: 5px solid #660034;
+transition-property: color, background-color, border-color;
+transition-duration: 1s, 1s, .5s;
+transition-delay: 0s, 1s, 2s;
+}
+.navButton:hover {
+color: white;
+background-color: #660034;
+border-color: #FF6603;
+}
+
+@keyframes growAndGlow {
+  from {
+    background-color: yellow;
+    animation-timing-function: cubic-bezier(1, .03, 1, .115);
+  }
+  50% {
+    transform: scale(1.5);
+    background-color: blue;
+    animation-timing-function: linear;
+  }
+  to {
+    transform: scale(3);
+    background-color: red;
+  }
+}
+.animation {
+  width: 200px;
+  height: 200px;
+  animation-name: growAndGlow;
+  animation-duration: 5s;
+  animation-iteration-count: 3;
+}
+  </style>
+  <script type="text/javascript">
+    window.addEventListener('load', function() {
+      var timeoutState
+      function changeState() {
+        var dot = document.querySelector('.dot');
+        var classList = dot.classList;
+        if (classList.contains('inactive')) {
+          classList.remove('inactive');
+          classList.add('active');
+        } else if (classList.contains('active')) {
+          classList.remove('active');
+          classList.add('inactive');
+        }
+        timeoutState = setTimeout(changeState, 1000);
+        console.log('setTimeout: ' + setTimeout);
+      }
+
+      document.querySelector('input.start').addEventListener('click', () => {
+        setTimeout(changeState, 1000);
+      });
+      document.querySelector('button.stop').addEventListener('click', () => {
+        if (timeoutState) {
+          clearTimeout(timeoutState);
+        }
+      });
+    });
+  </script>
+  </head>
+  <body>
+    <h1>Demo for transitions</h1>
+    <div class='dot inactive'></div>
+    <input class='start' type='button' value='start'></input>
+    <button class='stop'>Stop <a href='http://www.baidu.com'>Baidu</a></button>
+    <span class='navButton'>This is navigation bar.</span>
+    <div class='animation'></div>
+  </body>
+</html>
