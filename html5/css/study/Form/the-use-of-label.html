@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The use of label</title>
+    <script type="text/javascript">
+    function clickMe() {
+      console.log('click me.');
+    }
+    function listenCheckbox() {
+      var checkbox = document.getElementById('myonoffswitch');
+      checkbox.addEventListener('change', function() {
+        console.log('the value of checkbox: ' + this.checked);
+      });
+    }
+    window.addEventListener('load', () => {
+      var hidden = document.querySelector('.onoffswitch-active').hidden;
+      console.log('value of hidden: ' + hidden);
+      setTimeout(() => {
+        document.querySelector('.onoffswitch-active').hidden = false;
+      }, 2000);
+      listenCheckbox();
+    });
+    </script>
+    <style type="text/css">
+      table {
+        text-align: left;
+        font-size: 14px;
+        margin: 0 auto;
+      }
+      input {
+        border: solid blue 1px;
+        background-color: silver;
+      }
+
+      p.title {
+        padding-top: 5px;
+        border-top: 1px green dotted;
+        margin-bottom: 2px;
+      }
+      .onoffswitch-checkbox {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="username">Click me</label>
+    <input type="text" id="username">
+    <label for="username">Click me2</label>
+    <label for="username">Click me3</label>
+    <label for="username">Click me4</label>
+    <p>
+      <label><input type="button" value="Press Me" onclick="clickMe()">Button???</label>
+    </p>
+    <label class="onoffswitch-label" for="myonoffswitch">
+      <div class="onoffswitch-inner">
+        <div class="onoffswitch-active" hidden>ONONON</div>
+        <div class="onoffswitch-inactive" hidden>OFFOFFOFF</div>
+      </div>
+      <div class="onoffswitch-switch"></div>
+    </label>
+
+    <p class="title">The demo for onoffswitch</p>
+    <div class="onoffswitch">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+      <label class="onoffswitch-label" for="myonoffswitch">
+        <div class="onoffswitch-inner">
+          <div class="onoffswitch-active">ON</div>
+          <div class="onoffswitch-inactive">OFF</div>
+        </div>
+        <div class="onoffswitch-switch"></div>
+      </label>
+    </div>
+  </body>
+</html>
