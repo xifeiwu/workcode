@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Subscribe to CosmoFarmer.com</title>
+<style>
+/* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1.2;
+}
+ol { 
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+ul {
+  padding-left: 1.4em;
+  list-style: square;
+}
+/* end reset browser styles */
+
+body {
+  width: 760px;
+  margin: 0 auto; 
+  background-color: rgb(0,51,102)
+}
+
+h1 {
+  font-size: 2em;
+  font-family: Tahoma, Geneva, sans-serif;
+  color: rgb(255,255,255);
+  font-weight: normal;
+  border-bottom: dotted 2px rgba(255,255,255,.5);
+  padding-bottom: 4px;  
+  margin: 25px 0;
+}
+
+p {
+  margin-bottom: 25px;  
+}
+
+.subform {
+  font-size: 1.2em;
+  color: white;
+  font-family:Tahoma, Geneva, sans-serif; 
+}
+.subform .label {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: bold;
+  color: rgba(255,255,255,.5);
+}
+.subform input[type="submit"] {  
+  margin-left: 220px;
+  padding: 10px 25px;
+  font-size: 1em;
+  color: white;
+  background: rgb(0,102,153);
+  background: -webkit-linear-gradient(rgba(255,255,255,.1) 40%, rgba(255,255,255,.5));
+  background: -moz-linear-gradient(rgba(255,255,255,.1) 40%, rgba(255,255,255,.5));
+  background: -o-linear-gradient(rgba(255,255,255,.1) 40%, rgba(255,255,255,.5));
+  background: linear-gradient(rgba(255,255,255,.1) 40%, rgba(255,255,255,.5));
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 4px white;
+}
+.subform select {
+  font-size: 1.2em;
+}
+.subform input[type="text"], .subform textarea {
+  font-size: 1.2em;
+  color: rgb(255,255,255,1);
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255,255,255,.5); 
+  box-shadow: inset 0 0 10px rgba(255,255,255,.75);
+  width: 500px;
+  padding: 5px; 
+}
+.subform input[type="text"]:focus, .subform textarea:focus {
+  background-color: white;
+  color: black;
+}
+</style>
+<script type="text/javascript">
+'use strict';
+
+function getElementValue(name) {
+  var form = document.querySelector('form.subform');
+  switch (name) {
+    case 'skill':
+      var skill = form.elements[name];
+      for (var i = 0; i < skill.length; i++) {
+        if (skill[i].checked) {
+          console.log(name + ' -> ' + skill[i].value +
+            ';' + skill[i].text);
+          break;
+        }
+      }
+      break;
+    case 'likeMovie':
+    case 'likeMusic':
+    case 'likeReading':
+      console.log(name + ' -> ' + form.elements[name].checked);
+      break;
+    case 'refer':
+      var refer = form.elements[name];
+      var selectedOption = refer.options[refer.selectedIndex];
+      console.log(name + ' -> ' + selectedOption.value +
+        ';' + selectedOption.text);
+      break;
+    default:
+      var dd = name;
+      var elements = form.elements[name];
+      console.log(name + ' -> ' + form.elements[name].value);
+      break;
+  }
+}
+
+function getFormValue() {
+  ['name', 'email', 'skill', 'likeMovie', 'likeMovie',
+   'likeMusic', 'likeReading', 'refer', 'comments'].forEach((name) => {
+    getElementValue(name);
+  });
+}
+
+function addListenerForForm(callback) {
+  var form = document.querySelector('form.subform');
+  // form.addEventListener('submit', getFormValue);
+  ['name', 'email', 'skill', 'likeMovie', 'likeMovie',
+   'likeMusic', 'likeReading', 'refer', 'comments'].forEach((name) => {
+    switch (name) {
+      case 'name':
+      case 'email':
+      case 'comments':
+        form.elements[name].addEventListener('input', callback);
+        break;
+      case 'skill':
+        var skill = form.elements[name];
+        for (var i = 0; i < skill.length; i++) {
+          skill[i].addEventListener('change', callback);
+        }
+        break;
+      case 'likeMovie':
+      case 'likeMusic':
+      case 'likeReading':
+        form.elements[name].addEventListener('change', callback);
+        break;
+      case 'refer':
+        form.elements[name].addEventListener('change', callback);
+        break;
+      default:
+        console.log('No listener for ' + name);
+        break;
+    }
+  });
+}
+window.addEventListener('load', () => {
+  addListenerForForm((evt) => {
+    // console.log(evt);
+    getElementValue(evt.target.name);
+  });
+});
+</script>
+</head>
+<body>
+<h1>Reader Subscription Form</h1>
+<form class="subform" method="post" action="">
+  <p>
+    <label for="name" class="label">What is your name?</label>
+    <input type="text" name="name">
+  </p>
+  <p>
+    <label for="email" class="label">What is your email address?</label>
+    <input type="text" name="email">
+  </p>
+  <p><span class="label">Rate your apartment farming skills</span>
+    <label>
+      <input name="skill" type="radio" value="novice" checked>
+      Novice</label>
+    <label>
+      <input name="skill" type="radio" value="intermediate">
+      Intermediate</label>
+    <label>
+      <input name="skill" type="radio" value="advanced">
+      Advanced</label>
+  </p>
+  <p><span class="label">Select your favorite</span>
+    <label>
+      <input name="likeMovie" type="checkbox" value="movie">
+      Movie</label>
+    <label>
+      <input name="likeMusic" type="checkbox" value="music">
+      Music</label>
+    <label>
+      <input name="likeReading" type="checkbox" value="reading">
+      Reading</label>
+  </p>
+  <p>
+    <label for="refer"  class="label">Where did you hear about us? </label>
+    <select name="refer">
+      <option value="null">Select One</option>
+      <option value="1">Friend</option>
+      <option value="2" selected>Herban Jungle</option>
+      <option value="3">Compost Today</option>
+      <option value="4">Vanity Fair</option>
+    </select>
+  </p>
+  <p>
+    <label for="comments"  class="label">Any additional comments? </label>
+    <textarea name="comments" cols="35" rows="4"></textarea>
+  </p>
+  <p>
+    <input type="submit" value="Subscribe">
+  </p>
+  <p>
+    <input type="reset" value="Reset">
+  </p>
+</form>
+</body>
+</html>

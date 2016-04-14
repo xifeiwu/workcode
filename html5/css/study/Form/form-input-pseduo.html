@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>input-pesudo</title>
+<script type="text/javascript">
+  function formReset() {
+    document.getElementById("myForm").reset()
+  }
+  window.onload = function() {
+    var name = document.getElementById('name');
+    name.addEventListener('change', function() {
+      console.log(name.value);
+    });
+    name.addEventListener('keyup', function() {
+      console.log(this.value);
+    });
+  }
+</script>
+<style type="text/css">
+input:required + label::after {
+  content: "*";
+}
+
+/*The use of focus and after*/
+input#name:focus + label::after {
+  content: 'input your name.';
+  color: red;
+}
+
+input:optional { border-color: silver; }
+
+input:invalid + label::after {
+  content: ' ✘';
+  color: red;
+}
+
+input[type="text"]:valid + label::after {
+  content: ' ✓';
+  color: green;
+}
+
+input[type='number']:out-of-range {
+  border-color: red;
+}
+
+textarea:read-only { user-select: none; }
+textarea:read-write { user-select: text; }
+
+</style>
+</head>
+
+  <form id="myForm">
+    <p>
+      <label for="name">Name: </label>
+      <input type="text" size="30" id="name">
+      <label></label>
+    </p>
+    <p>
+      <label for="password">Password: </label>
+      <input id="password" type='text' size="30" required>
+      <label></label>
+    </p>
+    <p>
+      <label for="age">Age: </label>
+      <input id="age" type="number" size="30" max="10" min="1" value="11">
+    </p>
+    <p>
+      <label for="email">Email: </label>
+      <input id="email" type="email">
+    </p>
+    <p>
+      <label class="sex">Sex: </label>
+      <input type="radio" id="male" name="sex" value="male">
+      <label for="male"> Male</label>
+      <input type="radio" id="female" name="sex" value="female">
+      <label for="female"> FeMale</label>
+    </p>
+    <textarea readonly>Lorem ipsum</textarea>
+    <input type="button" onclick="formReset()" value="Reset">
+    <input type="submit">
+  </form>
+
+  <input type="submit">
+</body>
+
+</html>

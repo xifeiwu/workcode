@@ -17,6 +17,7 @@
       var hidden = document.querySelector('.onoffswitch-active').hidden;
       console.log('value of hidden: ' + hidden);
       setTimeout(() => {
+        // show the property of hidden.
         document.querySelector('.onoffswitch-active').hidden = false;
       }, 2000);
       listenCheckbox();
@@ -32,12 +33,6 @@
         border: solid blue 1px;
         background-color: silver;
       }
-
-      p.title {
-        padding-top: 5px;
-        border-top: 1px green dotted;
-        margin-bottom: 2px;
-      }
       .onoffswitch-checkbox {
         display: none;
       }
@@ -52,6 +47,7 @@
     <p>
       <label><input type="button" value="Press Me" onclick="clickMe()">Button???</label>
     </p>
+
     <label class="onoffswitch-label" for="myonoffswitch">
       <div class="onoffswitch-inner">
         <div class="onoffswitch-active" hidden>ONONON</div>
@@ -60,16 +56,5 @@
       <div class="onoffswitch-switch"></div>
     </label>
 
-    <p class="title">The demo for onoffswitch</p>
-    <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-      <label class="onoffswitch-label" for="myonoffswitch">
-        <div class="onoffswitch-inner">
-          <div class="onoffswitch-active">ON</div>
-          <div class="onoffswitch-inactive">OFF</div>
-        </div>
-        <div class="onoffswitch-switch"></div>
-      </label>
-    </div>
   </body>
 </html>
