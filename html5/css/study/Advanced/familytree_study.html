@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Model</title>
+  <style >
+/*Now the CSS*/
+.tree ul {
+    padding-top: 20px;
+    position: relative;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    border: 1px solid red;
+}
+.tree li {
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    /*border: 1px solid red;*/
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+/*.tree li::before, .tree li::after{
+    content: '';
+    border: 1px solid red;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1px solid #ccc;
+    width: 50%;
+    height: 20px;
+}*/
+/*.tree li::after{
+    right: auto; left: 50%;
+    border-left: 1px solid #ccc;
+}*/
+
+/*Thats all. I hope you enjoyed it.*/
+  </style>
+  </head>
+  <body>
+    <!--
+    We will create a family tree using just CSS(3)
+    The markup will be simple nested lists
+    -->
+    <div class="tree">
+      <ul>
+        <li>
+          <a href="#">Parent</a>
+          <ul>
+            <li>
+              <a href="#">Child</a>
+              <ul>
+                <li>
+                  <a href="#">Grand Child</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Child</a>
+              <ul>
+                <li><a href="#">Grand Child</a></li>
+                <li>
+                  <a href="#">Grand Child</a>
+                  <ul>
+                    <li>
+                      <a href="#">Great Grand Child</a>
+                    </li>
+                    <li>
+                      <a href="#">Great Grand Child</a>
+                    </li>
+                    <li>
+                      <a href="#">Great Grand Child</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#">Grand Child</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
