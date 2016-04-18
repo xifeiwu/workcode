@@ -3,60 +3,62 @@
   <head>
   <meta charset="UTF-8">
   <style >
-    .onoffswitch {
-      position: relative;
-      width: 90px;
-      -webkit-user-select:none;
-      -moz-user-select:none;
-      -ms-user-select: none;
+    .demo1 {
+      /*border: 1px solid red;*/
+      height: 20px;
+      width: 120px;
     }
-    .onoffswitch-label {
-      display: block;
+    .demo1 input.button {
+      margin-left: 30px;
+      height: 100%;
+      /*border: 1px solid red;*/
+    }
+    .demo1:hover div.circle {
+      border-color: green;
+      transform: rotate(3000deg);
+    }
+    .demo1 div.circle {
       border: 1px solid red;
-      /*overflow: hidden;*/
-    }
-/*
-    .onoffswitch-label {
-      display: block;
-      overflow: hidden;
-      cursor: pointer;
-      border: 1px solid black;
-      border-radius: 20px;
-    }
-    .onoffswitch-inner {
-      width: 200%;
-      margin-left: -100%;
-      -moz-transition: margin 0.3s ease-in 0s;
-      -webkit-transition: margin 0.3s ease-in 0s;
-      -o-transition: margin 0.3s ease-in 0s;
-      transition: margin 0.3s ease-in 0s;
-    }
-    .onoffswitch-inner > div {
+      border-radius: 5px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
       float: left;
-      width: 50%;
-      height: 30px;
-      padding: 0;
-      line-height: 30px;
-      font-size: 14px;
-      color: black;
-      font-family: Trebuchet, Arial, sans-serif;
-      font-weight: bold;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }*/
+      transition: all 2s;
+    }
+
+    .demo2 {
+      margin-top: 20px;
+      /*border: 1px solid red;*/
+    }
+    .demo2 div.button {
+      width: 50px;
+      height: 50px;
+      border: 1px solid green;
+      background-color: green;
+      color: white;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 50px;
+      vertical-align: center;
+
+      box-shadow: 0 5px 0 #000; 
+      transition: all .1s linear; 
+    }
+    .demo2 div.button:active { 
+      box-shadow: 0 2px 0 #666; 
+      transform: translateY(3px); 
+    }
+
   </style>
   </head>
   <body>
-    <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-      <label class="onoffswitch-label" for="myonoffswitch">
-        <div class="onoffswitch-inner">
-          <div class="onoffswitch-active">ON</div>
-          <div class="onoffswitch-inactive">OFF</div>
-        </div>
-        <div class="onoffswitch-switch"></div>
-      </label>
-    </div> 
+    <div class="demo1">
+      <div class="circle"></div>
+      <input class="button" type="button" value="Press Me!"></input>
+    </div>
+    <div class="demo2">
+      <div class="button">Press</div>
+    </div>
   </body>
 </html>
