@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Sample document</title>
+  <style >
+    ul {
+      border: green 1px dotted;
+    }
+    ul li {
+      border: black 1px dotted;
+      float: left;
+      list-style-type: none;
+    }
+    div.ul {
+      border: red 1px solid;
+    }
+    div.ul::after {
+      display: block;
+      clear: both;
+      content: '';
+    }
+    div.li {
+      border: yellow 1px solid;
+      /*float: left;*/
+      display: inline;
+    }
+  </style>
+
+  </head>
+  <body>
+<ul id="nav">
+  <li><a href="#">首页</a></li>
+  <li><a href="#">文章</a></li>
+  <li><a href="#">参考</a></li>
+  <li><a href="#">Blog</a></li>
+  <li><a href="#">论坛</a></li>
+  <li><a href="#">联系</a></li>
+</ul>
+<div class="ul">
+  <div class="li">element1</div>
+  <div class="li">element2</div>
+  <div class="li">element3</div>
+</div>
+  </body>
+</html>
